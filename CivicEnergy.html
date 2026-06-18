@@ -1,0 +1,3020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solar by Nest — sustainability.google</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+/* ============================================================
+   SOLAR BY NEST — DESIGN SYSTEM / REUSABLE CLASS REFERENCE (v2)
+   ------------------------------------------------------------
+   Color tokens (CSS custom properties on :root):
+     --color-bg            #FFFFFF
+     --color-bg-alt        #F6F6F6 (also #F8F9FA)
+     --color-ink           #1F1F1F (also #202124) — primary text & solid btn bg
+     --color-accent        #1A73E8 (also #4285F4) — links, focus rings
+     --color-sage-bg       #E6F4EA — soft tinted backgrounds
+     --color-sage-text     #137333 — dark forest green text
+     --color-text-secondary #5F6368
+     --color-border        #DADCE0
+     Secondary accents kept: amber #F9AB00, teal #00897B, purple #7B61FF
+
+   Layout helpers:
+     .container           max-width 1440px centered, responsive padding
+                           (24px mobile / 40px tablet / 64-96px desktop)
+     .container-wide      max-width 1600px, same padding (map/data sections)
+     .section             generic section, 80-120px vertical padding
+     .section-dark        dark #1F1F1F bg, white text
+     .section-light       light #F6F6F6 bg
+     .grid-2/.grid-3/.grid-4   responsive CSS grids (collapse to 1 col @768px)
+     .zigzag / .zigzag-row     alternating image/text editorial rows
+                               (.zigzag-row.reverse flips order)
+     .scroll-row           horizontal scroll container, cards bleed off edge
+     hr.divider            1px #DADCE0 horizontal rule between sections
+
+   Corner radii:
+     8px    — small components (chips, badges, tooltips, checkboxes)
+     .radius-md (28px) — input fields / pill-tags
+     pill (100px) — buttons, chips
+     .card (28px) / .card-lg (36px) — structural cards
+     .btn-icon-circle — fully circular icon buttons / FABs
+
+   Typography:
+     h1 / .display-large   SF Pro Display 800 / 64px / 68px / -2px
+     h2 / .heading-large   SF Pro Display 600 / 32px / 40px / 0px
+     body / .body-large    SF Pro Text Regular / 16-18px / 26px
+     .label / buttons      SF Pro Text Medium / 14-16px / 20px / +0.1px
+     strong / .body-emphasis  weight 600
+
+   Components:
+     .card / .card-lg     flat cards, NO shadow, 28px / 36px radius
+     .chip / .chip-green / .chip-teal / .chip-amber / .chip-purple
+                          fully-rounded pill labels, sage/teal/amber/purple, flat
+     .btn-primary         pill, solid #1F1F1F bg, white text
+     .btn-primary-green   pill, solid #1E8E3E bg (sustainability CTAs)
+     .btn-secondary       pill, transparent bg, 1px border, tint on hover
+     .btn-white-outline   white outline pill button (for dark sections)
+     .btn-icon-circle     circular flat icon button
+     .link-arrow          inline link with animated arrow on hover
+     .breadcrumb          12px grey breadcrumb trail w/ › separators
+
+   Page-specific reusable patterns (for future pages):
+     .hero-stack          split-screen hero, 50/50 image/text, vertically centered
+     .hero-image          image container for hero (no radius on full-bleed half)
+     .stepper             3-col "how it works" steps w/ connecting line
+     .feature-grid-3      3-column icon+title+desc grid
+     .image-grid-2x2      2x2 grid of images, 28px radius
+     .benefit-card        feature row: icon + bold label + description
+     .product-page-row    generic split row (image one side, text other)
+     .role-split / .role-card   .card-lg role-selection cards, flat
+     .image-container     generic image wrapper, 28px radius
+
+   Page/router system:
+     .page / .page.active     hash-router controlled page sections
+     [data-route]              nav links + page sections matched by router
+   ============================================================ */
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --color-bg: #FFFFFF;
+  --color-bg-alt: #F6F6F6;
+  --color-bg-alt2: #F8F9FA;
+  --color-ink: #1F1F1F;
+  --color-ink-2: #202124;
+  --color-accent: #1A73E8;
+  --color-accent-2: #4285F4;
+  --color-sage-bg: #E6F4EA;
+  --color-sage-text: #137333;
+  --color-text-secondary: #5F6368;
+  --color-border: #DADCE0;
+  --color-amber: #F9AB00;
+  --color-teal: #00897B;
+  --color-amber-dark: #946200;
+  --color-green: #1E8E3E;
+  --radius-sm: 8px;
+  --radius-md: 28px;
+  --radius-card: 28px;
+  --radius-card-lg: 36px;
+  --radius-pill: 100px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  color: var(--color-ink-2);
+  background: #F5F5F7;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Display Large — hero taglines */
+h1, .display-large {
+  font-size: 64px;
+  line-height: 68px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+/* Heading Large — section / card headers */
+h2, .heading-large {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 500;
+  letter-spacing: 0;
+}
+
+/* Body Large */
+.body-large { font-size: 18px; line-height: 26px; font-weight: 400; }
+
+/* Label / button text */
+.label, .btn-primary, .btn-primary-green, .btn-secondary, .btn-white-outline, .chip {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.1px;
+}
+
+strong, .body-emphasis { font-weight: 600; }
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display:block; max-width:100%; }
+
+/* ---------- Layout helpers ---------- */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.container-wide {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+@media (min-width: 600px) {
+  .container, .container-wide { padding: 0 40px; }
+}
+@media (min-width: 1024px) {
+  .container, .container-wide { padding: 0 64px; }
+}
+@media (min-width: 1440px) {
+  .container, .container-wide { padding: 0 96px; }
+}
+
+.section { padding: 80px 0; }
+@media (min-width: 1024px) {
+  .section { padding: 120px 0; }
+}
+.section-dark { background: var(--color-ink); color:#FFFFFF; }
+.section-light { background: var(--color-bg-alt); }
+
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap:48px; align-items:center; }
+.grid-3 { display:grid; grid-template-columns: repeat(3,1fr); gap:32px; }
+.grid-4 { display:grid; grid-template-columns: repeat(4,1fr); gap:24px; }
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .section { padding: 60px 0; }
+}
+
+/* ---------- Divider ---------- */
+hr.divider {
+  border: none;
+  height: 1px;
+  background: var(--color-border);
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* ---------- Zigzag editorial rows ---------- */
+.zigzag-row {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.zigzag-row.reverse .zigzag-image { order: 2; }
+.zigzag-row.reverse .zigzag-text { order: 1; }
+.zigzag .zigzag-row + .zigzag-row { margin-top: 96px; }
+
+@media (max-width:768px) {
+  .zigzag-row, .zigzag-row.reverse {
+    grid-template-columns: 1fr;
+  }
+  .zigzag-row.reverse .zigzag-image,
+  .zigzag-row.reverse .zigzag-text { order: initial; }
+}
+
+/* ---------- Scroll row ---------- */
+.scroll-row {
+  display:flex;
+  gap:24px;
+  overflow-x:auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scroll-row::-webkit-scrollbar { display:none; }
+.scroll-row > * {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background:#FFFFFF;
+  border-radius: var(--radius-card);
+  padding:24px;
+  box-shadow: none;
+}
+.card-lg {
+  background:#FFFFFF;
+  border-radius: var(--radius-card-lg);
+  overflow:hidden;
+  box-shadow: none;
+}
+
+/* ---------- Chips / pills ---------- */
+.chip {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.chip-green  { background: var(--color-sage-bg); color: var(--color-sage-text); }
+.chip-teal   { background: rgba(0,137,117,0.12);  color: var(--color-teal); }
+.chip-amber  { background: rgba(249,171,0,0.15);  color:#946200; }
+.chip-purple { background: rgba(249,171,0,0.15); color: var(--color-amber-dark); } /* remapped to amber */
+
+/* ---------- Image containers ---------- */
+.image-container {
+  border-radius: var(--radius-card);
+  overflow:hidden;
+}
+.image-container img { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* ---------- Buttons ---------- */
+.btn-primary, .btn-primary-green, .btn-secondary, .btn-white-outline {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:48px;
+  padding: 0 24px;
+  border-radius: var(--radius-pill);
+  cursor:pointer;
+  border: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space:nowrap;
+}
+
+.btn-primary {
+  background: var(--color-ink);
+  color:#FFFFFF;
+}
+.btn-primary:hover { background: color-mix(in srgb, var(--color-ink) 92%, white); }
+.btn-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--color-accent);
+}
+
+.btn-primary-green {
+  background: var(--color-green);
+  color:#FFFFFF;
+}
+.btn-primary-green:hover { background: color-mix(in srgb, var(--color-green) 92%, white); }
+.btn-primary-green:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--color-accent);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-ink);
+  border: 1px solid var(--color-ink);
+}
+.btn-secondary:hover { background: color-mix(in srgb, currentColor 4%, transparent); }
+.btn-secondary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #FFFFFF, 0 0 0 4px var(--color-accent);
+}
+
+.btn-white-outline {
+  background: transparent;
+  color:#FFFFFF;
+  border: 1px solid #FFFFFF;
+}
+.btn-white-outline:hover { background: rgba(255,255,255,0.08); }
+
+.btn-icon-circle {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  background: var(--color-bg-alt);
+  color: var(--color-ink);
+  border:none;
+  cursor:pointer;
+  transition: background-color 0.15s ease;
+  box-shadow:none;
+}
+.btn-icon-circle:hover { background: var(--color-border); }
+
+/* ---------- Link with arrow ---------- */
+.link-arrow {
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  color: var(--color-accent);
+  font-weight: 500;
+  border-bottom: 1px solid var(--color-accent);
+  padding-bottom: 1px;
+}
+.link-arrow .arrow {
+  display:inline-block;
+  transition: transform 0.2s ease-out;
+}
+.link-arrow:hover .arrow { transform: translateX(4px); }
+
+/* ---------- Floating logo (top-left) ---------- */
+.floating-logo {
+  position: fixed;
+  top: 20px;
+  left: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-weight: 800;
+  font-size: 17px;
+  color: #1E8E3E;
+  letter-spacing: -0.3px;
+}
+.floating-logo svg { width: 32px; height: 32px; }
+
+/* ---------- Floating CTA (top-right) ---------- */
+.floating-cta {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 1000;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1E8E3E;
+  text-decoration: none;
+  padding: 8px 20px;
+  border: 1.5px solid rgba(30,142,62,0.35);
+  border-radius: 100px;
+  background: rgba(255,255,255,0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.floating-cta:hover {
+  background: rgba(255,255,255,0.9);
+  border-color: #1E8E3E;
+}
+
+/* ──── HAMBURGER (mobile only) ─────────────────────── */
+.hamburger-btn {
+  display: none;
+  position: fixed;
+  top: 16px;
+  right: 20px;
+  z-index: 1001;
+  width: 40px; height: 40px;
+  border: none;
+  background: rgba(255,255,255,0.7);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-radius: 50%;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+}
+.hamburger-btn span {
+  display: block;
+  width: 18px; height: 2px;
+  background: #1E8E3E;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.open span:nth-child(2) { opacity: 0; }
+.hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile dropdown menu */
+#mobileMenu {
+  display: none;
+  position: fixed;
+  top: 68px;
+  left: 16px; right: 16px;
+  z-index: 999;
+  background: rgba(255,255,255,0.92);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.6);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  overflow: hidden;
+  flex-direction: column;
+}
+#mobileMenu.open { display: flex; }
+.mobile-menu-btn {
+  border: none;
+  background: transparent;
+  padding: 16px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1F1F1F;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  transition: background 0.15s ease;
+}
+.mobile-menu-btn:last-child { border-bottom: none; }
+.mobile-menu-btn:hover { background: rgba(30,142,62,0.06); }
+.mobile-menu-btn.active { color: #1E8E3E; }
+.mobile-cta-row {
+  padding: 12px 20px 16px;
+}
+.mobile-cta-row a {
+  display: block;
+  text-align: center;
+  background: #1E8E3E;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px;
+  border-radius: 100px;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .hamburger-btn { display: flex; }
+  #pillNav { display: none; }
+  .floating-cta { display: none; }
+  .floating-logo span { display: none; } /* show icon only on mobile */
+}
+@media (min-width: 769px) {
+  .hamburger-btn { display: none !important; }
+  #mobileMenu { display: none !important; }
+}
+
+/* ──── PILL SUB-NAV — floating frosted glass ─────── */
+#pillNav {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 900;
+  background: transparent;
+  border: none;
+  padding: 0;
+  pointer-events: none; /* let clicks pass through empty area */
+}
+.pill-nav-track {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.52);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 100px;
+  padding: 5px;
+  gap: 2px;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  pointer-events: all; /* re-enable clicks on the actual pill */
+}
+.pill-nav-btn {
+  border: none;
+  background: transparent;
+  border-radius: 100px;
+  padding: 8px 22px;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(31,31,31,0.75);
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+  white-space: nowrap;
+}
+.pill-nav-btn:hover { background: rgba(255,255,255,0.7); color: #1F1F1F; }
+.pill-nav-btn.active {
+  background: rgba(255,255,255,0.92);
+  color: #1E8E3E;
+  font-weight: 700;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+
+/* ──── HERO CAROUSEL ─────────────────────────────── */
+.hero-carousel {
+  overflow: hidden;
+  width: 100%;
+  padding: 40px 0 48px;
+  background: #fff;
+}
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: carousel-scroll 36s linear infinite;
+}
+.carousel-track:hover { animation-play-state: paused; }
+@keyframes carousel-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+/* varied shape cards */
+.c-card {
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+  background: #E6F4EA;
+}
+.c-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* shape variants */
+/* all shapes share the same height — only width and radius vary */
+.c-card.shape-tall   { width: 200px;  height: 280px; border-radius: 140px; }
+.c-card.shape-wide   { width: 440px;  height: 280px; border-radius: 28px; }
+.c-card.shape-circle { width: 280px;  height: 280px; border-radius: 50%; }
+.c-card.shape-square { width: 280px;  height: 280px; border-radius: 40px; }
+.c-card.shape-short  { width: 400px;  height: 280px; border-radius: 140px; }
+.c-card.shape-blob   { width: 320px;  height: 280px; border-radius: 58% 42% 52% 48% / 50% 50% 50% 50%; }
+
+/* push page content below floating pill nav */
+#app { padding-top: 80px; }
+
+/* ---------- Page transitions / router ---------- */
+.page { display:none; }
+.page.active { display:block; animation: fadein 0.2s ease; }
+@keyframes fadein {
+  from { opacity:0; }
+  to { opacity:1; }
+}
+
+/* ---------- Material icons sizing helpers ---------- */
+.material-icons-outlined { vertical-align: middle; }
+.icon-sm  { font-size:20px !important; }
+.icon-md  { font-size:32px !important; }
+.icon-lg  { font-size:48px !important; }
+.icon-xl  { font-size:64px !important; }
+.icon-green  { color: var(--color-green); }
+.icon-blue   { color: var(--color-accent); }
+.icon-teal   { color: var(--color-teal); }
+.icon-amber  { color: var(--color-amber); }
+.icon-amber { color: var(--color-amber); }
+
+/* ====================================================
+   HERO CENTERED — headline + subtext, #F5F5F7 bg
+   ==================================================== */
+.hero-centered {
+  background: #F5F5F7;
+  padding: 96px 24px 64px;
+  text-align: center;
+}
+@media (min-width: 768px)  { .hero-centered { padding: 100px 48px 64px; } }
+@media (min-width: 1024px) { .hero-centered { padding: 112px 96px 72px; } }
+
+.hero-centered h1 {
+  color: var(--color-ink-2);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  font-size: clamp(48px, 6.5vw, 88px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -2.5px;
+  margin-bottom: 24px;
+}
+.hero-centered .hero-sub {
+  color: var(--color-text-secondary);
+  font-size: 19px;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* ====================================================
+   SECTION HEADERS
+   ==================================================== */
+.section-header {
+  text-align:center;
+  max-width:640px;
+  margin: 0 auto 64px;
+}
+.section-header h2 {
+  margin-bottom:16px;
+}
+.section-header p {
+  color: var(--color-text-secondary);
+  font-size:18px;
+  line-height:26px;
+}
+.section-dark .section-header p { color:#BDC1C6; }
+
+/* ====================================================
+   STEPPER ("how it works") — .stepper
+   ==================================================== */
+.stepper {
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:32px;
+  position:relative;
+}
+.stepper-step {
+  text-align:center;
+  position:relative;
+  padding: 0 16px;
+}
+.stepper-step::before {
+  content:'';
+  display:block;
+  width:12px; height:12px;
+  background: var(--color-green);
+  border-radius:50%;
+  margin: 0 auto 24px;
+  position:relative;
+  z-index:2;
+}
+.stepper-step::after {
+  content:'';
+  position:absolute;
+  top:5px;
+  left:-50%;
+  width:100%;
+  height:2px;
+  background: var(--color-border);
+  z-index:1;
+}
+.stepper-step:first-child::after { display:none; }
+.stepper-step .material-icons-outlined {
+  font-size:48px;
+  color: var(--color-green);
+  margin-bottom:16px;
+}
+.stepper-step h3 {
+  font-size:20px;
+  font-weight:500;
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  margin-bottom:12px;
+}
+.stepper-step p { color: var(--color-text-secondary); font-size:15px; }
+
+@media (max-width: 768px) {
+  .stepper { grid-template-columns:1fr; gap:48px; }
+  .stepper-step::after { display:none; }
+}
+
+/* ====================================================
+   IMAGE GRID 2x2 — .image-grid-2x2
+   ==================================================== */
+.image-grid-2x2 {
+  display:grid;
+  grid-template-columns: repeat(2, 240px);
+  grid-template-rows: repeat(2, 240px);
+  gap:16px;
+}
+.image-grid-2x2 .image-container { width:240px; height:240px; }
+
+@media (max-width: 768px) {
+  .image-grid-2x2 {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+  }
+  .image-grid-2x2 .image-container { width:100%; height:160px; }
+}
+
+/* ====================================================
+   PRODUCT PAGE ROW (split text/image) — .product-page-row
+   ==================================================== */
+.product-page-row {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:64px;
+  align-items:center;
+}
+.product-page-row .eyebrow {
+  font-size:13px;
+  font-weight:700;
+  color: var(--color-green);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:16px;
+  display:block;
+}
+.product-page-row h2 {
+  margin-bottom:32px;
+}
+
+@media (max-width:768px) {
+  .product-page-row { grid-template-columns:1fr; gap:32px; }
+}
+
+/* ====================================================
+   BENEFIT CARD / FEATURE ROW — .benefit-card
+   ==================================================== */
+.benefit-card {
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  margin-bottom:28px;
+}
+.benefit-card .material-icons-outlined {
+  color: var(--color-green);
+  font-size:28px;
+  flex-shrink:0;
+  margin-top:2px;
+}
+.benefit-card h4 {
+  font-size:17px;
+  font-weight:600;
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+  margin-bottom:4px;
+}
+.benefit-card p {
+  color: var(--color-text-secondary);
+  font-size:15px;
+}
+
+/* ====================================================
+   STORE TEASER (full-width image bg) — .store-teaser
+   ==================================================== */
+.store-teaser {
+  position:relative;
+  background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  color:#FFFFFF;
+  text-align:center;
+  padding: 120px 24px;
+}
+.store-teaser .chip { margin-bottom:24px; }
+.store-teaser h2 {
+  color:#FFFFFF;
+  margin-bottom:24px;
+}
+.store-teaser p {
+  color:#BDC1C6;
+  font-size:18px;
+  line-height:26px;
+  max-width:560px;
+  margin: 0 auto 40px;
+}
+.store-teaser .actions {
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+@media (max-width:768px) {
+  .store-teaser h2 { font-size:32px; line-height:40px; }
+}
+
+/* ====================================================
+   ROLE CARDS — .role-card (.card-lg, 36px radius, flat)
+   ==================================================== */
+.role-split {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:32px;
+}
+.role-card.card-lg {
+  background:#FFFFFF;
+}
+.role-card .role-image {
+  width:100%;
+  height:280px;
+  overflow:hidden;
+}
+.role-card .role-image img { width:100%; height:100%; object-fit:cover; }
+.role-card .role-body { padding:40px; }
+.role-card .chip { margin-bottom:20px; }
+.role-card h3 {
+  font-size:28px;
+  line-height:36px;
+  font-weight:500;
+  margin-bottom:16px;
+}
+.role-card p {
+  color: var(--color-text-secondary);
+  font-size:16px;
+  line-height:26px;
+  margin-bottom:28px;
+}
+
+@media (max-width:768px) {
+  .role-split { grid-template-columns:1fr; }
+}
+
+/* ====================================================
+   FOOTER
+   ==================================================== */
+footer {
+  background: var(--color-ink);
+  color:#BDC1C6;
+  padding: 64px 0 0;
+}
+.footer-grid {
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap:48px;
+  padding-bottom:48px;
+}
+.footer-grid h4 {
+  color:#FFFFFF;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:20px;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+}
+.footer-brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-family:-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-weight:700;
+  font-size:18px;
+  color:#FFFFFF;
+  margin-bottom:16px;
+}
+.footer-brand svg { width:24px; height:24px; }
+.footer-grid p { font-size:14px; }
+.footer-grid ul li { margin-bottom:12px; }
+.footer-grid ul li a {
+  font-size:14px;
+  color:#BDC1C6;
+  transition: color 0.15s ease;
+}
+.footer-grid ul li a:hover { color:#FFFFFF; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding: 24px 0;
+  font-size:12px;
+  color:#9AA0A6;
+  text-align:center;
+}
+
+@media (max-width:768px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); gap:32px; }
+}
+</style>
+<style>
+  .map-two-col {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .map-two-col .map-pane {
+    flex: 0 1 45%;
+    min-width: 320px;
+  }
+  .map-two-col .list-pane {
+    flex: 1 1 50%;
+    min-width: 320px;
+  }
+  .card-list-scroll {
+    max-height: 600px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-right: 4px;
+  }
+  .filter-chip-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0 24px;
+  }
+  .filter-chip {
+    border: 1px solid var(--color-border, #DADCE0);
+    background: transparent;
+    color: var(--color-ink, #1F1F1F);
+    border-radius: 100px;
+    padding: 8px 16px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .filter-chip.active {
+    background: var(--color-ink, #1F1F1F);
+    color: #fff;
+    border-color: var(--color-ink, #1F1F1F);
+  }
+  .view-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 12px 0 4px;
+  }
+  .view-toggle-btn {
+    border: 1px solid var(--color-border, #DADCE0);
+    background: transparent;
+    color: var(--color-ink, #1F1F1F);
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+  .view-toggle-btn.active {
+    background: var(--color-ink, #1F1F1F);
+    color: #fff;
+    border-color: var(--color-ink, #1F1F1F);
+  }
+  .map-building-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+  }
+  .map-building-card {
+    cursor: pointer;
+    background: var(--color-bg-alt, #F6F6F6);
+    border-radius: 28px;
+    border: 2px solid transparent;
+    box-shadow: none;
+    padding: 16px;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .map-building-card.highlighted {
+    border-color: var(--color-accent, #1A73E8);
+    background: var(--color-sage-bg, #E6F4EA);
+    box-shadow: none;
+  }
+  .map-building-card .card-body {
+    padding-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .map-building-card h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink, #1F1F1F);
+  }
+  .map-building-card .address {
+    color: var(--text-secondary, #5F6368);
+    font-size: 13px;
+  }
+  .badge-available {
+    display: inline-block;
+    background: var(--color-sage-bg, #E6F4EA);
+    color: var(--color-sage-text, #137333);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .badge-waitlist {
+    display: inline-block;
+    background: #F1F3F4;
+    color: var(--text-secondary, #5F6368);
+    border-radius: 100px;
+    padding: 4px 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  /* Leaflet marker styles */
+  .map-marker {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #1E8E3E;
+    border: 1px solid #fff;
+    box-shadow: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.15s, height 0.15s;
+  }
+  .map-marker::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #fff;
+  }
+  .map-marker.selected {
+    width: 32px;
+    height: 32px;
+    background: #F9AB00;
+  }
+  .map-marker-label {
+    position: absolute;
+    top: -6px;
+    left: 30px;
+    white-space: nowrap;
+    background: var(--color-ink, #1F1F1F);
+    color: #fff;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    pointer-events: none;
+  }
+  .map-marker-wrap:hover .map-marker,
+  .map-marker-wrap.selected .map-marker {
+    width: 32px;
+    height: 32px;
+  }
+  .map-popup h4 {
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .map-popup p {
+    margin: 2px 0;
+    font-size: 13px;
+    color: var(--text-secondary, #5F6368);
+  }
+  .map-popup .btn-secondary {
+    margin-top: 8px;
+    width: 100%;
+    text-align: center;
+  }
+</style>
+<style>
+/* ===== ADDITIONAL STYLES — merge into main stylesheet ===== */
+
+/* Stepper */
+.stepper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  margin: 40px 0;
+}
+.stepper-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  padding: 0 12px;
+}
+.stepper-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-ink, #1F1F1F);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  margin: 0 auto 12px;
+  position: relative;
+  z-index: 2;
+  box-shadow: none;
+}
+.stepper-line {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 1px;
+  background: var(--color-border, #DADCE0);
+  z-index: 1;
+}
+.stepper-step:last-child .stepper-line { display: none; }
+.stepper-step h4 { font-weight: 400; margin: 0 0 4px; font-size: 16px; }
+.stepper-step p { color: var(--color-text-secondary, #5F6368); font-size: 14px; margin: 0; }
+
+/* Demand bar chart */
+.demand-bar-chart { margin-top: 16px; }
+.demand-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.demand-bar-label { width: 110px; font-size: 14px; color: var(--color-ink, #1F1F1F); flex-shrink: 0; }
+.demand-bar-track {
+  flex: 1;
+  background: var(--color-bg, #FFFFFF);
+  border-radius: 4px;
+  overflow: hidden;
+  height: 16px;
+}
+.demand-bar-fill {
+  height: 100%;
+  background: #1E8E3E;
+  border-radius: 4px;
+  box-shadow: none;
+}
+.demand-bar-value { width: 56px; text-align: right; font-size: 14px; color: var(--color-text-secondary, #5F6368); flex-shrink: 0; }
+
+/* Radio chips */
+.radio-chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.radio-chip {
+  border: 1px solid var(--color-border, #DADCE0);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--color-ink, #1F1F1F);
+  transition: all 0.15s ease;
+}
+.radio-chip input { display: none; }
+.radio-chip.active,
+.radio-chip:has(input:checked) {
+  background: var(--color-ink, #1F1F1F);
+  color: #fff;
+  border-color: var(--color-ink, #1F1F1F);
+}
+
+/* Form fields */
+.field-group { margin-bottom: 24px; }
+.field-group label.field-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--color-ink, #1F1F1F);
+}
+.field-value-display {
+  float: right;
+  color: #1E8E3E;
+  font-weight: 500;
+}
+.field-group input[type="range"] { width: 100%; accent-color: #1E8E3E; }
+.field-group select,
+.field-group input[type="text"],
+.field-group input[type="email"],
+.field-group input[type="date"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--color-border, #DADCE0);
+  border-radius: 28px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+/* Results panel */
+.roi-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-border, #DADCE0);
+}
+.roi-result-row:last-of-type { border-bottom: none; }
+.roi-result-label { color: var(--color-text-secondary, #5F6368); font-size: 14px; }
+.roi-result-value { font-weight: 500; font-size: 16px; }
+.roi-tenyear {
+  text-align: center;
+  margin: 24px 0;
+  padding: 20px;
+  background: var(--color-bg, #FFFFFF);
+  border-radius: 28px;
+}
+.roi-tenyear .value {
+  font-size: 36px;
+  font-weight: 400;
+  color: #1E8E3E;
+  display: block;
+}
+.roi-tenyear .label { color: var(--color-text-secondary, #5F6368); font-size: 14px; }
+
+/* ROI bar chart */
+#roiChart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 140px;
+  margin: 24px 0 8px;
+  border-bottom: 1px solid var(--color-border, #DADCE0);
+  padding-bottom: 4px;
+}
+.roi-bar-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+.roi-bar {
+  width: 100%;
+  background: #1E8E3E;
+  border-radius: 4px 4px 0 0;
+  height: 0;
+  box-shadow: none;
+  transition: height 0.6s ease;
+}
+.roi-bar.animate-in { height: var(--bar-height, 0%); }
+.roi-bar-year { font-size: 11px; color: var(--color-text-secondary, #5F6368); margin-top: 6px; }
+
+.disclaimer-text {
+  font-size: 12px;
+  color: var(--color-text-secondary, #5F6368);
+  margin-top: 16px;
+  font-style: italic;
+}
+
+/* CTA strip */
+.cta-strip {
+  background: var(--color-bg-alt, #F6F6F6);
+  border-radius: 28px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+.cta-strip h3 { font-weight: 400; margin: 0; }
+
+/* Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--color-bg, #FFFFFF);
+  border-radius: 28px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.15);
+}
+.modal h3 { font-weight: 400; margin-top: 0; }
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Nav cards */
+.nav-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px;
+  text-decoration: none;
+  color: var(--color-ink, #1F1F1F);
+}
+.nav-card-left { display: flex; align-items: center; gap: 16px; }
+.nav-card-left h4 { margin: 0; font-weight: 400; }
+.nav-card .material-icons-outlined.arrow { color: #1A73E8; }
+
+/* Blockquote */
+.policy-quote {
+  border-left: 4px solid #1E8E3E;
+  font-style: italic;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 8px 0 8px 24px;
+  margin: 32px 0;
+  color: var(--color-ink, #1F1F1F);
+}
+
+/* Store hero */
+.store-hero {
+  position: relative;
+  background-color: #1F1F1F;
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 80px 40px;
+  margin-bottom: 32px;
+  background-size: cover;
+  background-position: center;
+}
+.store-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+.store-hero-content { position: relative; z-index: 1; max-width: 600px; color: #fff; }
+.store-hero-content h1 { font-weight: 500; font-size: 56px; line-height: 1.14; letter-spacing: -0.5px; margin: 0 0 16px; }
+.store-hero-content p { font-size: 18px; opacity: 0.9; }
+
+.store-info-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.store-info-row .material-icons-outlined { color: #1E8E3E; }
+
+/* Scroll row */
+.scroll-row {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scroll-snap-type: x mandatory;
+  margin-right: calc(-1 * var(--container-padding, 24px));
+}
+.scroll-row .card {
+  flex: 0 0 240px;
+  scroll-snap-align: start;
+}
+.scroll-row .card img {
+  width: 100%;
+  height: 140px;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+/* Booking success */
+.booking-success {
+  display: none;
+  text-align: center;
+  padding: 40px 20px;
+}
+.booking-success.show {
+  display: block;
+  background: var(--color-sage-bg, #E6F4EA);
+  border-radius: 28px;
+}
+.booking-success .material-icons-outlined {
+  font-size: 48px;
+  color: #1E8E3E;
+  margin-bottom: 16px;
+}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<!-- Floating logo — top left -->
+<a href="#landing" class="floating-logo">
+  <svg width="32" height="32" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle cx="18" cy="18" r="18" fill="#1E8E3E"/>
+    <text x="6.5" y="23" font-family="-apple-system,BlinkMacSystemFont,SF Pro Display,sans-serif" font-weight="800" font-size="13" fill="#A8D5B5" letter-spacing="-0.5">CE</text>
+    <path d="M28 8 C28 8 20 10 18 18 C22 16 28 14 28 8Z" fill="#B7DFC4"/>
+    <line x1="18" y1="18" x2="24" y2="11" stroke="#B7DFC4" stroke-width="1" stroke-linecap="round"/>
+  </svg>
+  Civic Energy
+</a>
+
+<!-- Floating CTA — top right (desktop) -->
+<a href="#renter" class="floating-cta">Get started</a>
+
+<!-- Hamburger button — mobile only -->
+<button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- Mobile dropdown menu -->
+<div id="mobileMenu">
+  <button class="mobile-menu-btn active" data-pill="renters">For Renters</button>
+  <button class="mobile-menu-btn" data-pill="landlords">For Landlords</button>
+  <button class="mobile-menu-btn" data-pill="how">How It Works</button>
+  <button class="mobile-menu-btn" data-pill="map">Find a Building</button>
+  <div class="mobile-cta-row"><a href="#renter">Get started</a></div>
+</div>
+
+<!-- ============ PILL SUB-NAV ============ -->
+<div id="pillNav">
+  <div class="pill-nav-track">
+    <button class="pill-nav-btn active" data-pill="renters">For Renters</button>
+    <button class="pill-nav-btn" data-pill="landlords">For Landlords</button>
+    <button class="pill-nav-btn" data-pill="how">How It Works</button>
+    <button class="pill-nav-btn" data-pill="map">Find a Building</button>
+  </div>
+</div>
+
+<!-- ============ MAIN APP ============ -->
+<main id="app">
+
+  <!-- ================= LANDING PAGE ================= -->
+  <section id="landing" class="page active" data-route="landing">
+
+    <!-- Hero -->
+    <section class="hero-centered">
+<h1>Lower bills.<br>More freedom.<br>Power that's yours.</h1>
+      <p class="hero-sub">Balcony solar is now legal in California. Plug in, save money every month, and take your panels when you move. No landlord approval needed.</p>
+    </section>
+
+    <!-- ── Infinite shape carousel ────────────────── -->
+    <div class="hero-carousel" aria-hidden="true">
+      <div class="carousel-track">
+        <!-- Set A -->
+        <div class="c-card shape-wide">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=880&q=80" alt="San Francisco apartment building">
+        </div>
+        <div class="c-card shape-tall">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80" alt="Balcony solar panel in sunlight">
+        </div>
+        <div class="c-card shape-circle">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=560&q=80" alt="Nest thermostat on a wall">
+        </div>
+        <div class="c-card shape-short">
+          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80" alt="Community solar panels on a rooftop">
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=560&q=80" alt="Modern apartment building exterior">
+        </div>
+        <div class="c-card shape-blob">
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=640&q=80" alt="Bright apartment living room">
+        </div>
+        <div class="c-card shape-tall">
+          <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=400&q=80" alt="Home battery storage unit">
+        </div>
+        <div class="c-card shape-wide">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=880&q=80" alt="Energy monitor display">
+        </div>
+        <!-- Set B — exact duplicate for seamless loop -->
+        <div class="c-card shape-wide">
+          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=880&q=80" alt="San Francisco apartment building">
+        </div>
+        <div class="c-card shape-tall">
+          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80" alt="Balcony solar panel in sunlight">
+        </div>
+        <div class="c-card shape-circle">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=560&q=80" alt="Nest thermostat on a wall">
+        </div>
+        <div class="c-card shape-short">
+          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80" alt="Community solar panels on a rooftop">
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=560&q=80" alt="Modern apartment building exterior">
+        </div>
+        <div class="c-card shape-blob">
+          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=640&q=80" alt="Bright apartment living room">
+        </div>
+        <div class="c-card shape-tall">
+          <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=400&q=80" alt="Home battery storage unit">
+        </div>
+        <div class="c-card shape-wide">
+          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=880&q=80" alt="Energy monitor display">
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- How it works -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>How Solar by Nest works</h2>
+          <p>One system. Two partners. A cleaner city.</p>
+        </div>
+        <div class="stepper">
+          <article class="stepper-step">
+            <span class="material-icons-outlined" aria-hidden="true">domain</span>
+            <h3>Landlord registers</h3>
+            <p>A property owner enrolls their building. We handle installation planning and coordination.</p>
+          </article>
+          <article class="stepper-step">
+            <span class="material-icons-outlined" aria-hidden="true">solar_power</span>
+            <h3>System gets installed</h3>
+            <p>The full Solar by Nest system is installed: panels, battery storage, Nest thermostat, and energy monitor.</p>
+          </article>
+          <article class="stepper-step">
+            <span class="material-icons-outlined" aria-hidden="true">savings</span>
+            <h3>Renters benefit</h3>
+            <p>Residents enjoy lower energy bills, clean power, and a smart home with zero upfront cost.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- The system set -->
+    <section class="section section-light">
+      <div class="container product-page-row zigzag-row">
+        <div class="image-grid-2x2 zigzag-image">
+          <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80" alt="Solar panel mounted on an apartment balcony railing.">
+          </div>
+          <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=400&q=80" alt="Google Nest smart thermostat mounted on a wall.">
+          </div>
+          <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=400&q=80" alt="Home battery storage unit installed indoors.">
+          </div>
+          <div class="image-container">
+            <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=400&q=80" alt="Energy monitor display showing household energy usage.">
+          </div>
+        </div>
+        <div class="zigzag-text">
+          <span class="eyebrow">Included in every registered apartment</span>
+          <h2>Everything you need,<br>already installed.</h2>
+
+          <div class="benefit-card">
+            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
+            <div>
+              <h4>Balcony or rooftop solar panels</h4>
+              <p>Generate your own clean electricity</p>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
+            <div>
+              <h4>Nest smart thermostat</h4>
+              <p>AI-powered comfort and energy savings</p>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
+            <div>
+              <h4>Home battery storage</h4>
+              <p>Store energy, stay powered during outages</p>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
+            <div>
+              <h4>Energy monitor</h4>
+              <p>Track your usage and savings in real time</p>
+            </div>
+          </div>
+
+          <a href="#renter" class="btn-primary-green">See how it works</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Store teaser -->
+    <section class="store-teaser">
+      <div class="container">
+        <span class="chip chip-amber">Now open in San Francisco</span>
+        <h2>Experience Solar by Nest<br>in person.</h2>
+        <p>Visit the Solar by Nest exhibition at the Google Store, SF. Walk through a full working apartment setup. Talk to energy advisors. See the system live.</p>
+        <div class="actions">
+          <a href="#store" class="btn-primary">Find a location</a>
+          <a href="#store" class="btn-white-outline">Learn more</a>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- Role split -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:48px;">
+          <h2>Which best describes you?</h2>
+        </div>
+        <div class="role-split">
+          <article class="role-card card-lg">
+            <div class="role-image">
+              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80" alt="Bright modern apartment living room interior.">
+            </div>
+            <div class="role-body">
+              <span class="chip chip-teal">I'm a renter</span>
+              <h3>Find your solar-powered home</h3>
+              <p>Browse Solar by Nest apartments in SF. Lower bills, smart home tech, and clean energy included.</p>
+              <a href="#renter" class="btn-primary-green">Explore apartments</a>
+            </div>
+          </article>
+          <article class="role-card card-lg">
+            <div class="role-image">
+              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Exterior of a multi-unit residential apartment building.">
+            </div>
+            <div class="role-body">
+              <span class="chip chip-purple">I'm a landlord</span>
+              <h3>Make your building work harder</h3>
+              <p>Register your SF property. Attract quality tenants, increase property value, and unlock energy incentives.</p>
+              <a href="#landlord" class="btn-secondary">Register your building</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </section>
+  <!-- ================= /LANDING PAGE ================= -->
+
+  <!-- ================= PLACEHOLDER PAGES ================= -->
+  <section id="renter" class="page" data-route="renter">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <section class="hero">
+  <h1>Your clean energy home<br>is waiting.</h1>
+  <p style="color:#5F6368; max-width:640px; font-size:18px;">
+    Solar by Nest is bringing rooftop and balcony solar, smart thermostats, and home battery backup
+    to apartment buildings across San Francisco, at no upfront cost to renters.
+  </p>
+</section>
+
+<div class="grid-4" style="margin:48px 0;">
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:36px; color:#1E8E3E;">bolt</span>
+    <h3 style="font-weight:400; margin:8px 0 4px;">Up to 40%</h3>
+    <p style="color:#5F6368; font-size:14px;">reduction in energy bills</p>
+  </div>
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:36px; color:#1E8E3E;">eco</span>
+    <h3 style="font-weight:400; margin:8px 0 4px;">$0</h3>
+    <p style="color:#5F6368; font-size:14px;">upfront cost to you</p>
+  </div>
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:36px; color:#1E8E3E;">battery_charging_full</span>
+    <h3 style="font-weight:400; margin:8px 0 4px;">72hr</h3>
+    <p style="color:#5F6368; font-size:14px;">backup power during outages</p>
+  </div>
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:36px; color:#1E8E3E;">co2</span>
+    <h3 style="font-weight:400; margin:8px 0 4px;">2.4 tons</h3>
+    <p style="color:#5F6368; font-size:14px;">CO₂ avoided per year per unit</p>
+  </div>
+</div>
+
+<h2>What you'll get</h2>
+<div class="scroll-row">
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1559302995-f1d6a7410a08?auto=format&fit=crop&w=600&q=80" alt="Solar panels installed on an apartment balcony railing">
+    <span class="material-icons-outlined" style="color:#1E8E3E;">solar_power</span>
+    <h3 style="font-weight:400; margin:8px 0;">Balcony &amp; rooftop panels</h3>
+    <p style="color:#5F6368; font-size:14px;">"I plugged it in myself in an afternoon. No contractor visit needed."<br>Generates clean power right where you live.</p>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1567925086312-cf45d2cb1b32?auto=format&fit=crop&w=600&q=80" alt="Nest smart thermostat mounted on a living room wall">
+    <span class="material-icons-outlined" style="color:#00897B;">thermostat</span>
+    <h3 style="font-weight:400; margin:8px 0;">Nest smart thermostat</h3>
+    <p style="color:#5F6368; font-size:14px;">"It learned my schedule in about a week."<br>Automatically shifts heating and cooling to match solar production.</p>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1620714223084-86c95cfdcc89?auto=format&fit=crop&w=600&q=80" alt="Home battery storage unit installed near an apartment entryway">
+    <span class="material-icons-outlined" style="color:#7B61FF;">battery_charging_full</span>
+    <h3 style="font-weight:400; margin:8px 0;">Home battery storage</h3>
+    <p style="color:#5F6368; font-size:14px;">"During the last outage, my fridge and lights stayed on for two days."<br>Stores extra solar energy for nighttime and emergencies.</p>
+  </div>
+  <div class="card">
+    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80" alt="Energy monitor display showing real-time household usage">
+    <span class="material-icons-outlined" style="color:#F9AB00;">monitor_heart</span>
+    <h3 style="font-weight:400; margin:8px 0;">Real-time energy monitor</h3>
+    <p style="color:#5F6368; font-size:14px;">"I finally understand where my electricity actually goes."<br>See solar generation, usage, and savings at a glance.</p>
+  </div>
+</div>
+
+<div class="card" style="background:#1E8E3E; color:#fff; text-align:center; padding:48px 24px; margin:48px 0;">
+  <h2 style="color:#fff; margin-bottom:16px;">Ready to find your apartment?</h2>
+  <a href="#renter-map" class="btn-secondary" style="border-color:#fff; color:#fff;">See available buildings in SF</a>
+</div>
+
+<div class="grid-2">
+  <a href="#renter-solar" class="card nav-card-link">
+    <div class="nav-card-left">
+      <span class="material-icons-outlined" style="color:#1E8E3E;">wb_sunny</span>
+      <h3 style="font-weight:400; margin:0;">Solar types explained</h3>
+    </div>
+    <span class="link-arrow"><span class="chevron">→</span></span>
+  </a>
+  <a href="#renter-incentives" class="card nav-card-link">
+    <div class="nav-card-left">
+      <span class="material-icons-outlined" style="color:#1E8E3E;">savings</span>
+      <h3 style="font-weight:400; margin:0;">Incentives for renters</h3>
+    </div>
+    <span class="link-arrow"><span class="chevron">→</span></span>
+  </a>
+</div>
+    </div>
+  </section>
+
+  <section id="renter-solar" class="page" data-route="renter-solar">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <section class="hero">
+  <h1>Solar energy options for renters</h1>
+  <p style="color:#5F6368; max-width:640px; font-size:18px;">
+    Renters have historically been locked out of solar. Without a roof to install on or a landlord
+    willing to invest, going solar felt out of reach. New laws, new technology, and new programs are
+    changing that.
+  </p>
+</section>
+
+<div class="zigzag-row">
+  <div class="zigzag-image">
+    <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=800&q=80" alt="Plug-in balcony solar panels mounted to a railing">
+  </div>
+  <div class="zigzag-text">
+    <h2>Balcony solar panels</h2>
+    <p style="color:#5F6368;">
+      Thanks to California's SB 868, plug-in balcony solar systems are now legal for renters to install
+      in many buildings without landlord approval. These compact panels plug directly into a standard
+      outlet and offset your everyday electricity use.
+    </p>
+    <div class="spec-chip-row">
+      <span class="chip">500W–2kW output</span>
+      <span class="chip">$500–2,500 cost</span>
+      <span class="chip">IRA rebate eligible</span>
+      <span class="chip-green">SB 868</span>
+    </div>
+    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
+    <p><a href="#" class="link-arrow">Learn about SB 868 <span class="chevron">→</span></a></p>
+  </div>
+</div>
+
+<div class="zigzag-row reverse">
+  <div class="zigzag-image">
+    <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?auto=format&fit=crop&w=800&q=80" alt="Sunlight passing through a large apartment window with a film coating">
+  </div>
+  <div class="zigzag-text">
+    <h2>Window solar films</h2>
+    <p style="color:#5F6368;">
+      Developed by companies like NEXT Energy Technologies, transparent photovoltaic films can be applied
+      directly to existing window glass, generating electricity while still letting in natural light.
+      No drilling, no structural changes, no rooftop required.
+    </p>
+    <div class="spec-chip-row">
+      <span class="chip">Low profile</span>
+      <span class="chip">No structural change</span>
+      <span class="chip">Efficiency incentive eligible</span>
+    </div>
+    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
+  </div>
+</div>
+
+<div class="zigzag-row">
+  <div class="zigzag-image">
+    <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80" alt="Large community solar farm with rows of panels under a clear sky">
+  </div>
+  <div class="zigzag-text">
+    <h2>Community solar subscription</h2>
+    <p style="color:#5F6368;">
+      Subscribe to a share of an off-site solar farm and receive a credit on your monthly electric bill
+      based on the energy it produces. No installation, no equipment, and no roof access needed.
+    </p>
+    <div class="spec-chip-row">
+      <span class="chip">No installation needed</span>
+      <span class="chip">Monthly subscription</span>
+      <span class="chip">CA Community Solar program</span>
+    </div>
+    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
+  </div>
+</div>
+
+<div class="zigzag-row reverse">
+  <div class="zigzag-image">
+    <img src="https://images.unsplash.com/photo-1620714223084-86c95cfdcc89?auto=format&fit=crop&w=800&q=80" alt="Portable home battery storage unit on the floor near an outlet">
+  </div>
+  <div class="zigzag-text">
+    <h2>Home battery storage</h2>
+    <p style="color:#5F6368;">
+      Portable battery units store solar energy, whether your own or from a community subscription, for use
+      during evenings, peak pricing hours, or grid outages, giving renters reliable backup power.
+    </p>
+    <div class="spec-chip-row">
+      <span class="chip">$300–3,000</span>
+      <span class="chip">IRA rebates available</span>
+      <span class="chip">Grid-independent backup</span>
+    </div>
+    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <section id="renter-map" class="page" data-route="renter-map">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <div class="container-wide">
+    <h1 id="renter-map-heading">Solar by Nest apartments in San Francisco</h1>
+    <p class="subhead">Browse registered buildings across the city. Every listing includes the full system set.</p>
+
+    <div class="filter-chip-row" role="group" aria-label="Filter apartment listings">
+      <button class="filter-chip active" type="button">All neighborhoods</button>
+      <button class="filter-chip" type="button">Available now</button>
+      <button class="filter-chip" type="button">Studio</button>
+      <button class="filter-chip" type="button">1BR</button>
+      <button class="filter-chip" type="button">2BR+</button>
+      <button class="filter-chip" type="button">Balcony solar</button>
+      <button class="filter-chip" type="button">Community solar</button>
+    </div>
+
+    <div class="map-two-col">
+      <div class="map-pane">
+        <div style="height:600px;border-radius:16px;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=1200&q=80" alt="Aerial view of San Francisco" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,142,62,0.06),rgba(0,0,0,0.22));border-radius:16px;"></div>
+        </div>
+      </div>
+      <div class="list-pane">
+        <div id="renterCardList" class="card-list-scroll" aria-label="List of apartment buildings"></div>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <section id="renter-incentives" class="page" data-route="renter-incentives">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <section class="hero">
+  <h1>Money back for going solar</h1>
+  <p style="color:#5F6368; max-width:640px; font-size:18px;">
+    From local utility discounts to federal tax credits, renters in San Francisco have more ways than
+    ever to save money while reducing their carbon footprint.
+  </p>
+</section>
+
+<h2>San Francisco programs</h2>
+<div class="grid-3">
+  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #1E8E3E;">
+    <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">request_quote</span>
+    <h3 style="font-weight:400; margin:8px 0;">PG&E CARE/FERA program</h3>
+    <div class="spec-chip-row">
+      <span class="chip-teal">Renters</span>
+      <span class="chip-amber">Income-qualified</span>
+    </div>
+    <p style="color:#5F6368; font-size:14px;">
+      Income-eligible households receive an automatic monthly discount of 20–35% on their PG&E
+      electricity bill.
+    </p>
+    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
+  </div>
+  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #1E8E3E;">
+    <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">solar_power</span>
+    <h3 style="font-weight:400; margin:8px 0;">SFPUC CleanPowerSF</h3>
+    <div class="spec-chip-row">
+      <span class="chip-teal">Renters</span>
+    </div>
+    <p style="color:#5F6368; font-size:14px;">
+      Enroll in San Francisco's community solar program to source your electricity from local
+      renewable generation at competitive rates.
+    </p>
+    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
+  </div>
+  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #1E8E3E;">
+    <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">support_agent</span>
+    <h3 style="font-weight:400; margin:8px 0;">SF Renters Solar Access Program</h3>
+    <div class="spec-chip-row">
+      <span class="chip-teal">Renters</span>
+      <span class="chip-amber">Income-qualified</span>
+    </div>
+    <p style="color:#5F6368; font-size:14px;">
+      A city-coordinated initiative that helps renters navigate landlord approvals, permitting, and
+      installation for balcony and plug-in solar systems.
+    </p>
+    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<h2 style="margin-top:48px;">California-wide programs</h2>
+<div class="grid-3">
+  <div class="card">
+    <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">account_balance</span>
+    <h3 style="font-weight:400; margin:8px 0;">IRA Residential Clean Energy Credit</h3>
+    <p style="color:#5F6368; font-size:14px;">
+      Claim a 30% federal tax credit on the cost of qualifying solar and battery storage equipment,
+      including portable balcony solar systems.
+    </p>
+    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
+  </div>
+  <div class="card">
+    <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">redeem</span>
+    <h3 style="font-weight:400; margin:8px 0;">California Solar Initiative</h3>
+    <p style="color:#5F6368; font-size:14px;">
+      A state rebate program that lowers the upfront cost of qualifying solar installations for
+      eligible households.
+    </p>
+    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
+  </div>
+  <div class="card">
+    <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">gavel</span>
+    <h3 style="font-weight:400; margin:8px 0;">SB 868</h3>
+    <p style="color:#5F6368; font-size:14px;">
+      State law guaranteeing renters the right to install plug-in balcony solar systems, removing many
+      previous landlord-approval barriers.
+    </p>
+    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
+  </div>
+</div>
+
+<p style="font-style:italic; color:#5F6368; font-size:13px; margin-top:32px;">
+  Incentive availability and amounts are subject to change. Consult a licensed energy advisor for
+  personalized guidance.
+</p>
+    </div>
+  </section>
+
+  <section id="landlord" class="page" data-route="landlord">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <section class="hero grid-2" style="align-items:center; gap:40px;">
+  <div>
+    <h1 style="font-weight:500; font-size:56px; line-height:1.14; letter-spacing:-0.5px;">Make your building<br>work smarter.</h1>
+    <p style="font-size:18px; color:var(--color-text-secondary,#5F6368); max-width:480px;">
+      Register your San Francisco property for solar panels and Nest energy
+      systems at zero cost to install. Increase your property value,
+      attract solar-seeking tenants faster, and unlock $15,000+ in combined
+      incentives.
+    </p>
+    <div style="margin-top:24px; display:flex; gap:12px;">
+      <a href="#landlord-roi" class="btn-primary">Calculate your ROI</a>
+      <a href="#landlord-incentives" class="btn-secondary">View incentives</a>
+    </div>
+  </div>
+  <div>
+    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
+         alt="Property manager standing in front of a modern apartment building exterior"
+         style="width:100%; border-radius:28px; object-fit:cover; height:380px;">
+  </div>
+</section>
+
+<section class="grid-4" style="margin-top:48px;">
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">trending_up</span>
+    <h3 style="font-weight:400; margin:12px 0 4px;">12&ndash;18%</h3>
+    <p style="color:var(--color-text-secondary,#5F6368); margin:0;">increase in property value</p>
+  </div>
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:32px; color:#1A73E8;">groups</span>
+    <h3 style="font-weight:400; margin:12px 0 4px;">3x</h3>
+    <p style="color:var(--color-text-secondary,#5F6368); margin:0;">faster tenant placement for solar buildings</p>
+  </div>
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:32px; color:#F9AB00;">attach_money</span>
+    <h3 style="font-weight:400; margin:12px 0 4px;">$15,000+</h3>
+    <p style="color:var(--color-text-secondary,#5F6368); margin:0;">in available incentives per building</p>
+  </div>
+  <div class="card" style="text-align:center;">
+    <span class="material-icons-outlined" style="font-size:32px; color:#00897B;">verified</span>
+    <h3 style="font-weight:400; margin:12px 0 4px;">Green</h3>
+    <p style="color:var(--color-text-secondary,#5F6368); margin:0;">building certification eligibility</p>
+  </div>
+</section>
+
+<section style="margin-top:64px;">
+  <h2 style="font-weight:500;">How registration works</h2>
+  <div class="stepper">
+    <div class="stepper-step">
+      <div class="stepper-circle">1</div>
+      <div class="stepper-line"></div>
+      <h4>Submit your building</h4>
+      <p>Fill out the property profile with basic details about your building.</p>
+    </div>
+    <div class="stepper-step">
+      <div class="stepper-circle">2</div>
+      <div class="stepper-line"></div>
+      <h4>Feasibility assessment</h4>
+      <p>Google's team reviews your roof and solar potential, free of charge.</p>
+    </div>
+    <div class="stepper-step">
+      <div class="stepper-circle">3</div>
+      <div class="stepper-line"></div>
+      <h4>System installation</h4>
+      <p>Panels, battery storage, and Nest devices installed by certified crews.</p>
+    </div>
+    <div class="stepper-step">
+      <div class="stepper-circle">4</div>
+      <h4>Go live</h4>
+      <p>Your building appears on the renter map as solar-equipped housing.</p>
+    </div>
+  </div>
+</section>
+
+<section class="card card-lg" style="margin-top:48px;">
+  <span class="chip chip-green">Renter demand signal</span>
+  <h2 style="font-weight:500; margin:12px 0 4px;">Right now in San Francisco</h2>
+  <p style="font-size:24px; font-weight:400; color:#1E8E3E; margin:0 0 8px;">
+    14,200 renters are actively seeking solar-equipped housing
+  </p>
+  <p style="color:var(--color-text-secondary,#5F6368);">Demand by neighborhood (active searches this month)</p>
+
+  <div class="demand-bar-chart">
+    <div class="demand-bar-row">
+      <div class="demand-bar-label">Mission</div>
+      <div class="demand-bar-track"><div class="demand-bar-fill" style="width:88%;"></div></div>
+      <div class="demand-bar-value">3,120</div>
+    </div>
+    <div class="demand-bar-row">
+      <div class="demand-bar-label">SoMa</div>
+      <div class="demand-bar-track"><div class="demand-bar-fill" style="width:74%;"></div></div>
+      <div class="demand-bar-value">2,640</div>
+    </div>
+    <div class="demand-bar-row">
+      <div class="demand-bar-label">Sunset</div>
+      <div class="demand-bar-track"><div class="demand-bar-fill" style="width:62%;"></div></div>
+      <div class="demand-bar-value">2,180</div>
+    </div>
+    <div class="demand-bar-row">
+      <div class="demand-bar-label">Castro</div>
+      <div class="demand-bar-track"><div class="demand-bar-fill" style="width:55%;"></div></div>
+      <div class="demand-bar-value">1,950</div>
+    </div>
+    <div class="demand-bar-row">
+      <div class="demand-bar-label">Richmond</div>
+      <div class="demand-bar-track"><div class="demand-bar-fill" style="width:47%;"></div></div>
+      <div class="demand-bar-value">1,640</div>
+    </div>
+    <div class="demand-bar-row">
+      <div class="demand-bar-label">Bernal Heights</div>
+      <div class="demand-bar-track"><div class="demand-bar-fill" style="width:38%;"></div></div>
+      <div class="demand-bar-value">1,330</div>
+    </div>
+  </div>
+
+  <p style="margin-top:20px; font-size:18px; font-weight:400;">Your building could be their next home.</p>
+  <a href="#landlord-roi" class="btn-primary">Register your building</a>
+</section>
+
+<section class="grid-2" style="margin-top:32px; gap:24px;">
+  <a href="#landlord-roi" class="card nav-card link-arrow">
+    <div class="nav-card-left">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">calculate</span>
+      <h4>ROI calculator</h4>
+    </div>
+    <span class="material-icons-outlined arrow" aria-label="Go to ROI calculator">arrow_forward</span>
+  </a>
+  <a href="#landlord-incentives" class="card nav-card link-arrow">
+    <div class="nav-card-left">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1A73E8;">policy</span>
+      <h4>Incentives &amp; policy</h4>
+    </div>
+    <span class="material-icons-outlined arrow" aria-label="Go to incentives and policy">arrow_forward</span>
+  </a>
+</section>
+    </div>
+  </section>
+
+  <section id="landlord-roi" class="page" data-route="landlord-roi">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <section>
+  <h1 style="font-weight:500; font-size:56px; line-height:1.14; letter-spacing:-0.5px;">See your return on investment</h1>
+  <p style="color:var(--color-text-secondary,#5F6368); max-width:640px;">
+    Adjust the details below to estimate your building's solar costs, incentives,
+    and savings over time.
+  </p>
+</section>
+
+<section class="grid-2" style="align-items:start; gap:24px; margin-top:24px;">
+  <div class="card">
+    <h3 style="font-weight:400; margin-top:0;">Your building</h3>
+
+    <div class="field-group">
+      <label class="field-label" for="roiUnits">
+        Building size <span class="field-value-display" id="roiUnitsValue">24 units</span>
+      </label>
+      <input type="range" id="roiUnits" min="4" max="200" value="24" aria-label="Building size in units">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" id="roiTypeLabel">Building type</label>
+      <div class="radio-chip-group" role="radiogroup" aria-labelledby="roiTypeLabel">
+        <label class="radio-chip active">
+          <input type="radio" name="roiType" value="apartment" checked> Apartment complex
+        </label>
+        <label class="radio-chip">
+          <input type="radio" name="roiType" value="mixed"> Mixed-use
+        </label>
+        <label class="radio-chip">
+          <input type="radio" name="roiType" value="single"> Single family
+        </label>
+      </div>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="roiBill">
+        Current avg monthly energy bill per unit
+        <span class="field-value-display" id="roiBillValue">$180</span>
+      </label>
+      <input type="range" id="roiBill" min="80" max="400" value="180" step="10" aria-label="Average monthly energy bill per unit in dollars">
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" for="roiRoof">Roof condition</label>
+      <select id="roiRoof">
+        <option value="excellent">Excellent</option>
+        <option value="good" selected>Good</option>
+        <option value="needs">Needs assessment</option>
+      </select>
+    </div>
+
+    <div class="field-group">
+      <label class="field-label" id="roiSystemLabel">Solar system type</label>
+      <div class="radio-chip-group" role="radiogroup" aria-labelledby="roiSystemLabel">
+        <label class="radio-chip active">
+          <input type="radio" name="roiSystem" value="balcony" checked> Balcony solar
+        </label>
+        <label class="radio-chip">
+          <input type="radio" name="roiSystem" value="rooftop"> Rooftop solar
+        </label>
+        <label class="radio-chip">
+          <input type="radio" name="roiSystem" value="community"> Community solar
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card card-lg">
+    <h3 style="font-weight:400; margin-top:0;">Your estimate</h3>
+
+    <div class="roi-result-row">
+      <span class="roi-result-label">Estimated system cost</span>
+      <span class="roi-result-value" id="roiCost">$0</span>
+    </div>
+    <div class="roi-result-row">
+      <span class="roi-result-label">Available incentives</span>
+      <span class="chip chip-green" id="roiIncentive">$0</span>
+    </div>
+    <div class="roi-result-row">
+      <span class="roi-result-label">Net cost after incentives</span>
+      <span class="roi-result-value" id="roiNetCost">$0</span>
+    </div>
+    <div class="roi-result-row">
+      <span class="roi-result-label">Estimated annual savings</span>
+      <span class="roi-result-value" id="roiAnnualSavings">$0</span>
+    </div>
+    <div class="roi-result-row">
+      <span class="roi-result-label">Payback period</span>
+      <span class="roi-result-value" id="roiPayback">0 years</span>
+    </div>
+
+    <div class="roi-tenyear">
+      <span class="value" id="roiTenYear">$0</span>
+      <span class="label">10-year net gain</span>
+    </div>
+
+    <h4 style="font-weight:400; margin-bottom:0;">Cumulative savings vs. cost (10 years)</h4>
+    <div id="roiChart" aria-label="Bar chart of cumulative savings over 10 years"></div>
+
+    <p class="disclaimer-text">Estimates only. Consult an energy advisor for accurate numbers.</p>
+  </div>
+</section>
+
+<div class="cta-strip">
+  <h3>Ready to register? Start your building assessment.</h3>
+  <button type="button" class="btn-primary" onclick="document.getElementById('roiModalOverlay').classList.add('open')">Get started</button>
+</div>
+
+<div class="modal-overlay" id="roiModalOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="roiModalTitle">
+    <h3 id="roiModalTitle">Coming soon</h3>
+    <p>Coming soon. Visit our SF store to start the process.</p>
+    <div class="modal-actions">
+      <a href="#store" class="btn-primary">Visit the store</a>
+      <button type="button" class="btn-secondary" onclick="document.getElementById('roiModalOverlay').classList.remove('open')">Close</button>
+    </div>
+  </div>
+</div>
+    </div>
+  </section>
+
+  <section id="landlord-incentives" class="page" data-route="landlord-incentives">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <section>
+  <h1 style="font-weight:500; font-size:56px; line-height:1.14; letter-spacing:-0.5px;">Incentives &amp; policy for landlords</h1>
+  <p style="color:var(--color-text-secondary,#5F6368); max-width:640px;">
+    Stack federal, state, and local programs to dramatically reduce the cost of
+    going solar for your property.
+  </p>
+</section>
+
+<section style="margin-top:32px;">
+  <h2 style="font-weight:500;">Federal programs</h2>
+  <div class="grid-3">
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1A73E8;">savings</span>
+      <h3 style="font-weight:400;">IRA Investment Tax Credit</h3>
+      <span class="chip chip-amber">Federal</span>
+      <p style="color:var(--color-text-secondary,#5F6368);">Claim 30% of your total solar system cost as a direct credit against federal taxes owed.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1A73E8;">trending_down</span>
+      <h3 style="font-weight:400;">MACRS Accelerated Depreciation</h3>
+      <span class="chip chip-amber">Federal</span>
+      <p style="color:var(--color-text-secondary,#5F6368);">Depreciate commercial solar assets over 5 years, lowering taxable income significantly in early years.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1A73E8;">apartment</span>
+      <h3 style="font-weight:400;">IRA 179D Deduction</h3>
+      <span class="chip chip-amber">Federal</span>
+      <p style="color:var(--color-text-secondary,#5F6368);">Energy Efficient Commercial Buildings deduction rewards efficiency upgrades that pair well with solar and Nest systems.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" style="margin:48px 0;">
+
+<section>
+  <h2 style="font-weight:500;">California programs</h2>
+  <div class="grid-3">
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">battery_charging_full</span>
+      <h3 style="font-weight:400;">Self-Generation Incentive Program</h3>
+      <span class="chip chip-green">California</span>
+      <p style="color:var(--color-text-secondary,#5F6368);">SGIP provides rebates for installing battery storage alongside your solar system.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">home_work</span>
+      <h3 style="font-weight:400;">Multifamily Affordable Solar Housing</h3>
+      <span class="chip chip-green">California</span>
+      <p style="color:var(--color-text-secondary,#5F6368);">MASH offers incentives for solar installations on qualifying affordable multifamily housing.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">account_balance</span>
+      <h3 style="font-weight:400;">PACE Financing</h3>
+      <span class="chip chip-green">California</span>
+      <p style="color:var(--color-text-secondary,#5F6368);">Property Assessed Clean Energy financing lets you repay solar costs through your property tax bill.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<section style="margin-top:48px;">
+  <h2 style="font-weight:500;">SB 868 explained</h2>
+  <p style="color:var(--color-text-secondary,#5F6368);">
+    SB 868 is California's framework requiring multifamily property owners to
+    disclose building-level energy performance and gradually transition to
+    on-site renewable generation and electrified systems. For landlords, that
+    means buildings will increasingly be evaluated on their solar capacity, battery storage, and smart energy
+    management. Regulators and renters alike are paying attention.
+  </p>
+  <p style="color:var(--color-text-secondary,#5F6368);">
+    The requirements phase in over several years, starting with energy
+    benchmarking and disclosure, followed by minimum on-site generation
+    thresholds for larger buildings. Landlords who act early can spread costs
+    across multiple incentive cycles, lock in installation capacity before
+    demand surges, and avoid the compressed compliance timelines that will
+    affect late adopters.
+  </p>
+  <p style="color:var(--color-text-secondary,#5F6368);">
+    Early adoption also pays off commercially: solar-equipped, Nest-enabled
+    buildings already command higher rents and fill vacancies faster, well
+    ahead of any compliance deadline.
+  </p>
+  <blockquote class="policy-quote">
+    Buildings that embrace SB 868 now are positioned as the preferred housing
+    for California's growing renter majority.
+  </blockquote>
+</section>
+    </div>
+  </section>
+
+  <section id="shared-map" class="page" data-route="shared-map">
+
+    <!-- Full-bleed SF map hero -->
+    <div style="position:relative; height:100vh; overflow:hidden;">
+      <img
+        src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=1600&q=80"
+        alt="Aerial view of San Francisco"
+        style="width:100%;height:100%;object-fit:cover;display:block;">
+      <!-- dark gradient so the card pops -->
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.18) 0%,rgba(0,0,0,0.42) 100%);"></div>
+
+      <!-- Frosted-glass title card overlaid on map -->
+      <div style="position:absolute;bottom:10%;left:50%;transform:translateX(-50%);width:min(640px,90vw);
+                  background:rgba(255,255,255,0.18);
+                  -webkit-backdrop-filter:blur(28px) saturate(160%);
+                  backdrop-filter:blur(28px) saturate(160%);
+                  border:1px solid rgba(255,255,255,0.32);
+                  border-radius:28px;
+                  padding:40px 48px;">
+        <h1 id="shared-map-heading" style="color:#fff;font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1.5px;margin-bottom:12px;">
+          Solar by Nest in San Francisco
+        </h1>
+        <p style="color:rgba(255,255,255,0.88);font-size:17px;line-height:1.5;margin-bottom:28px;">
+          Explore solar-equipped buildings across the city, whether you're searching for a home or registering your property.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <button id="sharedViewRenter" class="view-toggle-btn active" type="button" onclick="setSharedMode('renter')" style="background:rgba(255,255,255,0.92);color:#1E8E3E;border:none;border-radius:100px;padding:10px 24px;font-weight:700;font-size:14px;cursor:pointer;">For Renters</button>
+          <button id="sharedViewLandlord" class="view-toggle-btn" type="button" onclick="setSharedMode('landlord')" style="background:rgba(255,255,255,0.22);color:#fff;border:1px solid rgba(255,255,255,0.4);border-radius:100px;padding:10px 24px;font-weight:600;font-size:14px;cursor:pointer;">For Landlords</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buildings list below the map -->
+    <div class="container-wide" style="padding-top:64px;padding-bottom:100px;">
+      <div class="filter-chip-row" id="sharedFilterChips" role="group" aria-label="Filter buildings"></div>
+      <div id="sharedCardList" class="card-list-scroll" aria-label="List of buildings" style="margin-top:24px;"></div>
+    </div>
+
+  </section>
+
+  <section id="store" class="page" data-route="store">
+    <div class="container" style="padding-top:120px;padding-bottom:100px;">
+      <div class="store-hero" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80');">
+  <div class="store-hero-content">
+    <h1>Visit Solar by Nest in San Francisco</h1>
+    <p>Step inside a fully working solar-and-Nest apartment, talk to an energy
+       advisor, and try the hardware yourself. No appointment necessary.</p>
+  </div>
+</div>
+
+<section class="card card-lg">
+  <div class="store-info-row">
+    <span class="material-icons-outlined" aria-hidden="true">location_on</span>
+    <div>
+      <strong>Solar by Nest Exhibition &middot; Google Store San Francisco</strong><br>
+      2 Stockton St, San Francisco, CA 94108
+    </div>
+  </div>
+  <div class="store-info-row">
+    <span class="material-icons-outlined" aria-hidden="true">schedule</span>
+    <div>
+      Mon&ndash;Sat 10am&ndash;8pm &middot; Sun 11am&ndash;6pm
+    </div>
+  </div>
+  <div class="store-info-row">
+    <span class="material-icons-outlined" aria-hidden="true">call</span>
+    <div>(415) 555-0142</div>
+  </div>
+  <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=2+Stockton+St+San+Francisco+CA" target="_blank" rel="noopener">Get directions</a>
+</section>
+
+<section style="margin-top:48px;">
+  <h2 style="font-weight:500;">What to expect</h2>
+  <div class="grid-3">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80"
+           alt="Modern apartment living room set up as a working solar and Nest demo space"
+           style="width:100%; height:160px; border-radius:16px; object-fit:cover;">
+      <h3 style="font-weight:400;">The full apartment setup</h3>
+      <p style="color:var(--color-text-secondary,#5F6368);">Walk through a real working Solar by Nest apartment mock-up, from balcony panels to in-room energy displays.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80"
+           alt="Two people having a consultation at a retail counter"
+           style="width:100%; height:160px; border-radius:16px; object-fit:cover;">
+      <h3 style="font-weight:400;">Meet your energy advisor</h3>
+      <p style="color:var(--color-text-secondary,#5F6368);">Book a 1:1 session with a Nest energy specialist to plan your building's transition.</p>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1567016432779-094069958ea5?auto=format&fit=crop&w=600&q=80"
+           alt="Hands adjusting a smart thermostat on a wall"
+           style="width:100%; height:160px; border-radius:16px; object-fit:cover;">
+      <h3 style="font-weight:400;">Try the Nest system</h3>
+      <p style="color:var(--color-text-secondary,#5F6368);">Get hands-on with the thermostat, energy monitor, and home battery before you decide.</p>
+    </div>
+  </div>
+</section>
+
+<section class="card" style="margin-top:48px;">
+  <h2 style="font-weight:500; margin-top:0;">Book a visit</h2>
+
+  <form id="bookingForm">
+    <div class="grid-2" style="gap:16px;">
+      <div class="field-group">
+        <label class="field-label" for="bookName">Name</label>
+        <input type="text" id="bookName" name="bookName" autocomplete="name" required>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="bookEmail">Email</label>
+        <input type="email" id="bookEmail" name="bookEmail" autocomplete="email" required>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="bookDate">Preferred date</label>
+        <input type="date" id="bookDate" name="bookDate" required>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="bookType">Visit type</label>
+        <select id="bookType" name="bookType">
+          <option value="walkthrough">Apartment walkthrough</option>
+          <option value="advisor">Energy advisor session</option>
+          <option value="demo">Hands-on product demo</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" class="btn-primary-green" onclick="submitBooking()">Book my visit</button>
+  </form>
+
+  <div class="booking-success" id="bookingSuccess">
+    <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
+    <p>Thanks! We'll confirm your visit by email.</p>
+  </div>
+</section>
+
+<section style="margin-top:48px;">
+  <h2 style="font-weight:500;">Product showcase</h2>
+  <div class="scroll-row">
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1567769541715-3c443a93e0e5?auto=format&fit=crop&w=400&q=80" alt="Nest Thermostat mounted on a wall">
+      <h4 style="font-weight:400;">Nest Thermostat</h4>
+      <p style="color:var(--color-text-secondary,#5F6368); font-size:14px;">Learns your schedule and automatically adjusts to save energy.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80" alt="Solar panel mounted on an apartment balcony railing">
+      <h4 style="font-weight:400;">Balcony Solar Panel</h4>
+      <p style="color:var(--color-text-secondary,#5F6368); font-size:14px;">Plug-in solar generation designed for renters and small spaces.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1620714223084-86c75daf4b69?auto=format&fit=crop&w=400&q=80" alt="Home battery storage unit installed on a wall">
+      <h4 style="font-weight:400;">Home Battery</h4>
+      <p style="color:var(--color-text-secondary,#5F6368); font-size:14px;">Stores excess solar energy for use after sunset or during outages.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&w=400&q=80" alt="Digital energy monitor display showing usage data">
+      <h4 style="font-weight:400;">Energy Monitor Display</h4>
+      <p style="color:var(--color-text-secondary,#5F6368); font-size:14px;">Real-time visibility into your unit's energy generation and use.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1545259741-2ea3ebf61fa3?auto=format&fit=crop&w=400&q=80" alt="Window with a thin transparent solar film applied">
+      <h4 style="font-weight:400;">Window Solar Film</h4>
+      <p style="color:var(--color-text-secondary,#5F6368); font-size:14px;">A transparent photovoltaic film that turns existing windows into power generators.</p>
+      <a href="#" class="link-arrow">Learn more &rarr;</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/>
+            <path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/>
+            <path fill="#FBBC05" d="M11.69 28.18A13.93 13.93 0 0 1 11 24c0-1.45.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88l7.35-5.7z"/>
+            <path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/>
+          </svg>
+          Solar by Nest
+        </div>
+        <p>Clean energy for every California home.</p>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <ul>
+          <li><a href="#landing">About</a></li>
+          <li><a href="#landing">How it works</a></li>
+          <li><a href="#renter">Find an apartment</a></li>
+          <li><a href="#landlord">Register a building</a></li>
+          <li><a href="#store">Visit the store</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#renter-incentives">SB 868 explained</a></li>
+          <li><a href="#landlord-incentives">IRA rebates</a></li>
+          <li><a href="#renter">Energy advisor</a></li>
+          <li><a href="#landing">Press</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Google ecosystem</h4>
+        <ul>
+          <li><a href="https://sustainability.google" target="_blank" rel="noopener">sustainability.google</a></li>
+          <li><a href="https://store.google.com/category/connected_home" target="_blank" rel="noopener">Google Nest</a></li>
+          <li><a href="https://store.google.com" target="_blank" rel="noopener">Google Store</a></li>
+          <li><a href="https://google.org" target="_blank" rel="noopener">Google.org</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Google LLC · Solar by Nest is a Google sustainability initiative · <a href="#landing">Privacy</a> · <a href="#landing">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- Nav active-state updater ----------
+  function updateNav(route) {
+    document.querySelectorAll('.nav-links [data-route]').forEach(function(link) {
+      if (link.getAttribute('data-route') === route) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+
+  // ---------- Pill nav active state ----------
+  var pillRouteMap = {
+    'landing': 'renters',
+    'renter': 'renters',
+    'renter-solar': 'renters',
+    'renter-map': 'map',
+    'renter-incentives': 'renters',
+    'landlord': 'landlords',
+    'landlord-roi': 'landlords',
+    'landlord-incentives': 'landlords',
+    'shared-map': 'map',
+    'store': 'how'
+  };
+  function updatePillNav(route) {
+    var active = pillRouteMap[route] || 'renters';
+    document.querySelectorAll('.pill-nav-btn').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-pill') === active);
+    });
+  }
+  document.querySelectorAll('.pill-nav-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var pill = btn.getAttribute('data-pill');
+      var routeTarget = { renters:'renter', landlords:'landlord', how:'landing', map:'shared-map' }[pill] || 'landing';
+      window.location.hash = routeTarget;
+    });
+  });
+
+  // ---------- Hamburger menu (mobile) ----------
+  var hamburgerBtn = document.getElementById('hamburgerBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', function() {
+      var isOpen = mobileMenu.classList.toggle('open');
+      hamburgerBtn.classList.toggle('open', isOpen);
+    });
+    document.querySelectorAll('.mobile-menu-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var pill = btn.getAttribute('data-pill');
+        var routeTarget = { renters:'renter', landlords:'landlord', how:'landing', map:'shared-map' }[pill] || 'landing';
+        window.location.hash = routeTarget;
+        mobileMenu.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+        document.querySelectorAll('.mobile-menu-btn').forEach(function(b) {
+          b.classList.toggle('active', b === btn);
+        });
+      });
+    });
+    // close menu when tapping outside
+    document.addEventListener('click', function(e) {
+      if (!mobileMenu.contains(e.target) && e.target !== hamburgerBtn && !hamburgerBtn.contains(e.target)) {
+        mobileMenu.classList.remove('open');
+        hamburgerBtn.classList.remove('open');
+      }
+    });
+  }
+
+  // ---------- Breadcrumb trails (kept for fallback) ----------
+  var breadcrumbs = {
+    'landing': 'Civic Energy · For Renters · Saving at Home · Solar by Nest',
+    'renter': 'Civic Energy · Solar by Nest · For Renters',
+    'renter-solar': 'Civic Energy · Solar by Nest · For Renters · Solar Options',
+    'renter-map': 'Civic Energy · Solar by Nest · For Renters · Find Apartments',
+    'renter-incentives': 'Civic Energy · Solar by Nest · For Renters · Incentives',
+    'landlord': 'Civic Energy · Solar by Nest · For Landlords',
+    'landlord-roi': 'Civic Energy · Solar by Nest · For Landlords · ROI Calculator',
+    'landlord-incentives': 'Civic Energy · Solar by Nest · For Landlords · Incentives',
+    'shared-map': 'Civic Energy · Solar by Nest · Map',
+    'store': 'Civic Energy · Solar by Nest · Visit the Store'
+  };
+
+  function renderBreadcrumb(route) {
+    var trail = breadcrumbs[route] || breadcrumbs['landing'];
+    var parts = trail.split('›').map(function(p) { return p.trim(); });
+    var html = parts.map(function(p) { return '<span>' + p + '</span>'; }).join('<span class="crumb-sep">›</span>');
+    document.getElementById('breadcrumb').innerHTML = html;
+  }
+
+  // ---------- Hash router ----------
+  function navigate() {
+    var route = (location.hash || '#landing').replace('#', '') || 'landing';
+    var pages = document.querySelectorAll('.page');
+    var found = false;
+
+    pages.forEach(function(page) {
+      if (page.id === route) {
+        page.classList.add('active');
+        found = true;
+      } else {
+        page.classList.remove('active');
+      }
+    });
+
+    if (!found) {
+      route = 'landing';
+      document.getElementById('landing').classList.add('active');
+    }
+
+    updateNav(route);
+    updatePillNav(route);
+    renderBreadcrumb(route);
+    window.scrollTo(0, 0);
+
+    // page-specific activation hooks
+    if (route === 'renter-map' && typeof activateRenterMapPage === 'function') {
+      activateRenterMapPage();
+    }
+    if (route === 'shared-map' && typeof activateSharedMapPage === 'function') {
+      activateSharedMapPage();
+    }
+    if (route === 'landlord-roi' && typeof initROICalculator === 'function') {
+      initROICalculator();
+    }
+
+    // close mobile menu on navigation
+    var navLinks = document.getElementById('navLinks');
+    if (navLinks) navLinks.classList.remove('open');
+  }
+
+  window.addEventListener('hashchange', navigate);
+  window.addEventListener('load', navigate);
+
+  // ---------- Scroll listener for nav shadow ----------
+  window.addEventListener('scroll', function() {
+    var nav = document.getElementById('mainNav');
+    if (window.scrollY > 8) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- ===== SHARED JS/DATA (include once) ===== -->
+<script>
+  window.solarBuildings = [
+    { id: 1, name: "Mission Sunbeam Apartments", neighborhood: "Mission", address: "2450 Mission St, San Francisco, CA", units: 32, available: 4, types: ["Studio", "1BR"], solar: "Rooftop solar", rent: "$2,100 – $2,900", lat: 37.7599, lng: -122.4187, image: "https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=400&q=80" },
+    { id: 2, name: "Castro Vista Flats", neighborhood: "Castro", address: "350 Noe St, San Francisco, CA", units: 18, available: 0, types: ["1BR", "2BR+"], solar: "Balcony solar + battery", rent: "$2,800 – $3,900", lat: 37.7609, lng: -122.4350, image: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=400&q=80" },
+    { id: 3, name: "SoMa Greenline Lofts", neighborhood: "SoMa", address: "888 Folsom St, San Francisco, CA", units: 64, available: 9, types: ["Studio", "1BR", "2BR+"], solar: "Rooftop solar + EV charging", rent: "$2,400 – $4,500", lat: 37.7820, lng: -122.4015, image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80" },
+    { id: 4, name: "Noe Valley Terrace", neighborhood: "Noe Valley", address: "1500 Church St, San Francisco, CA", units: 12, available: 1, types: ["2BR+"], solar: "Community solar subscription", rent: "$3,200 – $4,200", lat: 37.7475, lng: -122.4296, image: "https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=400&q=80" },
+    { id: 5, name: "Richmond Fog & Sun Court", neighborhood: "Richmond", address: "620 Clement St, San Francisco, CA", units: 24, available: 3, types: ["Studio", "1BR"], solar: "Rooftop solar", rent: "$1,900 – $2,700", lat: 37.7825, lng: -122.4640, image: "https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=400&q=80" },
+    { id: 6, name: "Outer Sunset Solar Row", neighborhood: "Sunset", address: "1801 Irving St, San Francisco, CA", units: 20, available: 2, types: ["1BR", "2BR+"], solar: "Balcony solar + battery", rent: "$2,000 – $2,800", lat: 37.7636, lng: -122.4757, image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=400&q=80" },
+    { id: 7, name: "Hayes Valley Verde Apartments", neighborhood: "Hayes Valley", address: "475 Hayes St, San Francisco, CA", units: 28, available: 5, types: ["Studio", "1BR"], solar: "Rooftop solar + EV charging", rent: "$2,600 – $3,600", lat: 37.7766, lng: -122.4242, image: "https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=400&q=80" },
+    { id: 8, name: "Tenderloin Bright Block", neighborhood: "Tenderloin", address: "230 Eddy St, San Francisco, CA", units: 40, available: 6, types: ["Studio", "1BR"], solar: "Community solar subscription", rent: "$1,800 – $2,400", lat: 37.7838, lng: -122.4128, image: "https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=400&q=80" },
+    { id: 9, name: "North Beach Harbor Light Flats", neighborhood: "North Beach", address: "1400 Stockton St, San Francisco, CA", units: 16, available: 0, types: ["1BR", "2BR+"], solar: "Rooftop solar", rent: "$2,900 – $3,800", lat: 37.8030, lng: -122.4106, image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=400&q=80" },
+    { id: 10, name: "Marina Breeze Residences", neighborhood: "Marina", address: "2100 Chestnut St, San Francisco, CA", units: 22, available: 2, types: ["1BR", "2BR+"], solar: "Balcony solar + battery", rent: "$3,200 – $4,400", lat: 37.8009, lng: -122.4376, image: "https://images.unsplash.com/photo-1567496898669-ee935f5f647a?auto=format&fit=crop&w=400&q=80" },
+    { id: 11, name: "Potrero Hill Sunline Lofts", neighborhood: "Potrero Hill", address: "1700 17th St, San Francisco, CA", units: 30, available: 7, types: ["Studio", "1BR", "2BR+"], solar: "Rooftop solar + EV charging", rent: "$2,300 – $3,500", lat: 37.7627, lng: -122.4007, image: "https://images.unsplash.com/photo-1502672023488-70e25813eb96?auto=format&fit=crop&w=400&q=80" },
+    { id: 12, name: "Bernal Heights Garden Apartments", neighborhood: "Bernal Heights", address: "300 Cortland Ave, San Francisco, CA", units: 14, available: 1, types: ["1BR"], solar: "Community solar subscription", rent: "$2,200 – $2,900", lat: 37.7395, lng: -122.4153, image: "https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=400&q=80" },
+    { id: 13, name: "Glen Park Canyon Residences", neighborhood: "Glen Park", address: "650 Bosworth St, San Francisco, CA", units: 10, available: 0, types: ["2BR+"], solar: "Rooftop solar", rent: "$3,000 – $3,900", lat: 37.7339, lng: -122.4336, image: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=400&q=80" },
+    { id: 14, name: "Excelsior Sunfield Apartments", neighborhood: "Excelsior", address: "4500 Mission St, San Francisco, CA", units: 26, available: 4, types: ["Studio", "1BR", "2BR+"], solar: "Balcony solar + battery", rent: "$1,900 – $2,800", lat: 37.7244, lng: -122.4310, image: "https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=400&q=80" },
+    { id: 15, name: "Outer Sunset Pacific View Court", neighborhood: "Outer Sunset", address: "2200 47th Ave, San Francisco, CA", units: 18, available: 3, types: ["1BR", "2BR+"], solar: "Rooftop solar", rent: "$2,100 – $3,000", lat: 37.7544, lng: -122.5046, image: "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=400&q=80" }
+  ];
+
+  // ---- Map state ----
+  window._solarMaps = window._solarMaps || {};
+  window._solarMarkers = window._solarMarkers || {};
+  window._solarSelected = window._solarSelected || {};
+
+  function initSolarMap(mapElementId, opts) {
+    opts = opts || {};
+    var map = L.map(mapElementId).setView([37.7749, -122.4194], 13);
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+      maxZoom: 19
+    }).addTo(map);
+
+    var markers = {};
+
+    window.solarBuildings.forEach(function (b) {
+      var icon = L.divIcon({
+        className: 'map-marker-wrap',
+        html: '<div class="map-marker"></div>',
+        iconSize: [24, 24],
+        iconAnchor: [12, 12]
+      });
+
+      var marker = L.marker([b.lat, b.lng], { icon: icon, riseOnHover: true });
+
+      var popupHtml =
+        '<div class="map-popup">' +
+          '<h4>' + b.name + '</h4>' +
+          '<p>' + b.available + ' of ' + b.units + ' available</p>' +
+          '<p>' + b.rent + '</p>' +
+          '<button class="btn-secondary" onclick="window.selectBuilding(' + b.id + ')">View details</button>' +
+        '</div>';
+
+      marker.bindPopup(popupHtml);
+
+      marker.on('mouseover', function () {
+        var el = marker.getElement();
+        if (el) el.classList.add('hover-expand');
+      });
+      marker.on('mouseout', function () {
+        var el = marker.getElement();
+        if (el && !el.classList.contains('selected')) el.classList.remove('hover-expand');
+      });
+
+      marker.addTo(map);
+      markers[b.id] = marker;
+    });
+
+    return { map: map, markers: markers };
+  }
+
+  window.selectBuilding = function (id) {
+    var building = window.solarBuildings.find(function (b) { return b.id === id; });
+    if (!building) return;
+
+    // Update all initialized maps
+    Object.keys(window._solarMaps).forEach(function (key) {
+      var entry = window._solarMaps[key];
+      if (!entry) return;
+      var map = entry.map;
+      var markers = entry.markers;
+      var marker = markers[id];
+
+      // Reset previously selected marker on this map
+      var prevId = window._solarSelected[key];
+      if (prevId && markers[prevId]) {
+        var prevEl = markers[prevId].getElement();
+        if (prevEl) {
+          var prevWrap = prevEl.querySelector('.map-marker-wrap') || prevEl;
+          prevEl.classList.remove('selected');
+          var prevDot = prevEl.querySelector('.map-marker');
+          if (prevDot) prevDot.classList.remove('selected');
+          var prevLabel = prevEl.querySelector('.map-marker-label');
+          if (prevLabel) prevLabel.remove();
+        }
+      }
+
+      if (marker) {
+        map.panTo([building.lat, building.lng]);
+        map.setZoom(15);
+        marker.openPopup();
+
+        var el = marker.getElement();
+        if (el) {
+          el.classList.add('selected');
+          var dot = el.querySelector('.map-marker');
+          if (dot) {
+            dot.classList.add('selected');
+            if (!el.querySelector('.map-marker-label')) {
+              var label = document.createElement('div');
+              label.className = 'map-marker-label';
+              label.textContent = building.name;
+              el.style.position = 'relative';
+              el.appendChild(label);
+            }
+          }
+        }
+        window._solarSelected[key] = id;
+      }
+    });
+
+    // Highlight matching card
+    document.querySelectorAll('.map-building-card.highlighted').forEach(function (c) {
+      c.classList.remove('highlighted');
+    });
+    var card = document.getElementById('building-card-' + id);
+    if (card) {
+      card.classList.add('highlighted');
+      card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+  };
+
+  function initRenterMap() {
+    if (window._solarMaps.renter) return;
+    var result = initSolarMap('renterMapEl');
+    window._solarMaps.renter = result;
+    setTimeout(function () { result.map.invalidateSize(); }, 100);
+  }
+
+  function initSharedMap() {
+    if (window._solarMaps.shared) return;
+    var result = initSolarMap('sharedMapEl');
+    window._solarMaps.shared = result;
+    setTimeout(function () { result.map.invalidateSize(); }, 100);
+  }
+
+  // ---- Card rendering ----
+  function renderBuildingCards(containerId, ctaLabel) {
+    ctaLabel = ctaLabel || 'Request info';
+    var container = document.getElementById(containerId);
+    if (!container) return;
+
+    container.innerHTML = window.solarBuildings.map(function (b) {
+      var availBadge = b.available > 0
+        ? '<span class="chip chip-green">' + b.available + ' of ' + b.units + ' available</span>'
+        : '<span class="badge-waitlist">Waitlist</span>';
+
+      return (
+        '<div id="building-card-' + b.id + '" class="card map-building-card" onclick="window.selectBuilding(' + b.id + ')" tabindex="0" role="button" aria-label="View details for ' + b.name + '">' +
+          '<img src="' + b.image + '" alt="Exterior of ' + b.name + ' in ' + b.neighborhood + '">' +
+          '<div class="card-body">' +
+            '<span class="chip chip-green">' + b.neighborhood + '</span>' +
+            '<h3>' + b.name + '</h3>' +
+            '<div class="address">' + b.address + '</div>' +
+            '<div>' + availBadge + '</div>' +
+            '<div><strong>' + b.rent + '</strong> / mo</div>' +
+            '<span class="chip chip-amber">' + b.solar + '</span>' +
+            '<button class="btn-secondary" onclick="event.stopPropagation();" aria-label="' + ctaLabel + ' for ' + b.name + '">' + ctaLabel + '</button>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+  }
+</script>
+<!-- ===== PAGE-SPECIFIC SCRIPT ===== -->
+<script>
+  var renterChips = ["All neighborhoods", "Available now", "Studio", "1BR", "2BR+", "Balcony solar", "Community solar"];
+  var landlordChips = ["All neighborhoods", "High solar potential", "Eligible for incentives", "Large buildings (50+ units)"];
+  var sharedMode = 'renter';
+
+  function setSharedMode(mode) {
+    sharedMode = mode;
+    document.getElementById('sharedViewRenter').classList.toggle('active', mode === 'renter');
+    document.getElementById('sharedViewLandlord').classList.toggle('active', mode === 'landlord');
+
+    var chips = mode === 'renter' ? renterChips : landlordChips;
+    var chipRow = document.getElementById('sharedFilterChips');
+    chipRow.innerHTML = chips.map(function (label, i) {
+      return '<button class="filter-chip' + (i === 0 ? ' active' : '') + '" type="button">' + label + '</button>';
+    }).join('');
+
+    var ctaLabel = mode === 'renter' ? 'Request info' : 'Register a nearby building';
+    renderBuildingCards('sharedCardList', ctaLabel);
+  }
+
+  // Renter page init (call when #renter-map becomes active page)
+  function activateRenterMapPage() {
+    renderBuildingCards('renterCardList', 'Request info');
+    initRenterMap();
+  }
+
+  // Shared page init (call when #shared-map becomes active page)
+  function activateSharedMapPage() {
+    setSharedMode(sharedMode);
+    initSharedMap();
+  }
+
+  // Generic filter chip toggle (visual only)
+  document.addEventListener('click', function (e) {
+    if (e.target.classList && e.target.classList.contains('filter-chip')) {
+      var row = e.target.parentElement;
+      row.querySelectorAll('.filter-chip').forEach(function (c) { c.classList.remove('active'); });
+      e.target.classList.add('active');
+    }
+  });
+</script>
+<script>
+/* ===== ROI CALCULATOR SCRIPT — merge into main script ===== */
+(function () {
+  function formatCurrency(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function calculateROI() {
+    var unitsEl = document.getElementById('roiUnits');
+    var billEl = document.getElementById('roiBill');
+    var roofEl = document.getElementById('roiRoof');
+    if (!unitsEl || !billEl || !roofEl) return;
+
+    var units = parseInt(unitsEl.value, 10);
+    var bill = parseInt(billEl.value, 10);
+    var roof = roofEl.value;
+
+    var systemEl = document.querySelector('input[name="roiSystem"]:checked');
+    var system = systemEl ? systemEl.value : 'balcony';
+
+    document.getElementById('roiUnitsValue').textContent = units + ' units';
+    document.getElementById('roiBillValue').textContent = '$' + bill;
+
+    // Per-unit cost by system type
+    var perUnitCost;
+    var savingsRate;
+    if (system === 'rooftop') {
+      perUnitCost = 4200;
+      savingsRate = 0.35;
+    } else if (system === 'community') {
+      perUnitCost = 600;
+      savingsRate = 0.15;
+    } else {
+      perUnitCost = 1800;
+      savingsRate = 0.25;
+    }
+
+    var totalCost = units * perUnitCost;
+
+    // Roof condition adjustment
+    if (roof === 'excellent') {
+      totalCost *= 0.90;
+    } else if (roof === 'needs') {
+      totalCost *= 1.15;
+    }
+
+    var incentives = totalCost * 0.35;
+    var netCost = totalCost - incentives;
+    var annualSavings = units * bill * 12 * savingsRate;
+    var payback = annualSavings > 0 ? (netCost / annualSavings) : 0;
+    var tenYearGain = (annualSavings * 10) - netCost;
+
+    document.getElementById('roiCost').textContent = formatCurrency(totalCost);
+    document.getElementById('roiIncentive').textContent = formatCurrency(incentives);
+    document.getElementById('roiNetCost').textContent = formatCurrency(netCost);
+    document.getElementById('roiAnnualSavings').textContent = formatCurrency(annualSavings);
+    document.getElementById('roiPayback').textContent = payback.toFixed(1) + ' years';
+    document.getElementById('roiTenYear').textContent = formatCurrency(tenYearGain);
+
+    renderChart(annualSavings);
+  }
+
+  function renderChart(annualSavings) {
+    var chart = document.getElementById('roiChart');
+    if (!chart) return;
+    chart.innerHTML = '';
+
+    var totalOverTen = annualSavings * 10;
+
+    for (var year = 1; year <= 10; year++) {
+      var cumulative = annualSavings * year;
+      var heightPct = totalOverTen > 0 ? Math.min((cumulative / totalOverTen) * 100, 100) : 0;
+
+      var col = document.createElement('div');
+      col.className = 'roi-bar-col';
+
+      var bar = document.createElement('div');
+      bar.className = 'roi-bar';
+      bar.style.setProperty('--bar-height', heightPct + '%');
+
+      var yearLabel = document.createElement('div');
+      yearLabel.className = 'roi-bar-year';
+      yearLabel.textContent = 'Y' + year;
+
+      col.appendChild(bar);
+      col.appendChild(yearLabel);
+      chart.appendChild(col);
+
+      // trigger grow-in animation
+      (function (barEl) {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            barEl.classList.add('animate-in');
+          });
+        });
+      })(bar);
+    }
+  }
+
+  // Active radio chip styling
+  function bindRadioChips() {
+    var groups = document.querySelectorAll('.radio-chip-group');
+    groups.forEach(function (group) {
+      var chips = group.querySelectorAll('.radio-chip');
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          chips.forEach(function (c) { c.classList.remove('active'); });
+          chip.classList.add('active');
+        });
+      });
+    });
+  }
+
+  function initROICalculator() {
+    var ids = ['roiUnits', 'roiBill', 'roiRoof'];
+    ids.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.addEventListener('input', calculateROI);
+    });
+
+    var radios = document.querySelectorAll('input[name="roiType"], input[name="roiSystem"]');
+    radios.forEach(function (radio) {
+      radio.addEventListener('change', calculateROI);
+    });
+
+    bindRadioChips();
+    calculateROI();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initROICalculator);
+  } else {
+    initROICalculator();
+  }
+
+  // Expose for re-init when page becomes active in an SPA-style nav
+  window.initROICalculator = initROICalculator;
+})();
+</script>
+<script>
+/* ===== STORE BOOKING SCRIPT — merge into main script ===== */
+function submitBooking() {
+  var form = document.getElementById('bookingForm');
+  var success = document.getElementById('bookingSuccess');
+  if (form) form.style.display = 'none';
+  if (success) success.classList.add('show');
+}
+</script>
+</body>
+</html>
