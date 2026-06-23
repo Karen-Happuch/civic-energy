@@ -533,7 +533,9 @@ hr.divider {
 /* ──── HERO CAROUSEL ─────────────────────────────── */
 .hero-carousel {
   overflow: hidden;
-  width: 100%;
+  width: auto;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
   padding: 40px 0 48px;
   background: #fff;
 }
@@ -589,7 +591,7 @@ hr.divider {
 .c-card.shape-blob   { width: 300px;  height: 260px; border-radius: 58% 42% 52% 48% / 50% 50% 50% 50%; }
 
 /* push page content below floating pill nav */
-#app { padding-top: 80px; }
+#app { padding-top: 80px; overflow-x: clip; }
 
 /* ---------- Page transitions / router ---------- */
 .page { display:none; }
@@ -1132,28 +1134,37 @@ footer {
 .stepper-step p { color: var(--color-text-secondary, #5F6368); font-size: 14px; margin: 0; }
 
 /* Demand bar chart */
-.demand-bar-chart { margin-top: 16px; }
+.demand-bar-chart { margin-top: 24px; }
 .demand-bar-row {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 10px;
+  gap: 14px;
+  margin-bottom: 20px;
 }
-.demand-bar-label { width: 110px; font-size: 14px; color: var(--color-ink, #1F1F1F); flex-shrink: 0; }
+.demand-bar-icon {
+  width: 36px; height: 36px;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: #E6F4EA;
+  border-radius: 50%;
+  color: #1E8E3E;
+}
+.demand-bar-icon .material-icons-outlined { font-size: 20px; }
+.demand-bar-label { width: 120px; font-size: 15px; font-weight: 500; color: var(--color-ink, #1F1F1F); flex-shrink: 0; }
 .demand-bar-track {
   flex: 1;
-  background: var(--color-bg, #FFFFFF);
-  border-radius: 4px;
+  background: #F1F3F4;
+  border-radius: 100px;
   overflow: hidden;
-  height: 16px;
+  height: 20px;
 }
 .demand-bar-fill {
   height: 100%;
-  background: #1E8E3E;
-  border-radius: 4px;
+  background: linear-gradient(90deg, #34A853 0%, #1E8E3E 100%);
+  border-radius: 100px;
   box-shadow: none;
 }
-.demand-bar-value { width: 56px; text-align: right; font-size: 14px; color: var(--color-text-secondary, #5F6368); flex-shrink: 0; }
+.demand-bar-value { width: 64px; text-align: right; font-size: 15px; font-weight: 700; color: #1E8E3E; flex-shrink: 0; }
 
 /* Radio chips */
 .radio-chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -2018,7 +2029,32 @@ footer {
   </div>
 </div>
 
-<section class="grid-4" style="margin-top:48px;">
+<!-- 3-step overview -->
+<section style="margin-top:72px;">
+  <div class="section-header" style="text-align:center; margin-bottom:48px;">
+    <h2 style="font-weight:600;">How it works</h2>
+    <p style="color:var(--color-text-secondary,#5F6368);">Three steps. One cleaner city.</p>
+  </div>
+  <div class="stepper">
+    <article class="stepper-step">
+      <span class="material-icons-outlined" aria-hidden="true">domain</span>
+      <h3>You register</h3>
+      <p>Enroll your building. We handle the planning and coordination.</p>
+    </article>
+    <article class="stepper-step">
+      <span class="material-icons-outlined" aria-hidden="true">bolt</span>
+      <h3>We install</h3>
+      <p>Solar, battery storage, and smart energy systems, at zero install cost.</p>
+    </article>
+    <article class="stepper-step">
+      <span class="material-icons-outlined" aria-hidden="true">savings</span>
+      <h3>Everyone earns</h3>
+      <p>Higher property value, lower bills, and tenants who stay longer.</p>
+    </article>
+  </div>
+</section>
+
+<section class="grid-4" style="margin-top:72px;">
   <div class="card" style="text-align:center;">
     <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">trending_up</span>
     <h3 style="font-weight:700; margin:12px 0 4px; color:#1E8E3E;">12–18%</h3>
@@ -2070,49 +2106,57 @@ footer {
   </div>
 </section>
 
-<section class="card card-lg" style="margin-top:48px;">
+<section class="card card-lg" style="margin-top:48px; padding:48px;">
   <span class="chip chip-green">Renter demand signal</span>
-  <h2 style="font-weight:500; margin:12px 0 4px;">Right now in San Francisco</h2>
-  <p style="font-size:24px; font-weight:400; color:#1E8E3E; margin:0 0 8px;">
-    14,200 renters are actively seeking solar-equipped housing
+  <h2 style="font-weight:600; margin:16px 0 8px;">Right now in San Francisco</h2>
+  <p style="font-size:26px; font-weight:600; color:#1E8E3E; margin:0 0 8px;">
+    14,200 renters are seeking solar-equipped housing
   </p>
-  <p style="color:var(--color-text-secondary,#5F6368);">Demand by neighborhood (active searches this month)</p>
+  <p style="color:var(--color-text-secondary,#5F6368); margin:0;">Demand by neighborhood &middot; active searches this month</p>
 
   <div class="demand-bar-chart">
     <div class="demand-bar-row">
+      <div class="demand-bar-icon"><span class="material-icons-outlined">location_city</span></div>
       <div class="demand-bar-label">Mission</div>
       <div class="demand-bar-track"><div class="demand-bar-fill" style="width:88%;"></div></div>
       <div class="demand-bar-value">3,120</div>
     </div>
     <div class="demand-bar-row">
+      <div class="demand-bar-icon"><span class="material-icons-outlined">apartment</span></div>
       <div class="demand-bar-label">SoMa</div>
       <div class="demand-bar-track"><div class="demand-bar-fill" style="width:74%;"></div></div>
       <div class="demand-bar-value">2,640</div>
     </div>
     <div class="demand-bar-row">
+      <div class="demand-bar-icon"><span class="material-icons-outlined">beach_access</span></div>
       <div class="demand-bar-label">Sunset</div>
       <div class="demand-bar-track"><div class="demand-bar-fill" style="width:62%;"></div></div>
       <div class="demand-bar-value">2,180</div>
     </div>
     <div class="demand-bar-row">
+      <div class="demand-bar-icon"><span class="material-icons-outlined">festival</span></div>
       <div class="demand-bar-label">Castro</div>
       <div class="demand-bar-track"><div class="demand-bar-fill" style="width:55%;"></div></div>
       <div class="demand-bar-value">1,950</div>
     </div>
     <div class="demand-bar-row">
+      <div class="demand-bar-icon"><span class="material-icons-outlined">park</span></div>
       <div class="demand-bar-label">Richmond</div>
       <div class="demand-bar-track"><div class="demand-bar-fill" style="width:47%;"></div></div>
       <div class="demand-bar-value">1,640</div>
     </div>
     <div class="demand-bar-row">
+      <div class="demand-bar-icon"><span class="material-icons-outlined">landscape</span></div>
       <div class="demand-bar-label">Bernal Heights</div>
       <div class="demand-bar-track"><div class="demand-bar-fill" style="width:38%;"></div></div>
       <div class="demand-bar-value">1,330</div>
     </div>
   </div>
 
-  <p style="margin-top:20px; font-size:18px; font-weight:400;">Your building could be their next home.</p>
-  <a href="#landlord-roi" class="btn-primary-green" style="font-size:16px; padding:14px 32px; display:inline-block; margin-top:8px;">Register your building</a>
+  <div style="margin-top:40px; padding-top:32px; border-top:1px solid var(--color-border,#DADCE0); text-align:center;">
+    <p style="font-size:20px; font-weight:600; margin:0 0 20px;">Your building could be their next home.</p>
+    <a href="#landlord-roi" class="btn-primary-green" style="font-size:16px; padding:16px 40px; display:inline-block;">Register your building</a>
+  </div>
 </section>
     </div>
   </section>
