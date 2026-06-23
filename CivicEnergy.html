@@ -548,26 +548,41 @@ hr.divider {
   0%   { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-/* varied shape cards */
+/* varied shape cards — logo edition */
 .c-card {
   flex: 0 0 auto;
   overflow: hidden;
   position: relative;
-  background: #E6F4EA;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 .c-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
+  width: auto;
+  max-width: 72%;
+  max-height: 72px;
+  object-fit: contain;
   display: block;
 }
+.c-card .c-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #5F6368;
+}
 /* shape variants */
-/* all shapes share the same height — only width and radius vary */
-.c-card.shape-tall   { width: 200px;  height: 280px; border-radius: 140px; }
-.c-card.shape-wide   { width: 440px;  height: 280px; border-radius: 28px; }
-.c-card.shape-circle { width: 280px;  height: 280px; border-radius: 50%; }
-.c-card.shape-square { width: 280px;  height: 280px; border-radius: 40px; }
-.c-card.shape-short  { width: 400px;  height: 280px; border-radius: 140px; }
-.c-card.shape-blob   { width: 320px;  height: 280px; border-radius: 58% 42% 52% 48% / 50% 50% 50% 50%; }
+.c-card.shape-tall   { width: 200px;  height: 260px; border-radius: 130px; }
+.c-card.shape-wide   { width: 400px;  height: 220px; border-radius: 28px; }
+.c-card.shape-circle { width: 260px;  height: 260px; border-radius: 50%; }
+.c-card.shape-square { width: 260px;  height: 260px; border-radius: 36px; }
+.c-card.shape-short  { width: 360px;  height: 220px; border-radius: 110px; }
+.c-card.shape-blob   { width: 300px;  height: 260px; border-radius: 58% 42% 52% 48% / 50% 50% 50% 50%; }
 
 /* push page content below floating pill nav */
 #app { padding-top: 80px; }
@@ -1429,58 +1444,130 @@ footer {
       <p class="hero-sub">Balcony solar is now legal in California. Plug in, save money every month, and take your panels when you move. No landlord approval needed.</p>
     </section>
 
-    <!-- ── Infinite shape carousel ────────────────── -->
+    <!-- ── Infinite brand logo carousel ────────────────── -->
     <div class="hero-carousel" aria-hidden="true">
       <div class="carousel-track">
         <!-- Set A -->
-        <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=880&q=80" alt="San Francisco apartment building">
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/nest.com" alt="Google Nest">
+          <span class="c-label">Smart Home</span>
         </div>
-        <div class="c-card shape-tall">
-          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80" alt="Balcony solar panel in sunlight">
+        <div class="c-card shape-wide">
+          <img src="https://logo.clearbit.com/sustainability.google" alt="Google Sustainability">
+          <span class="c-label">Sustainability</span>
         </div>
         <div class="c-card shape-circle">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=560&q=80" alt="Nest thermostat on a wall">
-        </div>
-        <div class="c-card shape-short">
-          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80" alt="Community solar panels on a rooftop">
+          <img src="https://logo.clearbit.com/enphase.com" alt="Enphase Energy">
+          <span class="c-label">Solar Tech</span>
         </div>
         <div class="c-card shape-square">
-          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=560&q=80" alt="Modern apartment building exterior">
+          <img src="https://logo.clearbit.com/sense.com" alt="Sense">
+          <span class="c-label">Energy Monitor</span>
         </div>
-        <div class="c-card shape-blob">
-          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=640&q=80" alt="Bright apartment living room">
+        <div class="c-card shape-short">
+          <img src="https://logo.clearbit.com/shelly.com" alt="Shelly">
+          <span class="c-label">Smart Meter</span>
         </div>
-        <div class="c-card shape-tall">
-          <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=400&q=80" alt="Home battery storage unit">
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/emporiaenergy.com" alt="Emporia Energy">
+          <span class="c-label">Energy Monitor</span>
         </div>
         <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=880&q=80" alt="Energy monitor display">
+          <img src="https://logo.clearbit.com/sunrun.com" alt="Sunrun">
+          <span class="c-label">Solar Install</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/tesla.com" alt="Tesla Solar">
+          <span class="c-label">Solar + Storage</span>
+        </div>
+        <div class="c-card shape-blob">
+          <img src="https://logo.clearbit.com/ecoflow.com" alt="EcoFlow">
+          <span class="c-label">Portable Solar</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/anker.com" alt="Anker SOLIX">
+          <span class="c-label">Balcony Solar</span>
+        </div>
+        <div class="c-card shape-wide">
+          <img src="https://logo.clearbit.com/zendure.com" alt="Zendure">
+          <span class="c-label">Portable Solar</span>
+        </div>
+        <div class="c-card shape-circle">
+          <img src="https://logo.clearbit.com/energystar.gov" alt="ENERGY STAR">
+          <span class="c-label">Certification</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/usgbc.org" alt="LEED / USGBC">
+          <span class="c-label">Green Building</span>
+        </div>
+        <div class="c-card shape-short">
+          <img src="https://logo.clearbit.com/dsireusa.org" alt="DSIRE">
+          <span class="c-label">Policy & Incentives</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/sfenvironment.org" alt="SF Environment">
+          <span class="c-label">SF Policy</span>
         </div>
         <!-- Set B — exact duplicate for seamless loop -->
-        <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=880&q=80" alt="San Francisco apartment building">
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/nest.com" alt="Google Nest">
+          <span class="c-label">Smart Home</span>
         </div>
-        <div class="c-card shape-tall">
-          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80" alt="Balcony solar panel in sunlight">
+        <div class="c-card shape-wide">
+          <img src="https://logo.clearbit.com/sustainability.google" alt="Google Sustainability">
+          <span class="c-label">Sustainability</span>
         </div>
         <div class="c-card shape-circle">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=560&q=80" alt="Nest thermostat on a wall">
-        </div>
-        <div class="c-card shape-short">
-          <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=800&q=80" alt="Community solar panels on a rooftop">
+          <img src="https://logo.clearbit.com/enphase.com" alt="Enphase Energy">
+          <span class="c-label">Solar Tech</span>
         </div>
         <div class="c-card shape-square">
-          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=560&q=80" alt="Modern apartment building exterior">
+          <img src="https://logo.clearbit.com/sense.com" alt="Sense">
+          <span class="c-label">Energy Monitor</span>
         </div>
-        <div class="c-card shape-blob">
-          <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=640&q=80" alt="Bright apartment living room">
+        <div class="c-card shape-short">
+          <img src="https://logo.clearbit.com/shelly.com" alt="Shelly">
+          <span class="c-label">Smart Meter</span>
         </div>
-        <div class="c-card shape-tall">
-          <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=400&q=80" alt="Home battery storage unit">
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/emporiaenergy.com" alt="Emporia Energy">
+          <span class="c-label">Energy Monitor</span>
         </div>
         <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=880&q=80" alt="Energy monitor display">
+          <img src="https://logo.clearbit.com/sunrun.com" alt="Sunrun">
+          <span class="c-label">Solar Install</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/tesla.com" alt="Tesla Solar">
+          <span class="c-label">Solar + Storage</span>
+        </div>
+        <div class="c-card shape-blob">
+          <img src="https://logo.clearbit.com/ecoflow.com" alt="EcoFlow">
+          <span class="c-label">Portable Solar</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/anker.com" alt="Anker SOLIX">
+          <span class="c-label">Balcony Solar</span>
+        </div>
+        <div class="c-card shape-wide">
+          <img src="https://logo.clearbit.com/zendure.com" alt="Zendure">
+          <span class="c-label">Portable Solar</span>
+        </div>
+        <div class="c-card shape-circle">
+          <img src="https://logo.clearbit.com/energystar.gov" alt="ENERGY STAR">
+          <span class="c-label">Certification</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/usgbc.org" alt="LEED / USGBC">
+          <span class="c-label">Green Building</span>
+        </div>
+        <div class="c-card shape-short">
+          <img src="https://logo.clearbit.com/dsireusa.org" alt="DSIRE">
+          <span class="c-label">Policy & Incentives</span>
+        </div>
+        <div class="c-card shape-square">
+          <img src="https://logo.clearbit.com/sfenvironment.org" alt="SF Environment">
+          <span class="c-label">SF Policy</span>
         </div>
       </div>
     </div>
