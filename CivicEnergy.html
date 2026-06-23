@@ -1380,7 +1380,7 @@ footer {
 
 <!-- ============ NAV ============ -->
 <!-- Floating logo — top left -->
-<a href="#landing" class="floating-logo">
+<div class="floating-logo">
   <svg width="32" height="32" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <circle cx="18" cy="18" r="18" fill="#1E8E3E"/>
     <text x="6.5" y="23" font-family="-apple-system,BlinkMacSystemFont,SF Pro Display,sans-serif" font-weight="800" font-size="13" fill="#A8D5B5" letter-spacing="-0.5">CE</text>
@@ -1388,7 +1388,7 @@ footer {
     <line x1="18" y1="18" x2="24" y2="11" stroke="#B7DFC4" stroke-width="1" stroke-linecap="round"/>
   </svg>
   Civic Energy
-</a>
+</div>
 
 <!-- Floating CTA — top right (desktop) -->
 <a href="#renter" class="floating-cta">Get started</a>
@@ -1400,8 +1400,8 @@ footer {
 
 <!-- Mobile dropdown menu -->
 <div id="mobileMenu">
-  <button class="mobile-menu-btn active" data-pill="renters">For Renters</button>
-  <button class="mobile-menu-btn" data-pill="landlords">For Landlords</button>
+  <button class="mobile-menu-btn" data-pill="renters">For Renters</button>
+  <button class="mobile-menu-btn active" data-pill="landlords">For Landlords</button>
   <button class="mobile-menu-btn" data-pill="how">How It Works</button>
   <button class="mobile-menu-btn" data-pill="map">Find a Building</button>
   <div class="mobile-cta-row"><a href="#renter">Get started</a></div>
@@ -1410,8 +1410,8 @@ footer {
 <!-- ============ PILL SUB-NAV ============ -->
 <div id="pillNav">
   <div class="pill-nav-track">
-    <button class="pill-nav-btn active" data-pill="renters">For Renters</button>
-    <button class="pill-nav-btn" data-pill="landlords">For Landlords</button>
+    <button class="pill-nav-btn" data-pill="renters">For Renters</button>
+    <button class="pill-nav-btn active" data-pill="landlords">For Landlords</button>
     <button class="pill-nav-btn" data-pill="how">How It Works</button>
     <button class="pill-nav-btn" data-pill="map">Find a Building</button>
   </div>
@@ -1421,7 +1421,7 @@ footer {
 <main id="app">
 
   <!-- ================= LANDING PAGE ================= -->
-  <section id="landing" class="page active" data-route="landing">
+  <section id="landing" class="page" data-route="landing">
 
     <!-- Hero -->
     <section class="hero-centered">
@@ -1924,7 +1924,7 @@ footer {
     </div>
   </section>
 
-  <section id="landlord" class="page" data-route="landlord">
+  <section id="landlord" class="page active" data-route="landlord">
     <div class="container" style="padding-top:120px;padding-bottom:100px;">
       <section class="hero grid-2" style="align-items:center; gap:40px;">
   <div>
@@ -2597,7 +2597,7 @@ footer {
 
   // ---------- Hash router ----------
   function navigate() {
-    var route = (location.hash || '#landing').replace('#', '') || 'landing';
+    var route = (location.hash || '#landlord').replace('#', '') || 'landlord';
     var pages = document.querySelectorAll('.page');
     var found = false;
 
@@ -2611,8 +2611,8 @@ footer {
     });
 
     if (!found) {
-      route = 'landing';
-      document.getElementById('landing').classList.add('active');
+      route = 'landlord';
+      document.getElementById('landlord').classList.add('active');
     }
 
     updateNav(route);
