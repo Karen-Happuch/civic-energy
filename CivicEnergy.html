@@ -1134,6 +1134,119 @@ footer {
   color: var(--color-text-secondary, #5F6368);
   margin-top: 16px;
 }
+
+/* ===== How It Works — Apple-style horizontal cards ===== */
+.hiw-page { background: #F5F5F7; }
+.hiw-block { margin-top: 96px; }
+.hiw-block:first-of-type { margin-top: 0; }
+.hiw-block-head { margin-bottom: 28px; }
+.hiw-block-head h2 {
+  font-weight: 600;
+  font-size: clamp(30px, 3.4vw, 44px);
+  letter-spacing: -1.2px;
+  margin: 0 0 10px;
+}
+.hiw-block-head p {
+  color: var(--color-text-secondary, #5F6368);
+  font-size: clamp(17px, 1.8vw, 20px);
+  max-width: 640px;
+  margin: 0;
+}
+.hiw-wrap { position: relative; }
+.hiw-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 6px 2px 10px;
+  scrollbar-width: none;
+}
+.hiw-row::-webkit-scrollbar { display: none; }
+.hiw-card {
+  flex: 0 0 auto;
+  width: 340px;
+  background: #fff;
+  border-radius: 28px;
+  padding: 18px 18px 26px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.04);
+}
+.hiw-card.sm { width: 280px; }
+.hiw-ph {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #ECEEF0;
+  border: 1px dashed #D2D6DA;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #9AA0A6;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+.hiw-ph .material-icons-outlined { font-size: 30px; margin-bottom: 8px; color: #B0B5BA; }
+.hiw-step {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #1E8E3E;
+  margin: 0 0 6px;
+}
+.hiw-card h3 {
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+.hiw-card p {
+  font-size: 15px;
+  color: #5F6368;
+  margin: 0;
+  line-height: 1.5;
+}
+.hiw-note {
+  font-size: 13px;
+  color: #80868B;
+  font-style: italic;
+  max-width: 760px;
+  margin: 18px 0 0;
+}
+.hiw-arrow {
+  position: absolute;
+  top: 38%;
+  transform: translateY(-50%);
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+  color: #1F1F1F;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5;
+  transition: background 0.15s ease;
+}
+.hiw-arrow:hover { background: #fff; }
+.hiw-arrow.left { left: -12px; }
+.hiw-arrow.right { right: -12px; }
+@media (max-width: 768px) {
+  .hiw-arrow { display: none; }
+  .hiw-card { width: 80vw; max-width: 320px; }
+  .hiw-card.sm { width: 72vw; max-width: 260px; }
+  .hiw-block { margin-top: 72px; }
+}
 </style>
 <style>
   .map-two-col {
@@ -1805,78 +1918,6 @@ footer {
 
     <hr class="divider">
 
-    <!-- ===== Two-path How It Works ===== -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header" style="margin-bottom:8px;">
-          <h2 style="font-weight:600;">How It Works</h2>
-        </div>
-        <p style="text-align:center; color:var(--color-text-secondary,#5F6368); max-width:720px; margin:0 auto 48px;">
-          Civic Energy has two main paths: portable solar for flexible personal use, and installation solar for building-wide adoption.
-        </p>
-        <div class="grid-2" style="align-items:start; gap:32px;">
-
-          <!-- Portable Solar -->
-          <article class="card card-lg path-card">
-            <span class="chip chip-teal">Portable Solar</span>
-            <h3 style="font-weight:600; margin:4px 0 0; font-size:24px;">Portable Solar</h3>
-            <p style="color:#5F6368; margin:0;">For renters or residents who want flexible solar for selected devices, small savings, or backup power.</p>
-            <div class="tag-row">
-              <span class="tag">Portable panel + battery</span>
-              <span class="tag">Balcony solar</span>
-              <span class="tag">Plug-in solar pathway</span>
-              <span class="tag">Solar charging station</span>
-            </div>
-            <ol class="path-steps">
-              <li>Place the panel near sunlight.</li>
-              <li>Connect it to a battery, power station, or approved plug-in system.</li>
-              <li>Use it for selected devices like a laptop, phone, router, lamp, TV, or scooter charger.</li>
-              <li>Track battery level, energy produced, and estimated savings.</li>
-            </ol>
-            <p style="font-size:13px; color:#5F6368; background:var(--color-bg-alt,#F6F6F6); border-radius:12px; padding:12px 14px; margin:4px 0 0;">
-              Portable solar usually does not power the entire apartment. It is best for selected devices and small-scale energy savings. Plug-in balcony solar depends on local rules and safety standards.
-            </p>
-            <div class="grid-3" style="gap:10px; margin-top:4px;">
-              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">solar_power</span>Portable panel on balcony</div></div>
-              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">battery_charging_full</span>Panel connected to battery</div></div>
-              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">devices</span>Charging laptop/phone/scooter</div></div>
-            </div>
-          </article>
-
-          <!-- Installation Solar -->
-          <article class="card card-lg path-card">
-            <span class="chip chip-purple">Installation Solar</span>
-            <h3 style="font-weight:600; margin:4px 0 0; font-size:24px;">Installation Solar</h3>
-            <p style="color:#5F6368; margin:0;">For apartment owners, facility managers, property managers, and landlords who want building-wide energy impact.</p>
-            <div class="tag-row">
-              <span class="tag">Rooftop solar</span>
-              <span class="tag">Window solar</span>
-              <span class="tag">Building-integrated solar</span>
-              <span class="tag">Building battery storage</span>
-              <span class="tag">Meter-connected solar</span>
-            </div>
-            <ol class="path-steps">
-              <li>Solar is professionally installed on the roof, window, or building surface.</li>
-              <li>An inverter converts solar energy into usable electricity.</li>
-              <li>The system connects to the building's electrical panel, meter, or approved energy infrastructure.</li>
-              <li>The building uses solar when available, and PG&amp;E/grid electricity fills the gap automatically.</li>
-              <li>The dashboard shows usage, savings, and energy impact.</li>
-            </ol>
-            <p style="font-size:13px; color:#5F6368; background:var(--color-bg-alt,#F6F6F6); border-radius:12px; padding:12px 14px; margin:4px 0 0;">
-              Users do not manually switch between solar and PG&amp;E. The system uses solar when available and automatically pulls from the grid when needed.
-            </p>
-            <div class="grid-3" style="gap:10px; margin-top:4px;">
-              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">apartment</span>Rooftop/window solar on building</div></div>
-              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">electric_meter</span>Solar connected to inverter &amp; meter</div></div>
-              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">dashboard</span>Dashboard: solar, PG&amp;E &amp; savings</div></div>
-            </div>
-          </article>
-
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
 
     <!-- The system set -->
     <section class="section section-light">
@@ -1983,6 +2024,193 @@ footer {
 
   </section>
   <!-- ================= /LANDING PAGE ================= -->
+
+  <!-- ================= HOW IT WORKS PAGE ================= -->
+  <section id="how" class="page hiw-page" data-route="how">
+    <div class="container" style="padding-top:128px; padding-bottom:128px;">
+
+      <!-- Hero -->
+      <div style="text-align:center; max-width:760px; margin:0 auto 80px;">
+        <h1 style="font-size:clamp(44px,6vw,72px); font-weight:800; letter-spacing:-2px; line-height:1.04;">How It Works</h1>
+        <p style="font-size:clamp(18px,2vw,22px); color:var(--color-text-secondary,#5F6368); margin-top:18px;">Two ways to bring Civic Energy into apartment living.</p>
+      </div>
+
+      <!-- ===== Portable Solar — journey ===== -->
+      <div class="hiw-block">
+        <div class="hiw-block-head">
+          <h2>Portable Solar</h2>
+          <p>Movable solar for renters and residents who want savings, backup power, and simple everyday use.</p>
+        </div>
+        <div class="hiw-wrap">
+          <button class="hiw-arrow left" aria-label="Scroll left" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:-380,behavior:'smooth'})">&#8249;</button>
+          <button class="hiw-arrow right" aria-label="Scroll right" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:380,behavior:'smooth'})">&#8250;</button>
+          <div class="hiw-row">
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">dashboard</span>Google Nest energy dashboard showing real-time electricity use.</div>
+              <p class="hiw-step">Step 1</p>
+              <h3>See your energy use</h3>
+              <p>Civic Energy Monitor reads real-time electricity use and sends it to the Google Nest energy dashboard.</p>
+            </article>
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">wb_sunny</span>Portable solar panel charging near sunlight.</div>
+              <p class="hiw-step">Step 2</p>
+              <h3>Charge with sunlight</h3>
+              <p>Place your portable solar where it can receive sunlight and store energy for later use.</p>
+            </article>
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">power</span>User plugging device into portable solar power unit.</div>
+              <p class="hiw-step">Step 3</p>
+              <h3>Plug in directly</h3>
+              <p>Connect your electrical appliances, devices, or gadgets directly to use stored solar power.</p>
+            </article>
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">insights</span>Energy dashboard showing savings and battery level.</div>
+              <p class="hiw-step">Step 4</p>
+              <h3>Track what you save</h3>
+              <p>View battery level, energy produced, estimated savings, and reduced grid use.</p>
+            </article>
+          </div>
+        </div>
+        <p class="hiw-note">Portable solar is best for movable use, backup power, and selected energy needs. Plug-in balcony solar depends on local rules and safety standards.</p>
+      </div>
+
+      <!-- ===== Examples of Portable Solar ===== -->
+      <div class="hiw-block">
+        <div class="hiw-block-head">
+          <h2>Examples of Portable Solar</h2>
+          <p>Different ways renters and residents can access solar without a full building installation.</p>
+        </div>
+        <div class="hiw-wrap">
+          <button class="hiw-arrow left" aria-label="Scroll left" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:-320,behavior:'smooth'})">&#8249;</button>
+          <button class="hiw-arrow right" aria-label="Scroll right" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:320,behavior:'smooth'})">&#8250;</button>
+          <div class="hiw-row">
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">gavel</span>SB 868 Plug-In Solar</div>
+              <h3>SB 868 Plug-In Solar</h3>
+              <p>California policy pathway for portable solar generation devices.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">balcony</span>Balcony Solar Kit</div>
+              <h3>Balcony Solar Kit</h3>
+              <p>Panels designed for balcony or patio use where local rules allow.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">solar_power</span>Portable Solar Panel</div>
+              <h3>Portable Solar Panel</h3>
+              <p>Movable solar panel that can be placed near sunlight and used with a power unit.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">battery_charging_full</span>Solar Power Station</div>
+              <h3>Solar Power Station</h3>
+              <p>Portable battery system that stores solar energy for later use.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">window</span>Window-Mounted Solar</div>
+              <h3>Window-Mounted Solar</h3>
+              <p>Compact solar option designed for apartment windows or sunny indoor edges.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">camping</span>Foldable Solar Charger</div>
+              <h3>Foldable Solar Charger</h3>
+              <p>Lightweight solar option for flexible charging and backup use.</p>
+            </article>
+          </div>
+        </div>
+        <p class="hiw-note">Examples are for prototype testing. Availability, safety rules, and installation requirements may vary.</p>
+      </div>
+
+      <!-- ===== Installation Solar — journey ===== -->
+      <div class="hiw-block">
+        <div class="hiw-block-head">
+          <h2>Installation Solar</h2>
+          <p>Professionally installed solar for apartment owners, facility managers, and building-wide energy savings.</p>
+        </div>
+        <div class="hiw-wrap">
+          <button class="hiw-arrow left" aria-label="Scroll left" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:-380,behavior:'smooth'})">&#8249;</button>
+          <button class="hiw-arrow right" aria-label="Scroll right" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:380,behavior:'smooth'})">&#8250;</button>
+          <div class="hiw-row">
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">apartment</span>Apartment building with rooftop and window solar.</div>
+              <p class="hiw-step">Step 1</p>
+              <h3>Install building solar</h3>
+              <p>Solar is installed on the roof, windows, facade, or approved building surface.</p>
+            </article>
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">electric_meter</span>Solar connected to inverter and building meter.</div>
+              <p class="hiw-step">Step 2</p>
+              <h3>Connect to the building</h3>
+              <p>The system connects to an inverter, electrical panel, meter, or approved energy infrastructure.</p>
+            </article>
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">bolt</span>Solar and grid power supporting apartment building.</div>
+              <p class="hiw-step">Step 3</p>
+              <h3>Use solar first</h3>
+              <p>The building uses available solar power, while PG&amp;E or grid electricity fills the gap automatically.</p>
+            </article>
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">dashboard</span>Google Nest energy dashboard showing building usage and savings.</div>
+              <p class="hiw-step">Step 4</p>
+              <h3>Track usage and savings</h3>
+              <p>Civic Energy Monitor sends real-time electricity use to the Google Nest energy dashboard.</p>
+            </article>
+            <article class="hiw-card">
+              <div class="hiw-ph"><span class="material-icons-outlined">groups</span>Owner and renter viewing Civic Energy dashboard.</div>
+              <p class="hiw-step">Step 5</p>
+              <h3>Share the benefits</h3>
+              <p>Owners see building value and energy performance. Renters see savings, usage insights, and cleaner apartment living.</p>
+            </article>
+          </div>
+        </div>
+        <p class="hiw-note">Users do not manually switch between solar and PG&amp;E. The system uses solar when available and pulls from the grid when needed.</p>
+      </div>
+
+      <!-- ===== Examples of Installation Solar ===== -->
+      <div class="hiw-block">
+        <div class="hiw-block-head">
+          <h2>Examples of Installation Solar</h2>
+          <p>Building-level systems that require professional setup.</p>
+        </div>
+        <div class="hiw-wrap">
+          <button class="hiw-arrow left" aria-label="Scroll left" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:-320,behavior:'smooth'})">&#8249;</button>
+          <button class="hiw-arrow right" aria-label="Scroll right" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:320,behavior:'smooth'})">&#8250;</button>
+          <div class="hiw-row">
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">roofing</span>Rooftop Solar</div>
+              <h3>Rooftop Solar</h3>
+              <p>Solar panels installed on the building roof.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">window</span>Window Solar</div>
+              <h3>Window Solar</h3>
+              <p>Solar glass or window-based systems that generate energy from building windows.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">apartment</span>Facade Solar</div>
+              <h3>Facade Solar</h3>
+              <p>Solar integrated into exterior building surfaces.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">battery_charging_full</span>Building Battery Storage</div>
+              <h3>Building Battery Storage</h3>
+              <p>Stores solar or grid energy for later use, peak hours, or outages.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">electric_meter</span>Meter-Connected Solar</div>
+              <h3>Meter-Connected Solar</h3>
+              <p>Solar connected to the building meter and electrical system.</p>
+            </article>
+            <article class="hiw-card sm">
+              <div class="hiw-ph"><span class="material-icons-outlined">diversity_3</span>Shared Building Solar</div>
+              <h3>Shared Building Solar</h3>
+              <p>Solar that supports common areas, shared loads, or tenant energy credits.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- ================= /HOW IT WORKS PAGE ================= -->
 
   <!-- ================= PLACEHOLDER PAGES ================= -->
   <section id="renter" class="page" data-route="renter">
@@ -2102,10 +2330,10 @@ Thank you,
 </section>
 
 <div class="grid-2" style="margin-top:88px;">
-  <a href="#renter-solar" class="card nav-card-link">
+  <a href="#how" class="card nav-card-link">
     <div class="nav-card-left">
       <span class="material-icons-outlined" style="color:#1E8E3E;">wb_sunny</span>
-      <h3 style="font-weight:400; margin:0;">Solar types explained</h3>
+      <h3 style="font-weight:400; margin:0;">How Civic Energy works</h3>
     </div>
     <span class="link-arrow"><span class="chevron">→</span></span>
   </a>
@@ -3123,7 +3351,7 @@ Thank you,
         <ul>
           <li><a href="#landlord">Property Owners</a></li>
           <li><a href="#renter">Renters</a></li>
-          <li><a href="#landing">How It Works</a></li>
+          <li><a href="#how">How It Works</a></li>
           <li><a href="#shared-map">Find a Building</a></li>
         </ul>
       </div>
@@ -3175,6 +3403,7 @@ Thank you,
     'landlord-roi': 'landlords',
     'landlord-incentives': 'landlords',
     'shared-map': 'map',
+    'how': 'how',
     'store': 'how'
   };
   function updatePillNav(route) {
@@ -3186,7 +3415,7 @@ Thank you,
   document.querySelectorAll('.pill-nav-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var pill = btn.getAttribute('data-pill');
-      var routeTarget = { renters:'renter', landlords:'landlord', how:'landing', map:'shared-map' }[pill] || 'landing';
+      var routeTarget = { renters:'renter', landlords:'landlord', how:'how', map:'shared-map' }[pill] || 'landing';
       window.location.hash = routeTarget;
     });
   });
@@ -3202,7 +3431,7 @@ Thank you,
     document.querySelectorAll('.mobile-menu-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var pill = btn.getAttribute('data-pill');
-        var routeTarget = { renters:'renter', landlords:'landlord', how:'landing', map:'shared-map' }[pill] || 'landing';
+        var routeTarget = { renters:'renter', landlords:'landlord', how:'how', map:'shared-map' }[pill] || 'landing';
         window.location.hash = routeTarget;
         mobileMenu.classList.remove('open');
         hamburgerBtn.classList.remove('open');
@@ -3231,6 +3460,7 @@ Thank you,
     'landlord-roi': 'Civic Energy · For Landlords · ROI Calculator',
     'landlord-incentives': 'Civic Energy · For Landlords · Incentives',
     'shared-map': 'Civic Energy · Map',
+    'how': 'Civic Energy · How It Works',
     'store': 'Civic Energy · Visit the Store'
   };
 
