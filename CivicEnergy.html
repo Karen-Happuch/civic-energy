@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Solar by Nest — sustainability.google</title>
+<title>Civic Energy</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
@@ -907,6 +907,167 @@ footer {
 @media (max-width:768px) {
   .footer-grid { grid-template-columns: repeat(2, 1fr); gap:32px; }
 }
+
+/* ====================================================
+   PROTOTYPE UPDATE HELPERS (advocacy, policy, map, paths)
+   ==================================================== */
+/* Grey image placeholders */
+.ph-img {
+  width: 100%;
+  background: #ECEEF0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #9AA0A6;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 16px;
+  min-height: 150px;
+  border: 1px dashed #D2D6DA;
+}
+.ph-img .material-icons-outlined { font-size: 28px; display:block; margin-bottom: 6px; color:#B0B5BA; }
+
+/* Message template box */
+.msg-template {
+  background: var(--color-bg-alt, #F6F6F6);
+  border: 1px solid var(--color-border, #DADCE0);
+  border-radius: 16px;
+  padding: 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-ink, #1F1F1F);
+  white-space: pre-line;
+  margin-top: 14px;
+}
+.copy-btn {
+  margin-top: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1E8E3E;
+  background: rgba(30,142,62,0.08);
+  border: 1px solid rgba(30,142,62,0.25);
+  border-radius: 100px;
+  padding: 8px 18px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.copy-btn:hover { background: rgba(30,142,62,0.16); }
+
+/* Source / disclaimer note */
+.src-note { font-size: 12px; color: #80868B; font-style: italic; margin-top: 12px; }
+.proto-flag { font-size: 12px; color: #946200; background:#FEF7E0; border-radius:8px; padding:4px 10px; display:inline-block; margin-top:8px; }
+
+/* Tags / listing chips */
+.tag-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+.tag {
+  font-size: 12px;
+  font-weight: 600;
+  color: #137333;
+  background: #E6F4EA;
+  border-radius: 100px;
+  padding: 5px 12px;
+}
+
+/* Policy progressive-disclosure card */
+.policy-card { cursor: pointer; transition: box-shadow 0.15s ease; }
+.policy-card .policy-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+.policy-card.open .policy-detail { max-height: 720px; }
+.policy-toggle-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.policy-toggle-row .chev { transition: transform 0.25s ease; color:#5F6368; }
+.policy-card.open .policy-toggle-row .chev { transform: rotate(180deg); }
+.btn-link-pill {
+  display:inline-block;
+  font-size:13px;
+  font-weight:600;
+  color:#1E8E3E;
+  border:1.5px solid rgba(30,142,62,0.35);
+  border-radius:100px;
+  padding:9px 18px;
+  margin:6px 8px 0 0;
+  background:#fff;
+  transition: background 0.15s ease;
+}
+.btn-link-pill:hover { background: rgba(30,142,62,0.08); }
+.btn-link-pill.solid { background:#1E8E3E; color:#fff; border-color:#1E8E3E; }
+.btn-link-pill.solid:hover { background:#177a34; }
+
+/* Two-path solar cards */
+.path-card { display:flex; flex-direction:column; gap:16px; }
+.path-steps { list-style:none; counter-reset: pathstep; margin:8px 0 0; padding:0; }
+.path-steps li {
+  counter-increment: pathstep;
+  position: relative;
+  padding: 8px 0 8px 40px;
+  font-size: 15px;
+  color: var(--color-ink, #1F1F1F);
+  border-bottom: 1px solid var(--color-border, #EAECEF);
+}
+.path-steps li:last-child { border-bottom:none; }
+.path-steps li::before {
+  content: counter(pathstep);
+  position: absolute;
+  left: 0; top: 7px;
+  width: 26px; height: 26px;
+  background: #E6F4EA;
+  color: #1E8E3E;
+  border-radius: 50%;
+  font-size: 13px; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.path-examples { display:flex; flex-wrap:wrap; gap:8px; }
+
+/* Concept map */
+.concept-map {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #EFF3EF 0%, #E8EEF2 100%);
+  border: 1px solid var(--color-border, #DADCE0);
+}
+.concept-map .map-water {
+  position:absolute; right:-8%; top:-10%; width:55%; height:65%;
+  background: #CDE3EE; border-radius: 50% 40% 45% 55%;
+  transform: rotate(-12deg);
+}
+.concept-map .map-water.two { right:auto; left:-12%; bottom:-18%; top:auto; width:48%; height:50%; background:#D4E7F0; }
+.concept-map .map-grid {
+  position:absolute; inset:0;
+  background-image: linear-gradient(rgba(120,130,140,0.12) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(120,130,140,0.12) 1px, transparent 1px);
+  background-size: 46px 46px;
+}
+.map-pin {
+  position:absolute;
+  width:34px; height:34px;
+  transform: translate(-50%,-100%);
+}
+.map-pin span {
+  position:absolute; inset:0;
+  background:#1E8E3E; border-radius:50% 50% 50% 0;
+  transform: rotate(-45deg);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+  display:flex; align-items:center; justify-content:center;
+}
+.map-pin span::after {
+  content:''; width:12px; height:12px; background:#fff; border-radius:50%;
+  transform: rotate(45deg);
+}
+.map-caption {
+  position:absolute; left:16px; bottom:14px; z-index:3;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  font-size:12px; font-weight:600; color:#5F6368;
+  padding:8px 14px; border-radius:100px;
+}
 </style>
 <style>
   .map-two-col {
@@ -1420,9 +1581,6 @@ footer {
   Civic Energy
 </div>
 
-<!-- Floating CTA — top right (desktop) -->
-<a href="#renter" class="floating-cta">Get started</a>
-
 <!-- Hamburger button — mobile only -->
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
   <span></span><span></span><span></span>
@@ -1434,7 +1592,6 @@ footer {
   <button class="mobile-menu-btn" data-pill="renters">Renters</button>
   <button class="mobile-menu-btn" data-pill="how">How It Works</button>
   <button class="mobile-menu-btn" data-pill="map">Find a Building</button>
-  <div class="mobile-cta-row"><a href="#renter">Get started</a></div>
 </div>
 
 <!-- ============ PILL SUB-NAV ============ -->
@@ -1557,7 +1714,7 @@ footer {
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <h2>How Solar by Nest works</h2>
+          <h2>How Civic Energy works</h2>
           <p>One system. Two partners. A cleaner city.</p>
         </div>
         <div class="stepper">
@@ -1569,13 +1726,86 @@ footer {
           <article class="stepper-step">
             <span class="material-icons-outlined" aria-hidden="true">solar_power</span>
             <h3>System gets installed</h3>
-            <p>The full Solar by Nest system is installed: panels, battery storage, Nest thermostat, and energy monitor.</p>
+            <p>The full Civic Energy system is installed: panels, battery storage, Nest thermostat, and energy monitor.</p>
           </article>
           <article class="stepper-step">
             <span class="material-icons-outlined" aria-hidden="true">savings</span>
             <h3>Renters benefit</h3>
             <p>Residents enjoy lower energy bills, clean power, and a smart home with zero upfront cost.</p>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ===== Two-path How It Works ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header" style="margin-bottom:8px;">
+          <h2 style="font-weight:600;">How It Works</h2>
+        </div>
+        <p style="text-align:center; color:var(--color-text-secondary,#5F6368); max-width:720px; margin:0 auto 48px;">
+          Civic Energy has two main paths: portable solar for flexible personal use, and installation solar for building-wide adoption.
+        </p>
+        <div class="grid-2" style="align-items:start; gap:32px;">
+
+          <!-- Portable Solar -->
+          <article class="card card-lg path-card">
+            <span class="chip chip-teal">Portable Solar</span>
+            <h3 style="font-weight:600; margin:4px 0 0; font-size:24px;">Portable Solar</h3>
+            <p style="color:#5F6368; margin:0;">For renters or residents who want flexible solar for selected devices, small savings, or backup power.</p>
+            <div class="tag-row">
+              <span class="tag">Portable panel + battery</span>
+              <span class="tag">Balcony solar</span>
+              <span class="tag">Plug-in solar pathway</span>
+              <span class="tag">Solar charging station</span>
+            </div>
+            <ol class="path-steps">
+              <li>Place the panel near sunlight.</li>
+              <li>Connect it to a battery, power station, or approved plug-in system.</li>
+              <li>Use it for selected devices like a laptop, phone, router, lamp, TV, or scooter charger.</li>
+              <li>Track battery level, energy produced, and estimated savings.</li>
+            </ol>
+            <p style="font-size:13px; color:#5F6368; background:var(--color-bg-alt,#F6F6F6); border-radius:12px; padding:12px 14px; margin:4px 0 0;">
+              Portable solar usually does not power the entire apartment. It is best for selected devices and small-scale energy savings. Plug-in balcony solar depends on local rules and safety standards.
+            </p>
+            <div class="grid-3" style="gap:10px; margin-top:4px;">
+              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">solar_power</span>Portable panel on balcony</div></div>
+              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">battery_charging_full</span>Panel connected to battery</div></div>
+              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">devices</span>Charging laptop/phone/scooter</div></div>
+            </div>
+          </article>
+
+          <!-- Installation Solar -->
+          <article class="card card-lg path-card">
+            <span class="chip chip-purple">Installation Solar</span>
+            <h3 style="font-weight:600; margin:4px 0 0; font-size:24px;">Installation Solar</h3>
+            <p style="color:#5F6368; margin:0;">For apartment owners, facility managers, property managers, and landlords who want building-wide energy impact.</p>
+            <div class="tag-row">
+              <span class="tag">Rooftop solar</span>
+              <span class="tag">Window solar</span>
+              <span class="tag">Building-integrated solar</span>
+              <span class="tag">Building battery storage</span>
+              <span class="tag">Meter-connected solar</span>
+            </div>
+            <ol class="path-steps">
+              <li>Solar is professionally installed on the roof, window, or building surface.</li>
+              <li>An inverter converts solar energy into usable electricity.</li>
+              <li>The system connects to the building's electrical panel, meter, or approved energy infrastructure.</li>
+              <li>The building uses solar when available, and PG&amp;E/grid electricity fills the gap automatically.</li>
+              <li>The dashboard shows usage, savings, and energy impact.</li>
+            </ol>
+            <p style="font-size:13px; color:#5F6368; background:var(--color-bg-alt,#F6F6F6); border-radius:12px; padding:12px 14px; margin:4px 0 0;">
+              Users do not manually switch between solar and PG&amp;E. The system uses solar when available and automatically pulls from the grid when needed.
+            </p>
+            <div class="grid-3" style="gap:10px; margin-top:4px;">
+              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">apartment</span>Rooftop/window solar on building</div></div>
+              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">electric_meter</span>Solar connected to inverter &amp; meter</div></div>
+              <div class="ph-img" style="min-height:96px; font-size:11px;"><div><span class="material-icons-outlined" style="font-size:22px;">dashboard</span>Dashboard: solar, PG&amp;E &amp; savings</div></div>
+            </div>
+          </article>
+
         </div>
       </div>
     </section>
@@ -1641,8 +1871,8 @@ footer {
     <section class="store-teaser">
       <div class="container">
         <span class="chip chip-amber">Now open in San Francisco</span>
-        <h2>Experience Solar by Nest<br>in person.</h2>
-        <p>Visit the Solar by Nest exhibition at the Google Store, SF. Walk through a full working apartment setup. Talk to energy advisors. See the system live.</p>
+        <h2>Experience Civic Energy<br>in person.</h2>
+        <p>Visit the Civic Energy exhibition at the Google Store, SF. Walk through a full working apartment setup. Talk to energy advisors. See the system live.</p>
         <div class="actions">
           <a href="#store" class="btn-primary">Find a location</a>
           <a href="#store" class="btn-white-outline">Learn more</a>
@@ -1666,7 +1896,7 @@ footer {
             <div class="role-body">
               <span class="chip chip-teal">I'm a renter</span>
               <h3>Find your solar-powered home</h3>
-              <p>Browse Solar by Nest apartments in SF. Lower bills, smart home tech, and clean energy included.</p>
+              <p>Browse Civic Energy apartments in SF. Lower bills, smart home tech, and clean energy included.</p>
               <a href="#renter" class="btn-primary-green">Explore apartments</a>
             </div>
           </article>
@@ -1752,7 +1982,60 @@ footer {
   <a href="#renter-map" class="btn-secondary" style="border-color:#fff; color:#fff;">See available buildings in SF</a>
 </div>
 
-<div class="grid-2">
+<!-- ===== Renter advocacy section ===== -->
+<section style="margin-top:72px;">
+  <div class="section-header" style="margin-bottom:8px;">
+    <h2 style="font-weight:600;">Ask Your Building for Better Energy Options</h2>
+  </div>
+  <p style="color:var(--color-text-secondary,#5F6368); max-width:680px; margin-bottom:36px;">
+    Renters may not control the building, but they can still ask for lower bills, cleaner energy options, and solar-ready apartment features.
+  </p>
+  <div class="grid-3">
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">checklist</span>
+      <h3 style="font-weight:600; margin:12px 0 8px; font-size:18px;">Know what to ask for</h3>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Ask your landlord or property manager if the building has considered rooftop solar, balcony solar, window solar, battery storage, or energy monitoring.</p>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">savings</span>
+      <h3 style="font-weight:600; margin:12px 0 8px; font-size:18px;">Focus on benefits</h3>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Frame the request around lower electricity bills, tenant demand, property value, incentives, and modern apartment features.</p>
+    </div>
+    <div class="card">
+      <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">mail</span>
+      <h3 style="font-weight:600; margin:12px 0 8px; font-size:18px;">Send a simple message</h3>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Use this short message to start the conversation.</p>
+      <div class="msg-template" id="advocacyMsg">Hi [Property Manager/Landlord Name],
+
+I wanted to ask if our building has considered adding solar or energy-saving features such as rooftop solar, balcony solar, window solar, battery storage, or energy monitoring.
+
+I'm interested because these features could help residents lower electricity costs, improve energy awareness, and make the building more attractive to current and future tenants.
+
+Thank you,
+[Your Name]</div>
+      <button type="button" class="copy-btn" onclick="(function(b){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById('advocacyMsg').innerText);b.textContent='Copied ✓';setTimeout(function(){b.textContent='Copy message';},1800);})(this)">Copy message</button>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SB 868 compact policy card ===== -->
+<section style="margin-top:48px;">
+  <div class="card" style="border-left:4px solid #1E8E3E;">
+    <span class="chip chip-green">Policy Watch: SB 868</span>
+    <p style="color:#5F6368; font-size:15px; margin:14px 0 0; max-width:760px;">
+      SB 868, also called the Plug and Play Solar Act, is a California bill focused on making small portable solar generation devices easier to use safely. It could create a pathway for more renter-friendly solar options, especially for people who cannot install rooftop solar.
+    </p>
+    <p style="font-size:13px; color:#946200; background:#FEF7E0; border-radius:8px; padding:8px 12px; display:inline-block; margin:16px 0 0;">
+      Status: Passed the California Senate and moved to the Assembly. Confirm latest status before final publishing.
+    </p>
+    <div style="margin-top:16px;">
+      <a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB868" target="_blank" rel="noopener" class="btn-link-pill solid">View SB 868 Bill</a>
+      <a href="https://solarrights.org/plug-in/" target="_blank" rel="noopener" class="btn-link-pill">Support Plug-In Solar</a>
+    </div>
+  </div>
+</section>
+
+<div class="grid-2" style="margin-top:48px;">
   <a href="#renter-solar" class="card nav-card-link">
     <div class="nav-card-left">
       <span class="material-icons-outlined" style="color:#1E8E3E;">wb_sunny</span>
@@ -1799,8 +2082,6 @@ footer {
       <span class="chip">IRA rebate eligible</span>
       <span class="chip-green">SB 868</span>
     </div>
-    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
-    <p><a href="#" class="link-arrow">Learn about SB 868 <span class="chevron">→</span></a></p>
   </div>
 </div>
 
@@ -1820,7 +2101,6 @@ footer {
       <span class="chip">No structural change</span>
       <span class="chip">Efficiency incentive eligible</span>
     </div>
-    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
   </div>
 </div>
 
@@ -1839,7 +2119,6 @@ footer {
       <span class="chip">Monthly subscription</span>
       <span class="chip">CA Community Solar program</span>
     </div>
-    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
   </div>
 </div>
 
@@ -1858,7 +2137,6 @@ footer {
       <span class="chip">IRA rebates available</span>
       <span class="chip">Grid-independent backup</span>
     </div>
-    <p><a href="#" class="link-arrow">How to get this <span class="chevron">→</span></a></p>
   </div>
 </div>
     </div>
@@ -1867,7 +2145,7 @@ footer {
   <section id="renter-map" class="page" data-route="renter-map">
     <div class="container" style="padding-top:120px;padding-bottom:100px;">
       <div class="container-wide">
-    <h1 id="renter-map-heading">Solar by Nest apartments in San Francisco</h1>
+    <h1 id="renter-map-heading">Civic Energy apartments in San Francisco</h1>
     <p class="subhead">Browse registered buildings across the city. Every listing includes the full system set.</p>
 
     <div class="filter-chip-row" role="group" aria-label="Filter apartment listings">
@@ -1918,7 +2196,6 @@ footer {
       Income-eligible households receive an automatic monthly discount of 20–35% on their PG&E
       electricity bill.
     </p>
-    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
   </div>
   <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #1E8E3E;">
     <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">solar_power</span>
@@ -1930,7 +2207,6 @@ footer {
       Enroll in San Francisco's community solar program to source your electricity from local
       renewable generation at competitive rates.
     </p>
-    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
   </div>
   <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #1E8E3E;">
     <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">support_agent</span>
@@ -1943,7 +2219,6 @@ footer {
       A city-coordinated initiative that helps renters navigate landlord approvals, permitting, and
       installation for balcony and plug-in solar systems.
     </p>
-    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
   </div>
 </div>
 
@@ -1958,7 +2233,6 @@ footer {
       Claim a 30% federal tax credit on the cost of qualifying solar and battery storage equipment,
       including portable balcony solar systems.
     </p>
-    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
   </div>
   <div class="card">
     <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">redeem</span>
@@ -1967,7 +2241,6 @@ footer {
       A state rebate program that lowers the upfront cost of qualifying solar installations for
       eligible households.
     </p>
-    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
   </div>
   <div class="card">
     <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">gavel</span>
@@ -1976,7 +2249,6 @@ footer {
       State law guaranteeing renters the right to install plug-in balcony solar systems, removing many
       previous landlord-approval barriers.
     </p>
-    <a href="#" class="link-arrow">Learn more <span class="chevron">→</span></a>
   </div>
 </div>
 
@@ -1984,6 +2256,98 @@ footer {
   Incentive availability and amounts are subject to change. Consult a licensed energy advisor for
   personalized guidance.
 </p>
+
+<!-- ===== Policy progressive disclosure ===== -->
+<section style="margin-top:64px;">
+  <div class="section-header" style="text-align:left; margin-bottom:8px;">
+    <h2 style="font-weight:600;">Policy, simply explained</h2>
+  </div>
+  <p style="color:var(--color-text-secondary,#5F6368); max-width:680px; margin-bottom:32px;">
+    Tap any card to reveal the details. Short summary first, the full picture only when you want it.
+  </p>
+  <div class="grid-2" style="gap:20px;">
+
+    <div class="card policy-card" onclick="this.classList.toggle('open')">
+      <div class="policy-toggle-row">
+        <div>
+          <span class="chip chip-green">SB 868</span>
+          <h3 style="font-weight:600; margin:10px 0 6px; font-size:18px;">SB 868 / Plug and Play Solar Act</h3>
+          <p style="color:#5F6368; font-size:14px; margin:0;">A California bill to make small, portable plug-in solar devices easier to use safely.</p>
+        </div>
+        <span class="material-icons-outlined chev">expand_more</span>
+      </div>
+      <div class="policy-detail">
+        <p style="color:#5F6368; font-size:14px; margin:16px 0 0;"><strong>What it is:</strong> SB 868 sets clear safety standards and a legal pathway for plug-in (balcony) solar, the kind renters can use without a rooftop or major install.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Status:</strong> Passed the California Senate and moved to the Assembly. Confirm latest status before final publishing.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Why it matters:</strong> It could open renter-friendly solar to millions of apartment residents who are locked out of rooftop systems today.</p>
+        <div style="margin-top:14px;">
+          <a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB868" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Official SB 868 Bill</a>
+          <a href="https://sd11.senate.ca.gov/news/senate-passes-senator-wieners-plug-solar-bill-lower-energy-costs" target="_blank" rel="noopener" class="btn-link-pill" onclick="event.stopPropagation()">Senator Wiener press release</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card policy-card" onclick="this.classList.toggle('open')">
+      <div class="policy-toggle-row">
+        <div>
+          <span class="chip chip-teal">For renters</span>
+          <h3 style="font-weight:600; margin:10px 0 6px; font-size:18px;">Why it matters for renters</h3>
+          <p style="color:#5F6368; font-size:14px; margin:0;">A clearer path to lower bills without owning the building or the roof.</p>
+        </div>
+        <span class="material-icons-outlined chev">expand_more</span>
+      </div>
+      <div class="policy-detail">
+        <p style="color:#5F6368; font-size:14px; margin:16px 0 0;"><strong>What it is:</strong> Plug-in solar lets renters generate some of their own power from a balcony or window and take the panels with them when they move.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Status:</strong> Tied to SB 868's progress — currently in the Assembly. Confirm latest status before final publishing.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Why it matters:</strong> Lower electricity costs, more energy awareness, and a real solar option for people who rent.</p>
+        <div style="margin-top:14px;">
+          <a href="https://solarrights.org/plug-in/" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Support Plug-In Solar</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card policy-card" onclick="this.classList.toggle('open')">
+      <div class="policy-toggle-row">
+        <div>
+          <span class="chip chip-purple">For owners</span>
+          <h3 style="font-weight:600; margin:10px 0 6px; font-size:18px;">Why it matters for apartment owners</h3>
+          <p style="color:#5F6368; font-size:14px; margin:0;">Clearer rules make solar-ready buildings simpler to offer and market.</p>
+        </div>
+        <span class="material-icons-outlined chev">expand_more</span>
+      </div>
+      <div class="policy-detail">
+        <p style="color:#5F6368; font-size:14px; margin:16px 0 0;"><strong>What it is:</strong> Standardized safety rules reduce uncertainty around what tenants can install and how building-wide solar fits in.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Status:</strong> Moving through the California Assembly. Confirm latest status before final publishing.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Why it matters:</strong> Tenant demand, higher property value, and a modern, energy-efficient building that stands out.</p>
+        <div style="margin-top:14px;">
+          <a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB868" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Official SB 868 Bill</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card policy-card" onclick="this.classList.toggle('open')">
+      <div class="policy-toggle-row">
+        <div>
+          <span class="chip chip-amber">Take action</span>
+          <h3 style="font-weight:600; margin:10px 0 6px; font-size:18px;">How to support or track the bill</h3>
+          <p style="color:#5F6368; font-size:14px; margin:0;">Follow its progress and add your voice in a few clicks.</p>
+        </div>
+        <span class="material-icons-outlined chev">expand_more</span>
+      </div>
+      <div class="policy-detail">
+        <p style="color:#5F6368; font-size:14px; margin:16px 0 0;"><strong>What it is:</strong> You can read the bill text, follow official updates, and join an advocacy campaign for plug-in solar.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Status:</strong> Active in the 2025–2026 legislative session. Confirm latest status before final publishing.</p>
+        <p style="color:#5F6368; font-size:14px; margin:10px 0 0;"><strong>Why it matters:</strong> Public support helps renter-friendly solar policy move forward.</p>
+        <div style="margin-top:14px;">
+          <a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB868" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Official SB 868 Bill</a>
+          <a href="https://sd11.senate.ca.gov/news/senate-passes-senator-wieners-plug-solar-bill-lower-energy-costs" target="_blank" rel="noopener" class="btn-link-pill" onclick="event.stopPropagation()">Wiener press release</a>
+          <a href="https://solarrights.org/plug-in/" target="_blank" rel="noopener" class="btn-link-pill" onclick="event.stopPropagation()">Solar Rights Alliance</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
     </div>
   </section>
 
@@ -2164,6 +2528,36 @@ footer {
   <div style="margin-top:40px; padding-top:32px; border-top:1px solid var(--color-border,#DADCE0); text-align:center;">
     <p style="font-size:20px; font-weight:600; margin:0 0 20px;">Your building could be their next home.</p>
     <a href="#landlord-roi" class="btn-primary-green" style="font-size:16px; padding:16px 40px; display:inline-block;">Register your building</a>
+  </div>
+</section>
+
+<!-- ===== Proof It Can Work ===== -->
+<section style="margin-top:72px;">
+  <div class="section-header" style="margin-bottom:8px;">
+    <h2 style="font-weight:600;">Proof It Can Work</h2>
+  </div>
+  <p style="color:var(--color-text-secondary,#5F6368); max-width:720px; margin-bottom:36px;">
+    Apartment-centered solar is not just an idea. Other places are already testing and adopting renter-friendly solar models.
+  </p>
+  <div class="grid-3">
+    <div class="card">
+      <div class="ph-img" style="height:160px; margin-bottom:16px;"><div><span class="material-icons-outlined">photo_camera</span>Germany balcony solar apartment photo</div></div>
+      <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">Germany: Balcony solar at scale</h3>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Germany has become one of the strongest examples of balcony solar adoption. By October 2024, more than 700,000 plug-in solar systems were registered, showing that small-scale apartment solar can grow quickly when rules are clear.</p>
+      <p class="proto-flag">Prototype statistic — verify before final publishing.</p>
+      <p class="src-note">Source: Clean Energy Wire / Federal Network Agency reporting.</p>
+    </div>
+    <div class="card">
+      <div class="ph-img" style="height:160px; margin-bottom:16px;"><div><span class="material-icons-outlined">image</span>Tenant balcony solar policy graphic</div></div>
+      <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">Renters gained stronger rights</h3>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Germany passed legal changes making it harder for landlords and apartment-owner associations to block balcony solar installations without strong justification.</p>
+      <p class="src-note">Source: Reuters, 2024.</p>
+    </div>
+    <div class="card">
+      <div class="ph-img" style="height:160px; margin-bottom:16px;"><div><span class="material-icons-outlined">insights</span>Apartment solar adoption statistics graphic</div></div>
+      <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">What this proves</h3>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Clear policy, simple installation pathways, and visible savings can help make apartment solar feel practical, trusted, and worth adopting.</p>
+    </div>
   </div>
 </section>
     </div>
@@ -2408,7 +2802,7 @@ footer {
                   border-radius:28px;
                   padding:40px 48px;">
         <h1 id="shared-map-heading" style="color:#fff;font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1.5px;margin-bottom:12px;">
-          Solar by Nest in San Francisco
+          Civic Energy in San Francisco
         </h1>
         <p style="color:rgba(255,255,255,0.88);font-size:17px;line-height:1.5;margin-bottom:28px;">
           Explore solar-equipped buildings across the city, whether you're searching for a home or registering your property.
@@ -2420,8 +2814,64 @@ footer {
       </div>
     </div>
 
+    <!-- ===== Concept map section ===== -->
+    <div class="container-wide" style="padding-top:64px;">
+      <div class="section-header" style="text-align:left; margin-bottom:8px;">
+        <h2 style="font-weight:600;">Explore solar-ready apartments</h2>
+      </div>
+      <p style="color:var(--color-text-secondary,#5F6368); max-width:720px; margin-bottom:28px;">
+        Imagine a future where renters can quickly find apartments that already support solar, smart energy tracking, or Civic Energy features.
+      </p>
+
+      <div class="grid-2" style="align-items:start; gap:32px;">
+        <!-- Concept map -->
+        <div class="concept-map" role="img" aria-label="Concept map of sample solar-ready apartment locations in San Francisco">
+          <div class="map-grid"></div>
+          <div class="map-water"></div>
+          <div class="map-water two"></div>
+          <div class="map-pin" style="left:24%; top:38%;"><span></span></div>
+          <div class="map-pin" style="left:42%; top:30%;"><span></span></div>
+          <div class="map-pin" style="left:58%; top:48%;"><span></span></div>
+          <div class="map-pin" style="left:35%; top:60%;"><span></span></div>
+          <div class="map-pin" style="left:68%; top:34%;"><span></span></div>
+          <div class="map-pin" style="left:50%; top:68%;"><span></span></div>
+          <div class="map-pin" style="left:78%; top:58%;"><span></span></div>
+          <div class="map-caption">Concept map: sample solar-ready apartment locations.</div>
+        </div>
+
+        <!-- Listing cards -->
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <div class="card">
+            <h3 style="font-weight:600; margin:0; font-size:18px;">Mission District Apartments</h3>
+            <div class="tag-row">
+              <span class="tag">Solar-ready</span>
+              <span class="tag">Energy dashboard</span>
+              <span class="tag">Estimated bill savings</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="font-weight:600; margin:0; font-size:18px;">Hayes Valley Residences</h3>
+            <div class="tag-row">
+              <span class="tag">Smart tracking</span>
+              <span class="tag">Shared solar</span>
+              <span class="tag">Renter-friendly</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="font-weight:600; margin:0; font-size:18px;">Sunset Community Apartments</h3>
+            <div class="tag-row">
+              <span class="tag">Battery backup</span>
+              <span class="tag">Lower utility costs</span>
+              <span class="tag">Civic Energy partner</span>
+            </div>
+          </div>
+          <p class="src-note">Listings are concept examples for prototype testing.</p>
+        </div>
+      </div>
+    </div>
+
     <!-- Buildings list below the map -->
-    <div class="container-wide" style="padding-top:64px;padding-bottom:100px;">
+    <div class="container-wide" style="padding-top:48px;padding-bottom:100px;">
       <div class="filter-chip-row" id="sharedFilterChips" role="group" aria-label="Filter buildings"></div>
       <div id="sharedCardList" class="card-list-scroll" aria-label="List of buildings" style="margin-top:24px;"></div>
     </div>
@@ -2432,7 +2882,7 @@ footer {
     <div class="container" style="padding-top:120px;padding-bottom:100px;">
       <div class="store-hero" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80');">
   <div class="store-hero-content">
-    <h1>Visit Solar by Nest in San Francisco</h1>
+    <h1>Visit Civic Energy in San Francisco</h1>
     <p>Step inside a fully working solar-and-Nest apartment, talk to an energy
        advisor, and try the hardware yourself. No appointment necessary.</p>
   </div>
@@ -2442,7 +2892,7 @@ footer {
   <div class="store-info-row">
     <span class="material-icons-outlined" aria-hidden="true">location_on</span>
     <div>
-      <strong>Solar by Nest Exhibition &middot; Google Store San Francisco</strong><br>
+      <strong>Civic Energy Exhibition &middot; Google Store San Francisco</strong><br>
       2 Stockton St, San Francisco, CA 94108
     </div>
   </div>
@@ -2467,7 +2917,7 @@ footer {
            alt="Modern apartment living room set up as a working solar and Nest demo space"
            style="width:100%; height:160px; border-radius:16px; object-fit:cover;">
       <h3 style="font-weight:400;">The full apartment setup</h3>
-      <p style="color:var(--color-text-secondary,#5F6368);">Walk through a real working Solar by Nest apartment mock-up, from balcony panels to in-room energy displays.</p>
+      <p style="color:var(--color-text-secondary,#5F6368);">Walk through a real working Civic Energy apartment mock-up, from balcony panels to in-room energy displays.</p>
     </div>
     <div class="card">
       <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80"
@@ -2681,16 +3131,16 @@ footer {
 
   // ---------- Breadcrumb trails (kept for fallback) ----------
   var breadcrumbs = {
-    'landing': 'Civic Energy · For Renters · Saving at Home · Solar by Nest',
-    'renter': 'Civic Energy · Solar by Nest · For Renters',
-    'renter-solar': 'Civic Energy · Solar by Nest · For Renters · Solar Options',
-    'renter-map': 'Civic Energy · Solar by Nest · For Renters · Find Apartments',
-    'renter-incentives': 'Civic Energy · Solar by Nest · For Renters · Incentives',
-    'landlord': 'Civic Energy · Solar by Nest · For Landlords',
-    'landlord-roi': 'Civic Energy · Solar by Nest · For Landlords · ROI Calculator',
-    'landlord-incentives': 'Civic Energy · Solar by Nest · For Landlords · Incentives',
-    'shared-map': 'Civic Energy · Solar by Nest · Map',
-    'store': 'Civic Energy · Solar by Nest · Visit the Store'
+    'landing': 'Civic Energy · For Renters · Saving at Home · Civic Energy',
+    'renter': 'Civic Energy · For Renters',
+    'renter-solar': 'Civic Energy · For Renters · Solar Options',
+    'renter-map': 'Civic Energy · For Renters · Find Apartments',
+    'renter-incentives': 'Civic Energy · For Renters · Incentives',
+    'landlord': 'Civic Energy · For Landlords',
+    'landlord-roi': 'Civic Energy · For Landlords · ROI Calculator',
+    'landlord-incentives': 'Civic Energy · For Landlords · Incentives',
+    'shared-map': 'Civic Energy · Map',
+    'store': 'Civic Energy · Visit the Store'
   };
 
   function renderBreadcrumb(route) {
