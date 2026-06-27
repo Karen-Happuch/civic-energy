@@ -127,10 +127,10 @@ h1, .display-large {
 
 /* Heading Large — section / card headers */
 h2, .heading-large {
-  font-size: 32px;
-  line-height: 40px;
-  font-weight: 500;
-  letter-spacing: 0;
+  font-size: clamp(34px, 3.6vw, 48px);
+  line-height: 1.08;
+  font-weight: 600;
+  letter-spacing: -1px;
 }
 
 /* Body Large */
@@ -173,9 +173,9 @@ img { display:block; max-width:100%; }
   .container, .container-wide { padding: 0 96px; }
 }
 
-.section { padding: 80px 0; }
+.section { padding: 112px 0; }
 @media (min-width: 1024px) {
-  .section { padding: 120px 0; }
+  .section { padding: 168px 0; }
 }
 .section-dark { background: var(--color-ink); color:#FFFFFF; }
 .section-light { background: var(--color-bg-alt); }
@@ -647,16 +647,16 @@ hr.divider {
    ==================================================== */
 .section-header {
   text-align:center;
-  max-width:640px;
-  margin: 0 auto 64px;
+  max-width:720px;
+  margin: 0 auto 80px;
 }
 .section-header h2 {
-  margin-bottom:16px;
+  margin-bottom:20px;
 }
 .section-header p {
   color: var(--color-text-secondary);
-  font-size:18px;
-  line-height:26px;
+  font-size:21px;
+  line-height:1.45;
 }
 .section-dark .section-header p { color:#BDC1C6; }
 
@@ -1983,7 +1983,7 @@ footer {
 </div>
 
 <!-- ===== Renter advocacy section ===== -->
-<section style="margin-top:72px;">
+<section style="margin-top:120px;">
   <div class="section-header" style="margin-bottom:8px;">
     <h2 style="font-weight:600;">Ask Your Building for Better Energy Options</h2>
   </div>
@@ -2019,7 +2019,7 @@ Thank you,
 </section>
 
 <!-- ===== SB 868 compact policy card ===== -->
-<section style="margin-top:48px;">
+<section style="margin-top:88px;">
   <div class="card" style="border-left:4px solid #1E8E3E;">
     <span class="chip chip-green">Policy Watch: SB 868</span>
     <p style="color:#5F6368; font-size:15px; margin:14px 0 0; max-width:760px;">
@@ -2035,7 +2035,7 @@ Thank you,
   </div>
 </section>
 
-<div class="grid-2" style="margin-top:48px;">
+<div class="grid-2" style="margin-top:88px;">
   <a href="#renter-solar" class="card nav-card-link">
     <div class="nav-card-left">
       <span class="material-icons-outlined" style="color:#1E8E3E;">wb_sunny</span>
@@ -2224,7 +2224,7 @@ Thank you,
 
 <hr class="divider">
 
-<h2 style="margin-top:48px;">California-wide programs</h2>
+<h2 style="margin-top:88px;">California-wide programs</h2>
 <div class="grid-3">
   <div class="card">
     <span class="material-icons-outlined" style="color:#1E8E3E; font-size:32px;">account_balance</span>
@@ -2258,7 +2258,7 @@ Thank you,
 </p>
 
 <!-- ===== Policy progressive disclosure ===== -->
-<section style="margin-top:64px;">
+<section style="margin-top:112px;">
   <div class="section-header" style="text-align:left; margin-bottom:8px;">
     <h2 style="font-weight:600;">Policy, simply explained</h2>
   </div>
@@ -2371,7 +2371,7 @@ Thank you,
 </section>
 
 <!-- Partner carousel -->
-<div class="section-header" style="text-align:center; margin-top:72px;">
+<div class="section-header" style="text-align:center; margin-top:120px;">
   <h2 style="font-weight:600;">Partners</h2>
   <p style="color:var(--color-text-secondary,#5F6368);">The ecosystem powering Civic Energy.</p>
 </div>
@@ -2402,7 +2402,7 @@ Thank you,
 </div>
 
 <!-- 3-step overview -->
-<section style="margin-top:72px;">
+<section style="margin-top:120px;">
   <div class="section-header" style="text-align:center; margin-bottom:48px;">
     <h2 style="font-weight:600;">How it works</h2>
     <p style="color:var(--color-text-secondary,#5F6368);">Three steps. One cleaner city.</p>
@@ -2426,7 +2426,7 @@ Thank you,
   </div>
 </section>
 
-<section class="grid-4" style="margin-top:72px;">
+<section class="grid-4" style="margin-top:120px;">
   <div class="card" style="text-align:center;">
     <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">trending_up</span>
     <h3 style="font-weight:700; margin:12px 0 4px; color:#1E8E3E;">12–18%</h3>
@@ -2449,8 +2449,8 @@ Thank you,
   </div>
 </section>
 
-<section style="margin-top:64px;">
-  <h2 style="font-weight:500;">How registration works</h2>
+<section style="margin-top:112px;">
+  <h2 style="font-weight:600;">How registration works</h2>
   <div class="stepper">
     <div class="stepper-step">
       <div class="stepper-circle">1</div>
@@ -2478,7 +2478,7 @@ Thank you,
   </div>
 </section>
 
-<section class="card card-lg" style="margin-top:48px; padding:48px;">
+<section class="card card-lg" style="margin-top:88px; padding:48px;">
   <span class="chip chip-green">Renter demand signal</span>
   <h2 style="font-weight:600; margin:16px 0 8px;">Right now in San Francisco</h2>
   <p style="font-size:26px; font-weight:600; color:#1E8E3E; margin:0 0 8px;">
@@ -2532,7 +2532,7 @@ Thank you,
 </section>
 
 <!-- ===== Proof It Can Work ===== -->
-<section style="margin-top:72px;">
+<section style="margin-top:120px;">
   <div class="section-header" style="margin-bottom:8px;">
     <h2 style="font-weight:600;">Proof It Can Work</h2>
   </div>
@@ -2697,7 +2697,7 @@ Thank you,
 </section>
 
 <section style="margin-top:32px;">
-  <h2 style="font-weight:500;">Federal programs</h2>
+  <h2 style="font-weight:600;">Federal programs</h2>
   <div class="grid-3">
     <div class="card">
       <span class="material-icons-outlined" style="font-size:32px; color:#1A73E8;">savings</span>
@@ -2726,7 +2726,7 @@ Thank you,
 <hr class="divider" style="margin:48px 0;">
 
 <section>
-  <h2 style="font-weight:500;">California programs</h2>
+  <h2 style="font-weight:600;">California programs</h2>
   <div class="grid-3">
     <div class="card">
       <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">battery_charging_full</span>
@@ -2752,8 +2752,8 @@ Thank you,
   </div>
 </section>
 
-<section style="margin-top:48px;">
-  <h2 style="font-weight:500;">SB 868 explained</h2>
+<section style="margin-top:88px;">
+  <h2 style="font-weight:600;">SB 868 explained</h2>
   <p style="color:var(--color-text-secondary,#5F6368);">
     SB 868 is California's framework requiring multifamily property owners to
     disclose building-level energy performance and gradually transition to
@@ -2909,8 +2909,8 @@ Thank you,
   <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=2+Stockton+St+San+Francisco+CA" target="_blank" rel="noopener">Get directions</a>
 </section>
 
-<section style="margin-top:48px;">
-  <h2 style="font-weight:500;">What to expect</h2>
+<section style="margin-top:88px;">
+  <h2 style="font-weight:600;">What to expect</h2>
   <div class="grid-3">
     <div class="card">
       <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=600&q=80"
@@ -2936,8 +2936,8 @@ Thank you,
   </div>
 </section>
 
-<section class="card" style="margin-top:48px;">
-  <h2 style="font-weight:500; margin-top:0;">Book a visit</h2>
+<section class="card" style="margin-top:88px;">
+  <h2 style="font-weight:600; margin-top:0;">Book a visit</h2>
 
   <form id="bookingForm">
     <div class="grid-2" style="gap:16px;">
@@ -2971,8 +2971,8 @@ Thank you,
   </div>
 </section>
 
-<section style="margin-top:48px;">
-  <h2 style="font-weight:500;">Product showcase</h2>
+<section style="margin-top:88px;">
+  <h2 style="font-weight:600;">Product showcase</h2>
   <div class="scroll-row">
     <div class="card">
       <img src="https://images.unsplash.com/photo-1567769541715-3c443a93e0e5?auto=format&fit=crop&w=400&q=80" alt="Nest Thermostat mounted on a wall">
