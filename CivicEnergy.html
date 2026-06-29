@@ -1152,7 +1152,7 @@ footer {
   max-width: 640px;
   margin: 0;
 }
-.hiw-wrap { position: relative; }
+.hiw-wrap { position: relative; margin-right: calc(50% - 50vw); }
 .hiw-row {
   display: flex;
   gap: 20px;
@@ -1160,6 +1160,7 @@ footer {
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   padding: 6px 2px 10px;
+  padding-right: clamp(24px, 6vw, 96px);
   scrollbar-width: none;
 }
 .hiw-row::-webkit-scrollbar { display: none; }
@@ -1240,7 +1241,7 @@ footer {
 }
 .hiw-arrow:hover { background: #fff; }
 .hiw-arrow.left { left: -12px; }
-.hiw-arrow.right { right: -12px; }
+.hiw-arrow.right { right: clamp(24px, 6vw, 96px); }
 @media (max-width: 768px) {
   .hiw-arrow { display: none; }
   .hiw-card { width: 80vw; max-width: 320px; }
@@ -1340,6 +1341,69 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 6px;
+  }
+  /* Find a Building: 2-up grid + compact CTA */
+  #sharedCardList {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-height: none;
+    overflow: visible;
+    padding-right: 0;
+  }
+  #sharedCardList .map-building-card .btn-secondary {
+    align-self: flex-start;
+    width: auto;
+    margin-top: 6px;
+  }
+  @media (max-width: 768px) {
+    #sharedCardList { grid-template-columns: 1fr; }
+  }
+  /* Full-bleed concept SF map banner */
+  .sf-map-banner {
+    position: relative;
+    width: auto;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    height: 70vh;
+    overflow: hidden;
+  }
+  .sf-map-banner img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .sf-map-banner .map-caption {
+    position: absolute; left: 50%; bottom: 22px; transform: translateX(-50%);
+    background: rgba(255,255,255,0.9);
+    -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    font-size: 13px; font-weight: 600; color: #5F6368;
+    padding: 10px 18px; border-radius: 100px;
+    white-space: nowrap;
+  }
+  .sf-map-banner .map-pin {
+    position: absolute; width: 30px; height: 30px; transform: translate(-50%, -100%);
+  }
+  .sf-map-banner .map-pin span {
+    position: absolute; inset: 0; background: #1E8E3E;
+    border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sf-map-banner .map-pin span::after {
+    content: ''; width: 10px; height: 10px; background: #fff; border-radius: 50%; transform: rotate(45deg);
+  }
+  .concept-listings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 920px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    .concept-listings-grid { grid-template-columns: 1fr; }
+    .sf-map-banner { height: 52vh; }
   }
   .map-building-card h3 {
     margin: 0;
@@ -3123,13 +3187,9 @@ Thank you,
         <h1 id="shared-map-heading" style="color:#fff;font-size:clamp(28px,4vw,48px);font-weight:800;letter-spacing:-1.5px;margin-bottom:12px;">
           Civic Energy in San Francisco
         </h1>
-        <p style="color:rgba(255,255,255,0.88);font-size:17px;line-height:1.5;margin-bottom:28px;">
+        <p style="color:rgba(255,255,255,0.88);font-size:17px;line-height:1.5;margin-bottom:0;">
           Explore solar-equipped buildings across the city, whether you're searching for a home or registering your property.
         </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <button id="sharedViewRenter" class="view-toggle-btn active" type="button" onclick="setSharedMode('renter')" style="background:rgba(255,255,255,0.92);color:#1E8E3E;border:none;border-radius:100px;padding:10px 24px;font-weight:700;font-size:14px;cursor:pointer;">For Renters</button>
-          <button id="sharedViewLandlord" class="view-toggle-btn" type="button" onclick="setSharedMode('landlord')" style="background:rgba(255,255,255,0.22);color:#fff;border:1px solid rgba(255,255,255,0.4);border-radius:100px;padding:10px 24px;font-weight:600;font-size:14px;cursor:pointer;">For Landlords</button>
-        </div>
       </div>
     </div>
 
@@ -3142,57 +3202,64 @@ Thank you,
         Imagine a future where renters can quickly find apartments that already support solar, smart energy tracking, or Civic Energy features.
       </p>
 
-      <div class="grid-2" style="align-items:start; gap:32px;">
-        <!-- Concept map -->
-        <div class="concept-map" role="img" aria-label="Concept map of sample solar-ready apartment locations in San Francisco">
-          <div class="map-grid"></div>
-          <div class="map-water"></div>
-          <div class="map-water two"></div>
-          <div class="map-pin" style="left:24%; top:38%;"><span></span></div>
-          <div class="map-pin" style="left:42%; top:30%;"><span></span></div>
-          <div class="map-pin" style="left:58%; top:48%;"><span></span></div>
-          <div class="map-pin" style="left:35%; top:60%;"><span></span></div>
-          <div class="map-pin" style="left:68%; top:34%;"><span></span></div>
-          <div class="map-pin" style="left:50%; top:68%;"><span></span></div>
-          <div class="map-pin" style="left:78%; top:58%;"><span></span></div>
-          <div class="map-caption">Concept map: sample solar-ready apartment locations.</div>
-        </div>
+    </div>
 
-        <!-- Listing cards -->
-        <div style="display:flex; flex-direction:column; gap:16px;">
-          <div class="card">
-            <h3 style="font-weight:600; margin:0; font-size:18px;">Mission District Apartments</h3>
-            <div class="tag-row">
-              <span class="tag">Solar-ready</span>
-              <span class="tag">Energy dashboard</span>
-              <span class="tag">Estimated bill savings</span>
-            </div>
+    <!-- Full-bleed realistic SF map -->
+    <div class="sf-map-banner" role="img" aria-label="Map of San Francisco showing sample solar-ready apartment neighborhoods">
+      <img src="sf-map.jpg" alt="Street map of San Francisco">
+      <div class="map-pin" style="left:46%; top:54%;"><span></span></div>
+      <div class="map-pin" style="left:58%; top:42%;"><span></span></div>
+      <div class="map-pin" style="left:30%; top:60%;"><span></span></div>
+      <div class="map-pin" style="left:64%; top:34%;"><span></span></div>
+      <div class="map-caption">Concept map: sample solar-ready apartment neighborhoods.</div>
+    </div>
+
+    <!-- Concept location cards (2x2) -->
+    <div class="container-wide" style="padding-top:48px;">
+      <div class="concept-listings-grid">
+        <div class="card">
+          <h3 style="font-weight:600; margin:0; font-size:18px;">Mission District Apartments</h3>
+          <div class="tag-row">
+            <span class="tag">Solar-ready</span>
+            <span class="tag">Energy dashboard</span>
+            <span class="tag">Estimated bill savings</span>
           </div>
-          <div class="card">
-            <h3 style="font-weight:600; margin:0; font-size:18px;">Hayes Valley Residences</h3>
-            <div class="tag-row">
-              <span class="tag">Smart tracking</span>
-              <span class="tag">Shared solar</span>
-              <span class="tag">Renter-friendly</span>
-            </div>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:600; margin:0; font-size:18px;">Hayes Valley Residences</h3>
+          <div class="tag-row">
+            <span class="tag">Smart tracking</span>
+            <span class="tag">Shared solar</span>
+            <span class="tag">Renter-friendly</span>
           </div>
-          <div class="card">
-            <h3 style="font-weight:600; margin:0; font-size:18px;">Sunset Community Apartments</h3>
-            <div class="tag-row">
-              <span class="tag">Battery backup</span>
-              <span class="tag">Lower utility costs</span>
-              <span class="tag">Civic Energy partner</span>
-            </div>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:600; margin:0; font-size:18px;">Sunset Community Apartments</h3>
+          <div class="tag-row">
+            <span class="tag">Battery backup</span>
+            <span class="tag">Lower utility costs</span>
+            <span class="tag">Civic Energy partner</span>
           </div>
-          <p class="src-note">Listings are concept examples for prototype testing.</p>
+        </div>
+        <div class="card">
+          <h3 style="font-weight:600; margin:0; font-size:18px;">Nob Hill Residences</h3>
+          <div class="tag-row">
+            <span class="tag">Rooftop solar</span>
+            <span class="tag">Smart tracking</span>
+            <span class="tag">Civic Energy partner</span>
+          </div>
         </div>
       </div>
+      <p class="src-note" style="text-align:center; margin-top:20px;">Listings are concept examples for prototype testing.</p>
     </div>
 
     <!-- Buildings list below the map -->
     <div class="container-wide" style="padding-top:48px;padding-bottom:100px;">
       <div class="filter-chip-row" id="sharedFilterChips" role="group" aria-label="Filter buildings"></div>
-      <div id="sharedCardList" class="card-list-scroll" aria-label="List of buildings" style="margin-top:24px;"></div>
+      <div id="sharedCardList" aria-label="List of buildings" style="margin-top:24px;"></div>
+      <div style="text-align:center; margin-top:48px;">
+        <a href="#landlord-roi" class="btn-primary-green" style="display:inline-block; padding:14px 32px;">Register a nearby building</a>
+      </div>
     </div>
 
   </section>
@@ -3710,8 +3777,10 @@ Thank you,
 
   function setSharedMode(mode) {
     sharedMode = mode;
-    document.getElementById('sharedViewRenter').classList.toggle('active', mode === 'renter');
-    document.getElementById('sharedViewLandlord').classList.toggle('active', mode === 'landlord');
+    var rBtn = document.getElementById('sharedViewRenter');
+    var lBtn = document.getElementById('sharedViewLandlord');
+    if (rBtn) rBtn.classList.toggle('active', mode === 'renter');
+    if (lBtn) lBtn.classList.toggle('active', mode === 'landlord');
 
     var chips = mode === 'renter' ? renterChips : landlordChips;
     var chipRow = document.getElementById('sharedFilterChips');
@@ -3719,8 +3788,7 @@ Thank you,
       return '<button class="filter-chip' + (i === 0 ? ' active' : '') + '" type="button">' + label + '</button>';
     }).join('');
 
-    var ctaLabel = mode === 'renter' ? 'Request info' : 'Register a nearby building';
-    renderBuildingCards('sharedCardList', ctaLabel);
+    renderBuildingCards('sharedCardList', 'Request info');
   }
 
   // Renter page init (call when #renter-map becomes active page)
