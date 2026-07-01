@@ -1356,6 +1356,7 @@ footer {
     width: auto;
     margin-top: 6px;
   }
+  #sharedCardList .map-building-card img { height: 240px; }
   @media (max-width: 768px) {
     #sharedCardList { grid-template-columns: 1fr; }
   }
@@ -3742,12 +3743,13 @@ Thank you,
   }
 
   // ---- Card rendering ----
-  function renderBuildingCards(containerId, ctaLabel) {
+  function renderBuildingCards(containerId, ctaLabel, limit) {
     ctaLabel = ctaLabel || 'Request info';
     var container = document.getElementById(containerId);
     if (!container) return;
 
-    container.innerHTML = window.solarBuildings.map(function (b) {
+    var list = limit ? window.solarBuildings.slice(0, limit) : window.solarBuildings;
+    container.innerHTML = list.map(function (b) {
       var availBadge = b.available > 0
         ? '<span class="chip chip-green">' + b.available + ' of ' + b.units + ' available</span>'
         : '<span class="badge-waitlist">Waitlist</span>';
@@ -3788,7 +3790,7 @@ Thank you,
       return '<button class="filter-chip' + (i === 0 ? ' active' : '') + '" type="button">' + label + '</button>';
     }).join('');
 
-    renderBuildingCards('sharedCardList', 'Request info');
+    renderBuildingCards('sharedCardList', 'Request info', 6);
   }
 
   // Renter page init (call when #renter-map becomes active page)
