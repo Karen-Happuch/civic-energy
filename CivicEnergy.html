@@ -3533,10 +3533,12 @@ Thank you,
   };
 
   function renderBreadcrumb(route) {
+    var el = document.getElementById('breadcrumb');
+    if (!el) return;
     var trail = breadcrumbs[route] || breadcrumbs['landing'];
     var parts = trail.split('›').map(function(p) { return p.trim(); });
     var html = parts.map(function(p) { return '<span>' + p + '</span>'; }).join('<span class="crumb-sep">›</span>');
-    document.getElementById('breadcrumb').innerHTML = html;
+    el.innerHTML = html;
   }
 
   // ---------- Hash router ----------
@@ -3801,8 +3803,8 @@ Thank you,
 
   // Shared page init (call when #shared-map becomes active page)
   function activateSharedMapPage() {
+    // Static SF map image is used now — no interactive Leaflet map on this page.
     setSharedMode(sharedMode);
-    initSharedMap();
   }
 
   // Generic filter chip toggle (visual only)
