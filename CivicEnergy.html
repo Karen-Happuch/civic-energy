@@ -832,8 +832,10 @@ hr.divider {
   background:#FFFFFF;
 }
 .role-card .role-image {
-  width:100%;
+  width:auto;
   height:280px;
+  margin:8px 8px 0; /* thin white outline around the image */
+  border-radius:28px;
   overflow:hidden;
 }
 .role-card .role-image img { width:100%; height:100%; object-fit:cover; }
@@ -1317,11 +1319,13 @@ footer {
     border-color: var(--color-ink, #1F1F1F);
   }
   .map-building-card img {
-    width: 100%;
+    width: calc(100% + 16px);
+    max-width: none;
     height: 200px;
     object-fit: cover;
     border-radius: 16px;
     display: block;
+    margin: -8px -8px 12px -8px; /* image nearly fills card top, ~8px white outline */
   }
   .map-building-card {
     cursor: pointer;
@@ -1781,11 +1785,12 @@ footer {
   scroll-snap-align: start;
 }
 .scroll-row .card img {
-  width: 100%;
-  height: 140px;
+  width: calc(100% + 32px);
+  max-width: none;
+  height: 190px;
   border-radius: 16px;
   object-fit: cover;
-  margin-bottom: 12px;
+  margin: -16px -16px 14px -16px; /* image nearly fills card top, ~8px white outline */
 }
 
 /* Booking success */
@@ -2919,7 +2924,7 @@ Thank you,
     Apartment-centered solar is not just an idea. Other places are already testing and adopting renter-friendly solar models.
   </p>
   <div class="grid-3">
-    <div class="card" style="padding:12px 12px 22px;">
+    <div class="card" style="padding:8px 8px 22px;">
       <img src="Web%20Images/germany%20balcony-solar-.webp" alt="Balcony solar panels on apartment buildings in Germany" style="width:100%; height:230px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
       <div style="padding:0 8px;">
         <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">Germany: Balcony solar at scale</h3>
@@ -2929,7 +2934,7 @@ Thank you,
         <a href="https://www.canarymedia.com/articles/solar/balcony-panels-germany-utah" target="_blank" rel="noopener" style="display:inline-block; margin-top:10px; color:#F9AB00; font-weight:600; font-size:14px; text-decoration:none;">Read more &rarr;</a>
       </div>
     </div>
-    <div class="card" style="padding:12px 12px 22px;">
+    <div class="card" style="padding:8px 8px 22px;">
       <img src="Web%20Images/Tenant%20balcony%20solar%20policy%20graphic.jpg.webp" alt="Tenant balcony solar policy graphic" style="width:100%; height:230px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
       <div style="padding:0 8px;">
         <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">Renters gained stronger rights</h3>
@@ -2939,7 +2944,7 @@ Thank you,
         <a href="https://www.canarymedia.com/articles/solar/balcony-panels-germany-utah" target="_blank" rel="noopener" style="display:inline-block; margin-top:10px; color:#F9AB00; font-weight:600; font-size:14px; text-decoration:none;">Read more &rarr;</a>
       </div>
     </div>
-    <div class="card" style="padding:12px 12px 22px;">
+    <div class="card" style="padding:8px 8px 22px;">
       <img src="Web%20Images/Apartment%20solar%20adoption%20statistics%20graphic.jpg" alt="Apartment solar adoption statistics graphic" style="width:100%; height:230px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
       <div style="padding:0 8px;">
         <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">What this proves</h3>
