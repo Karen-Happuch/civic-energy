@@ -1527,13 +1527,7 @@ footer {
   box-shadow: none;
 }
 .stepper-line {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  width: 100%;
-  height: 1px;
-  background: var(--color-border, #DADCE0);
-  z-index: 1;
+  display: none; /* removed: this was a duplicate lower line under the main connector */
 }
 .stepper-step:last-child .stepper-line { display: none; }
 .stepper-step h4 { font-weight: 400; margin: 0 0 4px; font-size: 16px; }
