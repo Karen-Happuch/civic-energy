@@ -260,8 +260,8 @@ hr.divider {
 }
 .chip-green  { background: var(--color-sage-bg); color: var(--color-sage-text); }
 .chip-teal   { background: rgba(0,137,117,0.12);  color: var(--color-teal); }
-.chip-amber  { background: rgba(249,171,0,0.15);  color:#946200; }
-.chip-purple { background: rgba(249,171,0,0.15); color: var(--color-amber-dark); } /* remapped to amber */
+.chip-amber  { background: #FEF7E0;  color:#946200; } /* unified Google-yellow highlight */
+.chip-purple { background: #FEF7E0; color:#946200; } /* unified Google-yellow highlight */
 .chip-dark   { background: var(--color-ink, #1F1F1F); color: #FFFFFF; }
 
 /* ---------- Image containers ---------- */
@@ -1180,7 +1180,10 @@ footer {
 }
 .hiw-card.sm { width: 280px; }
 .hiw-ph {
-  width: 100%;
+  width: calc(100% + 20px);
+  margin-left: -10px;
+  margin-right: -10px;
+  margin-top: -10px;
   aspect-ratio: 4 / 3;
   background: #ECEEF0;
   border: 1px dashed #D2D6DA;
@@ -2363,13 +2366,29 @@ footer {
   <div class="grid-3">
     <div class="card">
       <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">checklist</span>
-      <h3 style="font-weight:600; margin:12px 0 8px; font-size:18px;">Know what to ask for</h3>
-      <p style="color:#5F6368; font-size:15px; margin:0;">Ask your landlord or property manager if the building has considered rooftop solar, balcony solar, window solar, battery storage, or energy monitoring.</p>
+      <h3 style="font-weight:600; margin:12px 0 8px; font-size:18px;">Know your rights</h3>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Ask if the building has considered rooftop solar, balcony solar, window solar, battery storage, or energy monitoring — and know that California law is on your side.</p>
+      <div class="msg-template">Your rights in California:
+
+• Solar Rights Act (Civil Code §714) limits rules that unreasonably block solar access.
+
+• SB 868 — the Plug-In Solar Act — is advancing a clear pathway for renter-friendly plug-in solar.</div>
+      <p class="proto-flag">Prototype reference — verify current law before final publishing.</p>
     </div>
     <div class="card">
       <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">savings</span>
       <h3 style="font-weight:600; margin:12px 0 8px; font-size:18px;">Focus on benefits</h3>
-      <p style="color:#5F6368; font-size:15px; margin:0;">Frame the request around lower electricity bills, tenant demand, property value, incentives, and modern apartment features.</p>
+      <p style="color:#5F6368; font-size:15px; margin:0;">Frame the request as a win for the whole building, not a personal favor.</p>
+      <div class="msg-template">Why it makes sense for the building:
+
+• Lower electricity bills for residents
+
+• Higher property value and stronger tenant demand
+
+• Rebates and incentives available
+
+• A modern, energy-smart apartment</div>
+      <p class="proto-flag">Tip — owners respond best to value, not pressure.</p>
     </div>
     <div class="card">
       <span class="material-icons-outlined" style="font-size:32px; color:#1E8E3E;">mail</span>
@@ -2378,6 +2397,8 @@ footer {
       <div class="msg-template" id="advocacyMsg">Hi [Property Manager/Landlord Name],
 
 I wanted to ask if our building has considered adding solar or energy-saving features such as rooftop solar, balcony solar, window solar, battery storage, or energy monitoring.
+
+As a renter, I understand California supports residents' access to solar options, and I'd like to raise this for our building.
 
 I'm interested because these features could help residents lower electricity costs, improve energy awareness, and make the building more attractive to current and future tenants.
 
