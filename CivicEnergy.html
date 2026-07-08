@@ -1179,15 +1179,23 @@ footer {
   box-shadow: 0 1px 8px rgba(0,0,0,0.04);
 }
 .hiw-card.sm { width: 280px; }
-.hiw-ph {
+.hiw-ph, .hiw-ph-img {
   width: calc(100% + 20px);
   margin-left: -10px;
   margin-right: -10px;
   margin-top: -10px;
+  margin-bottom: 20px;
   aspect-ratio: 4 / 3;
+  border-radius: 18px;
+}
+.hiw-ph-img {
+  max-width: none;
+  object-fit: cover;
+  display: block;
+}
+.hiw-ph {
   background: #ECEEF0;
   border: 1px dashed #D2D6DA;
-  border-radius: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2142,25 +2150,25 @@ footer {
           <button class="hiw-arrow right" aria-label="Scroll right" onclick="this.parentElement.querySelector('.hiw-row').scrollBy({left:380,behavior:'smooth'})">&#8250;</button>
           <div class="hiw-row">
             <article class="hiw-card">
-              <div class="hiw-ph"><span class="material-icons-outlined">dashboard</span>Google Nest energy dashboard showing real-time electricity use.</div>
+              <img class="hiw-ph-img" src="Web%20Images/Google%20Nest%20energy%20dashboard.png" alt="Google Nest energy dashboard showing real-time electricity use">
               <p class="hiw-step">Step 1</p>
               <h3>See your energy use</h3>
               <p>Civic Energy Monitor reads real-time electricity use and sends it to the Google Nest energy dashboard.</p>
             </article>
             <article class="hiw-card">
-              <div class="hiw-ph"><span class="material-icons-outlined">wb_sunny</span>Portable solar panel charging near sunlight.</div>
+              <img class="hiw-ph-img" src="Web%20Images/Portable%20solar%20panel%20charging%20near%20sunlight..png" alt="Portable solar panel charging near sunlight">
               <p class="hiw-step">Step 2</p>
               <h3>Charge with sunlight</h3>
               <p>Place your portable solar where it can receive sunlight and store energy for later use.</p>
             </article>
             <article class="hiw-card">
-              <div class="hiw-ph"><span class="material-icons-outlined">power</span>User plugging device into portable solar power unit.</div>
+              <img class="hiw-ph-img" src="Web%20Images/User%20plugging%20device%20into%20portable%20solar%20power%20unit..png" alt="User plugging device into portable solar power unit">
               <p class="hiw-step">Step 3</p>
               <h3>Plug in directly</h3>
               <p>Connect your electrical appliances, devices, or gadgets directly to use stored solar power.</p>
             </article>
             <article class="hiw-card">
-              <div class="hiw-ph"><span class="material-icons-outlined">insights</span>Energy dashboard showing savings and battery level.</div>
+              <img class="hiw-ph-img" src="Web%20Images/Google%20Nest%20energy%20dashboard.png" alt="Energy dashboard showing savings and battery level">
               <p class="hiw-step">Step 4</p>
               <h3>Track what you save</h3>
               <p>View battery level, energy produced, estimated savings, and reduced grid use.</p>
@@ -2244,7 +2252,7 @@ footer {
               <p>The building uses available solar power, while PG&amp;E or grid electricity fills the gap automatically.</p>
             </article>
             <article class="hiw-card">
-              <div class="hiw-ph"><span class="material-icons-outlined">dashboard</span>Google Nest energy dashboard showing building usage and savings.</div>
+              <img class="hiw-ph-img" src="Web%20Images/Google%20Nest%20energy%20dashboard.png" alt="Google Nest energy dashboard showing building usage and savings">
               <p class="hiw-step">Step 4</p>
               <h3>Track usage and savings</h3>
               <p>Civic Energy Monitor sends real-time electricity use to the Google Nest energy dashboard.</p>
