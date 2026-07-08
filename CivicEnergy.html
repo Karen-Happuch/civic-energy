@@ -1792,6 +1792,17 @@ footer {
   object-fit: cover;
   margin: -16px -16px 14px -16px; /* image nearly fills card top, ~8px white outline */
 }
+/* Wide 4-up grid — cards fill the full container width instead of a narrow scroll row */
+.scroll-row.wyg-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  overflow: visible;
+  margin-right: 0;
+}
+.scroll-row.wyg-row .card { flex: none; width: auto; }
+.scroll-row.wyg-row .card img { height: 220px; }
+@media (max-width: 900px) { .scroll-row.wyg-row { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .scroll-row.wyg-row { grid-template-columns: 1fr; } }
 
 /* Booking success */
 .booking-success {
@@ -2309,7 +2320,7 @@ footer {
 </div>
 
 <h2 style="margin-bottom:32px;">What you'll get</h2>
-<div class="scroll-row">
+<div class="scroll-row wyg-row">
   <div class="card">
     <img src="Web%20Images/Balcony%20%26%20rooftop%20panels.jpeg" alt="Solar panels installed on an apartment balcony railing">
     <span class="material-icons-outlined" style="color:#1E8E3E;">solar_power</span>
