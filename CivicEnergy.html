@@ -1368,24 +1368,79 @@ html.renter-snap-active {
   max-width: 920px;
 }
 .policy-language-section {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.65fr);
   align-content: center;
-  gap: clamp(28px, 4vw, 64px);
+  align-items: stretch;
+  gap: clamp(32px, 4vw, 64px);
+}
+.policy-language-media {
+  min-width: 0;
+  min-height: 440px;
+  height: min(54svh, 560px);
+  align-self: center;
+}
+.policy-language-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  border-radius: 28px;
 }
 .policy-language-column {
   min-width: 0;
 }
 .policy-language-column .section-intro {
-  min-height: 82px;
-  margin-bottom: 24px;
+  min-height: 0;
+  max-width: none;
+  margin-bottom: 28px;
 }
 .policy-language-column .accordion-stack {
   max-width: none;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
 }
 .accordion-stack .policy-card {
   width: 100%;
-  padding: 11px 16px;
+  min-height: 142px;
+  padding: 18px;
   border-radius: 16px;
+}
+#renter-policy-packet .policy-resource-card::after {
+  content: "Show details";
+  align-self: flex-start;
+  margin-top: auto;
+  padding-top: 16px;
+  color: #B75324;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+}
+#renter-policy-packet .policy-resource-card.open {
+  grid-column: auto;
+  min-height: 0;
+  padding: 18px;
+  box-shadow: 0 10px 24px rgba(31,31,31,.08);
+}
+#renter-policy-packet .policy-resource-card.open::after {
+  content: "Back to tiles";
+  margin-top: 12px;
+  padding-top: 0;
+}
+#renter-policy-packet .policy-resource-card.open .policy-detail {
+  max-height: 440px;
+  overflow: visible;
+}
+#renter-policy-packet .policy-resource-card.open .policy-detail p {
+  font-size: 13px;
+  line-height: 1.42;
+  margin-bottom: 8px;
+}
+#renter-policy-packet .policy-resource-card.open .btn-link-pill {
+  font-size: 11px;
+  line-height: 1.25;
+  padding: 7px 10px;
+  margin-top: 4px;
 }
 .accordion-stack .policy-toggle-row {
   align-items: center;
@@ -1604,7 +1659,7 @@ html.renter-snap-active {
   margin-top: 14px;
   border-radius: 16px;
   padding: 20px;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.6;
 }
 #landlord-message-wizard .message-toolbar {
@@ -1643,6 +1698,10 @@ html.renter-snap-active {
     grid-template-columns: 1fr;
     align-content: start;
   }
+  .policy-language-media { min-height: 320px; }
+  .policy-language-column .accordion-stack {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .policy-language-column .section-intro {
     min-height: 0;
   }
@@ -1661,6 +1720,9 @@ html.renter-snap-active {
 @media (max-width: 620px) {
   html.renter-snap-active {
     scroll-snap-type: y proximity;
+  }
+  .policy-language-column .accordion-stack {
+    grid-template-columns: 1fr;
   }
   .renter-snap-section {
     min-height: 100svh;
@@ -3769,7 +3831,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       </section>
 
 <section class="renter-feature-section renter-snap-section" id="renter-what-you-get" aria-labelledby="renter-what-you-get-heading">
-<h2 id="renter-what-you-get-heading" style="margin-bottom:32px;">What you'll get</h2>
+<h2 id="renter-what-you-get-heading" style="margin-bottom:32px;">Sustainable Benefits</h2>
 <div class="scroll-row">
   <div class="card">
     <img src="Web%20Images/Balcony%20%26%20rooftop%20panels.jpeg" alt="Solar panels installed on an apartment balcony railing">
@@ -3825,6 +3887,9 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 </section>
 
 <section class="advocacy-section renter-snap-section policy-language-section" id="renter-policy-packet">
+  <div class="policy-language-media">
+    <img src="https://commons.wikimedia.org/wiki/Special:FilePath/California_State_Capitol_in_Sacramento.jpg?width=1600" alt="California State Capitol, where state clean-energy legislation is considered">
+  </div>
   <div class="policy-language-column">
     <div class="section-kicker">Policy language</div>
     <h2 style="font-weight:600;">Pull legislation and public programs into the ask</h2>
@@ -3919,7 +3984,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     </div>
   </div>
 
-  <div class="policy-language-column" id="renter-incentive-talk">
+  <div class="policy-language-column" id="renter-incentive-talk" hidden>
     <div class="section-kicker">Incentive language</div>
     <h2 style="font-weight:600;">Talk to landlords about money, risk, and timing</h2>
     <p class="section-intro">
@@ -4042,6 +4107,38 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     </div>
   </div>
 </section>
+
+<script>
+  function setRenterPolicyLanguageState(shouldOpen) {
+    var cards = document.querySelectorAll('#renter-policy-packet .policy-resource-card');
+    cards.forEach(function(card) {
+      card.classList.toggle('open', shouldOpen);
+      card.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+    });
+  }
+
+  function toggleRenterPolicyLanguageGroup() {
+    var cards = Array.prototype.slice.call(document.querySelectorAll('#renter-policy-packet .policy-resource-card'));
+    var allOpen = cards.length > 0 && cards.every(function(card) { return card.classList.contains('open'); });
+    setRenterPolicyLanguageState(!allOpen);
+  }
+
+  document.addEventListener('click', function(event) {
+    var card = event.target.closest && event.target.closest('#renter-policy-packet .policy-resource-card');
+    if (!card || event.target.closest('a')) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    toggleRenterPolicyLanguageGroup();
+  }, true);
+
+  document.addEventListener('keydown', function(event) {
+    var card = event.target.closest && event.target.closest('#renter-policy-packet .policy-resource-card');
+    if (!card || (event.key !== 'Enter' && event.key !== ' ')) return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    toggleRenterPolicyLanguageGroup();
+  }, true);
+</script>
 
 <section class="advocacy-section renter-snap-section" id="landlord-message-wizard">
   <div class="section-kicker">Send a simple message</div>
