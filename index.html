@@ -405,6 +405,10 @@ hr.divider {
   cursor: pointer;
   transition: opacity .24s ease, transform .3s cubic-bezier(.22,1,.36,1);
 }
+/* Keep the top-left logo pinned: .civic-logo-link sets position:relative for its
+   icon layer, which would otherwise drop the floating logo into normal flow and
+   push the page down. This compound selector restores the fixed positioning. */
+.floating-logo.civic-logo-link { position: fixed; }
 .floating-logo:focus-visible {
   outline: 2px solid rgba(229,139,90,0.65);
   outline-offset: 8px;
@@ -455,6 +459,14 @@ hr.divider {
 .civic-logo-link:active .civic-logo-icon-clone {
   animation: civicLogoIconShift 1.15s ease-in-out infinite;
 }
+/* On the home page the top-left logo animation loops continuously.
+   On every other page it stays still and only plays on hover (rules above). */
+html.route-home .floating-logo .civic-logo-icon-layer {
+  opacity: 1;
+}
+html.route-home .floating-logo .civic-logo-icon-clone {
+  animation: civicLogoIconShift 1.15s ease-in-out infinite;
+}
 @keyframes civicLogoIconShift {
   0%, 100% {
     filter: hue-rotate(0deg) saturate(1) brightness(1);
@@ -469,7 +481,8 @@ hr.divider {
 @media (prefers-reduced-motion: reduce) {
   .civic-logo-link:hover .civic-logo-icon-clone,
   .civic-logo-link:focus-visible .civic-logo-icon-clone,
-  .civic-logo-link:active .civic-logo-icon-clone {
+  .civic-logo-link:active .civic-logo-icon-clone,
+  html.route-home .floating-logo .civic-logo-icon-clone {
     animation: none;
     filter: hue-rotate(172deg) saturate(1.45);
   }
@@ -6080,6 +6093,7 @@ Thank you,
       document.getElementById('landlord').classList.add('active');
     }
 
+    document.documentElement.classList.toggle('route-home', route === 'landing');
     document.documentElement.classList.toggle('renter-snap-active', route === 'renter');
     document.documentElement.classList.toggle('finder-snap', route === 'shared-map');
     document.documentElement.classList.remove('finder-chrome-hidden');
