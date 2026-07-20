@@ -14,12 +14,12 @@
      --color-bg            #FFFFFF
      --color-bg-alt        #F6F6F6 (also #F8F9FA)
      --color-ink           #1F1F1F (also #202124) — primary text & solid btn bg
-     --color-accent        #F5854D (also #F7A273) — links, focus rings
-     --color-sage-bg       #FFF1E8 — soft tinted backgrounds
-     --color-sage-text     #B75324 — dark forest green text
+     --color-accent        #E58B5A (also #F0A87B) — links, focus rings
+     --color-sage-bg       #F7E6DA — soft tinted backgrounds
+     --color-sage-text     #9D5636 — dark forest green text
      --color-text-secondary #5F6368
      --color-border        #DADCE0
-     Secondary accents kept: amber #F5854D, teal #F5854D, purple #F5854D
+     Secondary accents kept: amber #E58B5A, teal #E58B5A, purple #E58B5A
 
    Layout helpers:
      .container           max-width 1440px centered, responsive padding
@@ -53,7 +53,7 @@
      .chip / .chip-green / .chip-teal / .chip-amber / .chip-purple
                           fully-rounded pill labels, sage/teal/amber/purple, flat
      .btn-primary         pill, solid #1F1F1F bg, white text
-     .btn-primary-green   pill, solid #F5854D bg (sustainability CTAs)
+     .btn-primary-green   pill, solid #E58B5A bg (sustainability CTAs)
      .btn-secondary       pill, transparent bg, 1px border, tint on hover
      .btn-white-outline   white outline pill button (for dark sections)
      .btn-icon-circle     circular flat icon button
@@ -100,19 +100,24 @@
   --color-bg-alt2: #F8F9FA;
   --color-ink: #1F1F1F;
   --color-ink-2: #202124;
-  --color-brand-orange: #F5854D;
-  --color-brand-orange-dark: #B75324;
-  --color-brand-orange-soft: #FFF1E8;
-  --color-accent: #F5854D;
-  --color-accent-2: #F7A273;
-  --color-sage-bg: #FFF1E8;
-  --color-sage-text: #B75324;
+  --color-google-blue: #7491C7;
+  --color-google-green: #88C286;
+  --color-google-orange: #E58B5A;
+  --color-google-yellow: #F4CB56;
+  --color-google-cream: #F2EEEA;
+  --color-brand-orange: #E58B5A;
+  --color-brand-orange-dark: #9D5636;
+  --color-brand-orange-soft: #F7E6DA;
+  --color-accent: #E58B5A;
+  --color-accent-2: #F0A87B;
+  --color-sage-bg: #F7E6DA;
+  --color-sage-text: #9D5636;
   --color-text-secondary: #5F6368;
   --color-border: #DADCE0;
-  --color-amber: #F5854D;
-  --color-teal: #F5854D;
-  --color-amber-dark: #B75324;
-  --color-green: #F5854D;
+  --color-amber: #E58B5A;
+  --color-teal: #E58B5A;
+  --color-amber-dark: #9D5636;
+  --color-green: #E58B5A;
   --radius-sm: 8px;
   --radius-md: 28px;
   --radius-card: 28px;
@@ -289,9 +294,9 @@ hr.divider {
   letter-spacing: .2px;
 }
 .chip-green  { background: var(--color-sage-bg); color: var(--color-sage-text); }
-.chip-teal   { background: rgba(0,137,117,0.12);  color: var(--color-teal); }
-.chip-amber  { background: rgba(249,171,0,0.15);  color:#B75324; }
-.chip-purple { background: rgba(249,171,0,0.15); color: var(--color-amber-dark); } /* remapped to amber */
+.chip-teal   { background: rgba(116,145,199,0.12);  color: var(--color-teal); }
+.chip-amber  { background: rgba(244,203,86,0.15);  color:#9D5636; }
+.chip-purple { background: rgba(244,203,86,0.15); color: var(--color-amber-dark); } /* remapped to amber */
 .chip-dark   { background: var(--color-ink, #1F1F1F); color: #FFFFFF; }
 
 /* ---------- Image containers ---------- */
@@ -397,13 +402,77 @@ hr.divider {
   height: 37px;
   opacity: 1;
   transform: translateY(0);
+  cursor: pointer;
   transition: opacity .24s ease, transform .3s cubic-bezier(.22,1,.36,1);
 }
+.floating-logo:focus-visible {
+  outline: 2px solid rgba(229,139,90,0.65);
+  outline-offset: 8px;
+  border-radius: 6px;
+}
 .floating-logo img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 104px;
   height: auto;
   transition: opacity 0.18s ease, filter 0.18s ease;
+}
+.civic-logo-link {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.civic-logo-icon-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  width: var(--civic-logo-icon-size, 37px);
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.civic-logo-icon-layer .civic-logo-icon-clone {
+  display: block;
+  width: var(--civic-logo-full-width, 104px) !important;
+  max-width: none !important;
+  height: auto !important;
+  opacity: 1 !important;
+  filter: saturate(1);
+}
+.civic-logo-link:hover .civic-logo-icon-layer,
+.civic-logo-link:focus-visible .civic-logo-icon-layer,
+.civic-logo-link:active .civic-logo-icon-layer {
+  opacity: 1;
+}
+.civic-logo-link:hover .civic-logo-icon-clone,
+.civic-logo-link:focus-visible .civic-logo-icon-clone,
+.civic-logo-link:active .civic-logo-icon-clone {
+  animation: civicLogoIconShift 1.15s ease-in-out infinite;
+}
+@keyframes civicLogoIconShift {
+  0%, 100% {
+    filter: hue-rotate(0deg) saturate(1) brightness(1);
+  }
+  32% {
+    filter: hue-rotate(172deg) saturate(1.7) brightness(1.02);
+  }
+  62% {
+    filter: hue-rotate(-36deg) saturate(1.55) brightness(1.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .civic-logo-link:hover .civic-logo-icon-clone,
+  .civic-logo-link:focus-visible .civic-logo-icon-clone,
+  .civic-logo-link:active .civic-logo-icon-clone {
+    animation: none;
+    filter: hue-rotate(172deg) saturate(1.45);
+  }
 }
 .floating-logo .brand-logo-light {
   position: absolute;
@@ -430,10 +499,10 @@ hr.divider {
   z-index: 1000;
   font-size: 14px;
   font-weight: 600;
-  color: #F5854D;
+  color: #E58B5A;
   text-decoration: none;
   padding: 8px 20px;
-  border: 1.5px solid rgba(30,142,62,0.35);
+  border: 1.5px solid rgba(136,194,134,0.35);
   border-radius: 100px;
   background: rgba(255,255,255,0.6);
   -webkit-backdrop-filter: blur(12px);
@@ -442,7 +511,7 @@ hr.divider {
 }
 .floating-cta:hover {
   background: rgba(255,255,255,0.9);
-  border-color: #F5854D;
+  border-color: #E58B5A;
 }
 
 /* ──── HAMBURGER (mobile only) ─────────────────────── */
@@ -468,7 +537,7 @@ hr.divider {
 .hamburger-btn span {
   display: block;
   width: 18px; height: 2px;
-  background: #F5854D;
+  background: #E58B5A;
   border-radius: 2px;
   transition: transform 0.2s ease, opacity 0.2s ease;
 }
@@ -507,15 +576,15 @@ hr.divider {
   transition: background 0.15s ease;
 }
 .mobile-menu-btn:last-child { border-bottom: none; }
-.mobile-menu-btn:hover { background: rgba(30,142,62,0.06); }
-.mobile-menu-btn.active { color: #F5854D; }
+.mobile-menu-btn:hover { background: rgba(136,194,134,0.06); }
+.mobile-menu-btn.active { color: #E58B5A; }
 .mobile-cta-row {
   padding: 12px 20px 16px;
 }
 .mobile-cta-row a {
   display: block;
   text-align: center;
-  background: #F5854D;
+  background: #E58B5A;
   color: #fff;
   font-weight: 700;
   font-size: 15px;
@@ -532,7 +601,7 @@ hr.divider {
     top: 14px;
     left: 16px;
     width: 84px;
-    height: 30px;
+    height: 44px;
   }
   .floating-logo img { width: 84px; }
 }
@@ -602,7 +671,7 @@ html.finder-chrome-hidden .hamburger-btn {
 .pill-nav-btn:hover { background: rgba(255,255,255,0.7); color: #1F1F1F; }
 .pill-nav-btn.active {
   background: rgba(255,255,255,0.92);
-  color: #F5854D;
+  color: #E58B5A;
   font-weight: 700;
   box-shadow: 0 1px 6px rgba(0,0,0,0.12);
 }
@@ -657,7 +726,7 @@ html.renter-hero-nav-active .pill-nav-btn.active {
   flex: 0 0 auto;
   overflow: hidden;
   position: relative;
-  background: #FFF1E8;
+  background: #F7E6DA;
 }
 .c-card img {
   position: absolute;
@@ -781,7 +850,7 @@ html.renter-hero-nav-active .pill-nav-btn.active {
   content:'';
   display:block;
   width:12px; height:12px;
-  background: var(--color-green);
+  background: #7491C7;
   border-radius:50%;
   margin: 0 auto 24px;
   position:relative;
@@ -983,7 +1052,9 @@ footer {
   letter-spacing:.5px;
 }
 .footer-brand {
+  display: inline-block;
   margin-bottom:16px;
+  text-decoration: none;
 }
 .footer-brand img {
   display: block;
@@ -1008,6 +1079,12 @@ footer {
 
 @media (max-width:768px) {
   .footer-grid { grid-template-columns: repeat(2, 1fr); gap:32px; }
+}
+@media (max-width:560px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 
 /* ====================================================
@@ -1048,19 +1125,19 @@ footer {
   margin-top: 12px;
   font-size: 13px;
   font-weight: 600;
-  color: #F5854D;
-  background: rgba(30,142,62,0.08);
-  border: 1px solid rgba(30,142,62,0.25);
+  color: #E58B5A;
+  background: rgba(136,194,134,0.08);
+  border: 1px solid rgba(136,194,134,0.25);
   border-radius: 100px;
   padding: 8px 18px;
   cursor: pointer;
   transition: background 0.15s ease;
 }
-.copy-btn:hover { background: rgba(30,142,62,0.16); }
+.copy-btn:hover { background: rgba(136,194,134,0.16); }
 
 /* Source / disclaimer note */
 .src-note { font-size: 12px; color: #80868B; font-style: italic; margin-top: 12px; }
-.proto-flag { font-size: 12px; color: #B75324; background:#FFF1E8; border-radius:8px; padding:4px 10px; display:inline-block; margin-top:8px; }
+.proto-flag { font-size: 12px; color: #9D5636; background:#F7E6DA; border-radius:8px; padding:4px 10px; display:inline-block; margin-top:8px; }
 
 /* Renter advocacy upgrade */
 html.renter-snap-active {
@@ -1217,7 +1294,7 @@ html.renter-snap-active {
   line-height: 1.5;
 }
 .brief-list .material-icons-outlined {
-  color: #F7A273;
+  color: #F0A87B;
   font-size: 30px;
 }
 .renter-frame-section .chip-green {
@@ -1243,7 +1320,7 @@ html.renter-snap-active {
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: rgba(245,133,77,0.14);
+  background: rgba(229,139,90,0.14);
   color: var(--color-brand-orange);
   font-size: 25px;
   line-height: 1;
@@ -1288,15 +1365,15 @@ html.renter-snap-active {
   font-size: 12px;
 }
 .source-strip a {
-  color: #B75324;
+  color: #9D5636;
   font-weight: 500;
-  border-bottom: 1px solid rgba(19,115,51,0.35);
+  border-bottom: 1px solid rgba(136,194,134,0.35);
 }
 .advocacy-section {
   margin-top: 0;
 }
 .section-kicker {
-  color: #B75324;
+  color: #9D5636;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1335,7 +1412,7 @@ html.renter-snap-active {
 .argument-card .material-icons-outlined,
 .policy-resource-card .material-icons-outlined,
 .incentive-card .material-icons-outlined {
-  color: #F5854D;
+  color: #E58B5A;
   font-size: 32px;
 }
 .policy-resource-card {
@@ -1348,8 +1425,8 @@ html.renter-snap-active {
   margin-top: 18px;
 }
 .policy-meta {
-  color: #B75324;
-  background: #FFF1E8;
+  color: #9D5636;
+  background: #F7E6DA;
   border-radius: 8px;
   padding: 4px 7px;
   font-size: 10px;
@@ -1411,7 +1488,7 @@ html.renter-snap-active {
   align-self: flex-start;
   margin-top: auto;
   padding-top: 16px;
-  color: #B75324;
+  color: #9D5636;
   font-size: 12px;
   line-height: 1;
   font-weight: 700;
@@ -1510,7 +1587,7 @@ html.renter-snap-active {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #F5854D;
+  background: #E58B5A;
 }
 .message-wizard {
   display: grid;
@@ -1543,7 +1620,7 @@ html.renter-snap-active {
 }
 .wizard-input:focus {
   outline: none;
-  border-color: #F5854D;
+  border-color: #E58B5A;
   box-shadow: 0 0 0 3px rgba(26,115,232,0.14);
 }
 .wizard-check-grid {
@@ -1566,7 +1643,7 @@ html.renter-snap-active {
 .wizard-check input {
   width: 18px;
   height: 18px;
-  accent-color: #F5854D;
+  accent-color: #E58B5A;
   margin-top: 1px;
 }
 .wizard-preview {
@@ -1826,8 +1903,8 @@ html.renter-snap-active {
 .tag {
   font-size: 12px;
   font-weight: 600;
-  color: #B75324;
-  background: #FFF1E8;
+  color: #9D5636;
+  background: #F7E6DA;
   border-radius: 100px;
   padding: 5px 12px;
 }
@@ -1852,7 +1929,7 @@ html.renter-snap-active {
   gap: 8px;
 }
 .policy-toggle-copy .material-icons-outlined {
-  color: #F5854D;
+  color: #E58B5A;
   font-size: 32px;
 }
 .policy-toggle-copy h3 {
@@ -1866,17 +1943,17 @@ html.renter-snap-active {
   display:inline-block;
   font-size:13px;
   font-weight:600;
-  color:#F5854D;
-  border:1.5px solid rgba(30,142,62,0.35);
+  color:#E58B5A;
+  border:1.5px solid rgba(136,194,134,0.35);
   border-radius:100px;
   padding:9px 18px;
   margin:6px 8px 0 0;
   background:#fff;
   transition: background 0.15s ease;
 }
-.btn-link-pill:hover { background: rgba(30,142,62,0.08); }
-.btn-link-pill.solid { background:#F5854D; color:#fff; border-color:#F5854D; }
-.btn-link-pill.solid:hover { background:#177a34; }
+.btn-link-pill:hover { background: rgba(136,194,134,0.08); }
+.btn-link-pill.solid { background:#E58B5A; color:#fff; border-color:#E58B5A; }
+.btn-link-pill.solid:hover { background:#6EA970; }
 
 /* Two-path solar cards */
 .path-card { display:flex; flex-direction:column; gap:16px; }
@@ -1895,8 +1972,8 @@ html.renter-snap-active {
   position: absolute;
   left: 0; top: 7px;
   width: 26px; height: 26px;
-  background: #FFF1E8;
-  color: #F5854D;
+  background: #F7E6DA;
+  color: #E58B5A;
   border-radius: 50%;
   font-size: 13px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
@@ -1932,7 +2009,7 @@ html.renter-snap-active {
 }
 .map-pin span {
   position:absolute; inset:0;
-  background:#F5854D; border-radius:50% 50% 50% 0;
+  background:#E58B5A; border-radius:50% 50% 50% 0;
   transform: rotate(-45deg);
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
   display:flex; align-items:center; justify-content:center;
@@ -1968,7 +2045,7 @@ html.renter-snap-active {
   position: absolute; inset: 0;
   border-radius: 50%;
   background: conic-gradient(from 90deg,
-    #F7A273, #F7A273, #F5854D, #EA4335, #F7A273);
+    #7491C7, #88C286, #F4CB56, #E58B5A, #7491C7);
   animation: nestspin 7s linear infinite;
 }
 .nest-ring::after {
@@ -1984,11 +2061,11 @@ html.renter-snap-active {
   display: flex; align-items: center; justify-content: center;
   box-shadow: inset 0 1px 8px rgba(0,0,0,0.08);
 }
-.nest-core .material-icons-outlined { color: #F5854D; font-size: 60px; }
+.nest-core .material-icons-outlined { color: #88C286; font-size: 60px; }
 @keyframes nestspin { to { transform: rotate(360deg); } }
 @keyframes nestpulse {
-  0%, 100% { transform: scale(0.96); filter: drop-shadow(0 0 0 rgba(30,142,62,0)); }
-  50%      { transform: scale(1.06); filter: drop-shadow(0 0 28px rgba(30,142,62,0.32)); }
+  0%, 100% { transform: scale(0.96); filter: drop-shadow(0 0 0 rgba(136,194,134,0)); }
+  50%      { transform: scale(1.06); filter: drop-shadow(0 0 28px rgba(136,194,134,0.32)); }
 }
 @media (prefers-reduced-motion: reduce) {
   .nest-ring, .nest-dial { animation: none; }
@@ -2002,18 +2079,137 @@ html.renter-snap-active {
 }
 .gnest-wordmark .nest-word { color: #5F6368; margin-left: 12px; }
 .main-partner-lead {
-  font-size: 26px;
+  font-size: 21px;
   line-height: 1.45;
-  color: var(--color-ink, #1F1F1F);
+  color: var(--color-text-secondary, #5F6368);
   font-weight: 400;
   max-width: 680px;
   margin: 40px auto 0;
 }
 .main-partner-sub {
-  font-size: 19px;
+  font-size: 21px;
   font-weight: 400;
   color: var(--color-text-secondary, #5F6368);
+  line-height: 1.45;
   margin-top: 16px;
+}
+.nest-proof {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 24px 72px;
+  margin-top: 40px;
+}
+.nest-proof-item { text-align: center; width: 240px; }
+.nest-proof-item strong, .stat-grad {
+  white-space: nowrap;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1.3;         /* room so gradient text glyphs aren't clipped */
+  padding-bottom: 2px;
+  background: linear-gradient(90deg, #7491C7, #88C286);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: #7491C7;
+}
+.nest-proof-item strong { display: block; font-size: clamp(30px, 3.4vw, 44px); }
+.stat-grad { display: inline-block; }
+.nest-proof-item span {
+  display: block;
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--color-text-secondary, #5F6368);
+}
+.landlord-stepper .stepper-step::before,
+.landlord-stepper .stepper-step::after {
+  display: none;
+}
+.landlord-overview-stepper .stepper-step::before {
+  display: block;
+  background: var(--color-google-green, #88C286);
+  margin: 0 auto 44px;
+}
+.landlord-overview-stepper .stepper-step::after {
+  display: block;
+  background: rgba(136,194,134,0.35);
+}
+.landlord-overview-stepper .stepper-step:first-child::after {
+  display: none;
+}
+.landlord-overview-stepper .stepper-step .material-icons-outlined {
+  display: block;
+  color: var(--color-google-green, #88C286) !important;
+  margin: 0 auto 20px;
+}
+.landlord-stats-grid .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.landlord-stats-grid .material-icons-outlined {
+  display: block;
+  color: var(--color-google-green, #88C286) !important;
+  font-size: 34px !important;
+  line-height: 1;
+}
+.landlord-stats-grid h3 {
+  color: var(--color-ink, #1F1F1F);
+}
+/* ===== Property Owners end CTA ===== */
+.owner-cta {
+  position: relative;
+  margin-top: 120px;
+  border-radius: 32px;
+  overflow: hidden;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+}
+.owner-cta-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+.owner-cta-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(0,0,0,0.62) 0%, rgba(0,0,0,0.30) 55%, rgba(0,0,0,0.12) 100%);
+}
+.owner-cta-content {
+  position: relative;
+  padding: clamp(36px, 6vw, 72px);
+  max-width: 620px;
+  color: #fff;
+}
+.owner-cta-content h2 {
+  color: #fff;
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.06;
+  letter-spacing: -1.2px;
+  margin: 0;
+}
+.owner-cta-content p {
+  color: rgba(255,255,255,0.92);
+  font-size: clamp(16px, 1.7vw, 20px);
+  margin: 16px 0 28px;
+}
+.owner-cta-btn {
+  display: inline-block;
+  background: var(--color-brand-orange, #E58B5A);
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 15px 34px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background 0.18s ease, transform 0.18s ease;
+}
+.owner-cta-btn:hover { background: #E06A32; transform: translateY(-2px); }
+@media (max-width: 640px) {
+  .owner-cta-scrim { background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.68) 100%); }
 }
 
 /* ===== How It Works — sequential card grid ===== */
@@ -2077,7 +2273,7 @@ html.renter-snap-active {
   height: 30px;
   padding: 0 12px;
   border-radius: 999px;
-  background: #F5854D;
+  background: #E58B5A;
   color: #fff;
   border: 4px solid #F5F5F7;
   box-sizing: content-box;
@@ -2121,7 +2317,7 @@ html.renter-snap-active {
   font-weight: 700;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: #F5854D;
+  color: #E58B5A;
   margin: 0 0 6px;
 }
 .hiw-card h3 {
@@ -2259,6 +2455,123 @@ html.renter-snap-active {
   .incentives-page > section:not(.incentives-hero) > h2 { margin-bottom: 32px !important; }
   .incentives-page .grid-3 > .card { padding: 32px 28px 34px; }
 }
+
+/* ===== Full-screen landing hero with two choices ===== */
+.landing-hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+  margin-top: -80px;            /* fill behind the floating nav */
+  overflow: hidden;
+}
+.landing-hero-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: 60% center;
+}
+.landing-hero-scrim {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,0.30) 0%, rgba(0,0,0,0) 24%),
+    linear-gradient(180deg, rgba(0,0,0,0) 42%, rgba(0,0,0,0.62) 100%);
+}
+.landing-hero-content {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 0 clamp(24px, 6vw, 96px) clamp(36px, 6vh, 72px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(22px, 4vh, 42px);
+}
+.landing-hero-copy { max-width: 640px; }
+.landing-hero-copy h1 {
+  color: #fff;
+  font-size: clamp(36px, 5.4vw, 72px);
+  line-height: 1.05;
+  letter-spacing: -1.5px;
+  margin: 0;
+  text-shadow: 0 2px 26px rgba(0,0,0,0.4);
+}
+.landing-hero-copy p {
+  color: rgba(255,255,255,0.94);
+  font-size: clamp(16px, 1.7vw, 20px);
+  line-height: 1.5;
+  margin: 16px 0 0;
+  max-width: 520px;
+  text-shadow: 0 1px 14px rgba(0,0,0,0.4);
+}
+.landing-choice-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 380px));
+  gap: 20px;
+}
+.landing-choice {
+  position: relative;
+  display: block;
+  padding: 24px 26px 26px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(255,255,255,0.64);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: 0 18px 44px rgba(31,31,31,0.14);
+  text-decoration: none;
+  color: #1F1F1F;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+.landing-choice:hover {
+  background: var(--color-brand-orange, #E58B5A);
+  border-color: var(--color-brand-orange, #E58B5A);
+  color: #FFFFFF;
+  box-shadow: 0 22px 52px rgba(31,31,31,0.18);
+  transform: translateY(-3px);
+}
+.landing-choice-eyebrow {
+  display: block;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.3px;
+  opacity: 0.85;
+}
+.landing-choice-title {
+  display: block;
+  font-size: clamp(24px, 2.6vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.6px;
+  margin: 4px 0 8px;
+}
+.landing-choice-sub {
+  display: block;
+  font-size: 15px;
+  line-height: 1.45;
+  opacity: 0.9;
+  max-width: 260px;
+}
+.landing-choice-arrow {
+  position: absolute;
+  top: 24px; right: 24px;
+  font-size: 22px;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+.landing-choice:hover .landing-choice-arrow { transform: translateX(4px); }
+@media (max-width: 720px) {
+  .landing-choice-row { grid-template-columns: 1fr; gap: 14px; }
+  .landing-choice { padding: 18px 20px 20px; }
+  .landing-choice-sub { max-width: none; }
+}
+@media (max-width: 560px) {
+  .landing-hero {
+    min-height: 100svh;
+  }
+  .landing-hero-content {
+    padding: 0 20px max(28px, env(safe-area-inset-bottom));
+    gap: 20px;
+  }
+  .landing-choice {
+    border-radius: 18px;
+  }
+}
 </style>
 <style>
   .map-two-col {
@@ -2345,8 +2658,8 @@ html.renter-snap-active {
     transition: border-color 0.15s, background 0.15s;
   }
   .map-building-card.highlighted {
-    border-color: var(--color-accent, #F5854D);
-    background: var(--color-sage-bg, #FFF1E8);
+    border-color: var(--color-accent, #E58B5A);
+    background: var(--color-sage-bg, #F7E6DA);
     box-shadow: none;
   }
   .map-building-card .card-body {
@@ -2400,7 +2713,7 @@ html.renter-snap-active {
     position: absolute; width: 30px; height: 30px; transform: translate(-50%, -100%);
   }
   .sf-map-banner .map-pin span {
-    position: absolute; inset: 0; background: #F5854D;
+    position: absolute; inset: 0; background: #E58B5A;
     border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.35);
     display: flex; align-items: center; justify-content: center;
@@ -2431,8 +2744,8 @@ html.renter-snap-active {
   }
   .badge-available {
     display: inline-block;
-    background: var(--color-sage-bg, #FFF1E8);
-    color: var(--color-sage-text, #B75324);
+    background: var(--color-sage-bg, #F7E6DA);
+    color: var(--color-sage-text, #9D5636);
     border-radius: 100px;
     padding: 4px 12px;
     font-size: 12px;
@@ -2453,7 +2766,7 @@ html.renter-snap-active {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #F5854D;
+    background: #E58B5A;
     border: 1px solid #fff;
     box-shadow: none;
     display: flex;
@@ -2471,7 +2784,7 @@ html.renter-snap-active {
   .map-marker.selected {
     width: 32px;
     height: 32px;
-    background: #F5854D;
+    background: #E58B5A;
   }
   .map-marker-label {
     position: absolute;
@@ -2560,38 +2873,211 @@ html.renter-snap-active {
 .stepper-step h4 { font-weight: 400; margin: 0 0 4px; font-size: 16px; }
 .stepper-step p { color: var(--color-text-secondary, #5F6368); font-size: 14px; margin: 0; }
 
-/* Demand bar chart */
-.demand-bar-chart { margin-top: 24px; }
-.demand-bar-row {
-  display: flex;
+.owner-registration-section {
+  margin-top: 132px;
+  padding-top: 24px;
+}
+.owner-registration-header {
+  display: block;
+  margin-bottom: 48px;
+}
+.owner-registration-header h2 {
+  margin: 0;
+  font-size: clamp(36px, 4vw, 56px);
+  line-height: 1.06;
+  letter-spacing: -0.6px;
+}
+.owner-registration-rail {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 28px;
+  padding-top: 28px;
+}
+.owner-registration-rail::before {
+  content: '';
+  position: absolute;
+  left: calc(12.5% + 24px);
+  right: calc(12.5% + 24px);
+  top: 52px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(136,194,134,0.56), rgba(136,194,134,0.2));
+}
+.owner-registration-step {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+.owner-registration-number {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--color-ink, #1F1F1F);
+  color: #fff;
+  display: inline-flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 500;
+  border: 5px solid #F5F5F7;
+  box-shadow: 0 0 0 2px rgba(136,194,134,0.32);
+}
+.owner-registration-step h3 {
+  margin: 22px 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+.owner-registration-step p {
+  max-width: 260px;
+  margin: 0;
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 15px;
+  line-height: 1.5;
+}
+@media (max-width: 840px) {
+  .owner-registration-header {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .owner-registration-rail {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 8px;
+  }
+  .owner-registration-rail::before {
+    display: none;
+  }
+  .owner-registration-step {
+    grid-template-columns: 50px minmax(0, 1fr);
+    justify-items: start;
+    text-align: left;
+    column-gap: 18px;
+  }
+  .owner-registration-number {
+    grid-row: 1 / 4;
+  }
+  .owner-registration-step h3 {
+    margin-top: 0;
+  }
+}
+
+/* Owner demand snapshot */
+.owner-demand-card {
+  margin-top: 88px;
+  padding: clamp(32px, 5vw, 64px);
+}
+.owner-demand-header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: start;
+  padding-bottom: 32px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid rgba(31,31,31,0.1);
+}
+.owner-demand-header h2 {
+  margin: 0;
+  font-size: clamp(34px, 4.8vw, 64px);
+  line-height: 1.02;
+}
+.owner-demand-stat {
+  text-align: right;
+  align-self: start;
+  width: min-content;
+  padding-top: clamp(4px, 0.6vw, 10px);
+}
+.owner-demand-stat strong {
+  display: block;
+  color: #E58B5A;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.02;
+  white-space: nowrap;
+}
+.owner-demand-stat span {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 13px;
+  line-height: 1.3;
+}
+.demand-bar-chart {
+  display: grid;
+  gap: 18px;
+}
+.demand-bar-row {
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr) 72px;
+  align-items: center;
+  gap: 18px;
 }
 .demand-bar-icon {
-  width: 36px; height: 36px;
-  flex-shrink: 0;
-  display: flex; align-items: center; justify-content: center;
-  background: #FFF1E8;
-  border-radius: 50%;
-  color: #F5854D;
+  display: none;
 }
-.demand-bar-icon .material-icons-outlined { font-size: 20px; }
-.demand-bar-label { width: 120px; font-size: 15px; font-weight: 500; color: var(--color-ink, #1F1F1F); flex-shrink: 0; }
+.demand-bar-label {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-ink, #1F1F1F);
+}
 .demand-bar-track {
-  flex: 1;
-  background: #F1F3F4;
+  background: #EEF1EF;
   border-radius: 100px;
   overflow: hidden;
-  height: 20px;
+  height: 12px;
 }
 .demand-bar-fill {
   height: 100%;
-  background: linear-gradient(90deg, #F7A273 0%, #F5854D 100%);
+  background: linear-gradient(90deg, #88C286 0%, #E58B5A 100%);
   border-radius: 100px;
   box-shadow: none;
 }
-.demand-bar-value { width: 64px; text-align: right; font-size: 15px; font-weight: 700; color: #F5854D; flex-shrink: 0; }
+.demand-bar-value {
+  text-align: right;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-ink, #1F1F1F);
+}
+.owner-demand-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 34px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(31,31,31,0.1);
+}
+.owner-demand-footer p {
+  margin: 0;
+  max-width: 620px;
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+@media (max-width: 760px) {
+  .owner-demand-header,
+  .owner-demand-footer {
+    display: block;
+  }
+  .owner-demand-stat {
+    margin-top: 24px;
+    text-align: left;
+    padding-top: 0;
+  }
+  .demand-bar-row {
+    grid-template-columns: 1fr 64px;
+    gap: 10px 14px;
+  }
+  .demand-bar-track {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .owner-demand-footer .btn-primary-green {
+    margin-top: 20px;
+  }
+}
 
 /* Radio chips */
 .radio-chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -2624,10 +3110,10 @@ html.renter-snap-active {
 }
 .field-value-display {
   float: right;
-  color: #F5854D;
+  color: #E58B5A;
   font-weight: 500;
 }
-.field-group input[type="range"] { width: 100%; accent-color: #F5854D; }
+.field-group input[type="range"] { width: 100%; accent-color: #E58B5A; }
 .field-group select,
 .field-group input[type="text"],
 .field-group input[type="email"],
@@ -2641,61 +3127,6 @@ html.renter-snap-active {
   box-sizing: border-box;
 }
 
-/* Results panel */
-.roi-result-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--color-border, #DADCE0);
-}
-.roi-result-row:last-of-type { border-bottom: none; }
-.roi-result-label { color: var(--color-text-secondary, #5F6368); font-size: 14px; }
-.roi-result-value { font-weight: 500; font-size: 16px; }
-.roi-tenyear {
-  text-align: center;
-  margin: 24px 0;
-  padding: 20px;
-  background: var(--color-bg, #FFFFFF);
-  border-radius: 28px;
-}
-.roi-tenyear .value {
-  font-size: 36px;
-  font-weight: 400;
-  color: #F5854D;
-  display: block;
-}
-.roi-tenyear .label { color: var(--color-text-secondary, #5F6368); font-size: 14px; }
-
-/* ROI bar chart */
-#roiChart {
-  display: flex;
-  align-items: flex-end;
-  gap: 6px;
-  height: 140px;
-  margin: 24px 0 8px;
-  border-bottom: 1px solid var(--color-border, #DADCE0);
-  padding-bottom: 4px;
-}
-.roi-bar-col {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  height: 100%;
-}
-.roi-bar {
-  width: 100%;
-  background: #F5854D;
-  border-radius: 4px 4px 0 0;
-  height: 0;
-  box-shadow: none;
-  transition: height 0.6s ease;
-}
-.roi-bar.animate-in { height: var(--bar-height, 0%); }
-.roi-bar-year { font-size: 11px; color: var(--color-text-secondary, #5F6368); margin-top: 6px; }
-
 .disclaimer-text {
   font-size: 12px;
   color: var(--color-text-secondary, #5F6368);
@@ -2703,46 +3134,373 @@ html.renter-snap-active {
   font-style: italic;
 }
 
-/* CTA strip */
-.cta-strip {
-  background: var(--color-bg-alt, #F6F6F6);
-  border-radius: 28px;
-  padding: 32px;
+/* ROI calculator refresh */
+.roi-hero {
+  max-width: 760px;
+}
+.roi-hero h1 {
+  font-size: clamp(48px, 6vw, 76px);
+  line-height: 1.04;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin: 0 0 22px;
+}
+.roi-subhead {
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1.45;
+  margin: 0 0 8px;
+}
+.roi-copy {
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 16px;
+  line-height: 1.55;
+  max-width: 640px;
+  margin: 0;
+}
+.roi-calculator-card,
+.roi-guidance-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(31,31,31,0.06);
+}
+.roi-calculator-card {
+  padding: clamp(28px, 4vw, 44px);
+  margin-top: 44px;
+}
+.roi-calculator-card .field-group input[type="range"] {
+  --slider-progress: 0%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 8px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg,
+      var(--color-google-green, #88C286) 0%,
+      var(--color-google-orange, #E58B5A) var(--slider-progress),
+      rgba(31,31,31,0.18) var(--slider-progress),
+      rgba(31,31,31,0.18) 100%);
+  cursor: pointer;
+}
+.roi-calculator-card .field-group input[type="range"]:focus-visible {
+  outline: 3px solid rgba(116,145,199,0.28);
+  outline-offset: 6px;
+}
+.roi-calculator-card .field-group input[type="range"]::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: transparent;
+}
+.roi-calculator-card .field-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  margin-top: -7px;
+  border-radius: 50%;
+  border: 3px solid #FFFFFF;
+  background: var(--color-google-orange, #E58B5A);
+  box-shadow: 0 3px 10px rgba(31,31,31,0.2);
+}
+.roi-calculator-card .field-group input[type="range"]::-moz-range-track {
+  height: 8px;
+  border-radius: 999px;
+  background: transparent;
+}
+.roi-calculator-card .field-group input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 3px solid #FFFFFF;
+  background: var(--color-google-orange, #E58B5A);
+  box-shadow: 0 3px 10px rgba(31,31,31,0.2);
+}
+.roi-tool-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
+  gap: clamp(24px, 4vw, 40px);
+  align-items: start;
+}
+.roi-controls {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+}
+.roi-return-card {
+  min-height: 240px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 32px;
+  border: 1.5px solid var(--color-ink, #1F1F1F);
+  border-radius: 22px;
+  padding: clamp(24px, 3vw, 34px);
+  background: var(--color-ink, #1F1F1F);
+  color: #FFFFFF;
 }
-.cta-strip h3 { font-weight: 400; margin: 0; }
-
-/* Modal */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1000;
-  align-items: center;
-  justify-content: center;
+.roi-return-card h3,
+.roi-forecast-panel h3 {
+  font-size: 22px;
+  line-height: 1.2;
+  margin: 0;
 }
-.modal-overlay.open { display: flex; }
-.modal {
-  background: var(--color-bg, #FFFFFF);
-  border-radius: 28px;
-  padding: 32px;
-  max-width: 400px;
-  width: 90%;
-  text-align: center;
-  box-shadow: 0 2px 24px rgba(0,0,0,0.15);
+.roi-return-card p {
+  color: rgba(255,255,255,0.76);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 6px 0 0;
 }
-.modal h3 { font-weight: 400; margin-top: 0; }
-.modal-actions {
+.roi-forecast-panel {
+  display: grid;
+  align-content: start;
+  gap: 24px;
+}
+.roi-forecast-panel > div:first-child p {
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 6px 0 0;
+}
+.roi-card-heading {
   display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.roi-card-icon {
+  width: 46px;
+  height: 46px;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  background: rgba(136,194,134,0.18);
+  color: var(--color-google-green, #88C286);
+  flex: 0 0 auto;
+}
+.roi-card-icon.material-icons-outlined {
+  font-size: 24px;
+  line-height: 1;
+}
+.roi-calculator-heading {
+  margin-bottom: 34px;
+}
+.roi-card-heading h3 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1.2;
+}
+.roi-card-heading p {
+  margin: 4px 0 0;
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.roi-summary-number {
+  display: block;
+  color: #FFFFFF;
+  font-size: clamp(52px, 6.3vw, 86px);
+  line-height: 1;
+  font-weight: 700;
+  margin-top: 26px;
+}
+.roi-summary-label {
+  color: rgba(255,255,255,0.72);
+  font-size: 15px;
+  margin-top: 8px;
+}
+.roi-metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 0;
+}
+.roi-mini-metric {
+  border: 1px solid rgba(31,31,31,0.08);
+  border-radius: 18px;
+  padding: 16px;
+  background: #F8F9FA;
+}
+.roi-mini-metric span {
+  display: block;
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 12px;
+  line-height: 1.35;
+}
+.roi-mini-metric strong {
+  display: block;
+  color: var(--color-ink, #1F1F1F);
+  font-size: 20px;
+  margin-top: 6px;
+}
+.roi-option-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  margin-top: 0;
+}
+.roi-option-row .field-group {
+  margin-bottom: 0;
+}
+.roi-readiness {
+  display: block;
+  color: var(--color-ink, #1F1F1F);
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.roi-story {
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 15px;
+  line-height: 1.55;
+  margin: 14px 0 0;
+  max-width: 620px;
+}
+.roi-guidance-card {
+  padding: clamp(28px, 4vw, 40px);
+  margin-top: clamp(72px, 7vw, 112px);
+}
+.roi-guidance-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+.roi-next-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+.roi-next-list li {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 12px;
+  color: var(--color-ink, #1F1F1F);
+  font-size: 14px;
+  line-height: 1.45;
+  align-items: start;
+}
+.roi-next-list span {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--color-ink, #1F1F1F);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+}
+.roi-contact-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(31,31,31,0.08);
+  margin-top: clamp(72px, 7vw, 112px);
+  padding: clamp(28px, 4vw, 40px);
+}
+.roi-contact-card h3 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.18;
+}
+.roi-contact-card p {
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 15px;
+  line-height: 1.45;
+  margin: 8px 0 0;
+}
+.roi-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 24px;
+}
+.roi-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: #F8F9FA;
+  color: var(--color-ink, #1F1F1F);
+  font-weight: 600;
+  min-height: 64px;
+}
+.roi-contact-link .material-icons-outlined {
+  color: var(--color-google-green, #88C286);
+  font-size: 22px;
+  line-height: 1;
+}
+.roi-email-draft {
+  margin-top: 24px;
+  border-radius: 22px;
+  background: #F8F9FA;
+  padding: 20px;
+}
+.roi-email-draft-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.roi-email-draft h4 {
+  margin: 0;
+  font-size: 16px;
+}
+.roi-email-draft pre {
+  white-space: pre-wrap;
+  color: var(--color-text-secondary, #5F6368);
+  font: 400 14px/1.55 "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+  margin: 0;
+}
+.renter-page-wrap {
+  display: none;
+}
+#renter {
+  min-height: 100vh;
+  background: #F5F5F7;
+}
+@media (max-width: 860px) {
+  .roi-tool-grid,
+  .roi-option-row,
+  .roi-next-list,
+  .roi-contact-grid {
+    grid-template-columns: 1fr;
+  }
+  .roi-metric-grid {
+    grid-template-columns: 1fr;
+  }
+  .roi-guidance-header {
+    display: block;
+  }
+}
+@media (max-width: 560px) {
+  .roi-calculator-card,
+  .roi-guidance-card,
+  .roi-contact-card {
+    border-radius: 22px;
+    padding: 24px;
+  }
+  .roi-guidance-card,
+  .roi-contact-card {
+    margin-top: 48px;
+  }
+  .roi-return-card {
+    min-height: 210px;
+    padding: 24px;
+  }
+  .roi-summary-number {
+    font-size: clamp(36px, 12vw, 52px);
+    white-space: nowrap;
+  }
+  .roi-card-heading {
+    align-items: flex-start;
+  }
+  .roi-contact-link {
+    min-height: 58px;
+    padding: 14px 16px;
+  }
 }
 
 /* Nav cards */
@@ -2756,11 +3514,11 @@ html.renter-snap-active {
 }
 .nav-card-left { display: flex; align-items: center; gap: 16px; }
 .nav-card-left h4 { margin: 0; font-weight: 400; }
-.nav-card .material-icons-outlined.arrow { color: #F5854D; }
+.nav-card .material-icons-outlined.arrow { color: #E58B5A; }
 
 /* Blockquote */
 .policy-quote {
-  border-left: 4px solid #F5854D;
+  border-left: 4px solid #E58B5A;
   font-style: italic;
   font-size: 28px;
   font-weight: 400;
@@ -2792,7 +3550,7 @@ html.renter-snap-active {
 .store-hero-content p { font-size: 18px; font-weight: 400; opacity: 0.9; }
 
 .store-info-row { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
-.store-info-row .material-icons-outlined { color: #F5854D; }
+.store-info-row .material-icons-outlined { color: #E58B5A; }
 
 /* Scroll row */
 .scroll-row {
@@ -2824,12 +3582,12 @@ html.renter-snap-active {
 }
 .booking-success.show {
   display: block;
-  background: var(--color-sage-bg, #FFF1E8);
+  background: var(--color-sage-bg, #F7E6DA);
   border-radius: 28px;
 }
 .booking-success .material-icons-outlined {
   font-size: 48px;
-  color: #F5854D;
+  color: #E58B5A;
   margin-bottom: 16px;
 }
 
@@ -2891,13 +3649,13 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   border: 1px solid rgba(218,220,224,.95);
   border-radius: 50%;
   background: rgba(255,255,255,.97);
-  color: #B75324;
+  color: #9D5636;
   box-shadow: 0 10px 28px rgba(31,31,31,.16);
   cursor: pointer;
   opacity: 0;
   transition: transform .28s cubic-bezier(.22,1,.36,1), opacity .2s ease, background .18s ease, box-shadow .18s ease;
 }
-.finder-search-toggle:hover { background:#FFF1E8; box-shadow:0 12px 34px rgba(31,31,31,.2); }
+.finder-search-toggle:hover { background:#F7E6DA; box-shadow:0 12px 34px rgba(31,31,31,.2); }
 .finder-search-toggle .material-icons-outlined { font-size:28px; transition:transform .2s ease; }
 .finder-search-dock.at-results .finder-search-toggle { display:flex; opacity:1; }
 .finder-search-dock.at-results.is-collapsed .finder-search-toggle {
@@ -3029,7 +3787,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 }
 .finder-price-filter > summary::-webkit-details-marker { display:none; }
 .finder-price-filter > summary::after { content:'▾'; font-size:11px; }
-.finder-price-filter[open] > summary { border-color:#F5854D; box-shadow:0 0 0 3px rgba(245,133,77,.14); }
+.finder-price-filter[open] > summary { border-color:#E58B5A; box-shadow:0 0 0 3px rgba(229,139,90,.14); }
 .finder-price-popover {
   position:absolute;
   left:0;
@@ -3047,7 +3805,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 .finder-price-values strong { font-size:13px; }
 .finder-range-row { display:grid; grid-template-columns:36px 1fr; gap:9px; align-items:center; margin:10px 0; }
 .finder-range-row label { font-size:11px; font-weight:650; }
-.finder-range-row input { width:100%; accent-color:#F5854D; }
+.finder-range-row input { width:100%; accent-color:#E58B5A; }
 .finder-price-scale { display:flex; justify-content:space-between; color:var(--color-text-secondary); font-size:9px; margin-left:45px; }
 .finder-search-row {
   display: grid;
@@ -3063,7 +3821,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color: #F5854D;
+  color: #E58B5A;
   font-size: 21px;
 }
 .finder-control,
@@ -3081,8 +3839,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 .finder-control:focus,
 .finder-search-box input:focus {
   outline: none;
-  border-color: #F5854D;
-  box-shadow: 0 0 0 3px rgba(245,133,77,0.14);
+  border-color: #E58B5A;
+  box-shadow: 0 0 0 3px rgba(229,139,90,0.14);
 }
 .finder-more-filters { position: relative; }
 .finder-more-filters summary {
@@ -3129,7 +3887,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   font-size: 13px;
   font-weight: 500;
 }
-.finder-check input { accent-color: #F5854D; width: 16px; height: 16px; }
+.finder-check input { accent-color: #E58B5A; width: 16px; height: 16px; }
 .finder-results-bar {
   position: relative;
   display: flex;
@@ -3143,7 +3901,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 .finder-clear {
   border: 0;
   background: transparent;
-  color: #B75324;
+  color: #9D5636;
   font: 600 13px/1 "Montserrat", sans-serif;
   cursor: pointer;
   padding: 10px;
@@ -3185,7 +3943,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 .finder-property-card:hover,
 .finder-property-card.highlighted {
   transform: translateY(-2px);
-  border-color: rgba(245,133,77,.7);
+  border-color: rgba(229,139,90,.7);
   box-shadow: 0 12px 34px rgba(31,31,31,.09);
 }
 .finder-card-media { position: relative; min-height: 154px; }
@@ -3209,10 +3967,10 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   font-weight: 700;
   box-shadow: 0 3px 12px rgba(0,0,0,.12);
 }
-.finder-card-badge.green { background: #FFF1E8; color: #B75324; }
+.finder-card-badge.green { background: #F7E6DA; color: #9D5636; }
 .finder-card-content { padding: 13px; display: flex; flex-direction: column; min-width: 0; }
 .finder-property-card.is-expanded .finder-card-content { padding:20px; }
-.finder-card-kicker { color: #B75324; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
+.finder-card-kicker { color: #9D5636; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
 .finder-property-card h2 { font-size: 16px; line-height: 1.18; margin: 4px 0; }
 .finder-property-card.is-expanded h2 { font-size:24px; }
 .finder-card-address { color: var(--color-text-secondary); font-size: 12px; line-height: 1.35; }
@@ -3225,8 +3983,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 .finder-green-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 11px; }
 .finder-green-tag {
   border-radius: 8px;
-  background: #FFF1E8;
-  color: #B75324;
+  background: #F7E6DA;
+  color: #9D5636;
   padding: 5px 7px;
   font-size: 10.5px;
   font-weight: 650;
@@ -3236,7 +3994,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #B75324;
+  color: #9D5636;
   font-size: 12px;
   font-weight: 650;
   margin-top: auto;
@@ -3314,10 +4072,10 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
 <!-- ============ NAV ============ -->
 <!-- Floating logo — top left -->
-<div class="floating-logo" aria-label="Civic Energy">
+<a href="#landing" class="floating-logo civic-logo-link" aria-label="Go to Civic Energy home">
   <img class="brand-logo-dark" src="Web%20Images/civic-energy-brand-dark.png" alt="Civic Energy">
   <img class="brand-logo-light" src="Web%20Images/civic-energy-brand-light.png" alt="" aria-hidden="true">
-</div>
+</a>
 
 <!-- Hamburger button — mobile only -->
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
@@ -3326,19 +4084,15 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
 <!-- Mobile dropdown menu -->
 <div id="mobileMenu">
-  <button class="mobile-menu-btn active" data-pill="landlords">Property Owners</button>
+  <button class="mobile-menu-btn" data-pill="landlords">Property Owners</button>
   <button class="mobile-menu-btn" data-pill="renters">Renters</button>
-  <button class="mobile-menu-btn" data-pill="how">How It Works</button>
-  <button class="mobile-menu-btn" data-pill="map">Find a Building</button>
 </div>
 
 <!-- ============ PILL SUB-NAV ============ -->
 <div id="pillNav">
   <div class="pill-nav-track">
-    <button class="pill-nav-btn active" data-pill="landlords">Property Owners</button>
+    <button class="pill-nav-btn" data-pill="landlords">Property Owners</button>
     <button class="pill-nav-btn" data-pill="renters">Renters</button>
-    <button class="pill-nav-btn" data-pill="how">How It Works</button>
-    <button class="pill-nav-btn" data-pill="map">Find a Building</button>
   </div>
 </div>
 
@@ -3346,241 +4100,30 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 <main id="app">
 
   <!-- ================= LANDING PAGE ================= -->
-<section id="landing" class="page" data-route="landing">
-
-    <!-- Hero -->
-    <section class="hero-centered">
-<h1>Lower bills.<br>More freedom.<br>Power that's yours.</h1>
-      <p class="hero-sub">Clean energy for renters starts with a stronger building ask: lower bills, healthier homes, resilience, and owner-ready incentives.</p>
-    </section>
-
-    <!-- ── Infinite brand logo carousel ────────────────── -->
-    <div class="section-header" style="text-align:center;">
-      <h2 style="font-weight:600;">Partners</h2>
-      <p style="color:var(--color-text-secondary,#5F6368);">The ecosystem powering Civic Energy.</p>
-    </div>
-    <div class="hero-carousel" aria-hidden="true">
-      <div class="carousel-track">
-        <!-- Set A -->
-        <div class="c-card shape-square">
-          <img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat">
-          <span class="c-label">Smart Home</span>
+<section id="landing" class="page active" data-route="landing">
+    <div class="landing-hero">
+      <img class="landing-hero-img" src="Hero_banner.png" alt="A resident on an apartment balcony with a balcony solar panel, checking her energy on her phone">
+      <div class="landing-hero-scrim"></div>
+      <div class="landing-hero-content">
+        <div class="landing-hero-copy">
+          <h1>Personalizing your energy.</h1>
         </div>
-        <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy">
-          <span class="c-label">Sustainability</span>
-        </div>
-        <div class="c-card shape-circle">
-          <img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor display">
-          <span class="c-label">Energy Monitor</span>
-        </div>
-        <div class="c-card shape-square">
-          <img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter">
-          <span class="c-label">Smart Meter</span>
-        </div>
-        <div class="c-card shape-short">
-          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar panels">
-          <span class="c-label">Rooftop Solar</span>
-        </div>
-        <div class="c-card shape-square">
-          <img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar panel">
-          <span class="c-label">Balcony Solar</span>
-        </div>
-        <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Building certification">
-          <span class="c-label">Certification</span>
-        </div>
-        <div class="c-card shape-blob">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building">
-          <span class="c-label">Green Building</span>
-        </div>
-        <div class="c-card shape-square">
-          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives and savings">
-          <span class="c-label">Incentives</span>
-        </div>
-        <div class="c-card shape-circle">
-          <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco">
-          <span class="c-label">SF Policy</span>
-        </div>
-        <!-- Set B — exact duplicate for seamless loop -->
-        <div class="c-card shape-square">
-          <img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat">
-          <span class="c-label">Smart Home</span>
-        </div>
-        <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy">
-          <span class="c-label">Sustainability</span>
-        </div>
-        <div class="c-card shape-circle">
-          <img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor display">
-          <span class="c-label">Energy Monitor</span>
-        </div>
-        <div class="c-card shape-square">
-          <img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter">
-          <span class="c-label">Smart Meter</span>
-        </div>
-        <div class="c-card shape-short">
-          <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar panels">
-          <span class="c-label">Rooftop Solar</span>
-        </div>
-        <div class="c-card shape-square">
-          <img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar panel">
-          <span class="c-label">Balcony Solar</span>
-        </div>
-        <div class="c-card shape-wide">
-          <img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Building certification">
-          <span class="c-label">Certification</span>
-        </div>
-        <div class="c-card shape-blob">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building">
-          <span class="c-label">Green Building</span>
-        </div>
-        <div class="c-card shape-square">
-          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives and savings">
-          <span class="c-label">Incentives</span>
-        </div>
-        <div class="c-card shape-circle">
-          <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco">
-          <span class="c-label">SF Policy</span>
+        <div class="landing-choice-row">
+          <a href="#landlord" class="landing-choice">
+            <span class="landing-choice-eyebrow">I&rsquo;m a</span>
+            <span class="landing-choice-title">Property Owner</span>
+            <span class="landing-choice-sub">Raise property value and attract better tenants.</span>
+            <span class="landing-choice-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a href="#renter" class="landing-choice">
+            <span class="landing-choice-eyebrow">I&rsquo;m a</span>
+            <span class="landing-choice-title">Renter</span>
+            <span class="landing-choice-sub">Lower your bills and take control of your energy.</span>
+            <span class="landing-choice-arrow" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </div>
     </div>
-
-    <hr class="divider">
-
-    <!-- How it works -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header">
-          <h2>How Civic Energy works</h2>
-          <p>One system. Two partners. A cleaner city.</p>
-        </div>
-        <div class="stepper">
-          <article class="stepper-step">
-            <span class="material-icons-outlined" aria-hidden="true">domain</span>
-            <h3>Landlord registers</h3>
-            <p>A property owner enrolls their building. We handle installation planning and coordination.</p>
-          </article>
-          <article class="stepper-step">
-            <span class="material-icons-outlined" aria-hidden="true">solar_power</span>
-            <h3>System gets installed</h3>
-            <p>The full Civic Energy system is installed: panels, battery storage, Nest thermostat, and energy monitor.</p>
-          </article>
-          <article class="stepper-step">
-            <span class="material-icons-outlined" aria-hidden="true">savings</span>
-            <h3>Renters benefit</h3>
-            <p>Residents enjoy lower energy bills, clean power, and a smart home with zero upfront cost.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-
-    <!-- The system set -->
-    <section class="section section-light">
-      <div class="container product-page-row zigzag-row">
-        <div class="image-grid-2x2 zigzag-image">
-          <div class="image-container">
-            <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=400&q=80" alt="Solar panel mounted on an apartment balcony railing.">
-          </div>
-          <div class="image-container">
-            <img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Google Nest smart thermostat mounted on a wall.">
-          </div>
-          <div class="image-container">
-            <img src="https://images.unsplash.com/photo-1592833159155-c62df1b65634?auto=format&fit=crop&w=400&q=80" alt="Home battery storage unit installed indoors.">
-          </div>
-          <div class="image-container">
-            <img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?auto=format&fit=crop&w=400&q=80" alt="Energy monitor display showing household energy usage.">
-          </div>
-        </div>
-        <div class="zigzag-text">
-          <span class="eyebrow">Included in every registered apartment</span>
-          <h2>Everything you need,<br>already installed.</h2>
-
-          <div class="benefit-card">
-            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
-            <div>
-              <h4>Balcony or rooftop solar panels</h4>
-              <p>Generate your own clean electricity</p>
-            </div>
-          </div>
-          <div class="benefit-card">
-            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
-            <div>
-              <h4>Nest smart thermostat</h4>
-              <p>AI-powered comfort and energy savings</p>
-            </div>
-          </div>
-          <div class="benefit-card">
-            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
-            <div>
-              <h4>Home battery storage</h4>
-              <p>Store energy, stay powered during outages</p>
-            </div>
-          </div>
-          <div class="benefit-card">
-            <span class="material-icons-outlined" aria-hidden="true">check_circle</span>
-            <div>
-              <h4>Energy monitor</h4>
-              <p>Track your usage and savings in real time</p>
-            </div>
-          </div>
-
-          <a href="#renter" class="btn-primary-green">See how it works</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Store teaser -->
-    <section class="store-teaser">
-      <div class="container">
-        <span class="chip chip-dark">Now open in San Francisco</span>
-        <h2>Experience Civic Energy<br>in person.</h2>
-        <p>Visit the Civic Energy exhibition at the Google Store, SF. Walk through a full working apartment setup. Talk to energy advisors. See the system live.</p>
-        <div class="actions">
-          <a href="#store" class="btn-primary">Find a location</a>
-          <a href="#store" class="btn-white-outline">Learn more</a>
-        </div>
-      </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- Role split -->
-    <section class="section">
-      <div class="container">
-        <div class="section-header" style="margin-bottom:48px;">
-          <h2>Which best describes you?</h2>
-        </div>
-        <div class="role-split">
-          <article class="role-card card-lg">
-            <div class="role-image">
-              <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=600&q=80" alt="Bright modern apartment living room interior.">
-            </div>
-            <div class="role-body">
-              <span class="chip chip-teal">I'm a renter</span>
-              <h3>Find your solar-powered home</h3>
-              <p>Browse Civic Energy apartments in SF. Lower bills, smart home tech, and clean energy included.</p>
-              <a href="#renter" class="btn-primary-green">Explore apartments</a>
-            </div>
-          </article>
-          <article class="role-card card-lg">
-            <div class="role-image">
-              <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=600&q=80" alt="Exterior of a multi-unit residential apartment building.">
-            </div>
-            <div class="role-body">
-              <span class="chip chip-purple">I'm a landlord</span>
-              <h3>Make your building work harder</h3>
-              <p>Register your SF property. Attract quality tenants, increase property value, and unlock energy incentives.</p>
-              <a href="#landlord" class="btn-secondary">Register your building</a>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
   </section>
   <!-- ================= /LANDING PAGE ================= -->
 
@@ -3835,25 +4378,25 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 <div class="scroll-row">
   <div class="card">
     <img src="Web%20Images/Balcony%20%26%20rooftop%20panels.jpeg" alt="Solar panels installed on an apartment balcony railing">
-    <span class="material-icons-outlined" style="color:#F5854D;">solar_power</span>
+    <span class="material-icons-outlined" style="color:#E58B5A;">solar_power</span>
     <h3 style="font-weight:400; margin:8px 0;">Balcony &amp; rooftop panels</h3>
     <p style="color:#5F6368; font-size:14px;">"I plugged it in myself in an afternoon. No contractor visit needed."<br>Generates clean power right where you live.</p>
   </div>
   <div class="card">
     <img src="Web%20Images/Nest%20smart%20thermostat.jpg" alt="Nest smart thermostat mounted on a living room wall">
-    <span class="material-icons-outlined" style="color:#F5854D;">thermostat</span>
+    <span class="material-icons-outlined" style="color:#E58B5A;">thermostat</span>
     <h3 style="font-weight:400; margin:8px 0;">Nest smart thermostat</h3>
     <p style="color:#5F6368; font-size:14px;">"It learned my schedule in about a week."<br>Automatically shifts heating and cooling to match solar production.</p>
   </div>
   <div class="card">
     <img src="Web%20Images/Home%20battery%20storage.jpeg" alt="Home battery storage unit installed near an apartment entryway">
-    <span class="material-icons-outlined" style="color:#F5854D;">battery_charging_full</span>
+    <span class="material-icons-outlined" style="color:#E58B5A;">battery_charging_full</span>
     <h3 style="font-weight:400; margin:8px 0;">Home battery storage</h3>
     <p style="color:#5F6368; font-size:14px;">"During the last outage, my fridge and lights stayed on for two days."<br>Stores extra solar energy for nighttime and emergencies.</p>
   </div>
   <div class="card">
     <img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor display showing real-time household usage">
-    <span class="material-icons-outlined" style="color:#F5854D;">monitor_heart</span>
+    <span class="material-icons-outlined" style="color:#E58B5A;">monitor_heart</span>
     <h3 style="font-weight:400; margin:8px 0;">Real-time energy monitor</h3>
     <p style="color:#5F6368; font-size:14px;">"I finally understand where my electricity actually goes."<br>See solar generation, usage, and savings at a glance.</p>
   </div>
@@ -4185,17 +4728,24 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   </div>
 </section>
 
-<div class="grid-2 renter-end-links">
+<div class="grid-3 renter-end-links">
   <a href="#how" class="card nav-card-link">
     <div class="nav-card-left">
-      <span class="material-icons-outlined" style="color:#F5854D;">wb_sunny</span>
+      <span class="material-icons-outlined" style="color:#E58B5A;">wb_sunny</span>
       <h3 style="font-weight:400; margin:0;">How Civic Energy works</h3>
+    </div>
+    <span class="link-arrow"><span class="chevron">→</span></span>
+  </a>
+  <a href="#shared-map" class="card nav-card-link">
+    <div class="nav-card-left">
+      <span class="material-icons-outlined" style="color:#E58B5A;">map</span>
+      <h3 style="font-weight:400; margin:0;">Find a building</h3>
     </div>
     <span class="link-arrow"><span class="chevron">→</span></span>
   </a>
   <a href="#renter-incentives" class="card nav-card-link">
     <div class="nav-card-left">
-      <span class="material-icons-outlined" style="color:#F5854D;">savings</span>
+      <span class="material-icons-outlined" style="color:#E58B5A;">savings</span>
       <h3 style="font-weight:400; margin:0;">Incentives for renters</h3>
     </div>
     <span class="link-arrow"><span class="chevron">→</span></span>
@@ -4311,7 +4861,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="map-pane">
         <div style="height:600px;border-radius:16px;overflow:hidden;position:relative;">
           <img src="https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=1200&q=80" alt="Aerial view of San Francisco" style="width:100%;height:100%;object-fit:cover;display:block;">
-          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(30,142,62,0.06),rgba(0,0,0,0.22));border-radius:16px;"></div>
+          <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(136,194,134,0.06),rgba(0,0,0,0.22));border-radius:16px;"></div>
         </div>
       </div>
       <div class="list-pane">
@@ -4334,8 +4884,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
 <h2>San Francisco programs</h2>
 <div class="grid-3">
-  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #F5854D;">
-    <span class="material-icons-outlined" style="color:#F5854D; font-size:32px;">request_quote</span>
+  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #E58B5A;">
+    <span class="material-icons-outlined" style="color:#E58B5A; font-size:32px;">request_quote</span>
     <h3 style="font-weight:400; margin:8px 0;">Pacific Gas and Electric (PG&amp;E) CARE/FERA program</h3>
     <div class="spec-chip-row">
       <span class="chip-teal">Renters</span>
@@ -4347,8 +4897,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       Assistance (FERA) programs.
     </p>
   </div>
-  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #F5854D;">
-    <span class="material-icons-outlined" style="color:#F5854D; font-size:32px;">solar_power</span>
+  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #E58B5A;">
+    <span class="material-icons-outlined" style="color:#E58B5A; font-size:32px;">solar_power</span>
     <h3 style="font-weight:400; margin:8px 0;">San Francisco Public Utilities Commission (SFPUC) CleanPowerSF</h3>
     <div class="spec-chip-row">
       <span class="chip-teal">Renters</span>
@@ -4358,8 +4908,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       electricity from cleaner renewable generation at competitive rates.
     </p>
   </div>
-  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #F5854D;">
-    <span class="material-icons-outlined" style="color:#F5854D; font-size:32px;">support_agent</span>
+  <div class="card" style="background:var(--color-bg-alt); border-left:4px solid #E58B5A;">
+    <span class="material-icons-outlined" style="color:#E58B5A; font-size:32px;">support_agent</span>
     <h3 style="font-weight:400; margin:8px 0;">SF Renters Solar Access Program</h3>
     <div class="spec-chip-row">
       <span class="chip-teal">Renters</span>
@@ -4377,7 +4927,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 <h2 style="margin-top:88px;">California-wide programs</h2>
 <div class="grid-3">
   <div class="card">
-    <span class="material-icons-outlined" style="color:#F5854D; font-size:32px;">account_balance</span>
+    <span class="material-icons-outlined" style="color:#E58B5A; font-size:32px;">account_balance</span>
     <h3 style="font-weight:400; margin:8px 0;">Inflation Reduction Act (IRA) Residential Clean Energy Credit</h3>
     <p style="color:#5F6368; font-size:14px;">
       Claim a 30% federal tax credit on the cost of qualifying solar and battery storage equipment,
@@ -4385,7 +4935,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     </p>
   </div>
   <div class="card">
-    <span class="material-icons-outlined" style="color:#F5854D; font-size:32px;">redeem</span>
+    <span class="material-icons-outlined" style="color:#E58B5A; font-size:32px;">redeem</span>
     <h3 style="font-weight:400; margin:8px 0;">California Solar Initiative</h3>
     <p style="color:#5F6368; font-size:14px;">
       A state rebate program that lowers the upfront cost of qualifying solar installations for
@@ -4393,7 +4943,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     </p>
   </div>
   <div class="card">
-    <span class="material-icons-outlined" style="color:#F5854D; font-size:32px;">gavel</span>
+    <span class="material-icons-outlined" style="color:#E58B5A; font-size:32px;">gavel</span>
     <h3 style="font-weight:400; margin:8px 0;">Senate Bill 868 (SB 868)</h3>
     <p style="color:#5F6368; font-size:14px;">
       A policy-watch bill focused on renter-accessible plug-in solar. Confirm bill status before using it
@@ -4501,7 +5051,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     </div>
   </section>
 
-  <section id="landlord" class="page active" data-route="landlord">
+  <section id="landlord" class="page" data-route="landlord">
     <div class="container" style="padding-top:120px;padding-bottom:100px;">
       <section class="hero grid-2" style="align-items:center; gap:40px;">
   <div>
@@ -4531,18 +5081,17 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="nest-core"><span class="material-icons-outlined">eco</span></div>
     </div>
     <div class="gnest-wordmark">
-      <span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span><span class="nest-word">Nest</span>
+      <span style="color:#7491C7;">G</span><span style="color:#E58B5A;">o</span><span style="color:#F4CB56;">o</span><span style="color:#7491C7;">g</span><span style="color:#88C286;">l</span><span style="color:#E58B5A;">e</span><span class="nest-word">Nest</span>
     </div>
-    <p class="main-partner-lead">Civic Energy Monitor reads real-time electricity use and sends it to the Google Nest energy dashboard.</p>
-    <p class="main-partner-sub">Making electricity consumption visible in real time.</p>
+    <p class="main-partner-lead" style="max-width:760px;">Tens of millions of homes already use Google Nest. Connecting balcony solar to that familiar dashboard gives owners a trusted amenity renters recognize and property teams can monitor.</p>
   </div>
 </section>
 
-<!-- ===== Nest energy experience — full-bleed image ===== -->
+<!-- ===== Full-screen property banner ===== -->
 <div style="margin-top:120px; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); width:auto;">
-  <img src="nest-energy-experience.jpg"
-       alt="A resident checks the Google Nest Home Energy Dashboard on her phone beside balcony solar panels, showing live electricity, solar generation, cost, and eco insights."
-       style="width:100%; height:auto; display:block;">
+  <img src="CTA.png"
+       alt="Mission View Apartments — a solar-equipped San Francisco apartment building with a property owner reviewing energy data"
+       style="width:100%; height:100vh; object-fit:cover; display:block;">
 </div>
 
 <!-- Partner carousel -->
@@ -4578,11 +5127,11 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
 <!-- 3-step overview -->
 <section style="margin-top:120px;">
-  <div class="section-header" style="text-align:center; margin-bottom:48px;">
-    <h2 style="font-weight:600;">A Simple Path to Smarter Energy</h2>
-    <p style="color:var(--color-text-secondary,#5F6368);">Three steps. One cleaner city.</p>
+  <div class="section-header" style="text-align:center; margin-bottom:72px;">
+    <h2 style="font-weight:600;">A Simple Path to Higher Property Value</h2>
+    <p style="color:var(--color-text-secondary,#5F6368);">Three steps to add a visible amenity, reduce overhead, and improve tenant retention.</p>
   </div>
-  <div class="stepper">
+  <div class="stepper landlord-stepper landlord-overview-stepper" style="gap:48px;">
     <article class="stepper-step">
       <span class="material-icons-outlined" aria-hidden="true">domain</span>
       <h3>You register</h3>
@@ -4595,71 +5144,73 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     </article>
     <article class="stepper-step">
       <span class="material-icons-outlined" aria-hidden="true">savings</span>
-      <h3>Everyone earns</h3>
+      <h3>Your building gains</h3>
       <p>Higher property value, lower bills, and tenants who stay longer.</p>
     </article>
   </div>
 </section>
 
-<section class="grid-4" style="margin-top:120px;">
+<section class="grid-4 landlord-stats-grid" style="margin-top:120px;">
   <div class="card" style="text-align:center;">
-    <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">trending_up</span>
-    <h3 style="font-weight:700; margin:12px 0 4px; color:#F5854D;">12–18%</h3>
+    <span class="material-icons-outlined">trending_up</span>
+    <h3 style="font-weight:700; margin:0 0 4px;">12–18%</h3>
     <p style="color:var(--color-text-secondary,#5F6368); margin:0;">property value increase</p>
   </div>
   <div class="card" style="text-align:center;">
-    <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">groups</span>
-    <h3 style="font-weight:700; margin:12px 0 4px; color:#F5854D;">3×</h3>
+    <span class="material-icons-outlined">groups</span>
+    <h3 style="font-weight:700; margin:0 0 4px;">3×</h3>
     <p style="color:var(--color-text-secondary,#5F6368); margin:0;">faster tenant placement</p>
   </div>
   <div class="card" style="text-align:center;">
-    <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">attach_money</span>
-    <h3 style="font-weight:700; margin:12px 0 4px; color:#F5854D;">$15,000+</h3>
+    <span class="material-icons-outlined">attach_money</span>
+    <h3 style="font-weight:700; margin:0 0 4px;">$15,000+</h3>
     <p style="color:var(--color-text-secondary,#5F6368); margin:0;">available incentives</p>
   </div>
   <div class="card" style="text-align:center;">
-    <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">verified</span>
-    <h3 style="font-weight:700; margin:12px 0 4px; color:#F5854D;">LEED</h3>
+    <span class="material-icons-outlined">verified</span>
+    <h3 style="font-weight:700; margin:0 0 4px;">LEED</h3>
     <p style="color:var(--color-text-secondary,#5F6368); margin:0;">certification eligible</p>
   </div>
 </section>
 
-<section style="margin-top:112px;">
-  <h2 style="font-weight:600;">How registration works</h2>
-  <div class="stepper">
-    <div class="stepper-step">
-      <div class="stepper-circle">1</div>
-      <div class="stepper-line"></div>
-      <h4>Submit your building</h4>
-      <p>Fill out the property profile with basic details about your building.</p>
-    </div>
-    <div class="stepper-step">
-      <div class="stepper-circle">2</div>
-      <div class="stepper-line"></div>
-      <h4>Feasibility assessment</h4>
-      <p>Google's team reviews your roof and solar potential, free of charge.</p>
-    </div>
-    <div class="stepper-step">
-      <div class="stepper-circle">3</div>
-      <div class="stepper-line"></div>
-      <h4>System installation</h4>
-      <p>Panels, battery storage, and Nest devices installed by certified crews.</p>
-    </div>
-    <div class="stepper-step">
-      <div class="stepper-circle">4</div>
-      <h4>Go live</h4>
-      <p>Your building appears on the renter map as solar-equipped housing.</p>
-    </div>
+<section class="owner-registration-section">
+  <div class="owner-registration-header">
+    <h2>Owner onboarding</h2>
+  </div>
+  <div class="owner-registration-rail" aria-label="Four-step owner registration process">
+    <article class="owner-registration-step">
+      <span class="owner-registration-number">1</span>
+      <h3>Submit your building</h3>
+      <p>Share the address, unit count, access details, and current energy goals.</p>
+    </article>
+    <article class="owner-registration-step">
+      <span class="owner-registration-number">2</span>
+      <h3>Review feasibility</h3>
+      <p>We assess solar fit, incentive options, and the strongest value case.</p>
+    </article>
+    <article class="owner-registration-step">
+      <span class="owner-registration-number">3</span>
+      <h3>Approve the plan</h3>
+      <p>Confirm scope, timing, tenant communication, and install coordination.</p>
+    </article>
+    <article class="owner-registration-step">
+      <span class="owner-registration-number">4</span>
+      <h3>Launch the amenity</h3>
+      <p>Go live with Nest visibility and a solar-equipped listing renters understand.</p>
+    </article>
   </div>
 </section>
 
-<section class="card card-lg" style="margin-top:88px; padding:48px;">
-  <span class="chip chip-dark">Renter demand signal</span>
-  <h2 style="font-weight:600; margin:16px 0 8px;">Right now in San Francisco</h2>
-  <p style="font-size:26px; font-weight:600; color:#F5854D; margin:0 0 8px;">
-    14,200 renters are seeking solar-equipped housing
-  </p>
-  <p style="color:var(--color-text-secondary,#5F6368); margin:0;">Demand by neighborhood &middot; active searches this month</p>
+<section class="card card-lg owner-demand-card">
+  <div class="owner-demand-header">
+    <div>
+      <h2>Renter demand signal</h2>
+    </div>
+    <div class="owner-demand-stat">
+      <strong>14,200</strong>
+      <span>active solar-housing searches this month</span>
+    </div>
+  </div>
 
   <div class="demand-bar-chart">
     <div class="demand-bar-row">
@@ -4700,51 +5251,51 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     </div>
   </div>
 
-  <div style="margin-top:40px; padding-top:32px; border-top:1px solid var(--color-border,#DADCE0); text-align:center;">
-    <p style="font-size:20px; font-weight:600; margin:0 0 20px;">Your building could be their next home.</p>
+  <div class="owner-demand-footer">
+    <p>Use this demand signal to position solar as a leasing advantage, not just an energy upgrade.</p>
     <a href="#landlord-roi" class="btn-primary-green" style="font-size:16px; padding:16px 40px; display:inline-block;">Register your building</a>
   </div>
 </section>
 
-<!-- ===== Proof It Can Work ===== -->
+<!-- ===== Proof It Works ===== -->
 <section style="margin-top:120px;">
-  <div class="section-header" style="margin-bottom:8px;">
-    <h2 style="font-weight:600;">Proof It Can Work</h2>
+  <div class="section-header" style="margin-bottom:36px;">
+    <h2 style="font-weight:600;">Proof It Works</h2>
+    <p style="color:var(--color-text-secondary,#5F6368);">Germany shows the pattern: adoption is growing, policy is backing it, and early buildings can turn solar into property value.</p>
   </div>
-  <p style="color:var(--color-text-secondary,#5F6368); max-width:720px; margin-bottom:36px;">
-    Apartment-centered solar is not just an idea. Other places are already testing and adopting renter-friendly solar models.
-  </p>
   <div class="grid-3">
-    <div class="card" style="padding:8px 8px 22px;">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Houses_in_the_Mission_District_of_San_Francisco.jpg?width=1200" alt="Colorful apartment buildings in San Francisco's Mission District" style="width:100%; height:230px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
+    <div class="card" style="padding:8px 8px 20px;">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Balcony_solar_panels_in_Wesenberg,_Germany_a.jpg?width=1200" alt="Balcony-mounted solar panels on a residential building in Germany" style="width:100%; height:220px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
       <div style="padding:0 8px;">
-        <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">Germany: Balcony solar at scale</h3>
-        <p style="color:#5F6368; font-size:15px; margin:0;">Germany has become one of the strongest examples of balcony solar adoption. By October 2024, more than 700,000 plug-in solar systems were registered, showing that small-scale apartment solar can grow quickly when rules are clear.</p>
-        <p class="proto-flag">Prototype statistic — verify before final publishing.</p>
-        <p class="src-note">Source: Clean Energy Wire / Federal Network Agency reporting.</p>
-        <a href="https://www.canarymedia.com/articles/solar/balcony-panels-germany-utah" target="_blank" rel="noopener" style="display:inline-block; margin-top:10px; color:#F5854D; font-weight:600; font-size:14px; text-decoration:none;">Read more &rarr;</a>
+        <h3 style="font-weight:600; margin:0 0 6px; font-size:18px;">800,000+ in Germany</h3>
+        <p style="color:#5F6368; font-size:15px; margin:0;">Plug-in balcony solar devices were registered by the end of 2024, with the actual market likely larger.</p>
       </div>
     </div>
-    <div class="card" style="padding:8px 8px 22px;">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Castro_District_in_2022_3.jpg?width=1200" alt="Residential buildings in San Francisco's Castro neighborhood" style="width:100%; height:230px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
+    <div class="card" style="padding:8px 8px 20px;">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Castro_District_in_2022_3.jpg?width=1200" alt="Residential buildings in San Francisco's Castro neighborhood" style="width:100%; height:220px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
       <div style="padding:0 8px;">
-        <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">Renters gained stronger rights</h3>
-        <p style="color:#5F6368; font-size:15px; margin:0;">Germany passed legal changes making it harder for landlords and apartment-owner associations to block balcony solar installations without strong justification.</p>
-        <p class="proto-flag">Prototype statistic — verify before final publishing.</p>
-        <p class="src-note">Source: Reuters, 2024.</p>
-        <a href="https://www.canarymedia.com/articles/solar/balcony-panels-germany-utah" target="_blank" rel="noopener" style="display:inline-block; margin-top:10px; color:#F5854D; font-weight:600; font-size:14px; text-decoration:none;">Read more &rarr;</a>
+        <h3 style="font-weight:600; margin:0 0 6px; font-size:18px;">Policy is backing adoption</h3>
+        <p style="color:#5F6368; font-size:15px; margin:0;">Germany's 2024 law gives renters a regulated path to install plug-in solar, pushing balcony systems into the mainstream.</p>
       </div>
     </div>
-    <div class="card" style="padding:8px 8px 22px;">
-      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Houses_on_18th_Street_on_Potrero_Hill,_February_2021.jpg?width=1200" alt="Sunny residential buildings on San Francisco's Potrero Hill" style="width:100%; height:230px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
+    <div class="card" style="padding:8px 8px 20px;">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Houses_on_18th_Street_on_Potrero_Hill,_February_2021.jpg?width=1200" alt="Sunny residential buildings on San Francisco's Potrero Hill" style="width:100%; height:220px; object-fit:cover; border-radius:16px; display:block; margin-bottom:16px;">
       <div style="padding:0 8px;">
-        <h3 style="font-weight:600; margin:0 0 8px; font-size:18px;">What this proves</h3>
-        <p style="color:#5F6368; font-size:15px; margin:0;">Clear policy, simple installation pathways, and visible savings can help make apartment solar feel practical, trusted, and worth adopting.</p>
-        <p class="proto-flag">Prototype statistic — verify before final publishing.</p>
-        <p class="src-note">Source: Civic Energy analysis.</p>
-        <a href="https://www.canarymedia.com/articles/solar/balcony-panels-germany-utah" target="_blank" rel="noopener" style="display:inline-block; margin-top:10px; color:#F5854D; font-weight:600; font-size:14px; text-decoration:none;">Read more &rarr;</a>
+        <h3 style="font-weight:600; margin:0 0 6px; font-size:18px;">Move before it becomes standard</h3>
+        <p style="color:#5F6368; font-size:15px; margin:0;">Owners who make solar visible early can capture demand and keep their property from falling behind.</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== End CTA ===== -->
+<section class="owner-cta">
+  <img class="owner-cta-img" src="Web%20Images/Generated%20How%20It%20Works/05-sb868-plugin-solar.png" alt="Residents discussing plug-in balcony solar on a San Francisco apartment building">
+  <div class="owner-cta-scrim"></div>
+  <div class="owner-cta-content">
+    <h2>Add value to your building today.</h2>
+    <p>Zero install cost. Higher property value. Tenants who stay longer.</p>
+    <a href="#landlord-roi" class="owner-cta-btn">Register your building</a>
   </div>
 </section>
     </div>
@@ -4752,124 +5303,155 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
   <section id="landlord-roi" class="page" data-route="landlord-roi">
     <div class="container" style="padding-top:120px;padding-bottom:100px;">
-      <section>
-  <h1 style="font-weight:500; font-size:56px; line-height:1.14; letter-spacing:-0.5px;">See your return on investment</h1>
-  <p style="color:var(--color-text-secondary,#5F6368); max-width:640px;">
-    Adjust the details below to estimate your building's solar costs, incentives,
-    and savings over time.
+      <section class="roi-hero">
+  <h1>ROI Calculator</h1>
+  <p class="roi-subhead">See your return on investment.</p>
+  <p class="roi-copy">
+    Adjust the details below to estimate your building's solar costs, incentives, savings, and payback period.
   </p>
 </section>
 
-<section class="grid-2" style="align-items:start; gap:24px; margin-top:24px;">
-  <div class="card">
-    <h3 style="font-weight:400; margin-top:0;">Your building</h3>
-
-    <div class="field-group">
-      <label class="field-label" for="roiUnits">
-        Building size <span class="field-value-display" id="roiUnitsValue">24 units</span>
-      </label>
-      <input type="range" id="roiUnits" min="4" max="200" value="24" aria-label="Building size in units">
-    </div>
-
-    <div class="field-group">
-      <label class="field-label" id="roiTypeLabel">Building type</label>
-      <div class="radio-chip-group" role="radiogroup" aria-labelledby="roiTypeLabel">
-        <label class="radio-chip active">
-          <input type="radio" name="roiType" value="apartment" checked> Apartment complex
-        </label>
-        <label class="radio-chip">
-          <input type="radio" name="roiType" value="mixed"> Mixed-use
-        </label>
-        <label class="radio-chip">
-          <input type="radio" name="roiType" value="single"> Single family
-        </label>
+<section class="card card-lg roi-calculator-card">
+  <div class="roi-card-heading roi-calculator-heading">
+      <span class="roi-card-icon material-icons-outlined" aria-hidden="true">apartment</span>
+      <div>
+        <h3>Build your estimate</h3>
+        <p>Move the two sliders and watch the return numbers update together.</p>
       </div>
     </div>
 
-    <div class="field-group">
-      <label class="field-label" for="roiBill">
-        Current avg monthly energy bill per unit
-        <span class="field-value-display" id="roiBillValue">$180</span>
-      </label>
-      <input type="range" id="roiBill" min="80" max="400" value="180" step="10" aria-label="Average monthly energy bill per unit in dollars">
+  <div class="roi-tool-grid">
+    <div class="roi-controls">
+      <div>
+        <div class="field-group">
+          <label class="field-label" for="roiUnits">
+            Building size <span class="field-value-display" id="roiUnitsValue">24 units</span>
+          </label>
+          <input type="range" id="roiUnits" min="4" max="120" value="24" aria-label="Building size in units">
+        </div>
+
+        <div class="field-group" style="margin-bottom:0;">
+          <label class="field-label" for="roiBill">
+            Average monthly energy bill per unit
+            <span class="field-value-display" id="roiBillValue">$180</span>
+          </label>
+          <input type="range" id="roiBill" min="80" max="400" value="180" step="10" aria-label="Average monthly energy bill per unit in dollars">
+        </div>
+      </div>
+
+      <div class="roi-return-card">
+        <div>
+          <h3>Estimated return</h3>
+          <p id="roiSystemSummary">Balcony solar keeps the first step lightweight and renter-visible.</p>
+        </div>
+        <div>
+          <span class="roi-summary-number" id="roiTenYear">$0</span>
+          <p class="roi-summary-label">projected 10-year net gain</p>
+        </div>
+      </div>
     </div>
 
-    <div class="field-group">
-      <label class="field-label" for="roiRoof">Roof condition</label>
-      <select id="roiRoof">
-        <option value="excellent">Excellent</option>
-        <option value="good" selected>Good</option>
-        <option value="needs">Needs assessment</option>
-      </select>
-    </div>
+    <div class="roi-forecast-panel">
+      <div>
+        <h3>Forecast</h3>
+        <p>How the current estimate breaks down.</p>
+      </div>
 
-    <div class="field-group">
-      <label class="field-label" id="roiSystemLabel">Solar system type</label>
-      <div class="radio-chip-group" role="radiogroup" aria-labelledby="roiSystemLabel">
-        <label class="radio-chip active">
-          <input type="radio" name="roiSystem" value="balcony" checked> Balcony solar
-        </label>
-        <label class="radio-chip">
-          <input type="radio" name="roiSystem" value="rooftop"> Rooftop solar
-        </label>
-        <label class="radio-chip">
-          <input type="radio" name="roiSystem" value="community"> Community solar
-        </label>
+      <div class="roi-metric-grid" aria-label="Solar return estimate">
+        <div class="roi-mini-metric">
+          <span>Net cost after incentives</span>
+          <strong id="roiNetCost">$0</strong>
+        </div>
+        <div class="roi-mini-metric">
+          <span>Annual savings</span>
+          <strong id="roiAnnualSavings">$0</strong>
+        </div>
+        <div class="roi-mini-metric">
+          <span>Payback period</span>
+          <strong id="roiPayback">0 years</strong>
+        </div>
+        <div class="roi-mini-metric">
+          <span>Available incentives</span>
+          <strong id="roiIncentive">$0</strong>
+        </div>
+      </div>
+
+      <div class="roi-option-row">
+        <div class="field-group">
+          <label class="field-label" for="roiRoof">Rooftop coordination</label>
+          <select id="roiRoof">
+            <option value="excellent">Excellent or recently updated</option>
+            <option value="good" selected>Good, no known issues</option>
+            <option value="needs">Needs assessment</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" id="roiSystemLabel">Solar pathway</label>
+          <div class="radio-chip-group" role="radiogroup" aria-labelledby="roiSystemLabel">
+            <label class="radio-chip active">
+              <input type="radio" name="roiSystem" value="balcony" checked> Balcony solar
+            </label>
+            <label class="radio-chip">
+              <input type="radio" name="roiSystem" value="rooftop"> Rooftop solar
+            </label>
+            <label class="radio-chip">
+              <input type="radio" name="roiSystem" value="community"> Community solar
+            </label>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="card card-lg">
-    <h3 style="font-weight:400; margin-top:0;">Your estimate</h3>
-
-    <div class="roi-result-row">
-      <span class="roi-result-label">Estimated system cost</span>
-      <span class="roi-result-value" id="roiCost">$0</span>
-    </div>
-    <div class="roi-result-row">
-      <span class="roi-result-label">Available incentives</span>
-      <span class="chip chip-green" id="roiIncentive">$0</span>
-    </div>
-    <div class="roi-result-row">
-      <span class="roi-result-label">Net cost after incentives</span>
-      <span class="roi-result-value" id="roiNetCost">$0</span>
-    </div>
-    <div class="roi-result-row">
-      <span class="roi-result-label">Estimated annual savings</span>
-      <span class="roi-result-value" id="roiAnnualSavings">$0</span>
-    </div>
-    <div class="roi-result-row">
-      <span class="roi-result-label">Payback period</span>
-      <span class="roi-result-value" id="roiPayback">0 years</span>
-    </div>
-
-    <div class="roi-tenyear">
-      <span class="value" id="roiTenYear">$0</span>
-      <span class="label">10-year net gain</span>
-    </div>
-
-    <h4 style="font-weight:400; margin-bottom:0;">Cumulative savings vs. cost (10 years)</h4>
-    <div id="roiChart" aria-label="Bar chart of cumulative savings over 10 years"></div>
-
-    <p class="disclaimer-text">Estimates only. Consult an energy advisor for accurate numbers.</p>
-  </div>
 </section>
 
-<div class="cta-strip">
-  <h3>Ready to register? Start your building assessment.</h3>
-  <button type="button" class="btn-primary" onclick="document.getElementById('roiModalOverlay').classList.add('open')">Get started</button>
-</div>
-
-<div class="modal-overlay" id="roiModalOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="roiModalTitle">
-    <h3 id="roiModalTitle">Coming soon</h3>
-    <p>Coming soon. Visit our SF store to start the process.</p>
-    <div class="modal-actions">
-      <a href="#store" class="btn-primary">Visit the store</a>
-      <button type="button" class="btn-secondary" onclick="document.getElementById('roiModalOverlay').classList.remove('open')">Close</button>
+<section class="card card-lg roi-guidance-card">
+  <div class="roi-guidance-header">
+    <div>
+      <div class="roi-readiness">
+        <span id="roiReadiness">Strong fit for assessment</span>
+      </div>
+      <p class="roi-story" id="roiStory">Your building appears well positioned for a simple assessment and renter-facing solar amenity.</p>
     </div>
   </div>
-</div>
+
+  <ul class="roi-next-list" aria-label="What happens next">
+    <li><span>1</span><p>Send apartment name, address, and unit count.</p></li>
+    <li><span>2</span><p>Confirm solar fit, incentive options, and installation pathway.</p></li>
+    <li><span>3</span><p>Turn the upgrade into a marketable amenity for renters.</p></li>
+  </ul>
+</section>
+
+<section class="card card-lg roi-contact-card">
+  <h3>Request for assessment today.</h3>
+  <p>We are just an email or a call away.</p>
+  <div class="roi-contact-grid" aria-label="Assessment contact options">
+    <a class="roi-contact-link" href="tel:+14155550142">
+      <span class="material-icons-outlined" aria-hidden="true">call</span>
+      <span>(415) 555-0142</span>
+    </a>
+    <a class="roi-contact-link" href="mailto:assessment@civicenergy.com?subject=Civic%20Energy%20assessment%20request&body=Hi%20Civic%20Energy%20team%2C%0D%0A%0D%0AMy%20apartment%20%2F%20building%20name%20is%3A%20%5BBuilding%20name%5D%0D%0AThe%20property%20address%20is%3A%20%5BAddress%5D%0D%0AI%20am%20interested%20in%20an%20ROI%20assessment%20for%20balcony%20solar%20%2F%20rooftop%20solar%20%2F%20community%20solar.%0D%0AThe%20building%20has%20about%20%5Bnumber%5D%20units.%0D%0A%0D%0AThank%20you%2C%0D%0A%5BYour%20name%5D">
+      <span class="material-icons-outlined" aria-hidden="true">mail</span>
+      <span>assessment@civicenergy.com</span>
+    </a>
+  </div>
+  <div class="roi-email-draft">
+    <div class="roi-email-draft-header">
+      <h4>Starter email</h4>
+      <button type="button" class="copy-btn" id="copyRoiEmail">Copy email</button>
+    </div>
+    <pre id="roiEmailDraft">Hi Civic Energy team,
+
+My apartment / building name is: [Building name]
+The property address is: [Address]
+I am interested in an ROI assessment for balcony solar / rooftop solar / community solar.
+The building has about [number] units.
+
+Thank you,
+[Your name]</pre>
+  </div>
+</section>
     </div>
   </section>
 
@@ -4887,21 +5469,21 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   <h2 style="font-weight:600;">Federal programs</h2>
   <div class="grid-3">
     <div class="card">
-      <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">savings</span>
+      <span class="material-icons-outlined" style="font-size:32px; color:#E58B5A;">savings</span>
       <h3 style="font-weight:400;">Inflation Reduction Act (IRA) Investment Tax Credit</h3>
       <span class="chip chip-amber">Federal</span>
       <p style="color:var(--color-text-secondary,#5F6368);">Claim 30% of your total solar system cost as a direct credit against federal taxes owed.</p>
       <a href="#" class="link-arrow">Learn more &rarr;</a>
     </div>
     <div class="card">
-      <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">trending_down</span>
+      <span class="material-icons-outlined" style="font-size:32px; color:#E58B5A;">trending_down</span>
       <h3 style="font-weight:400;">Modified Accelerated Cost Recovery System (MACRS) Accelerated Depreciation</h3>
       <span class="chip chip-amber">Federal</span>
       <p style="color:var(--color-text-secondary,#5F6368);">Use the Modified Accelerated Cost Recovery System (MACRS) to depreciate commercial solar assets over 5 years, lowering taxable income significantly in early years.</p>
       <a href="#" class="link-arrow">Learn more &rarr;</a>
     </div>
     <div class="card">
-      <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">apartment</span>
+      <span class="material-icons-outlined" style="font-size:32px; color:#E58B5A;">apartment</span>
       <h3 style="font-weight:400;">Inflation Reduction Act (IRA) 179D Deduction</h3>
       <span class="chip chip-amber">Federal</span>
       <p style="color:var(--color-text-secondary,#5F6368);">The Internal Revenue Code Section 179D Energy Efficient Commercial Buildings deduction rewards efficiency upgrades that pair well with solar and Nest systems.</p>
@@ -4916,21 +5498,21 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   <h2 style="font-weight:600;">California programs</h2>
   <div class="grid-3">
     <div class="card">
-      <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">battery_charging_full</span>
+      <span class="material-icons-outlined" style="font-size:32px; color:#E58B5A;">battery_charging_full</span>
       <h3 style="font-weight:400;">Self-Generation Incentive Program</h3>
       <span class="chip chip-green">California</span>
       <p style="color:var(--color-text-secondary,#5F6368);">The Self-Generation Incentive Program (SGIP) provides rebates for installing battery storage alongside your solar system.</p>
       <a href="#" class="link-arrow">Learn more &rarr;</a>
     </div>
     <div class="card">
-      <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">home_work</span>
+      <span class="material-icons-outlined" style="font-size:32px; color:#E58B5A;">home_work</span>
       <h3 style="font-weight:400;">Multifamily Affordable Solar Housing (MASH)</h3>
       <span class="chip chip-green">California</span>
       <p style="color:var(--color-text-secondary,#5F6368);">Multifamily Affordable Solar Housing (MASH) offers incentives for solar installations on qualifying affordable multifamily housing.</p>
       <a href="#" class="link-arrow">Learn more &rarr;</a>
     </div>
     <div class="card">
-      <span class="material-icons-outlined" style="font-size:32px; color:#F5854D;">account_balance</span>
+      <span class="material-icons-outlined" style="font-size:32px; color:#E58B5A;">account_balance</span>
       <h3 style="font-weight:400;">Property Assessed Clean Energy (PACE) Financing</h3>
       <span class="chip chip-green">California</span>
       <p style="color:var(--color-text-secondary,#5F6368);">Property Assessed Clean Energy (PACE) financing lets you repay solar costs through your property tax bill.</p>
@@ -5203,9 +5785,9 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand">
+        <a href="#landing" class="footer-brand civic-logo-link" aria-label="Go to Civic Energy home">
           <img src="Web%20Images/civic-energy-brand-light.png" alt="Civic Energy">
-        </div>
+        </a>
         <p>Community solar for every San Francisco building.</p>
       </div>
       <div>
@@ -5256,26 +5838,26 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
   // ---------- Pill nav active state ----------
   var pillRouteMap = {
-    'landing': 'renters',
+    'landing': 'none',
     'renter': 'renters',
     'renter-solar': 'renters',
-    'renter-map': 'map',
+    'renter-map': 'renters',
     'renter-incentives': 'renters',
     'landlord': 'landlords',
     'landlord-roi': 'landlords',
     'landlord-incentives': 'landlords',
-    'shared-map': 'map',
-    'how': 'how',
-    'store': 'how'
+    'shared-map': 'renters',
+    'how': 'renters',
+    'store': 'renters'
   };
   function updatePillNav(route) {
-    var active = pillRouteMap[route] || 'renters';
+    var active = pillRouteMap[route] || 'none';
     document.querySelectorAll('.pill-nav-btn').forEach(function(btn) {
       btn.classList.toggle('active', btn.getAttribute('data-pill') === active);
     });
   }
   function updateRenterHeroNav() {
-    var isRenterPage = (location.hash || '#landlord').replace('#', '') === 'renter';
+    var isRenterPage = (location.hash || '#landing').replace('#', '') === 'renter';
     var hero = document.querySelector('#renter .renter-hero-viewport');
     var inHero = false;
     if (isRenterPage && hero) {
@@ -5332,10 +5914,64 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
     logo.classList.toggle('logo-on-dark', onDark);
   }
+
+  function getPrimaryCivicLogoImage(link) {
+    return link.querySelector('img[src*="civic-energy-brand"]:not(.civic-logo-icon-clone):not([aria-hidden="true"])') ||
+      link.querySelector('img[src*="civic-energy-brand"]:not(.civic-logo-icon-clone)');
+  }
+
+  function syncCivicLogoLink(link) {
+    var img = getPrimaryCivicLogoImage(link);
+    if (!img) return;
+
+    var rect = img.getBoundingClientRect();
+    var width = rect.width || img.naturalWidth || 104;
+    var height = rect.height || img.naturalHeight || 37;
+    link.style.setProperty('--civic-logo-full-width', width + 'px');
+    link.style.setProperty('--civic-logo-icon-size', Math.min(height, width * 0.42) + 'px');
+  }
+
+  function initCivicLogoLinks() {
+    document.querySelectorAll('img[src*="civic-energy-brand"]:not(.civic-logo-icon-clone)').forEach(function(img) {
+      var link = img.closest('a');
+      if (!link && img.parentNode) {
+        link = document.createElement('a');
+        link.href = '#landing';
+        link.setAttribute('aria-label', 'Go to Civic Energy home');
+        img.parentNode.insertBefore(link, img);
+        link.appendChild(img);
+      }
+      if (!link) return;
+
+      link.classList.add('civic-logo-link');
+      if (!link.querySelector('.civic-logo-icon-layer')) {
+        var primary = getPrimaryCivicLogoImage(link);
+        if (!primary) return;
+
+        var layer = document.createElement('span');
+        layer.className = 'civic-logo-icon-layer';
+        layer.setAttribute('aria-hidden', 'true');
+
+        var clone = primary.cloneNode(false);
+        clone.className = 'civic-logo-icon-clone';
+        clone.removeAttribute('alt');
+        clone.setAttribute('aria-hidden', 'true');
+
+        layer.appendChild(clone);
+        link.appendChild(layer);
+      }
+
+      syncCivicLogoLink(link);
+    });
+  }
+
+  function syncCivicLogoLinks() {
+    document.querySelectorAll('.civic-logo-link').forEach(syncCivicLogoLink);
+  }
   var finderChromeLastScrollY = 0;
   function updateFinderChromeVisibility() {
     var root = document.documentElement;
-    var route = (location.hash || '#landlord').replace('#', '');
+    var route = (location.hash || '#landing').replace('#', '');
     var currentY = Math.max(0, window.scrollY || 0);
     var delta = currentY - finderChromeLastScrollY;
 
@@ -5419,7 +6055,14 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
   // ---------- Hash router ----------
   function navigate() {
-    var route = (location.hash || '#landlord').replace('#', '') || 'landlord';
+    var route = (location.hash || '#landing').replace('#', '') || 'landing';
+    var renterHoldingRoutes = {
+      'renter-solar': true,
+      'renter-map': true,
+      'renter-incentives': true,
+      'shared-map': true
+    };
+    if (renterHoldingRoutes[route]) route = 'renter';
     var pages = document.querySelectorAll('.page');
     var found = false;
 
@@ -5446,6 +6089,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     renderBreadcrumb(route);
     window.scrollTo(0, 0);
     window.requestAnimationFrame(function() {
+      initCivicLogoLinks();
+      syncCivicLogoLinks();
       updateRenterHeroNav();
       updateFloatingLogoContrast();
     });
@@ -5466,8 +6111,14 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     if (navLinks) navLinks.classList.remove('open');
   }
 
+  initCivicLogoLinks();
   window.addEventListener('hashchange', navigate);
-  window.addEventListener('load', navigate);
+  window.addEventListener('load', function() {
+    initCivicLogoLinks();
+    syncCivicLogoLinks();
+    navigate();
+  });
+  window.addEventListener('resize', syncCivicLogoLinks);
 
   document.addEventListener('click', function(event) {
     var link = event.target.closest('[data-renter-scroll]');
@@ -6016,6 +6667,20 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     return '$' + Math.round(n).toLocaleString('en-US');
   }
 
+  function setText(id, value) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = value;
+  }
+
+  function updateRangeFill(input) {
+    if (!input) return;
+    var min = parseFloat(input.min || '0');
+    var max = parseFloat(input.max || '100');
+    var value = parseFloat(input.value || '0');
+    var percent = max > min ? ((value - min) / (max - min)) * 100 : 0;
+    input.style.setProperty('--slider-progress', percent + '%');
+  }
+
   function calculateROI() {
     var unitsEl = document.getElementById('roiUnits');
     var billEl = document.getElementById('roiBill');
@@ -6025,30 +6690,34 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     var units = parseInt(unitsEl.value, 10);
     var bill = parseInt(billEl.value, 10);
     var roof = roofEl.value;
+    updateRangeFill(unitsEl);
+    updateRangeFill(billEl);
 
     var systemEl = document.querySelector('input[name="roiSystem"]:checked');
     var system = systemEl ? systemEl.value : 'balcony';
 
-    document.getElementById('roiUnitsValue').textContent = units + ' units';
-    document.getElementById('roiBillValue').textContent = '$' + bill;
+    setText('roiUnitsValue', units + ' units');
+    setText('roiBillValue', '$' + bill);
 
-    // Per-unit cost by system type
     var perUnitCost;
     var savingsRate;
+    var systemSummary;
     if (system === 'rooftop') {
       perUnitCost = 4200;
       savingsRate = 0.35;
+      systemSummary = 'Rooftop solar creates the strongest savings when roof access and structure are ready.';
     } else if (system === 'community') {
       perUnitCost = 600;
       savingsRate = 0.15;
+      systemSummary = 'Community solar is a lighter pathway when the building is not ready for on-site installation.';
     } else {
       perUnitCost = 1800;
       savingsRate = 0.25;
+      systemSummary = 'Balcony solar keeps the first step lightweight and renter-visible.';
     }
 
     var totalCost = units * perUnitCost;
 
-    // Roof condition adjustment
     if (roof === 'excellent') {
       totalCost *= 0.90;
     } else if (roof === 'needs') {
@@ -6061,64 +6730,58 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     var payback = annualSavings > 0 ? (netCost / annualSavings) : 0;
     var tenYearGain = (annualSavings * 10) - netCost;
 
-    document.getElementById('roiCost').textContent = formatCurrency(totalCost);
-    document.getElementById('roiIncentive').textContent = formatCurrency(incentives);
-    document.getElementById('roiNetCost').textContent = formatCurrency(netCost);
-    document.getElementById('roiAnnualSavings').textContent = formatCurrency(annualSavings);
-    document.getElementById('roiPayback').textContent = payback.toFixed(1) + ' years';
-    document.getElementById('roiTenYear').textContent = formatCurrency(tenYearGain);
+    setText('roiIncentive', formatCurrency(incentives));
+    setText('roiNetCost', formatCurrency(netCost));
+    setText('roiAnnualSavings', formatCurrency(annualSavings));
+    setText('roiPayback', payback.toFixed(1) + ' years');
+    setText('roiTenYear', formatCurrency(tenYearGain));
+    setText('roiSystemSummary', systemSummary);
 
-    renderChart(annualSavings);
-  }
-
-  function renderChart(annualSavings) {
-    var chart = document.getElementById('roiChart');
-    if (!chart) return;
-    chart.innerHTML = '';
-
-    var totalOverTen = annualSavings * 10;
-
-    for (var year = 1; year <= 10; year++) {
-      var cumulative = annualSavings * year;
-      var heightPct = totalOverTen > 0 ? Math.min((cumulative / totalOverTen) * 100, 100) : 0;
-
-      var col = document.createElement('div');
-      col.className = 'roi-bar-col';
-
-      var bar = document.createElement('div');
-      bar.className = 'roi-bar';
-      bar.style.setProperty('--bar-height', heightPct + '%');
-
-      var yearLabel = document.createElement('div');
-      yearLabel.className = 'roi-bar-year';
-      yearLabel.textContent = 'Y' + year;
-
-      col.appendChild(bar);
-      col.appendChild(yearLabel);
-      chart.appendChild(col);
-
-      // trigger grow-in animation
-      (function (barEl) {
-        requestAnimationFrame(function () {
-          requestAnimationFrame(function () {
-            barEl.classList.add('animate-in');
-          });
-        });
-      })(bar);
+    if (roof === 'needs') {
+      setText('roiReadiness', 'Need feasibility review');
+      setText('roiStory', 'Start with a roof and electrical assessment, then use incentives to decide whether balcony, rooftop, or community solar is the strongest path.');
+    } else if (payback <= 4.5) {
+      setText('roiReadiness', 'Strong fit for assessment');
+      setText('roiStory', 'Your inputs point to a clear owner value case: visible savings, a marketable amenity, and a reasonable payback window.');
+    } else {
+      setText('roiReadiness', 'Good fit to compare options');
+      setText('roiStory', 'The numbers suggest solar can still support leasing value, but the assessment should compare incentives and installation paths before committing.');
     }
   }
 
-  // Active radio chip styling
   function bindRadioChips() {
     var groups = document.querySelectorAll('.radio-chip-group');
     groups.forEach(function (group) {
       var chips = group.querySelectorAll('.radio-chip');
       chips.forEach(function (chip) {
+        var input = chip.querySelector('input');
+        chip.classList.toggle('active', !!input && input.checked);
+        if (chip.dataset.roiBound === 'true') return;
+        chip.dataset.roiBound = 'true';
         chip.addEventListener('click', function () {
-          chips.forEach(function (c) { c.classList.remove('active'); });
-          chip.classList.add('active');
+          window.setTimeout(function () {
+            chips.forEach(function (c) {
+              var cInput = c.querySelector('input');
+              c.classList.toggle('active', !!cInput && cInput.checked);
+            });
+          }, 0);
         });
       });
+    });
+  }
+
+  function bindRoiEmailDraft() {
+    var copyBtn = document.getElementById('copyRoiEmail');
+    var draft = document.getElementById('roiEmailDraft');
+    if (!copyBtn || !draft || copyBtn.dataset.roiBound === 'true') return;
+    copyBtn.dataset.roiBound = 'true';
+    copyBtn.addEventListener('click', function () {
+      var text = draft.innerText || draft.textContent;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text);
+      }
+      copyBtn.textContent = 'Copied';
+      setTimeout(function () { copyBtn.textContent = 'Copy email'; }, 1800);
     });
   }
 
@@ -6126,15 +6789,20 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     var ids = ['roiUnits', 'roiBill', 'roiRoof'];
     ids.forEach(function (id) {
       var el = document.getElementById(id);
+      if (!el || el.dataset.roiBound === 'true') return;
+      el.dataset.roiBound = 'true';
       if (el) el.addEventListener('input', calculateROI);
     });
 
-    var radios = document.querySelectorAll('input[name="roiType"], input[name="roiSystem"]');
+    var radios = document.querySelectorAll('input[name="roiSystem"]');
     radios.forEach(function (radio) {
+      if (radio.dataset.roiBound === 'true') return;
+      radio.dataset.roiBound = 'true';
       radio.addEventListener('change', calculateROI);
     });
 
     bindRadioChips();
+    bindRoiEmailDraft();
     calculateROI();
   }
 
