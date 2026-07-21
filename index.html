@@ -687,38 +687,32 @@ html.renter-hero-nav-active .pill-nav-btn.active {
   box-shadow: none;
 }
 
-/* ──── HERO CAROUSEL — Google Sustainability marquee style ─────── */
+/* ──── HERO CAROUSEL ─────────────────────────────── */
 .hero-carousel {
   overflow: hidden;
   width: auto;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: 16px 0;
+  padding: 40px 0 48px;
   background: #fff;
 }
 .carousel-track {
   display: flex;
-  align-items: center;
-  gap: 4px;                 /* Google uses a very tight 4px gap */
+  gap: 20px;
   width: max-content;
-  will-change: transform;   /* smoother compositing, like Google's marquee */
-  animation: carousel-scroll 60s linear infinite;  /* slow, calm, linear */
+  animation: carousel-scroll 36s linear infinite;
 }
 .carousel-track:hover { animation-play-state: paused; }
 @keyframes carousel-scroll {
   0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }   /* two identical sets → seamless loop */
+  100% { transform: translateX(-50%); }
 }
-@media (prefers-reduced-motion: reduce) {
-  .carousel-track { animation: none; }
-}
-/* marquee cards: fixed row height; the shape's aspect-ratio drives the width */
+/* varied shape cards — full-bleed image edition */
 .c-card {
   flex: 0 0 auto;
   overflow: hidden;
   position: relative;
-  background: #F1F3F4;
-  height: clamp(190px, 26vw, 420px);
+  background: #F7E6DA;
 }
 .c-card img {
   position: absolute;
@@ -728,9 +722,30 @@ html.renter-hero-nav-active .pill-nav-btn.active {
   object-fit: cover;
   display: block;
 }
-/* two shapes alternate — a perfect circle and a vertical lens/leaf */
-.c-card.shape-circle { aspect-ratio: 1 / 1;     border-radius: 50%; }
-.c-card.shape-lens   { aspect-ratio: 340 / 480; border-radius: 50% / 100%; }
+.c-card .c-label {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px);
+  padding: 6px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+/* shape variants */
+.c-card.shape-tall   { width: 200px;  height: 260px; border-radius: 130px; }
+.c-card.shape-wide   { width: 400px;  height: 220px; border-radius: 28px; }
+.c-card.shape-circle { width: 260px;  height: 260px; border-radius: 50%; }
+.c-card.shape-square { width: 260px;  height: 260px; border-radius: 36px; }
+.c-card.shape-short  { width: 360px;  height: 220px; border-radius: 110px; }
+.c-card.shape-blob   { width: 300px;  height: 260px; border-radius: 58% 42% 52% 48% / 50% 50% 50% 50%; }
 
 /* push page content below floating pill nav */
 #app { padding-top: 80px; overflow-x: clip; }
@@ -5068,28 +5083,27 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 </div>
 <div class="hero-carousel" aria-hidden="true" style="margin-top:32px;">
   <div class="carousel-track">
-    <!-- Set A -->
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy"></div>
-    <div class="c-card shape-lens"><img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor"></div>
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar"></div>
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Certification"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building"></div>
-    <div class="c-card shape-circle"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco"></div>
-    <!-- Set B (identical → seamless -50% loop) -->
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy"></div>
-    <div class="c-card shape-lens"><img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor"></div>
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar"></div>
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Certification"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building"></div>
-    <div class="c-card shape-circle"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives"></div>
-    <div class="c-card shape-lens"><img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco"></div>
+    <div class="c-card shape-square"><img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat"><span class="c-label">Smart Home</span></div>
+    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy"><span class="c-label">Sustainability</span></div>
+    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor"><span class="c-label">Energy Monitor</span></div>
+    <div class="c-card shape-square"><img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter"><span class="c-label">Smart Meter</span></div>
+    <div class="c-card shape-short"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar"><span class="c-label">Rooftop Solar</span></div>
+    <div class="c-card shape-square"><img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar"><span class="c-label">Balcony Solar</span></div>
+    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Certification"><span class="c-label">Certification</span></div>
+    <div class="c-card shape-blob"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building"><span class="c-label">Green Building</span></div>
+    <div class="c-card shape-square"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives"><span class="c-label">Incentives</span></div>
+    <div class="c-card shape-circle"><img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco"><span class="c-label">SF Policy</span></div>
+    <!-- Set B -->
+    <div class="c-card shape-square"><img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat"><span class="c-label">Smart Home</span></div>
+    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy"><span class="c-label">Sustainability</span></div>
+    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor"><span class="c-label">Energy Monitor</span></div>
+    <div class="c-card shape-square"><img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter"><span class="c-label">Smart Meter</span></div>
+    <div class="c-card shape-short"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar"><span class="c-label">Rooftop Solar</span></div>
+    <div class="c-card shape-square"><img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar"><span class="c-label">Balcony Solar</span></div>
+    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Certification"><span class="c-label">Certification</span></div>
+    <div class="c-card shape-blob"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building"><span class="c-label">Green Building</span></div>
+    <div class="c-card shape-square"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives"><span class="c-label">Incentives</span></div>
+    <div class="c-card shape-circle"><img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco"><span class="c-label">SF Policy</span></div>
   </div>
 </div>
 
