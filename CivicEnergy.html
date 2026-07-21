@@ -449,43 +449,16 @@ hr.divider {
   opacity: 1 !important;
   filter: saturate(1);
 }
-.civic-logo-link:hover .civic-logo-icon-layer,
-.civic-logo-link:focus-visible .civic-logo-icon-layer,
-.civic-logo-link:active .civic-logo-icon-layer {
+/* Logo hover = simple link affordance: the whole logo (icon + text) turns
+   white via the light logo variant. No looping/color-shift animation — the
+   logo shows its default colors at rest on every page, including home. */
+.floating-logo:hover .brand-logo-dark,
+.floating-logo:focus-visible .brand-logo-dark {
+  opacity: 0;
+}
+.floating-logo:hover .brand-logo-light,
+.floating-logo:focus-visible .brand-logo-light {
   opacity: 1;
-}
-.civic-logo-link:hover .civic-logo-icon-clone,
-.civic-logo-link:focus-visible .civic-logo-icon-clone,
-.civic-logo-link:active .civic-logo-icon-clone {
-  animation: civicLogoIconShift 1.15s ease-in-out infinite;
-}
-/* On the home page the top-left logo animation loops continuously.
-   On every other page it stays still and only plays on hover (rules above). */
-html.route-home .floating-logo .civic-logo-icon-layer {
-  opacity: 1;
-}
-html.route-home .floating-logo .civic-logo-icon-clone {
-  animation: civicLogoIconShift 1.15s ease-in-out infinite;
-}
-@keyframes civicLogoIconShift {
-  0%, 100% {
-    filter: hue-rotate(0deg) saturate(1) brightness(1);
-  }
-  32% {
-    filter: hue-rotate(172deg) saturate(1.7) brightness(1.02);
-  }
-  62% {
-    filter: hue-rotate(-36deg) saturate(1.55) brightness(1.12);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .civic-logo-link:hover .civic-logo-icon-clone,
-  .civic-logo-link:focus-visible .civic-logo-icon-clone,
-  .civic-logo-link:active .civic-logo-icon-clone,
-  html.route-home .floating-logo .civic-logo-icon-clone {
-    animation: none;
-    filter: hue-rotate(172deg) saturate(1.45);
-  }
 }
 .floating-logo .brand-logo-light {
   position: absolute;
@@ -6093,7 +6066,6 @@ Thank you,
       document.getElementById('landlord').classList.add('active');
     }
 
-    document.documentElement.classList.toggle('route-home', route === 'landing');
     document.documentElement.classList.toggle('renter-snap-active', route === 'renter');
     document.documentElement.classList.toggle('finder-snap', route === 'shared-map');
     document.documentElement.classList.remove('finder-chrome-hidden');
