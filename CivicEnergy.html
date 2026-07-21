@@ -447,17 +447,19 @@ hr.divider {
   max-width: none !important;
   height: auto !important;
   opacity: 1 !important;
-  filter: saturate(1);
+  filter: brightness(0) saturate(0);
 }
-/* Logo hover = simple link affordance: the whole logo (icon + text) turns
-   white via the light logo variant. No looping/color-shift animation — the
-   logo shows its default colors at rest on every page, including home. */
+/* Logo hover = white wordmark with a clipped black icon overlay. */
 .floating-logo:hover .brand-logo-dark,
 .floating-logo:focus-visible .brand-logo-dark {
   opacity: 0;
 }
 .floating-logo:hover .brand-logo-light,
 .floating-logo:focus-visible .brand-logo-light {
+  opacity: 1;
+}
+.floating-logo:hover .civic-logo-icon-layer,
+.floating-logo:focus-visible .civic-logo-icon-layer {
   opacity: 1;
 }
 .floating-logo .brand-logo-light {
@@ -483,21 +485,29 @@ hr.divider {
   top: 20px;
   right: 24px;
   z-index: 1000;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  box-sizing: border-box;
+  line-height: 1;
   font-size: 14px;
   font-weight: 600;
-  color: #E58B5A;
+  color: rgba(31,31,31,0.75);
   text-decoration: none;
-  padding: 8px 20px;
-  border: 1.5px solid rgba(136,194,134,0.35);
+  padding: 13px 27px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
   border-radius: 100px;
-  background: rgba(255,255,255,0.6);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  transition: background 0.15s ease, border-color 0.15s ease;
+  background: rgba(255, 255, 255, 0.52);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform .24s ease, opacity .24s ease;
 }
-.floating-cta:hover {
-  background: rgba(255,255,255,0.9);
-  border-color: #E58B5A;
+.floating-cta:hover,
+.floating-cta:focus-visible {
+  background: rgba(255,255,255,0.92);
+  color: #E58B5A;
 }
 
 /* ──── HAMBURGER (mobile only) ─────────────────────── */
@@ -610,23 +620,32 @@ hr.divider {
   opacity: 1;
   transition: opacity .24s ease, transform .3s cubic-bezier(.22,1,.36,1);
 }
-html.finder-chrome-hidden .floating-logo {
+html.finder-chrome-hidden .floating-logo,
+html.top-chrome-hidden .floating-logo {
   opacity: 0;
   transform: translateY(-28px);
   pointer-events: none;
 }
-html.finder-chrome-hidden #pillNav {
+html.finder-chrome-hidden #pillNav,
+html.top-chrome-hidden #pillNav {
   opacity: 0;
   transform: translate(-50%, -130%);
   pointer-events: none;
 }
-html.finder-chrome-hidden .hamburger-btn {
+html.finder-chrome-hidden .hamburger-btn,
+html.top-chrome-hidden .hamburger-btn {
+  opacity: 0;
+  transform: translateY(-130%);
+  pointer-events: none;
+}
+html.finder-chrome-hidden .floating-cta,
+html.top-chrome-hidden .floating-cta {
   opacity: 0;
   transform: translateY(-130%);
   pointer-events: none;
 }
 @media (prefers-reduced-motion: reduce) {
-  .floating-logo, #pillNav, .hamburger-btn { transition-duration: .01ms !important; }
+  .floating-logo, #pillNav, .hamburger-btn, .floating-cta { transition-duration: .01ms !important; }
 }
 .pill-nav-track {
   display: inline-flex;
@@ -2554,6 +2573,587 @@ html.renter-snap-active {
     border-radius: 18px;
   }
 }
+.landing-main-section {
+  position: relative;
+  padding: clamp(72px, 8vw, 112px) clamp(24px, 6vw, 96px);
+  background: #FFFFFF;
+}
+.landing-main-section.section-muted { background: #F8F9FA; }
+.landing-section-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+.landing-section-grid {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(390px, .92fr);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
+}
+.landing-section-grid.reverse { grid-template-columns: minmax(390px, .92fr) minmax(0, 1fr); }
+.landing-kicker {
+  display: block;
+  color: var(--color-brand-orange-dark);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.landing-section-copy h2,
+.landing-section-head h2 {
+  font-size: clamp(34px, 4vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -.6px;
+  margin: 0;
+  max-width: 720px;
+}
+.landing-section-copy p,
+.landing-section-head p,
+.landing-feature-card p,
+.landing-system-card p,
+.landing-monitor-panel p {
+  color: var(--color-text-secondary);
+  font-size: 17px;
+  line-height: 1.65;
+}
+.landing-section-copy p { margin: 20px 0 0; max-width: 620px; }
+.section-impact .landing-section-head,
+.section-products .landing-section-head,
+.section-process .landing-section-head {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-impact .landing-section-head h2,
+.section-impact .landing-section-head p,
+.section-products .landing-section-head h2,
+.section-products .landing-section-head p,
+.section-process .landing-section-head h2,
+.section-process .landing-section-head p {
+  margin-left: auto;
+  margin-right: auto;
+}
+.landing-main-section.section-monitor {
+  background: #FFFFFF;
+  padding-left: clamp(16px, 2.5vw, 36px);
+  padding-right: clamp(16px, 2.5vw, 36px);
+}
+.section-monitor .landing-section-grid {
+  max-width: 1460px;
+  background: #F7E6DA;
+  border-radius: 32px;
+  padding: clamp(32px, 5vw, 64px);
+  border: 1px solid rgba(229,139,90,0.18);
+}
+.section-monitor .landing-kicker,
+.section-monitor .landing-section-copy h2 {
+  color: #8F4D2E;
+}
+.section-monitor .landing-section-copy p,
+.section-monitor .landing-monitor-panel p {
+  color: rgba(31,31,31,0.72);
+}
+.landing-section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+.landing-image-card {
+  min-height: 390px;
+  aspect-ratio: 5 / 4;
+  border-radius: 28px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+  background: #FFFFFF;
+}
+.landing-image-card img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+.landing-section-head {
+  max-width: 820px;
+  margin-bottom: 52px;
+}
+.landing-section-head p { margin-top: 18px; }
+.landing-feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.landing-feature-card,
+.landing-system-card,
+.landing-monitor-panel {
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  padding: 24px;
+}
+.landing-feature-card { display:flex; flex-direction:column; min-height:100%; }
+.landing-feature-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 22px;
+}
+.landing-feature-card h3,
+.landing-system-card h3,
+.landing-monitor-panel h3 {
+  font-size: 22px;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+.landing-feature-card p,
+.landing-system-card p,
+.landing-monitor-panel p { margin: 0; }
+.landing-system-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+.landing-system-card .material-icons-outlined {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-brand-orange);
+  background: #F7E6DA;
+  margin-bottom: 18px;
+}
+.landing-monitor-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+.landing-monitor-panel img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 18px;
+  margin-bottom: 18px;
+}
+.landing-pill-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.landing-mini-pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  background: #F7E6DA;
+  color: #9D5636;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.landing-finder-mini {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 24px;
+}
+.landing-finder-mini article {
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #FFFFFF;
+}
+.landing-finder-mini img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.landing-finder-mini div { padding: 14px; }
+.landing-finder-mini strong { display:block; margin-bottom: 4px; }
+.landing-finder-mini span { color: var(--color-text-secondary); font-size: 13px; }
+.section-finder .landing-section-grid {
+  align-items: stretch;
+}
+.section-finder .landing-section-copy {
+  display: flex;
+  flex-direction: column;
+}
+.section-finder .landing-pill-row {
+  margin-top: 18px;
+}
+.section-finder .landing-image-card {
+  position: relative;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+.section-finder .landing-image-card img {
+  position: absolute;
+  inset: 0;
+  object-position: center center;
+}
+.section-process {
+  padding-top: clamp(56px, 6vw, 84px);
+}
+.landing-section-divider {
+  max-width: 1240px;
+  height: 1px;
+  margin: 0 auto;
+  background: linear-gradient(90deg, transparent, rgba(31,31,31,0.16), transparent);
+}
+.section-store-experience {
+  background: #FFFFFF;
+  overflow: hidden;
+  padding-top: clamp(60px, 6vw, 88px);
+}
+.store-experience-head {
+  max-width: 1240px;
+  margin: 0 auto 34px;
+  display: block;
+}
+.store-experience-head h2 {
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1.08;
+  letter-spacing: -.5px;
+  margin: 0;
+  max-width: 760px;
+}
+.store-experience-head p {
+  color: var(--color-text-secondary);
+  font-size: 17px;
+  line-height: 1.65;
+  margin: 20px 0 0;
+  max-width: 760px;
+}
+.store-experience-actions {
+  max-width: 1240px;
+  margin: 26px auto 0;
+}
+.store-carousel {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(420px, 52vw);
+  gap: 18px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 0 clamp(24px, 6vw, 96px) 8px;
+}
+.store-carousel::-webkit-scrollbar { display: none; }
+.store-slide {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #ECEFF1;
+  scroll-snap-align: center;
+}
+.store-slide img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  max-width: none;
+}
+.store-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 44%, rgba(0,0,0,0.44) 100%);
+  pointer-events: none;
+}
+.store-slide-caption {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 1;
+  color: #FFFFFF;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.45);
+}
+.store-slide-caption h3 {
+  margin: 0;
+  font-size: clamp(13px, 1.05vw, 16px);
+  line-height: 1.35;
+  font-weight: 650;
+}
+.role-store-section {
+  margin-top: 120px;
+  background: #F8F9FA;
+  border-radius: 32px;
+  padding: clamp(28px, 4vw, 54px);
+  overflow: hidden;
+}
+.role-store-section.owner {
+  background: #F7E6DA;
+}
+.role-store-head {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(320px, .72fr);
+  gap: clamp(28px, 4vw, 56px);
+  align-items: end;
+  margin-bottom: 28px;
+}
+.role-store-head h2 {
+  font-size: clamp(34px, 4.2vw, 58px);
+  line-height: 1.08;
+  letter-spacing: -.5px;
+  margin: 0;
+}
+.role-store-head p {
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  line-height: 1.62;
+  margin: 0;
+}
+.role-store-strip {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(280px, 42%);
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+.role-store-strip::-webkit-scrollbar { display: none; }
+.role-store-card {
+  position: relative;
+  min-height: 280px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #FFFFFF;
+  scroll-snap-align: start;
+}
+.role-store-card img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+}
+.role-store-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 42%, rgba(0,0,0,0.5) 100%);
+}
+.role-store-caption {
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 16px;
+  z-index: 1;
+  color: #FFFFFF;
+  text-shadow: 0 2px 14px rgba(0,0,0,0.42);
+}
+.role-store-caption strong {
+  display: block;
+  font-size: 18px;
+  line-height: 1.18;
+  margin-bottom: 5px;
+}
+.role-store-caption span {
+  display: block;
+  color: rgba(255,255,255,0.9);
+  font-size: 13px;
+  line-height: 1.45;
+}
+.role-store-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 26px;
+}
+.contact-page {
+  background: #F8F9FA;
+  padding: clamp(112px, 12vw, 160px) clamp(24px, 6vw, 96px) clamp(80px, 9vw, 120px);
+}
+.contact-hero {
+  max-width: 1240px;
+  margin: 0 auto 42px;
+  padding-bottom: 42px;
+  border-bottom: 1px solid rgba(218,220,224,0.9);
+}
+.contact-hero h1 {
+  font-size: clamp(46px, 5.5vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -.8px;
+  margin: 0;
+  max-width: 980px;
+}
+.contact-hero p {
+  color: var(--color-text-secondary);
+  font-size: clamp(17px, 1.45vw, 20px);
+  line-height: 1.6;
+  margin: 22px 0 0;
+  max-width: 960px;
+}
+.contact-layout {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.contact-card-group {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+.contact-info-card,
+.contact-form-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(218,220,224,0.9);
+  border-radius: 24px;
+  padding: clamp(22px, 2.4vw, 30px);
+  min-height: 100%;
+  box-shadow: 0 1px 2px rgba(31,31,31,0.04);
+}
+.contact-info-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.contact-info-card.accent-warm { background: #F7E6DA; border-color: rgba(229,139,90,0.25); }
+.contact-info-card.accent-green { background: #E8F2E6; border-color: rgba(136,194,134,0.32); }
+.contact-info-card.accent-blue { background: #E8F0FE; border-color: rgba(66,133,244,0.18); }
+.contact-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+.contact-info-card .material-icons-outlined {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9D5636;
+  background: rgba(255,255,255,0.72);
+  flex: 0 0 auto;
+}
+.contact-info-card h2,
+.contact-form-card h2 {
+  margin: 0 0 8px;
+  font-size: clamp(22px, 2vw, 28px);
+  line-height: 1.16;
+  letter-spacing: -.2px;
+}
+.contact-info-card p,
+.contact-form-card p {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.58;
+  margin: 0;
+}
+.contact-info-card a {
+  color: var(--color-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+.contact-info-card a:hover { color: var(--color-brand-orange-dark); }
+.contact-info-card span.contact-link-pill {
+  font-weight: 650;
+}
+.contact-card-label {
+  color: var(--color-brand-orange-dark);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.contact-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: auto;
+}
+.contact-link-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 10px 16px;
+  background: rgba(255,255,255,0.72);
+  color: var(--color-ink);
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.65);
+}
+.contact-link-pill:hover {
+  background: #FFFFFF;
+  color: var(--color-brand-orange-dark);
+}
+.contact-form-card {
+  background: #FFFFFF;
+  margin-top: 6px;
+}
+.contact-form-card form { margin-top: 28px; }
+.contact-form-card .grid-2 { align-items: start; }
+.contact-form-card textarea {
+  width: 100%;
+  min-height: 132px;
+  resize: vertical;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: 22px;
+  font-size: 14px;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.contact-form-card .btn-primary-green {
+  width: 100%;
+  justify-content: center;
+  margin-top: 4px;
+}
+@media (max-width: 980px) {
+  .contact-card-group { grid-template-columns: 1fr; }
+  .store-carousel { grid-auto-columns: minmax(300px, 84vw); }
+  .role-store-head { grid-template-columns: 1fr; }
+  .role-store-strip { grid-auto-columns: minmax(260px, 78%); }
+}
+@media (max-width: 720px) {
+  .contact-page { padding: 104px 22px 72px; }
+  .contact-info-card {
+    border-radius: 20px;
+  }
+  .store-slide { border-radius: 20px; }
+  .role-store-section { border-radius: 24px; }
+  .role-store-card { border-radius: 18px; }
+}
+@media (max-width: 1080px) {
+  .landing-feature-grid,
+  .landing-system-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 920px) {
+  .landing-section-grid,
+  .landing-section-grid.reverse,
+  .landing-monitor-layout { grid-template-columns: 1fr; }
+  .landing-image-card { min-height: 320px; aspect-ratio: 16 / 10; }
+  .section-finder .landing-image-card {
+    min-height: 420px;
+    aspect-ratio: 4 / 5;
+  }
+}
+@media (max-width: 560px) {
+  .landing-main-section { padding: 64px 22px; }
+  .landing-image-card { min-height: 280px; border-radius: 18px; }
+  .section-finder .landing-image-card { min-height: 340px; }
+  .landing-feature-grid,
+  .landing-system-grid,
+  .landing-finder-mini { grid-template-columns: 1fr; }
+}
 </style>
 <style>
   .map-two-col {
@@ -3890,9 +4490,18 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 }
 .building-search-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(360px, .85fr);
-  gap: 26px;
+  grid-template-columns: minmax(420px, .92fr) minmax(560px, 1.08fr);
+  gap: 18px;
   align-items: start;
+  min-height: calc(100vh - 148px);
+}
+.finder-listings-panel {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 8px 24px rgba(31,31,31,.05);
 }
 .finder-results-list {
   display: grid;
@@ -3901,17 +4510,18 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 #sharedCardList.finder-results-list { grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; align-items:start; }
 .finder-property-card {
   display: grid;
-  grid-template-columns: 128px minmax(0, 1fr);
+  grid-template-columns: 1fr;
   overflow: hidden;
-  border-radius: 18px;
+  border-radius: 8px;
   background: #fff;
   border: 1px solid var(--color-border);
   transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+  cursor: pointer;
 }
 .finder-property-card.is-expanded {
   grid-column:1 / -1;
-  grid-template-columns:minmax(230px,38%) minmax(0,1fr);
-  border-radius:22px;
+  grid-template-columns:minmax(260px,42%) minmax(0,1fr);
+  border-radius:10px;
 }
 .finder-property-card.map-building-card { padding:0; background:#fff; border:1px solid var(--color-border); }
 #sharedCardList .finder-property-card.map-building-card img {
@@ -3925,10 +4535,10 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 .finder-property-card:hover,
 .finder-property-card.highlighted {
   transform: translateY(-2px);
-  border-color: rgba(229,139,90,.7);
-  box-shadow: 0 12px 34px rgba(31,31,31,.09);
+  border-color: rgba(31,31,31,.42);
+  box-shadow: 0 10px 24px rgba(31,31,31,.12);
 }
-.finder-card-media { position: relative; min-height: 154px; }
+.finder-card-media { position: relative; aspect-ratio: 4 / 3; min-height: 0; background:#EDEFF2; }
 .finder-property-card.is-expanded .finder-card-media { min-height:330px; }
 .finder-card-media img { width: 100%; height: 100%; object-fit: cover; }
 .finder-card-badges {
@@ -3950,16 +4560,32 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   box-shadow: 0 3px 12px rgba(0,0,0,.12);
 }
 .finder-card-badge.green { background: #F7E6DA; color: #9D5636; }
-.finder-card-content { padding: 13px; display: flex; flex-direction: column; min-width: 0; }
+.finder-save-button {
+  position:absolute;
+  right:12px;
+  bottom:12px;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.94);
+  color:#1F1F1F;
+  box-shadow:0 3px 12px rgba(0,0,0,.16);
+}
+.finder-save-button .material-icons-outlined { font-size:20px; }
+.finder-card-content { padding: 12px; display: flex; flex-direction: column; min-width: 0; }
 .finder-property-card.is-expanded .finder-card-content { padding:20px; }
-.finder-card-kicker { color: #9D5636; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; }
-.finder-property-card h2 { font-size: 16px; line-height: 1.18; margin: 4px 0; }
+.finder-card-kicker { color: #5F6368; font-size: 11px; font-weight: 650; text-transform: none; letter-spacing: 0; }
+.finder-property-card h2 { font-size: 15px; line-height: 1.25; margin: 4px 0; font-weight:650; }
 .finder-property-card.is-expanded h2 { font-size:24px; }
-.finder-card-address { color: var(--color-text-secondary); font-size: 12px; line-height: 1.35; }
-.finder-card-price { font-size: 16px; font-weight: 700; margin: 8px 0 3px; }
+.finder-card-address { color: var(--color-text-secondary); font-size: 11.5px; line-height: 1.35; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.finder-card-price { font-size: 18px; font-weight: 750; margin: 8px 0 3px; letter-spacing:0; }
 .finder-property-card.is-expanded .finder-card-price { font-size:23px; margin-top:12px; }
 .finder-card-price span { color: var(--color-text-secondary); font-size: 12px; font-weight: 400; }
-.finder-card-facts { font-size: 11px; font-weight: 600; margin-bottom: 0; }
+.finder-card-facts { font-size: 11px; font-weight: 600; margin-bottom: 0; color:#3C4043; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .finder-card-details { display:none; }
 .finder-property-card.is-expanded .finder-card-details { display:block; margin-top:12px; }
 .finder-green-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 11px; }
@@ -3994,17 +4620,17 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   font: 600 12px/1 "Montserrat", sans-serif;
   cursor: pointer;
 }
-.finder-map-panel { position: sticky; top: 150px; }
-#sharedMapEl { height: calc(100vh - 178px); min-height: 520px; border-radius: 22px; overflow: hidden; border: 1px solid var(--color-border); }
-.finder-map-note { color: var(--color-text-secondary); font-size: 11px; margin-top: 8px; }
+.finder-map-panel { position: sticky; top: 24px; min-width:0; }
+#sharedMapEl { height: calc(100vh - 48px); min-height: 620px; border-radius: 18px; overflow: hidden; border: 1px solid var(--color-border); box-shadow:0 8px 24px rgba(31,31,31,.07); }
+.finder-map-note { color: var(--color-text-secondary); font-size: 11px; margin-top: 8px; padding:0 4px; }
 .finder-empty { background:#fff; border:1px solid var(--color-border); border-radius:22px; padding:48px; text-align:center; }
 
 @media (max-width: 1180px) {
   .finder-search-row { grid-template-columns: minmax(260px, 1.5fr) repeat(2, 1fr); }
   .finder-more-filters { grid-column: auto; }
-  .building-search-layout { grid-template-columns: minmax(0, 1fr) minmax(320px, .75fr); }
+  .building-search-layout { grid-template-columns: minmax(340px, .9fr) minmax(0, 1.1fr); }
   #sharedCardList.finder-results-list { grid-template-columns:1fr; }
-  .finder-property-card { grid-template-columns:150px minmax(0,1fr); }
+  .finder-property-card { grid-template-columns:1fr; }
   .finder-property-card.is-expanded { grid-template-columns:minmax(220px,42%) minmax(0,1fr); }
   .finder-card-media { min-height:170px; }
 }
@@ -4032,6 +4658,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   .building-search-layout { grid-template-columns: 1fr; }
   .finder-map-panel { position: relative; top: auto; order: -1; }
   #sharedMapEl { height: 420px; min-height: 0; }
+  .finder-listings-panel { padding: 14px; }
+  #sharedCardList.finder-results-list { grid-template-columns:repeat(2, minmax(0,1fr)); }
 }
 @media (max-width: 560px) {
   .building-finder-hero { min-height:100svh; background-position:62% center; }
@@ -4045,7 +4673,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   .finder-check-grid { grid-template-columns: 1fr; }
   .finder-price-popover { width:min(310px, calc(100vw - 48px)); }
   .finder-property-card,
-  .finder-property-card.is-expanded { grid-template-columns:110px minmax(0,1fr); }
+  .finder-property-card.is-expanded { grid-template-columns:1fr; }
+  #sharedCardList.finder-results-list { grid-template-columns:1fr; }
   .finder-property-card.is-expanded .finder-card-media { min-height:230px; }
 }
 </style>
@@ -4059,6 +4688,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   <img class="brand-logo-light" src="Web%20Images/civic-energy-brand-light.png" alt="" aria-hidden="true">
 </a>
 
+<a href="#contact" class="floating-cta">Contact</a>
+
 <!-- Hamburger button — mobile only -->
 <button class="hamburger-btn" id="hamburgerBtn" aria-label="Open menu">
   <span></span><span></span><span></span>
@@ -4068,6 +4699,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 <div id="mobileMenu">
   <button class="mobile-menu-btn" data-pill="landlords">Property Owners</button>
   <button class="mobile-menu-btn" data-pill="renters">Renters</button>
+  <button class="mobile-menu-btn" data-pill="contact">Contact</button>
 </div>
 
 <!-- ============ PILL SUB-NAV ============ -->
@@ -4088,7 +4720,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="landing-hero-scrim"></div>
       <div class="landing-hero-content">
         <div class="landing-hero-copy">
-          <h1>Personalizing your energy.</h1>
+          <h1>Personalize<br>Your Energy</h1>
         </div>
         <div class="landing-choice-row">
           <a href="#landlord" class="landing-choice">
@@ -4106,6 +4738,216 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
         </div>
       </div>
     </div>
+
+    <section class="landing-main-section section-editorial" aria-labelledby="home-what-heading">
+      <div class="landing-section-grid reverse">
+        <div class="landing-image-card">
+          <img src="Web%20Images/renter-frame-solar-hero-hq.png" alt="Resident using solar energy in an apartment">
+        </div>
+        <div class="landing-section-copy">
+          <span class="landing-kicker">What it is</span>
+          <h2 id="home-what-heading">Energy translation</h2>
+          <p>Civic Energy is a translation layer between apartments and energy systems. It turns existing smart home and utility data into two connected experiences: an ambient home interface for residents and a building-level intelligence layer for property teams, utilities, and policymakers.</p>
+          <p>For renters, it makes energy easier to understand without adding another dashboard. For landlords and property managers, it makes building performance visible enough to guide operations, retrofits, and tenant value.</p>
+          <div class="landing-pill-row" aria-label="Civic Energy layers">
+            <span class="landing-mini-pill">Home</span>
+            <span class="landing-mini-pill">Building</span>
+            <span class="landing-mini-pill">Utility</span>
+            <span class="landing-mini-pill">Policy</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-main-section section-muted section-impact" aria-labelledby="home-why-heading">
+      <div class="landing-section-inner">
+        <div class="landing-section-head">
+          <span class="landing-kicker">Why it matters</span>
+          <h2 id="home-why-heading">Shared energy control</h2>
+          <p>Energy control used to belong mostly to homeowners. Civic Energy brings it into apartments, where smart home data can support residents, property teams, utilities, and policy decisions instead of staying siloed and underused.</p>
+        </div>
+        <div class="landing-system-grid">
+          <article class="landing-system-card">
+            <span class="material-icons-outlined" aria-hidden="true">person</span>
+            <h3>For renters</h3>
+            <p>Residents get lower bills, more control, clearer feedback, and a better way to compare apartments based on comfort, resilience, and energy performance.</p>
+          </article>
+          <article class="landing-system-card">
+            <span class="material-icons-outlined" aria-hidden="true">domain</span>
+            <h3>For property teams</h3>
+            <p>Owners, developers, and property managers can see where energy upgrades improve operations, tenant demand, retrofit planning, and long-term building value.</p>
+          </article>
+          <article class="landing-system-card">
+            <span class="material-icons-outlined" aria-hidden="true">account_balance</span>
+            <h3>For systems</h3>
+            <p>Utilities and policymakers can use aggregated patterns to understand peak demand, distributed energy potential, incentive gaps, and housing energy standards.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-main-section section-products" aria-labelledby="home-tech-heading">
+      <div class="landing-section-inner">
+        <div class="landing-section-head">
+          <span class="landing-kicker">What it offers</span>
+          <h2 id="home-tech-heading">Apartment energy,<br>made tangible</h2>
+          <p>Apartment-ready energy tools help residents reduce bills while giving landlords a clearer path to better operations, resilience, and building value.</p>
+        </div>
+        <div class="landing-feature-grid">
+          <article class="landing-feature-card">
+            <img src="Web%20Images/Balcony%20%26%20rooftop%20panels.jpeg" alt="Balcony and rooftop solar panels">
+            <h3>Solar access</h3>
+            <p>Rooftop, balcony, window, and shared building solar help apartments participate in clean generation.</p>
+          </article>
+          <article class="landing-feature-card">
+            <img src="Web%20Images/Home%20battery%20storage.jpeg" alt="Home battery storage system">
+            <h3>Battery storage</h3>
+            <p>Storage supports peak-load management, resilience, backup power, and better use of distributed generation.</p>
+          </article>
+          <article class="landing-feature-card">
+            <img src="Web%20Images/Nest%20smart%20thermostat.jpg" alt="Nest smart thermostat">
+            <h3>Smart home controls</h3>
+            <p>Nest-level sensing and subtle product language create a foundation for low-friction awareness and comfort.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-main-section section-muted section-monitor" aria-labelledby="home-monitor-heading">
+      <div class="landing-section-grid">
+        <div class="landing-section-copy">
+          <span class="landing-kicker">Home monitoring</span>
+          <h2 id="home-monitor-heading">Ambient monitoring</h2>
+          <p>The resident experience is low-attention, not another dashboard. Subtle signals communicate energy state, urgency, savings, and comfort without asking people to constantly check charts.</p>
+          <p>At the same time, the same data can be aggregated into building-level patterns that help property managers and planners understand demand, inefficiency, and retrofit opportunities.</p>
+        </div>
+        <div class="landing-monitor-layout">
+          <article class="landing-monitor-panel">
+            <img src="Web%20Images/Google%20Nest%20energy%20dashboard.png" alt="Google Nest energy dashboard">
+            <h3>Resident signal</h3>
+            <p>Simple feedback makes energy easier to notice and act on.</p>
+          </article>
+          <article class="landing-monitor-panel">
+            <img src="Web%20Images/Apartment%20solar%20adoption%20statistics%20graphic.jpg" alt="Apartment energy analytics graphic">
+            <h3>Building insight</h3>
+            <p>Aggregated patterns reveal opportunities across many units.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="landing-main-section section-process" aria-labelledby="home-operation-heading">
+      <div class="landing-section-inner">
+        <div class="landing-section-head">
+          <span class="landing-kicker">How it operates</span>
+          <h2 id="home-operation-heading">From home signals to system action</h2>
+          <p>Home data becomes building intelligence, then system action. Civic Energy is designed as a bridge from individual apartments to better operations, better incentives, and better policy.</p>
+        </div>
+        <div class="landing-feature-grid">
+          <article class="landing-feature-card">
+            <img src="Web%20Images/Generated%20How%20It%20Works/01-see-energy-use.png" alt="Resident checks home energy use">
+            <h3>1. Sense the home</h3>
+            <p>Smart home and utility signals reveal usage, timing, comfort, and energy stress across individual apartments.</p>
+          </article>
+          <article class="landing-feature-card">
+            <img src="Web%20Images/Generated%20How%20It%20Works/14-track-usage-savings.png" alt="Energy savings dashboard">
+            <h3>2. Aggregate the building</h3>
+            <p>Patterns across units show where demand spikes, where systems are inefficient, and where upgrades matter most.</p>
+          </article>
+          <article class="landing-feature-card">
+            <img src="Web%20Images/Generated%20How%20It%20Works/15-share-benefits.png" alt="Residents share building energy benefits">
+            <h3>3. Inform decisions</h3>
+            <p>Credible insight can support utility planning, owner investment, energy standards, and incentive design.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="landing-section-divider" aria-hidden="true"></div>
+
+    <section class="landing-main-section section-store-experience" aria-labelledby="home-store-heading">
+      <div class="store-experience-head">
+        <div>
+          <span class="landing-kicker">Google offsite store</span>
+          <h2 id="home-store-heading">Experience the system in person.</h2>
+        </div>
+        <p>The Civic Energy offsite store turns the apartment energy system into a walk-through experience. Visitors can explore balcony solar, home batteries, Nest-style controls, ambient monitoring, and building-level energy intelligence inside realistic apartment rooms before choosing a home or planning a retrofit.</p>
+      </div>
+      <div class="store-carousel" aria-label="Civic Energy offsite store views">
+        <article class="store-slide">
+          <img src="Web%20Images/Offsite%20Store/google-offsite-storefront.jpg" alt="Google Civic Energy offsite store exterior">
+          <div class="store-slide-caption">
+            <h3>Street-level access</h3>
+          </div>
+        </article>
+        <article class="store-slide">
+          <img src="Web%20Images/Offsite%20Store/google-offsite-showroom.jpg" alt="Google offsite store showroom with Civic Energy apartment demos">
+          <div class="store-slide-caption">
+            <h3>Apartment-scale demos</h3>
+          </div>
+        </article>
+        <article class="store-slide">
+          <img src="Web%20Images/Offsite%20Store/google-offsite-guided-demo.jpg" alt="Visitors learning about solar and battery technology in the Civic Energy store">
+          <div class="store-slide-caption">
+            <h3>Guided walkthroughs</h3>
+          </div>
+        </article>
+        <article class="store-slide">
+          <img src="Web%20Images/Offsite%20Store/google-offsite-visitor-demo.jpg" alt="Visitors testing a Civic Energy monitor inside the Google offsite store">
+          <div class="store-slide-caption">
+            <h3>Hands-on controls</h3>
+          </div>
+        </article>
+        <article class="store-slide">
+          <img src="Web%20Images/Offsite%20Store/google-offsite-balcony-demo.jpg" alt="Balcony solar demonstration inside the Google Civic Energy store">
+          <div class="store-slide-caption">
+            <h3>Solar in context</h3>
+          </div>
+        </article>
+        <article class="store-slide">
+          <img src="Web%20Images/Offsite%20Store/google-offsite-interior-wide.jpg" alt="Wide interior view of Google Civic Energy offsite store">
+          <div class="store-slide-caption">
+            <h3>From product to system</h3>
+          </div>
+        </article>
+      </div>
+      <div class="store-experience-actions">
+        <a href="#store" class="btn-primary-green">Visit the store</a>
+      </div>
+    </section>
+
+    <section class="landing-main-section section-muted section-finder" aria-labelledby="home-finder-heading">
+      <div class="landing-section-grid">
+        <div class="landing-section-copy">
+          <span class="landing-kicker">Find apartments</span>
+          <h2 id="home-finder-heading">Energy-visible homes</h2>
+          <p>Browse apartments where energy performance is visible. The apartment finder turns building-level features into something renters can compare and landlords can improve: solar access, storage, monitoring, green score, estimated savings, comfort, and resilience.</p>
+          <div class="landing-section-actions">
+            <a href="#shared-map" class="btn-primary-green" data-open-finder-top>Browse apartments</a>
+          </div>
+          <div class="landing-finder-mini" aria-label="Example apartment features">
+            <article>
+              <img src="Web%20Images/Generated%20How%20It%20Works/16-rooftop-solar.png" alt="Apartment building with rooftop solar">
+              <div><strong>Solar-ready building</strong><span>Clean power and tenant-facing savings.</span></div>
+            </article>
+            <article>
+              <img src="Web%20Images/Generated%20How%20It%20Works/19-building-battery.png" alt="Building battery storage">
+              <div><strong>Storage + resilience</strong><span>Support for peak hours, outages, and shared loads.</span></div>
+            </article>
+          </div>
+          <div class="landing-pill-row" aria-label="Finder filters">
+            <span class="landing-mini-pill">Green score</span>
+            <span class="landing-mini-pill">Solar access</span>
+            <span class="landing-mini-pill">Battery storage</span>
+            <span class="landing-mini-pill">Energy monitoring</span>
+            <span class="landing-mini-pill">Estimated savings</span>
+          </div>
+        </div>
+        <div class="landing-image-card">
+          <img src="Web%20Images/Maps/sf-map-vertical.png" alt="San Francisco apartment finder map preview showing the full city geography">
+        </div>
+      </div>
+    </section>
   </section>
   <!-- ================= /LANDING PAGE ================= -->
 
@@ -4710,6 +5552,34 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   </div>
 </section>
 
+<section class="role-store-section renter-snap-section" id="renter-store-experience" aria-labelledby="renter-store-heading">
+  <div class="role-store-head">
+    <div>
+      <div class="section-kicker">Google offsite store</div>
+      <h2 id="renter-store-heading">Try it before you ask.</h2>
+    </div>
+    <p>Renters can visit the offsite store to see how balcony solar, battery storage, Nest controls, and real-time energy feedback work inside an apartment. It turns the landlord conversation from an abstract request into something visible, practical, and easy to explain.</p>
+  </div>
+  <div class="role-store-strip" aria-label="Renter offsite store experiences">
+    <article class="role-store-card">
+      <img src="Web%20Images/Offsite%20Store/google-offsite-guided-demo.jpg" alt="Store guide explaining apartment solar and battery technology to renters">
+      <div class="role-store-caption"><strong>Get a guided demo</strong><span>Learn the system language before talking to a property manager.</span></div>
+    </article>
+    <article class="role-store-card">
+      <img src="Web%20Images/Offsite%20Store/google-offsite-balcony-demo.jpg" alt="Balcony solar demonstration in the Civic Energy store">
+      <div class="role-store-caption"><strong>See apartment-scale solar</strong><span>Compare balcony, portable, and shared building options in context.</span></div>
+    </article>
+    <article class="role-store-card">
+      <img src="Web%20Images/Offsite%20Store/google-offsite-visitor-demo.jpg" alt="Visitors using an energy monitor in the Google offsite store">
+      <div class="role-store-caption"><strong>Test energy feedback</strong><span>Understand what savings, comfort, and usage signals could look like at home.</span></div>
+    </article>
+  </div>
+  <div class="role-store-actions">
+    <a href="#store" class="btn-primary-green">Visit the store</a>
+    <a href="#renter" class="btn-secondary" data-renter-scroll="landlord-message-wizard">Use it in your ask</a>
+  </div>
+</section>
+
 <div class="grid-3 renter-end-links">
   <a href="#how" class="card nav-card-link">
     <div class="nav-card-left">
@@ -5049,6 +5919,34 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=80"
          alt="Property manager standing in front of a modern apartment building exterior"
          style="width:100%; border-radius:28px; object-fit:cover; height:380px;">
+  </div>
+</section>
+
+<section class="role-store-section owner" id="landlord-store-experience" aria-labelledby="landlord-store-heading">
+  <div class="role-store-head">
+    <div>
+      <div class="section-kicker">Google offsite store</div>
+      <h2 id="landlord-store-heading">See the amenity before you invest.</h2>
+    </div>
+    <p>Property owners can use the offsite store as a low-risk preview of the Civic Energy system. Walk through tenant-facing demos, compare retrofit packages, understand the Nest-style monitoring layer, and see how solar, storage, and energy visibility become a leasing advantage.</p>
+  </div>
+  <div class="role-store-strip" aria-label="Property owner offsite store experiences">
+    <article class="role-store-card">
+      <img src="Web%20Images/Offsite%20Store/google-offsite-storefront.jpg" alt="Google Civic Energy offsite store exterior for property owners">
+      <div class="role-store-caption"><strong>Bring decision-makers</strong><span>A real showroom for owners, managers, and residents to align around upgrades.</span></div>
+    </article>
+    <article class="role-store-card">
+      <img src="Web%20Images/Offsite%20Store/google-offsite-showroom.jpg" alt="Google offsite store apartment demo showroom">
+      <div class="role-store-caption"><strong>Preview tenant value</strong><span>See how the amenity reads in a listing, tour, and resident onboarding.</span></div>
+    </article>
+    <article class="role-store-card">
+      <img src="Web%20Images/Offsite%20Store/google-offsite-interior-wide.jpg" alt="Wide Google Civic Energy offsite store interior with apartment demos">
+      <div class="role-store-caption"><strong>Plan the system set</strong><span>Compare solar, batteries, monitoring, and controls before scoping a building.</span></div>
+    </article>
+  </div>
+  <div class="role-store-actions">
+    <a href="#store" class="btn-primary-green">Visit the store</a>
+    <a href="#landlord-roi" class="btn-secondary">Estimate owner ROI</a>
   </div>
 </section>
 
@@ -5604,27 +6502,138 @@ Thank you,
       </div>
 
       <div class="container-wide finder-results-section" id="buildingResultsSection">
-        <div class="finder-results-bar">
-          <div><strong id="sharedResultsCount">15 green buildings</strong><div class="src-note" style="margin-top:3px;">Prototype listings with representative neighborhood photography.</div></div>
-          <div class="finder-results-actions">
-            <button class="finder-clear" id="buildingClearFilters" type="button">Clear filters</button>
-            <select id="buildingSort" class="finder-control" aria-label="Sort results" style="width:auto;min-width:190px;">
-              <option value="recommended">Sort: Recommended</option>
-              <option value="price-low">Price: Low to high</option>
-              <option value="price-high">Price: High to low</option>
-              <option value="green">Best green score</option>
-              <option value="availability">Most availability</option>
-            </select>
-          </div>
-        </div>
-
         <div class="building-search-layout">
-          <div id="sharedCardList" class="finder-results-list" aria-live="polite" aria-label="Search results"></div>
           <aside class="finder-map-panel" aria-label="Map of matching buildings">
             <div id="sharedMapEl"></div>
             <p class="finder-map-note">Select a result to center its location. Addresses and availability are prototype examples.</p>
           </aside>
+          <div class="finder-listings-panel">
+            <div class="finder-results-bar">
+              <div><strong id="sharedResultsCount">15 green buildings</strong><div class="src-note" style="margin-top:3px;">Prototype listings with representative neighborhood photography.</div></div>
+              <div class="finder-results-actions">
+                <button class="finder-clear" id="buildingClearFilters" type="button">Clear filters</button>
+                <select id="buildingSort" class="finder-control" aria-label="Sort results" style="width:auto;min-width:190px;">
+                  <option value="recommended">Sort: Recommended</option>
+                  <option value="price-low">Price: Low to high</option>
+                  <option value="price-high">Price: High to low</option>
+                  <option value="green">Best green score</option>
+                  <option value="availability">Most availability</option>
+                </select>
+              </div>
+            </div>
+            <div id="sharedCardList" class="finder-results-list" aria-live="polite" aria-label="Search results"></div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="page" data-route="contact">
+    <div class="contact-page">
+      <header class="contact-hero">
+        <div>
+          <span class="landing-kicker">Contact</span>
+          <h1>Build energy-visible housing.</h1>
+        </div>
+        <p>Connect with Civic Energy about apartment search support, building readiness, utility pilots, and policy partnerships. We help translate household energy data into practical decisions for residents, property teams, and public systems.</p>
+      </header>
+
+      <div class="contact-layout">
+        <div class="contact-card-group">
+          <article class="contact-info-card accent-warm">
+            <div class="contact-card-top">
+              <div>
+                <span class="contact-card-label">Residents</span>
+                <h2>Apartment search support</h2>
+              </div>
+              <span class="material-icons-outlined" aria-hidden="true">home</span>
+            </div>
+            <p>Questions about green scores, savings estimates, solar access, or energy monitoring in apartment listings.</p>
+            <div class="contact-card-actions">
+              <a class="contact-link-pill" href="mailto:hello@civicenergy.network?subject=Apartment%20search%20support">hello@civicenergy.network</a>
+              <a class="contact-link-pill" href="#shared-map">Browse apartments</a>
+            </div>
+          </article>
+
+          <article class="contact-info-card accent-green">
+            <div class="contact-card-top">
+              <div>
+                <span class="contact-card-label">Property teams</span>
+                <h2>Building readiness review</h2>
+              </div>
+              <span class="material-icons-outlined" aria-hidden="true">domain</span>
+            </div>
+            <p>Portfolio review, retrofit priorities, tenant-facing benefits, incentives, and energy performance communication.</p>
+            <div class="contact-card-actions">
+              <a class="contact-link-pill" href="mailto:buildings@civicenergy.network?subject=Building%20readiness%20review">buildings@civicenergy.network</a>
+              <a class="contact-link-pill" href="#landlord">Owner tools</a>
+            </div>
+          </article>
+
+          <article class="contact-info-card accent-blue">
+            <div class="contact-card-top">
+              <div>
+                <span class="contact-card-label">Systems</span>
+                <h2>Utility and policy pilots</h2>
+              </div>
+              <span class="material-icons-outlined" aria-hidden="true">hub</span>
+            </div>
+            <p>Aggregated insights for peak load, demand flexibility, distributed energy coordination, and housing standards.</p>
+            <div class="contact-card-actions">
+              <a class="contact-link-pill" href="mailto:systems@civicenergy.network?subject=System%20intelligence%20pilot">systems@civicenergy.network</a>
+              <a class="contact-link-pill" href="#how">How it works</a>
+            </div>
+          </article>
+
+          <article class="contact-info-card">
+            <div class="contact-card-top">
+              <div>
+                <span class="contact-card-label">Office</span>
+                <h2>San Francisco team</h2>
+              </div>
+              <span class="material-icons-outlined" aria-hidden="true">location_on</span>
+            </div>
+            <p>General questions, research conversations, press, demos, and meeting requests. Response time is usually 1-2 business days.</p>
+            <div class="contact-card-actions">
+              <a class="contact-link-pill" href="tel:+14155550142">(415) 555-0142</a>
+              <span class="contact-link-pill">Mon-Fri, 9 AM-5 PM PT</span>
+            </div>
+          </article>
+        </div>
+
+        <aside class="contact-form-card" aria-label="Contact inquiry">
+          <span class="landing-kicker">Inquiry</span>
+          <h2>Send a note.</h2>
+          <p>Tell us who you are, what you are working on, and the best way to reach you.</p>
+
+          <form>
+            <div class="grid-2" style="gap:16px;">
+              <div class="field-group">
+                <label class="field-label" for="contactName">Name</label>
+                <input type="text" id="contactName" name="contactName" autocomplete="name">
+              </div>
+              <div class="field-group">
+                <label class="field-label" for="contactEmail">Email</label>
+                <input type="email" id="contactEmail" name="contactEmail" autocomplete="email">
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="contactRole">I am contacting as</label>
+              <select id="contactRole" name="contactRole">
+                <option>Resident or renter</option>
+                <option>Property owner or manager</option>
+                <option>Utility or energy planner</option>
+                <option>Government or policy team</option>
+                <option>Research or press</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label" for="contactMessage">Message</label>
+              <textarea id="contactMessage" name="contactMessage" placeholder="Tell us about your building, apartment search, pilot idea, or policy question."></textarea>
+            </div>
+            <a class="btn-primary-green" href="mailto:hello@civicenergy.network?subject=Civic%20Energy%20inquiry">Send inquiry</a>
+          </form>
+        </aside>
       </div>
     </div>
   </section>
@@ -5657,7 +6666,6 @@ Thank you,
     <span class="material-icons-outlined" aria-hidden="true">call</span>
     <div>(415) 555-0142</div>
   </div>
-  <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=2+Stockton+St+San+Francisco+CA" target="_blank" rel="noopener">Get directions</a>
 </section>
 
 <section style="margin-top:88px;">
@@ -5779,6 +6787,7 @@ Thank you,
           <li><a href="#renter">Renters</a></li>
           <li><a href="#how">How It Works</a></li>
           <li><a href="#shared-map">Find a Building</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
       <div>
@@ -5830,7 +6839,8 @@ Thank you,
     'landlord-incentives': 'landlords',
     'shared-map': 'renters',
     'how': 'renters',
-    'store': 'renters'
+    'store': 'renters',
+    'contact': 'none'
   };
   function updatePillNav(route) {
     var active = pillRouteMap[route] || 'none';
@@ -5950,35 +6960,38 @@ Thank you,
   function syncCivicLogoLinks() {
     document.querySelectorAll('.civic-logo-link').forEach(syncCivicLogoLink);
   }
-  var finderChromeLastScrollY = 0;
+  var topChromeLastScrollY = 0;
   function updateFinderChromeVisibility() {
     var root = document.documentElement;
     var route = (location.hash || '#landing').replace('#', '');
     var currentY = Math.max(0, window.scrollY || 0);
-    var delta = currentY - finderChromeLastScrollY;
+    var delta = currentY - topChromeLastScrollY;
+    var hideTopChrome = root.classList.contains('top-chrome-hidden');
+    if (currentY <= 28) {
+      hideTopChrome = false;
+    } else if (delta > 3 && currentY > 96) {
+      hideTopChrome = true;
+    } else if (delta < -3) {
+      hideTopChrome = false;
+    }
+    root.classList.toggle('top-chrome-hidden', hideTopChrome);
 
     if (route !== 'shared-map') {
       root.classList.remove('finder-chrome-hidden');
-      finderChromeLastScrollY = currentY;
+      topChromeLastScrollY = currentY;
       return;
     }
 
     var results = document.querySelector('#shared-map.active #buildingResultsSection');
     var crossedSectionBoundary = !!results && results.getBoundingClientRect().top <= 82;
-    if (!crossedSectionBoundary) {
-      root.classList.remove('finder-chrome-hidden');
-    } else if (delta > 2) {
-      root.classList.add('finder-chrome-hidden');
-    } else if (delta < -2) {
-      root.classList.remove('finder-chrome-hidden');
-    }
-    finderChromeLastScrollY = currentY;
+    root.classList.toggle('finder-chrome-hidden', hideTopChrome && crossedSectionBoundary);
+    topChromeLastScrollY = currentY;
   }
   document.querySelectorAll('.pill-nav-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       var pill = btn.getAttribute('data-pill');
-      var routeTarget = { renters:'renter', landlords:'landlord', how:'how', map:'shared-map' }[pill] || 'landing';
-      window.location.hash = routeTarget;
+      var routeTarget = { renters:'renter', landlords:'landlord', how:'how', map:'shared-map', contact:'contact' }[pill] || 'landing';
+      openRouteAtTop(routeTarget);
     });
   });
 
@@ -5993,8 +7006,8 @@ Thank you,
     document.querySelectorAll('.mobile-menu-btn').forEach(function(btn) {
       btn.addEventListener('click', function() {
         var pill = btn.getAttribute('data-pill');
-        var routeTarget = { renters:'renter', landlords:'landlord', how:'how', map:'shared-map' }[pill] || 'landing';
-        window.location.hash = routeTarget;
+        var routeTarget = { renters:'renter', landlords:'landlord', how:'how', map:'shared-map', contact:'contact' }[pill] || 'landing';
+        openRouteAtTop(routeTarget);
         mobileMenu.classList.remove('open');
         hamburgerBtn.classList.remove('open');
         document.querySelectorAll('.mobile-menu-btn').forEach(function(b) {
@@ -6023,7 +7036,8 @@ Thank you,
     'landlord-incentives': 'Civic Energy · For Landlords · Incentives',
     'shared-map': 'Civic Energy · Map',
     'how': 'Civic Energy · How It Works',
-    'store': 'Civic Energy · Visit the Store'
+    'store': 'Civic Energy · Visit the Store',
+    'contact': 'Civic Energy · Contact'
   };
 
   function renderBreadcrumb(route) {
@@ -6035,14 +7049,32 @@ Thank you,
     el.innerHTML = html;
   }
 
+  function jumpToTopInstant() {
+    var root = document.documentElement;
+    var priorScrollBehavior = root.style.scrollBehavior;
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo(0, 0);
+    window.requestAnimationFrame(function() {
+      root.style.scrollBehavior = priorScrollBehavior;
+    });
+  }
+
+  function openRouteAtTop(route) {
+    var nextHash = '#' + route;
+    if (location.hash !== nextHash) {
+      history.pushState(null, '', nextHash);
+    }
+    navigate();
+    jumpToTopInstant();
+  }
+
   // ---------- Hash router ----------
   function navigate() {
     var route = (location.hash || '#landing').replace('#', '') || 'landing';
     var renterHoldingRoutes = {
       'renter-solar': true,
       'renter-map': true,
-      'renter-incentives': true,
-      'shared-map': true
+      'renter-incentives': true
     };
     if (renterHoldingRoutes[route]) route = 'renter';
     var pages = document.querySelectorAll('.page');
@@ -6065,11 +7097,12 @@ Thank you,
     document.documentElement.classList.toggle('renter-snap-active', route === 'renter');
     document.documentElement.classList.toggle('finder-snap', route === 'shared-map');
     document.documentElement.classList.remove('finder-chrome-hidden');
-    finderChromeLastScrollY = 0;
+    document.documentElement.classList.remove('top-chrome-hidden');
+    topChromeLastScrollY = 0;
     updateNav(route);
     updatePillNav(route);
     renderBreadcrumb(route);
-    window.scrollTo(0, 0);
+    jumpToTopInstant();
     window.requestAnimationFrame(function() {
       initCivicLogoLinks();
       syncCivicLogoLinks();
@@ -6095,6 +7128,7 @@ Thank you,
 
   initCivicLogoLinks();
   window.addEventListener('hashchange', navigate);
+  window.addEventListener('popstate', navigate);
   window.addEventListener('load', function() {
     initCivicLogoLinks();
     syncCivicLogoLinks();
@@ -6119,6 +7153,15 @@ Thank you,
     } else {
       scrollToTarget();
     }
+  }, true);
+
+  document.addEventListener('click', function(event) {
+    var link = event.target.closest('[data-open-finder-top], a[href="#shared-map"]');
+    if (!link) return;
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+
+    event.preventDefault();
+    openRouteAtTop('shared-map');
   }, true);
 
   // ---------- Scroll listener for nav shadow ----------
@@ -6186,7 +7229,7 @@ Thank you,
 
   function initSolarMap(mapElementId, opts) {
     opts = opts || {};
-    var map = L.map(mapElementId).setView([37.7749, -122.4194], 13);
+    var map = L.map(mapElementId).setView([37.7749, -122.4194], 12);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
@@ -6408,7 +7451,7 @@ Thank you,
 
     if (buildings.length) {
       var group = L.featureGroup(buildings.map(function (building) { return entry.markers[building.id]; }));
-      entry.map.fitBounds(group.getBounds(), { padding: [36, 36], maxZoom: 14 });
+      entry.map.fitBounds(group.getBounds(), { padding: [56, 56], maxZoom: 12 });
     }
   }
 
@@ -6430,9 +7473,10 @@ Thank you,
       var greenTags = building.greenFeatures.slice(0, 4).map(function (feature) {
         return '<span class="finder-green-tag">' + escapeBuildingText(feature) + '</span>';
       }).join('');
-      return '<article id="building-card-' + building.id + '" class="finder-property-card map-building-card" onclick="window.toggleSharedBuilding(' + building.id + ')" tabindex="0" role="button" aria-expanded="false" aria-label="Expand ' + escapeBuildingText(building.name) + '">' +
+      return '<article id="building-card-' + building.id + '" class="finder-property-card map-building-card" onclick="window.toggleSharedBuilding(' + building.id + ')" tabindex="0" role="button" aria-label="Select ' + escapeBuildingText(building.name) + '">' +
         '<div class="finder-card-media"><img src="' + building.image.replace('w=400', 'w=1000') + '" alt="Representative home in ' + escapeBuildingText(building.neighborhood) + '" loading="lazy">' +
-          '<div class="finder-card-badges"><span class="finder-card-badge">' + availability + '</span><span class="finder-card-badge green">Green score ' + building.greenScore + '</span></div></div>' +
+          '<div class="finder-card-badges"><span class="finder-card-badge">' + availability + '</span><span class="finder-card-badge green">Green score ' + building.greenScore + '</span></div>' +
+          '<button class="finder-save-button" type="button" onclick="event.stopPropagation();" aria-label="Save ' + escapeBuildingText(building.name) + '"><span class="material-icons-outlined" aria-hidden="true">favorite_border</span></button></div>' +
         '<div class="finder-card-content"><div class="finder-card-kicker">' + escapeBuildingText(building.neighborhood) + '</div>' +
           '<h2>' + escapeBuildingText(building.name) + '</h2><p class="finder-card-address">' + escapeBuildingText(building.address) + '</p>' +
           '<div class="finder-card-price">$' + building.minRent.toLocaleString() + '–$' + building.maxRent.toLocaleString() + '<span> / month</span></div>' +
@@ -6449,15 +7493,10 @@ Thank you,
   window.toggleSharedBuilding = function (id) {
     var card = document.getElementById('building-card-' + id);
     if (!card) return;
-    var shouldExpand = !card.classList.contains('is-expanded');
     document.querySelectorAll('#sharedCardList .finder-property-card.is-expanded').forEach(function (openCard) {
       openCard.classList.remove('is-expanded');
       openCard.setAttribute('aria-expanded', 'false');
     });
-    if (shouldExpand) {
-      card.classList.add('is-expanded');
-      card.setAttribute('aria-expanded', 'true');
-    }
     window.selectBuilding(id);
   };
 
