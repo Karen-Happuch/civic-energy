@@ -2945,6 +2945,82 @@ html.renter-snap-active {
   }
 }
 
+/* Landlord testimonials */
+.landlord-testimonials {
+  margin-top: 120px;
+}
+.landlord-testimonials .section-header {
+  max-width: 760px;
+}
+.landlord-testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.landlord-testimonial-card {
+  background: #fff;
+  border-radius: 28px;
+  padding: 14px;
+  border: 1px solid rgba(31,31,31,0.08);
+  box-shadow: 0 16px 44px rgba(31,31,31,0.055);
+  display: grid;
+  grid-template-rows: 190px minmax(0, 1fr);
+}
+.landlord-testimonial-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 22px;
+  display: block;
+}
+.landlord-testimonial-body {
+  padding: 22px 12px 10px;
+  display: grid;
+  gap: 15px;
+  align-content: start;
+}
+.landlord-testimonial-quote {
+  margin: 0;
+  color: var(--color-ink, #1F1F1F);
+  font-size: 16px;
+  line-height: 1.42;
+}
+.landlord-testimonial-person {
+  border-top: 1px solid rgba(31,31,31,0.08);
+  padding-top: 15px;
+}
+.landlord-testimonial-person strong {
+  display: block;
+  font-size: 16px;
+  line-height: 1.25;
+}
+.landlord-testimonial-person span {
+  display: block;
+  margin-top: 5px;
+  color: var(--color-text-secondary, #5F6368);
+  font-size: 13px;
+  line-height: 1.35;
+}
+.landlord-testimonial-kicker {
+  width: fit-content;
+  color: #9D5636;
+  background: rgba(229,139,90,0.14);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+@media (max-width: 920px) {
+  .landlord-testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+  .landlord-testimonial-card {
+    grid-template-rows: 220px minmax(0, 1fr);
+  }
+}
+
 /* Owner demand snapshot */
 .owner-demand-card {
   margin-top: 88px;
@@ -5076,6 +5152,49 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
        style="width:100%; height:100vh; object-fit:cover; display:block;">
 </div>
 
+<!-- ===== Landlord testimonials ===== -->
+<section class="landlord-testimonials">
+  <div class="section-header">
+    <h2 style="font-weight:600;">Landlords are seeing it work</h2>
+    <p style="color:var(--color-text-secondary,#5F6368);">Property teams are turning clean-energy upgrades into lower overhead, stronger leasing stories, and amenities residents can actually see.</p>
+  </div>
+  <div class="landlord-testimonial-grid">
+    <article class="landlord-testimonial-card">
+      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=900&q=80" alt="Property management team reviewing building upgrade plans around a conference table">
+      <div class="landlord-testimonial-body">
+        <span class="landlord-testimonial-kicker">Portfolio operator</span>
+        <p class="landlord-testimonial-quote">"Civic Energy helped us turn sustainability from a vague goal into an owner-side value case. The strongest part was how simple it became to explain the upgrade to residents and investors."</p>
+        <div class="landlord-testimonial-person">
+          <strong>Skyline Apartment Management</strong>
+          <span>Regional multifamily portfolio operator</span>
+        </div>
+      </div>
+    </article>
+    <article class="landlord-testimonial-card">
+      <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80" alt="Male apartment owner in a blazer standing near a city building" style="object-position:center 32%;">
+      <div class="landlord-testimonial-body">
+        <span class="landlord-testimonial-kicker">Building owner</span>
+        <p class="landlord-testimonial-quote">"I expected solar to feel like a construction headache. The assessment made the path clear: visible renter value, lower common-area costs, and a better story for lease renewals."</p>
+        <div class="landlord-testimonial-person">
+          <strong>Daniel Reyes</strong>
+          <span>Owner, 18-unit Mission District building</span>
+        </div>
+      </div>
+    </article>
+    <article class="landlord-testimonial-card">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=900&q=80" alt="Female property operations lead smiling in a modern office">
+      <div class="landlord-testimonial-body">
+        <span class="landlord-testimonial-kicker">Operations lead</span>
+        <p class="landlord-testimonial-quote">"The resident response changed the conversation. People could see the amenity, understand the savings, and connect the building with comfort, resilience, and lower bills."</p>
+        <div class="landlord-testimonial-person">
+          <strong>Maya Chen</strong>
+          <span>Facilities director, Westside apartment portfolio</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
 <!-- Partner carousel -->
 <div class="section-header" style="text-align:center; margin-top:120px;">
   <h2 style="font-weight:600;">Partners</h2>
@@ -5107,7 +5226,11 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   </div>
 </div>
 
-<section class="grid-4 landlord-stats-grid" style="margin-top:120px;">
+<!-- ===== Guaranteed ROI ===== -->
+<div class="section-header" style="text-align:center; margin-top:120px; margin-bottom:48px;">
+  <h2 style="font-weight:600;">Guaranteed ROI</h2>
+</div>
+<section class="grid-4 landlord-stats-grid">
   <div class="card" style="text-align:center;">
     <span class="material-icons-outlined">trending_up</span>
     <h3 style="font-weight:700; margin:0 0 4px;">12–18%</h3>
@@ -5127,6 +5250,31 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <span class="material-icons-outlined">verified</span>
     <h3 style="font-weight:700; margin:0 0 4px;">LEED</h3>
     <p style="color:var(--color-text-secondary,#5F6368); margin:0;">certification eligible</p>
+  </div>
+</section>
+
+<!-- 3-step overview -->
+<section style="margin-top:120px;">
+  <div class="section-header" style="text-align:center; margin-bottom:72px;">
+    <h2 style="font-weight:600;">A Simple Path to Higher Property Value</h2>
+    <p style="color:var(--color-text-secondary,#5F6368);">Three steps to add a visible amenity, reduce overhead, and improve tenant retention.</p>
+  </div>
+  <div class="stepper landlord-stepper landlord-overview-stepper" style="gap:48px;">
+    <article class="stepper-step">
+      <span class="material-icons-outlined" aria-hidden="true">domain</span>
+      <h3>You register</h3>
+      <p>Enroll your building. We handle the planning and coordination.</p>
+    </article>
+    <article class="stepper-step">
+      <span class="material-icons-outlined" aria-hidden="true">bolt</span>
+      <h3>We install</h3>
+      <p>Solar, battery storage, and smart energy systems, at zero install cost.</p>
+    </article>
+    <article class="stepper-step">
+      <span class="material-icons-outlined" aria-hidden="true">savings</span>
+      <h3>Your building gains</h3>
+      <p>Higher property value, lower bills, and tenants who stay longer.</p>
+    </article>
   </div>
 </section>
 
