@@ -693,14 +693,15 @@ html.renter-hero-nav-active .pill-nav-btn.active {
   width: auto;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: 40px 0 48px;
-  background: #fff;
+  padding: 54px 0 66px;
+  background: transparent;
 }
 .carousel-track {
   display: flex;
-  gap: 20px;
+  gap: 24px;
+  align-items: center;
   width: max-content;
-  animation: carousel-scroll 36s linear infinite;
+  animation: carousel-scroll 86s linear infinite;
 }
 .carousel-track:hover { animation-play-state: paused; }
 @keyframes carousel-scroll {
@@ -712,7 +713,7 @@ html.renter-hero-nav-active .pill-nav-btn.active {
   flex: 0 0 auto;
   overflow: hidden;
   position: relative;
-  background: #F7E6DA;
+  background: #F4F4F1;
 }
 .c-card img {
   position: absolute;
@@ -722,30 +723,34 @@ html.renter-hero-nav-active .pill-nav-btn.active {
   object-fit: cover;
   display: block;
 }
-.c-card .c-label {
-  position: absolute;
-  left: 50%;
-  bottom: 16px;
-  transform: translateX(-50%);
-  z-index: 2;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: #fff;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(8px);
-  padding: 6px 14px;
-  border-radius: 100px;
-  white-space: nowrap;
+.technology-carousel-copy {
+  color: var(--color-text-secondary,#5F6368);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.5;
 }
-/* shape variants */
-.c-card.shape-tall   { width: 200px;  height: 260px; border-radius: 130px; }
-.c-card.shape-wide   { width: 400px;  height: 220px; border-radius: 28px; }
-.c-card.shape-circle { width: 260px;  height: 260px; border-radius: 50%; }
-.c-card.shape-square { width: 260px;  height: 260px; border-radius: 36px; }
-.c-card.shape-short  { width: 360px;  height: 220px; border-radius: 110px; }
-.c-card.shape-blob   { width: 300px;  height: 260px; border-radius: 58% 42% 52% 48% / 50% 50% 50% 50%; }
+/* Google-inspired marquee shapes */
+.c-card.shape-circle { width: 300px; height: 300px; border-radius: 50%; }
+.c-card.shape-d-left { width: 300px; height: 300px; border-radius: 150px 0 0 150px; }
+.c-card.shape-d-right { width: 300px; height: 300px; border-radius: 0 150px 150px 0; }
+.c-card.shape-leaf { width: 300px; height: 300px; border-radius: 150px 0 150px 0; }
+.c-card.shape-leaf-alt { width: 300px; height: 300px; border-radius: 0 150px 0 150px; }
+.c-card.shape-soft-square { width: 300px; height: 300px; border-radius: 46px; }
+@media (max-width:768px) {
+  .hero-carousel { padding: 36px 0 46px; }
+  .carousel-track { gap: 18px; animation-duration: 78s; }
+  .c-card.shape-circle { width: 230px; height: 230px; }
+  .c-card.shape-d-left,
+  .c-card.shape-d-right,
+  .c-card.shape-leaf,
+  .c-card.shape-leaf-alt,
+  .c-card.shape-soft-square { width: 230px; height: 230px; }
+  .c-card.shape-d-left { border-radius: 115px 0 0 115px; }
+  .c-card.shape-d-right { border-radius: 0 115px 115px 0; }
+  .c-card.shape-leaf { border-radius: 115px 0 115px 0; }
+  .c-card.shape-leaf-alt { border-radius: 0 115px 0 115px; }
+  .c-card.shape-soft-square { border-radius: 38px; }
+}
 
 /* push page content below floating pill nav */
 #app { padding-top: 80px; overflow-x: clip; }
@@ -2954,42 +2959,47 @@ html.renter-snap-active {
 }
 .landlord-testimonial-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  grid-template-columns: repeat(3, 1fr);   /* always 3 side by side on desktop & tablet */
   gap: 24px;
   margin-top: 40px;
 }
 .landlord-testimonial-card {
   background: #fff;
-  border-radius: 28px;
-  padding: 14px;
+  border-radius: 24px;
+  padding: 4px;                 /* thin white outline hugging the image */
   border: 1px solid rgba(31,31,31,0.08);
   box-shadow: 0 16px 44px rgba(31,31,31,0.055);
   display: grid;
-  grid-template-rows: 190px minmax(0, 1fr);
+  grid-template-rows: 210px minmax(0, 1fr);
 }
 .landlord-testimonial-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
-  border-radius: 22px;
+  border-radius: 20px;
   display: block;
 }
 .landlord-testimonial-body {
-  padding: 22px 12px 10px;
-  display: grid;
-  gap: 15px;
-  align-content: start;
+  padding: 16px 14px 18px;      /* image sits edge-to-edge; text gets its own inset */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.landlord-testimonial-quote {
-  margin: 0;
-  color: var(--color-ink, #1F1F1F);
-  font-size: 16px;
-  line-height: 1.42;
+/* orange pill sits directly below the image */
+.landlord-testimonial-kicker {
+  width: fit-content;
+  align-self: flex-start;
+  margin-top: 0;
+  color: #9D5636;
+  background: rgba(229,139,90,0.14);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
 }
 .landlord-testimonial-person {
-  border-top: 1px solid rgba(31,31,31,0.08);
-  padding-top: 15px;
+  padding-top: 0;
 }
 .landlord-testimonial-person strong {
   display: block;
@@ -3003,21 +3013,18 @@ html.renter-snap-active {
   font-size: 13px;
   line-height: 1.35;
 }
-.landlord-testimonial-kicker {
-  width: fit-content;
-  color: #9D5636;
-  background: rgba(229,139,90,0.14);
-  border-radius: 999px;
-  padding: 7px 12px;
-  font-size: 12px;
-  font-weight: 700;
+.landlord-testimonial-quote {
+  margin: 0;
+  color: var(--color-ink, #1F1F1F);
+  font-size: 16px;
+  line-height: 1.42;
 }
-@media (max-width: 920px) {
+@media (max-width: 600px) {
   .landlord-testimonial-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;   /* phone: stack in a single column */
   }
   .landlord-testimonial-card {
-    grid-template-rows: 220px minmax(0, 1fr);
+    grid-template-rows: 240px minmax(0, 1fr);
   }
 }
 
@@ -5128,106 +5135,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   </div>
 </section>
 
-<!-- ===== Main Partner ===== -->
-<section style="margin-top:120px;">
-  <div class="section-header" style="margin-bottom:48px;">
-    <h2 style="font-weight:600;">Main Partner</h2>
-  </div>
-  <div class="main-partner-card">
-    <div class="nest-dial" role="img" aria-label="Google Nest">
-      <div class="nest-ring"></div>
-      <div class="nest-core"><span class="material-icons-outlined">eco</span></div>
-    </div>
-    <div class="gnest-wordmark">
-      <span style="color:#7491C7;">G</span><span style="color:#E58B5A;">o</span><span style="color:#F4CB56;">o</span><span style="color:#7491C7;">g</span><span style="color:#88C286;">l</span><span style="color:#E58B5A;">e</span><span class="nest-word">Nest</span>
-    </div>
-    <p class="main-partner-lead" style="max-width:760px;">Tens of millions of homes already use Google Nest. Connecting balcony solar to that familiar dashboard gives owners a trusted amenity renters recognize and property teams can monitor.</p>
-  </div>
-</section>
-
-<!-- ===== Full-screen property banner ===== -->
-<div style="margin-top:120px; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); width:auto;">
-  <img src="CTA.png"
-       alt="Mission View Apartments — a solar-equipped San Francisco apartment building with a property owner reviewing energy data"
-       style="width:100%; height:100vh; object-fit:cover; display:block;">
-</div>
-
-<!-- ===== Landlord testimonials ===== -->
-<section class="landlord-testimonials">
-  <div class="section-header">
-    <h2 style="font-weight:600;">Landlords are seeing it work</h2>
-    <p style="color:var(--color-text-secondary,#5F6368);">Property teams are turning clean-energy upgrades into lower overhead, stronger leasing stories, and amenities residents can actually see.</p>
-  </div>
-  <div class="landlord-testimonial-grid">
-    <article class="landlord-testimonial-card">
-      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=900&q=80" alt="Property management team reviewing building upgrade plans around a conference table">
-      <div class="landlord-testimonial-body">
-        <span class="landlord-testimonial-kicker">Portfolio operator</span>
-        <p class="landlord-testimonial-quote">"Civic Energy helped us turn sustainability from a vague goal into an owner-side value case. The strongest part was how simple it became to explain the upgrade to residents and investors."</p>
-        <div class="landlord-testimonial-person">
-          <strong>Skyline Apartment Management</strong>
-          <span>Regional multifamily portfolio operator</span>
-        </div>
-      </div>
-    </article>
-    <article class="landlord-testimonial-card">
-      <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80" alt="Male apartment owner in a blazer standing near a city building" style="object-position:center 32%;">
-      <div class="landlord-testimonial-body">
-        <span class="landlord-testimonial-kicker">Building owner</span>
-        <p class="landlord-testimonial-quote">"I expected solar to feel like a construction headache. The assessment made the path clear: visible renter value, lower common-area costs, and a better story for lease renewals."</p>
-        <div class="landlord-testimonial-person">
-          <strong>Daniel Reyes</strong>
-          <span>Owner, 18-unit Mission District building</span>
-        </div>
-      </div>
-    </article>
-    <article class="landlord-testimonial-card">
-      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=900&q=80" alt="Female property operations lead smiling in a modern office">
-      <div class="landlord-testimonial-body">
-        <span class="landlord-testimonial-kicker">Operations lead</span>
-        <p class="landlord-testimonial-quote">"The resident response changed the conversation. People could see the amenity, understand the savings, and connect the building with comfort, resilience, and lower bills."</p>
-        <div class="landlord-testimonial-person">
-          <strong>Maya Chen</strong>
-          <span>Facilities director, Westside apartment portfolio</span>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
-
-<!-- Partner carousel -->
-<div class="section-header" style="text-align:center; margin-top:120px;">
-  <h2 style="font-weight:600;">Partners</h2>
-  <p style="color:var(--color-text-secondary,#5F6368);">The ecosystem powering Civic Energy.</p>
-</div>
-<div class="hero-carousel" aria-hidden="true" style="margin-top:32px;">
-  <div class="carousel-track">
-    <div class="c-card shape-square"><img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat"><span class="c-label">Smart Home</span></div>
-    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy"><span class="c-label">Sustainability</span></div>
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor"><span class="c-label">Energy Monitor</span></div>
-    <div class="c-card shape-square"><img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter"><span class="c-label">Smart Meter</span></div>
-    <div class="c-card shape-short"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar"><span class="c-label">Rooftop Solar</span></div>
-    <div class="c-card shape-square"><img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar"><span class="c-label">Balcony Solar</span></div>
-    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Certification"><span class="c-label">Certification</span></div>
-    <div class="c-card shape-blob"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building"><span class="c-label">Green Building</span></div>
-    <div class="c-card shape-square"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives"><span class="c-label">Incentives</span></div>
-    <div class="c-card shape-circle"><img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco"><span class="c-label">SF Policy</span></div>
-    <!-- Set B -->
-    <div class="c-card shape-square"><img src="https://live.staticflickr.com/4751/40613996642_545696838f_b.jpg" alt="Smart home thermostat"><span class="c-label">Smart Home</span></div>
-    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=820&q=80" alt="Renewable energy"><span class="c-label">Sustainability</span></div>
-    <div class="c-card shape-circle"><img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor"><span class="c-label">Energy Monitor</span></div>
-    <div class="c-card shape-square"><img src="https://live.staticflickr.com/5445/9155731687_912549da8b_b.jpg" alt="Electricity meter"><span class="c-label">Smart Meter</span></div>
-    <div class="c-card shape-short"><img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=760&q=80" alt="Rooftop solar"><span class="c-label">Rooftop Solar</span></div>
-    <div class="c-card shape-square"><img src="https://live.staticflickr.com/65535/53972193663_ddb5e99c1b_b.jpg" alt="Balcony solar"><span class="c-label">Balcony Solar</span></div>
-    <div class="c-card shape-wide"><img src="https://images.unsplash.com/photo-1606857521015-7f9fcf423740?auto=format&fit=crop&w=820&q=80" alt="Certification"><span class="c-label">Certification</span></div>
-    <div class="c-card shape-blob"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=600&q=80" alt="Green building"><span class="c-label">Green Building</span></div>
-    <div class="c-card shape-square"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=520&q=80" alt="Incentives"><span class="c-label">Incentives</span></div>
-    <div class="c-card shape-circle"><img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=520&q=80" alt="San Francisco"><span class="c-label">SF Policy</span></div>
-  </div>
-</div>
-
 <!-- ===== Guaranteed ROI ===== -->
-<div class="section-header" style="text-align:center; margin-top:120px; margin-bottom:48px;">
+<div class="section-header" style="text-align:center; margin-top:96px; margin-bottom:48px;">
   <h2 style="font-weight:600;">Guaranteed ROI</h2>
 </div>
 <section class="grid-4 landlord-stats-grid">
@@ -5252,6 +5161,96 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <p style="color:var(--color-text-secondary,#5F6368); margin:0;">certification eligible</p>
   </div>
 </section>
+
+<!-- ===== Main Partner ===== -->
+<section style="margin-top:120px;">
+  <div class="section-header" style="margin-bottom:48px;">
+    <h2 style="font-weight:600;">Main Partner</h2>
+  </div>
+  <div class="main-partner-card">
+    <div class="nest-dial" role="img" aria-label="Google Nest">
+      <div class="nest-ring"></div>
+      <div class="nest-core"><span class="material-icons-outlined">eco</span></div>
+    </div>
+    <div class="gnest-wordmark">
+      <span style="color:#4285F4;">G</span><span style="color:#EA4335;">o</span><span style="color:#FBBC05;">o</span><span style="color:#4285F4;">g</span><span style="color:#34A853;">l</span><span style="color:#EA4335;">e</span><span class="nest-word">Nest</span>
+    </div>
+    <p class="main-partner-lead" style="max-width:760px;">Tens of millions of homes already use Google Nest. Connecting balcony solar to that familiar dashboard gives owners a trusted amenity renters recognize and property teams can monitor.</p>
+  </div>
+</section>
+
+<!-- ===== Full-screen property banner ===== -->
+<div style="margin-top:120px; margin-left:calc(50% - 50vw); margin-right:calc(50% - 50vw); width:auto;">
+  <img src="CTA.png"
+       alt="Mission View Apartments — a solar-equipped San Francisco apartment building with a property owner reviewing energy data"
+       style="width:100%; height:100vh; object-fit:cover; display:block;">
+</div>
+
+<!-- ===== Landlord testimonials ===== -->
+<section class="landlord-testimonials">
+  <div class="section-header">
+    <h2 style="font-weight:600;">Landlords are seeing it work</h2>
+    <p style="color:var(--color-text-secondary,#5F6368);">Property teams are turning clean-energy upgrades into lower overhead, stronger leasing stories, and amenities residents can actually see.</p>
+  </div>
+  <div class="landlord-testimonial-grid">
+    <article class="landlord-testimonial-card">
+      <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=900&q=80" alt="Property management team reviewing building upgrade plans around a conference table">
+      <div class="landlord-testimonial-body">
+        <span class="landlord-testimonial-kicker">Portfolio operator</span>
+        <div class="landlord-testimonial-person">
+          <strong>Skyline Apartment Management</strong>
+          <span>Regional multifamily portfolio operator</span>
+        </div>
+        <p class="landlord-testimonial-quote">"Civic Energy helped us turn sustainability from a vague goal into an owner-side value case. The strongest part was how simple it became to explain the upgrade to residents and investors."</p>
+      </div>
+    </article>
+    <article class="landlord-testimonial-card">
+      <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=80" alt="Male apartment owner in a blazer standing near a city building" style="object-position:center 32%;">
+      <div class="landlord-testimonial-body">
+        <span class="landlord-testimonial-kicker">Building owner</span>
+        <div class="landlord-testimonial-person">
+          <strong>Daniel Reyes</strong>
+          <span>Owner, 18-unit Mission District building</span>
+        </div>
+        <p class="landlord-testimonial-quote">"I expected solar to feel like a construction headache. The assessment made the path clear: visible renter value, lower common-area costs, and a better story for lease renewals."</p>
+      </div>
+    </article>
+    <article class="landlord-testimonial-card">
+      <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=900&q=80" alt="Female property operations lead smiling in a modern office">
+      <div class="landlord-testimonial-body">
+        <span class="landlord-testimonial-kicker">Operations lead</span>
+        <div class="landlord-testimonial-person">
+          <strong>Maya Chen</strong>
+          <span>Facilities director, Westside apartment portfolio</span>
+        </div>
+        <p class="landlord-testimonial-quote">"The resident response changed the conversation. People could see the amenity, understand the savings, and connect the building with comfort, resilience, and lower bills."</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- Technology carousel -->
+<div class="section-header" style="text-align:center; margin-top:120px;">
+  <h2 style="font-weight:600;">Durable energy technology for modern properties</h2>
+  <p class="technology-carousel-copy">We pair proven energy storage, controls, monitoring hardware, and durable solar products that help property teams lower overhead, improve comfort, and operate with clear energy data. Built as long-life, one-time upgrades for battery-backed energy management.</p>
+</div>
+<div class="hero-carousel" aria-hidden="true" style="margin-top:32px;">
+  <div class="carousel-track">
+    <div class="c-card shape-d-right"><img src="Web Images/Nest smart thermostat.jpg" alt="Smart thermostat for property energy control"></div>
+    <div class="c-card shape-circle"><img src="Web Images/Home battery storage.jpeg" alt="Battery-backed energy management hardware"></div>
+    <div class="c-card shape-d-left"><img src="Web Images/Google Nest energy dashboard.png" alt="Energy monitoring dashboard"></div>
+    <div class="c-card shape-soft-square"><img src="Web Images/Balcony & rooftop panels.jpeg" alt="Durable solar products for multifamily properties"></div>
+    <div class="c-card shape-leaf"><img src="Web Images/renter-portable-solar-hero.png" alt="Portable energy hardware"></div>
+    <div class="c-card shape-leaf-alt"><img src="Web Images/Portable solar panel charging near sunlight..png" alt="Portable solar charging hardware"></div>
+    <!-- Set B -->
+    <div class="c-card shape-d-right"><img src="Web Images/Nest smart thermostat.jpg" alt="Smart thermostat for property energy control"></div>
+    <div class="c-card shape-circle"><img src="Web Images/Home battery storage.jpeg" alt="Battery-backed energy management hardware"></div>
+    <div class="c-card shape-d-left"><img src="Web Images/Google Nest energy dashboard.png" alt="Energy monitoring dashboard"></div>
+    <div class="c-card shape-soft-square"><img src="Web Images/Balcony & rooftop panels.jpeg" alt="Durable solar products for multifamily properties"></div>
+    <div class="c-card shape-leaf"><img src="Web Images/renter-portable-solar-hero.png" alt="Portable energy hardware"></div>
+    <div class="c-card shape-leaf-alt"><img src="Web Images/Portable solar panel charging near sunlight..png" alt="Portable solar charging hardware"></div>
+  </div>
+</div>
 
 <!-- 3-step overview -->
 <section style="margin-top:120px;">
