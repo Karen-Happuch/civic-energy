@@ -2647,6 +2647,7 @@ html.renter-snap-active {
 }
 .section-monitor .landing-section-grid {
   max-width: 1460px;
+  grid-template-columns: minmax(320px, .72fr) minmax(0, 1.28fr);
   background: #F7E6DA;
   border-radius: 32px;
   padding: clamp(32px, 5vw, 64px);
@@ -2735,7 +2736,7 @@ html.renter-snap-active {
 }
 .landing-monitor-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 .landing-monitor-panel img {
@@ -2754,12 +2755,19 @@ html.renter-snap-active {
 .landing-mini-pill {
   display: inline-flex;
   align-items: center;
-  border-radius: 999px;
-  background: #F7E6DA;
-  color: #9D5636;
-  padding: 8px 12px;
+  gap: 7px;
+  color: #5F6368;
+  padding: 2px 0;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 650;
+}
+.landing-mini-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #E58B5A;
+  flex: 0 0 auto;
 }
 .landing-finder-mini {
   display: grid;
@@ -4828,10 +4836,10 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
           <img src="Web%20Images/renter-frame-solar-hero-hq.png" alt="Resident using solar energy in an apartment">
         </div>
         <div class="landing-section-copy">
-          <span class="landing-kicker">What it is</span>
-          <h2 id="home-what-heading">Energy translation</h2>
-          <p>Civic Energy is a translation layer between apartments and energy systems. It turns existing smart home and utility data into two connected experiences: an ambient home interface for residents and a building-level intelligence layer for property teams, utilities, and policymakers.</p>
-          <p>For renters, it makes energy easier to understand without adding another dashboard. For landlords and property managers, it makes building performance visible enough to guide operations, retrofits, and tenant value.</p>
+          <span class="landing-kicker">What Civic Energy does</span>
+          <h2 id="home-what-heading">Apartment energy data for better building decisions</h2>
+          <p>Civic Energy translates smart home and utility data from apartment buildings into two connected tools: a low-attention home interface for residents and a building intelligence layer for owners, utilities, and policymakers.</p>
+          <p>Renters get clearer energy feedback without another dashboard. Landlords and property managers get building performance signals that guide operations, retrofits, and tenant value.</p>
           <div class="landing-pill-row" aria-label="Civic Energy layers">
             <span class="landing-mini-pill">Home</span>
             <span class="landing-mini-pill">Building</span>
@@ -4846,8 +4854,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="landing-section-inner">
         <div class="landing-section-head">
           <span class="landing-kicker">Why it matters</span>
-          <h2 id="home-why-heading">Shared energy control</h2>
-          <p>Energy control used to belong mostly to homeowners. Civic Energy brings it into apartments, where smart home data can support residents, property teams, utilities, and policy decisions instead of staying siloed and underused.</p>
+          <h2 id="home-why-heading">Energy upgrades should work for apartment buildings</h2>
+          <p>Clean-energy choices have mostly favored homeowners. Civic Energy brings energy visibility into apartment buildings, where smart home data can support residents, property infrastructure, utility planning, and housing policy instead of staying siloed.</p>
         </div>
         <div class="landing-system-grid">
           <article class="landing-system-card">
@@ -4857,13 +4865,13 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
           </article>
           <article class="landing-system-card">
             <span class="material-icons-outlined" aria-hidden="true">domain</span>
-            <h3>For property teams</h3>
-            <p>Owners, developers, and property managers can see where energy upgrades improve operations, tenant demand, retrofit planning, and long-term building value.</p>
+            <h3>For property infrastructure</h3>
+            <p>Owners, developers, and property managers can identify where solar, storage, controls, and monitoring improve operations, tenant demand, retrofit planning, and long-term building value.</p>
           </article>
           <article class="landing-system-card">
             <span class="material-icons-outlined" aria-hidden="true">account_balance</span>
-            <h3>For systems</h3>
-            <p>Utilities and policymakers can use aggregated patterns to understand peak demand, distributed energy potential, incentive gaps, and housing energy standards.</p>
+            <h3>For utilities and policy</h3>
+            <p>Utilities and policymakers can use aggregated building patterns to understand peak demand, distributed energy potential, incentive gaps, and housing energy standards.</p>
           </article>
         </div>
       </div>
@@ -4872,9 +4880,9 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <section class="landing-main-section section-products" aria-labelledby="home-tech-heading">
       <div class="landing-section-inner">
         <div class="landing-section-head">
-          <span class="landing-kicker">What it offers</span>
-          <h2 id="home-tech-heading">Apartment energy,<br>made tangible</h2>
-          <p>Apartment-ready energy tools help residents reduce bills while giving landlords a clearer path to better operations, resilience, and building value.</p>
+          <span class="landing-kicker">What Civic Energy offers</span>
+          <h2 id="home-tech-heading">Clean energy tools for apartment buildings</h2>
+          <p>Apartment-ready solar, storage, controls, and monitoring help residents reduce bills while giving landlords a clearer path to better operations, resilience, and building value.</p>
         </div>
         <div class="landing-feature-grid">
           <article class="landing-feature-card">
@@ -4889,8 +4897,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
           </article>
           <article class="landing-feature-card">
             <img src="Web%20Images/Nest%20smart%20thermostat.jpg" alt="Nest smart thermostat">
-            <h3>Smart home controls</h3>
-            <p>Nest-level sensing and subtle product language create a foundation for low-friction awareness and comfort.</p>
+            <h3>Home energy controls</h3>
+            <p>Nest-style sensing and subtle product feedback create a foundation for low-friction awareness, savings, and comfort.</p>
           </article>
         </div>
       </div>
@@ -4900,19 +4908,19 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="landing-section-grid">
         <div class="landing-section-copy">
           <span class="landing-kicker">Home monitoring</span>
-          <h2 id="home-monitor-heading">Ambient monitoring</h2>
-          <p>The resident experience is low-attention, not another dashboard. Subtle signals communicate energy state, urgency, savings, and comfort without asking people to constantly check charts.</p>
-          <p>At the same time, the same data can be aggregated into building-level patterns that help property managers and planners understand demand, inefficiency, and retrofit opportunities.</p>
+          <h2 id="home-monitor-heading">Low-attention energy feedback</h2>
+          <p>Residents receive simple signals for energy use, urgency, savings, and comfort without constantly checking charts.</p>
+          <p>Building teams can review the same data as aggregated patterns for demand, inefficiency, comfort issues, and retrofit opportunities.</p>
         </div>
         <div class="landing-monitor-layout">
           <article class="landing-monitor-panel">
             <img src="Web%20Images/Google%20Nest%20energy%20dashboard.png" alt="Google Nest energy dashboard">
-            <h3>Resident signal</h3>
+            <h3>Resident feedback</h3>
             <p>Simple feedback makes energy easier to notice and act on.</p>
           </article>
           <article class="landing-monitor-panel">
-            <img src="Web%20Images/Apartment%20solar%20adoption%20statistics%20graphic.jpg" alt="Apartment energy analytics graphic">
-            <h3>Building insight</h3>
+            <img src="Web%20Images/Apartment%20solar%20adoption%20statistics%20graphic.jpg" alt="Building energy analytics graphic">
+            <h3>Building patterns</h3>
             <p>Aggregated patterns reveal opportunities across many units.</p>
           </article>
         </div>
@@ -4922,24 +4930,24 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <section class="landing-main-section section-process" aria-labelledby="home-operation-heading">
       <div class="landing-section-inner">
         <div class="landing-section-head">
-          <span class="landing-kicker">How it operates</span>
-          <h2 id="home-operation-heading">From home signals to system action</h2>
-          <p>Home data becomes building intelligence, then system action. Civic Energy is designed as a bridge from individual apartments to better operations, better incentives, and better policy.</p>
+          <span class="landing-kicker">How Civic Energy works</span>
+          <h2 id="home-operation-heading">From home data to building decisions</h2>
+          <p>Civic Energy turns apartment-level data into building intelligence, then into decisions about operations, incentives, retrofits, and policy.</p>
         </div>
         <div class="landing-feature-grid">
           <article class="landing-feature-card">
             <img src="Web%20Images/Generated%20How%20It%20Works/01-see-energy-use.png" alt="Resident checks home energy use">
-            <h3>1. Sense the home</h3>
+            <h3>1. Read home energy use</h3>
             <p>Smart home and utility signals reveal usage, timing, comfort, and energy stress across individual apartments.</p>
           </article>
           <article class="landing-feature-card">
             <img src="Web%20Images/Generated%20How%20It%20Works/14-track-usage-savings.png" alt="Energy savings dashboard">
-            <h3>2. Aggregate the building</h3>
-            <p>Patterns across units show where demand spikes, where systems are inefficient, and where upgrades matter most.</p>
+            <h3>2. Compare units across the building</h3>
+            <p>Patterns across units show where demand spikes, where equipment wastes energy, and where upgrades matter most.</p>
           </article>
           <article class="landing-feature-card">
             <img src="Web%20Images/Generated%20How%20It%20Works/15-share-benefits.png" alt="Residents share building energy benefits">
-            <h3>3. Inform decisions</h3>
+            <h3>3. Guide building and policy decisions</h3>
             <p>Credible insight can support utility planning, owner investment, energy standards, and incentive design.</p>
           </article>
         </div>
@@ -4952,9 +4960,9 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="store-experience-head">
         <div>
           <span class="landing-kicker">Google offsite store</span>
-          <h2 id="home-store-heading">Experience the system in person.</h2>
+          <h2 id="home-store-heading">Try the apartment clean-energy setup in person</h2>
         </div>
-        <p>The Civic Energy offsite store turns the apartment energy system into a walk-through experience. Visitors can explore balcony solar, home batteries, Nest-style controls, ambient monitoring, and building-level energy intelligence inside realistic apartment rooms before choosing a home or planning a retrofit.</p>
+        <p>The Civic Energy offsite store turns solar, storage, Nest-style controls, and monitoring into a walk-through apartment experience. Visitors can test resident-facing feedback and building-level energy insights before choosing a home or planning a retrofit.</p>
       </div>
       <div class="store-carousel" aria-label="Civic Energy offsite store views">
         <article class="store-slide">
@@ -5003,8 +5011,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="landing-section-grid">
         <div class="landing-section-copy">
           <span class="landing-kicker">Find apartments</span>
-          <h2 id="home-finder-heading">Energy-visible homes</h2>
-          <p>Browse apartments where energy performance is visible. The apartment finder turns building-level features into something renters can compare and landlords can improve: solar access, storage, monitoring, green score, estimated savings, comfort, and resilience.</p>
+          <h2 id="home-finder-heading">Compare buildings by energy features</h2>
+          <p>Browse San Francisco apartments with visible building energy features. The apartment finder helps renters compare solar access, storage, monitoring, green score, estimated savings, comfort, and resilience.</p>
           <div class="landing-section-actions">
             <a href="#shared-map" class="btn-primary-green" data-open-finder-top>Browse apartments</a>
           </div>
@@ -5027,7 +5035,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
           </div>
         </div>
         <div class="landing-image-card">
-          <img src="Web%20Images/Maps/sf-map-vertical.png" alt="San Francisco apartment finder map preview showing the full city geography">
+          <img src="sf-map.jpg" alt="San Francisco street map preview for apartment search">
         </div>
       </div>
     </section>
