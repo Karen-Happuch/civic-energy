@@ -2640,25 +2640,70 @@ html.renter-snap-active {
   margin-left: auto;
   margin-right: auto;
 }
+.landing-main-section.section-impact {
+  padding-bottom: clamp(96px, 9vw, 136px);
+}
+.landing-main-section.section-products {
+  padding-top: clamp(96px, 9vw, 136px);
+}
+.section-impact .landing-section-head {
+  margin-bottom: clamp(56px, 5vw, 72px);
+}
+.section-impact .landing-section-head h2 {
+  max-width: 840px;
+}
 .landing-main-section.section-monitor {
-  background: #FFFFFF;
-  padding-left: clamp(16px, 2.5vw, 36px);
-  padding-right: clamp(16px, 2.5vw, 36px);
+  background: #F8F9FA;
+  padding-left: clamp(24px, 6vw, 96px);
+  padding-right: clamp(24px, 6vw, 96px);
+  padding-top: clamp(88px, 9vw, 132px);
+  padding-bottom: clamp(88px, 9vw, 132px);
 }
 .section-monitor .landing-section-grid {
-  max-width: 1460px;
-  background: #F7E6DA;
+  max-width: 1240px;
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  background: #FFFFFF;
   border-radius: 32px;
-  padding: clamp(32px, 5vw, 64px);
-  border: 1px solid rgba(229,139,90,0.18);
+  padding: clamp(36px, 5vw, 76px);
+  box-shadow: 0 18px 48px rgba(31,31,31,0.07);
+  gap: clamp(36px, 5vw, 72px);
+  align-items: center;
 }
 .section-monitor .landing-kicker,
 .section-monitor .landing-section-copy h2 {
-  color: #8F4D2E;
+  color: var(--color-ink, #1F1F1F);
 }
 .section-monitor .landing-section-copy p,
 .section-monitor .landing-monitor-panel p {
-  color: rgba(31,31,31,0.72);
+  color: var(--color-text-secondary, #5F6368);
+}
+.section-monitor .landing-section-copy h2 {
+  max-width: 680px;
+  font-size: clamp(38px, 4.2vw, 60px);
+  line-height: 1.05;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+.section-monitor .landing-section-copy p {
+  max-width: 620px;
+  font-size: clamp(16px, 1.45vw, 18px);
+  line-height: 1.62;
+}
+.section-monitor .landing-monitor-layout {
+  display: block;
+}
+.landing-monitor-panel.landing-monitor-feature {
+  padding: 0;
+  border-radius: 28px;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+.landing-monitor-panel.landing-monitor-feature img {
+  aspect-ratio: 16 / 10;
+  border-radius: 28px;
+  box-shadow: 0 18px 48px rgba(31,31,31,0.09);
+  margin-bottom: 0;
 }
 .landing-section-actions {
   display: flex;
@@ -2671,8 +2716,7 @@ html.renter-snap-active {
   aspect-ratio: 5 / 4;
   border-radius: 28px;
   overflow: hidden;
-  border: 1px solid var(--color-border);
-  box-shadow: none;
+  box-shadow: 0 12px 30px rgba(31,31,31,0.055);
   background: #FFFFFF;
 }
 .landing-image-card img {
@@ -2695,17 +2739,18 @@ html.renter-snap-active {
 .landing-system-card,
 .landing-monitor-panel {
   background: #FFFFFF;
-  border: 1px solid var(--color-border);
   border-radius: 24px;
   padding: 24px;
+  box-shadow: 0 12px 30px rgba(31,31,31,0.055);
 }
 .landing-feature-card { display:flex; flex-direction:column; min-height:100%; }
 .landing-feature-card img {
-  width: 100%;
+  width: calc(100% + 32px);
+  max-width: none;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   border-radius: 18px;
-  margin-bottom: 22px;
+  margin: -16px -16px 24px;
 }
 .landing-feature-card h3,
 .landing-system-card h3,
@@ -2735,7 +2780,7 @@ html.renter-snap-active {
 }
 .landing-monitor-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 .landing-monitor-panel img {
@@ -2754,12 +2799,19 @@ html.renter-snap-active {
 .landing-mini-pill {
   display: inline-flex;
   align-items: center;
-  border-radius: 999px;
-  background: #F7E6DA;
-  color: #9D5636;
-  padding: 8px 12px;
+  gap: 7px;
+  color: #5F6368;
+  padding: 2px 0;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 650;
+}
+.landing-mini-pill::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #E58B5A;
+  flex: 0 0 auto;
 }
 .landing-finder-mini {
   display: grid;
@@ -2768,10 +2820,10 @@ html.renter-snap-active {
   margin-top: 24px;
 }
 .landing-finder-mini article {
-  border: 1px solid var(--color-border);
   border-radius: 18px;
   overflow: hidden;
   background: #FFFFFF;
+  box-shadow: 0 12px 30px rgba(31,31,31,0.055);
 }
 .landing-finder-mini img {
   width: 100%;
@@ -2796,6 +2848,37 @@ html.renter-snap-active {
   height: auto;
   min-height: 0;
   aspect-ratio: auto;
+}
+.landing-map-preview {
+  min-height: 520px;
+  background: #E9EEF1;
+}
+.landing-map-card {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  background: #E9EEF1;
+  z-index: 1;
+}
+.landing-map-card .leaflet-control-zoom {
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(31,31,31,0.12);
+}
+.landing-map-card .leaflet-control-zoom a {
+  border: 0;
+  color: #1F1F1F;
+  background: rgba(255,255,255,0.94);
+}
+.landing-map-card .leaflet-control-attribution {
+  font-size: 9px;
+  color: #5F6368;
+  background: rgba(255,255,255,0.84);
 }
 .section-finder .landing-image-card img {
   position: absolute;
@@ -3145,16 +3228,69 @@ html.renter-snap-active {
   .landing-section-grid,
   .landing-section-grid.reverse,
   .landing-monitor-layout { grid-template-columns: 1fr; }
+  .section-monitor .landing-section-grid {
+    grid-template-columns: 1fr;
+    padding: clamp(32px, 6vw, 56px);
+  }
+  .section-monitor .landing-section-copy h2 {
+    max-width: 760px;
+    font-size: clamp(36px, 6vw, 48px);
+  }
   .landing-image-card { min-height: 320px; aspect-ratio: 16 / 10; }
   .section-finder .landing-image-card {
     min-height: 420px;
     aspect-ratio: 4 / 5;
   }
+  .landing-map-preview {
+    min-height: 420px;
+  }
 }
 @media (max-width: 560px) {
   .landing-main-section { padding: 64px 22px; }
+  .landing-main-section.section-monitor {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .section-monitor .landing-section-grid {
+    border-radius: 24px;
+    padding: 28px 20px;
+    gap: 30px;
+  }
+  .section-monitor .landing-section-copy h2,
+  .landing-section-copy h2,
+  .landing-section-head h2 {
+    max-width: 100%;
+    font-size: clamp(30px, 9vw, 40px);
+    line-height: 1.1;
+    letter-spacing: 0;
+  }
+  .landing-section-copy p,
+  .landing-section-head p,
+  .landing-feature-card p,
+  .landing-system-card p,
+  .landing-monitor-panel p {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  .landing-feature-card,
+  .landing-system-card,
+  .landing-monitor-panel {
+    padding: 20px;
+    border-radius: 20px;
+  }
+  .landing-feature-card img {
+    width: calc(100% + 24px);
+    border-radius: 16px;
+    margin: -12px -12px 20px;
+  }
+  .landing-monitor-panel.landing-monitor-feature img {
+    aspect-ratio: 4 / 3;
+    border-radius: 18px;
+    margin-bottom: 0;
+  }
   .landing-image-card { min-height: 280px; border-radius: 18px; }
   .section-finder .landing-image-card { min-height: 340px; }
+  .landing-map-preview { min-height: 340px; }
   .landing-feature-grid,
   .landing-system-grid,
   .landing-finder-mini { grid-template-columns: 1fr; }
@@ -4828,16 +4964,9 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
           <img src="Web%20Images/renter-frame-solar-hero-hq.png" alt="Resident using solar energy in an apartment">
         </div>
         <div class="landing-section-copy">
-          <span class="landing-kicker">What it is</span>
-          <h2 id="home-what-heading">Energy translation</h2>
-          <p>Civic Energy is a translation layer between apartments and energy systems. It turns existing smart home and utility data into two connected experiences: an ambient home interface for residents and a building-level intelligence layer for property teams, utilities, and policymakers.</p>
-          <p>For renters, it makes energy easier to understand without adding another dashboard. For landlords and property managers, it makes building performance visible enough to guide operations, retrofits, and tenant value.</p>
-          <div class="landing-pill-row" aria-label="Civic Energy layers">
-            <span class="landing-mini-pill">Home</span>
-            <span class="landing-mini-pill">Building</span>
-            <span class="landing-mini-pill">Utility</span>
-            <span class="landing-mini-pill">Policy</span>
-          </div>
+          <h2 id="home-what-heading">Apartment energy data for better building decisions</h2>
+          <p>Civic Energy translates smart home and utility data from apartment buildings into two connected tools: a simple home interface for residents and a building intelligence layer for owners, utilities, and policymakers.</p>
+          <p>Renters get clearer energy feedback without another dashboard. Landlords and property managers get building performance signals that guide operations, retrofits, and tenant value.</p>
         </div>
       </div>
     </section>
@@ -4845,9 +4974,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <section class="landing-main-section section-muted section-impact" aria-labelledby="home-why-heading">
       <div class="landing-section-inner">
         <div class="landing-section-head">
-          <span class="landing-kicker">Why it matters</span>
-          <h2 id="home-why-heading">Shared energy control</h2>
-          <p>Energy control used to belong mostly to homeowners. Civic Energy brings it into apartments, where smart home data can support residents, property teams, utilities, and policy decisions instead of staying siloed and underused.</p>
+          <h2 id="home-why-heading">Energy upgrades for apartment buildings</h2>
+          <p>Clean-energy upgrades need to work for the whole building. Civic Energy helps renters understand comfort, savings, and resilience while giving property owners clearer data for operations, retrofit planning, tenant value, utility coordination, and policy decisions.</p>
         </div>
         <div class="landing-system-grid">
           <article class="landing-system-card">
@@ -4857,13 +4985,13 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
           </article>
           <article class="landing-system-card">
             <span class="material-icons-outlined" aria-hidden="true">domain</span>
-            <h3>For property teams</h3>
-            <p>Owners, developers, and property managers can see where energy upgrades improve operations, tenant demand, retrofit planning, and long-term building value.</p>
+            <h3>For property infrastructure</h3>
+            <p>Owners, developers, and property managers can identify where solar, storage, controls, and monitoring improve operations, tenant demand, retrofit planning, and long-term building value.</p>
           </article>
           <article class="landing-system-card">
             <span class="material-icons-outlined" aria-hidden="true">account_balance</span>
-            <h3>For systems</h3>
-            <p>Utilities and policymakers can use aggregated patterns to understand peak demand, distributed energy potential, incentive gaps, and housing energy standards.</p>
+            <h3>For utilities and policy</h3>
+            <p>Utilities and policymakers can use aggregated building patterns to understand peak demand, distributed energy potential, incentive gaps, and housing energy standards.</p>
           </article>
         </div>
       </div>
@@ -4872,9 +5000,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <section class="landing-main-section section-products" aria-labelledby="home-tech-heading">
       <div class="landing-section-inner">
         <div class="landing-section-head">
-          <span class="landing-kicker">What it offers</span>
-          <h2 id="home-tech-heading">Apartment energy,<br>made tangible</h2>
-          <p>Apartment-ready energy tools help residents reduce bills while giving landlords a clearer path to better operations, resilience, and building value.</p>
+          <h2 id="home-tech-heading">Solar, storage, and monitoring made practical</h2>
+          <p>Apartment-ready solar, storage, controls, and monitoring help residents reduce bills while giving landlords a clearer path to better operations, resilience, and building value.</p>
         </div>
         <div class="landing-feature-grid">
           <article class="landing-feature-card">
@@ -4889,8 +5016,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
           </article>
           <article class="landing-feature-card">
             <img src="Web%20Images/Nest%20smart%20thermostat.jpg" alt="Nest smart thermostat">
-            <h3>Smart home controls</h3>
-            <p>Nest-level sensing and subtle product language create a foundation for low-friction awareness and comfort.</p>
+            <h3>Home energy controls</h3>
+            <p>Nest-style sensing and subtle product feedback create a foundation for low-friction awareness, savings, and comfort.</p>
           </article>
         </div>
       </div>
@@ -4899,21 +5026,12 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <section class="landing-main-section section-muted section-monitor" aria-labelledby="home-monitor-heading">
       <div class="landing-section-grid">
         <div class="landing-section-copy">
-          <span class="landing-kicker">Home monitoring</span>
-          <h2 id="home-monitor-heading">Ambient monitoring</h2>
-          <p>The resident experience is low-attention, not another dashboard. Subtle signals communicate energy state, urgency, savings, and comfort without asking people to constantly check charts.</p>
-          <p>At the same time, the same data can be aggregated into building-level patterns that help property managers and planners understand demand, inefficiency, and retrofit opportunities.</p>
+          <h2 id="home-monitor-heading">Real-time energy tracking</h2>
+          <p>An intuitive experience helps renters see consumption, understand savings, and make better energy decisions in real time.</p>
         </div>
         <div class="landing-monitor-layout">
-          <article class="landing-monitor-panel">
+          <article class="landing-monitor-panel landing-monitor-feature">
             <img src="Web%20Images/Google%20Nest%20energy%20dashboard.png" alt="Google Nest energy dashboard">
-            <h3>Resident signal</h3>
-            <p>Simple feedback makes energy easier to notice and act on.</p>
-          </article>
-          <article class="landing-monitor-panel">
-            <img src="Web%20Images/Apartment%20solar%20adoption%20statistics%20graphic.jpg" alt="Apartment energy analytics graphic">
-            <h3>Building insight</h3>
-            <p>Aggregated patterns reveal opportunities across many units.</p>
           </article>
         </div>
       </div>
@@ -4922,24 +5040,23 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <section class="landing-main-section section-process" aria-labelledby="home-operation-heading">
       <div class="landing-section-inner">
         <div class="landing-section-head">
-          <span class="landing-kicker">How it operates</span>
-          <h2 id="home-operation-heading">From home signals to system action</h2>
-          <p>Home data becomes building intelligence, then system action. Civic Energy is designed as a bridge from individual apartments to better operations, better incentives, and better policy.</p>
+          <h2 id="home-operation-heading">From home data to building decisions</h2>
+          <p>Civic Energy turns apartment-level data into building intelligence, then into decisions about operations, incentives, retrofits, and policy.</p>
         </div>
         <div class="landing-feature-grid">
           <article class="landing-feature-card">
             <img src="Web%20Images/Generated%20How%20It%20Works/01-see-energy-use.png" alt="Resident checks home energy use">
-            <h3>1. Sense the home</h3>
+            <h3>1. Read home energy use</h3>
             <p>Smart home and utility signals reveal usage, timing, comfort, and energy stress across individual apartments.</p>
           </article>
           <article class="landing-feature-card">
             <img src="Web%20Images/Generated%20How%20It%20Works/14-track-usage-savings.png" alt="Energy savings dashboard">
-            <h3>2. Aggregate the building</h3>
-            <p>Patterns across units show where demand spikes, where systems are inefficient, and where upgrades matter most.</p>
+            <h3>2. Compare units across the building</h3>
+            <p>Patterns across units show where demand spikes, where equipment wastes energy, and where upgrades matter most.</p>
           </article>
           <article class="landing-feature-card">
             <img src="Web%20Images/Generated%20How%20It%20Works/15-share-benefits.png" alt="Residents share building energy benefits">
-            <h3>3. Inform decisions</h3>
+            <h3>3. Guide building and policy decisions</h3>
             <p>Credible insight can support utility planning, owner investment, energy standards, and incentive design.</p>
           </article>
         </div>
@@ -4952,9 +5069,9 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="store-experience-head">
         <div>
           <span class="landing-kicker">Google offsite store</span>
-          <h2 id="home-store-heading">Experience the system in person.</h2>
+          <h2 id="home-store-heading">Try the apartment clean-energy setup in person</h2>
         </div>
-        <p>The Civic Energy offsite store turns the apartment energy system into a walk-through experience. Visitors can explore balcony solar, home batteries, Nest-style controls, ambient monitoring, and building-level energy intelligence inside realistic apartment rooms before choosing a home or planning a retrofit.</p>
+        <p>The Civic Energy offsite store turns solar, storage, Nest-style controls, and monitoring into a walk-through apartment experience. Visitors can test resident-facing feedback and building-level energy insights before choosing a home or planning a retrofit.</p>
       </div>
       <div class="store-carousel" aria-label="Civic Energy offsite store views">
         <article class="store-slide">
@@ -5003,8 +5120,8 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <div class="landing-section-grid">
         <div class="landing-section-copy">
           <span class="landing-kicker">Find apartments</span>
-          <h2 id="home-finder-heading">Energy-visible homes</h2>
-          <p>Browse apartments where energy performance is visible. The apartment finder turns building-level features into something renters can compare and landlords can improve: solar access, storage, monitoring, green score, estimated savings, comfort, and resilience.</p>
+          <h2 id="home-finder-heading">Compare buildings by energy features</h2>
+          <p>Browse San Francisco apartments with visible building energy features. The apartment finder helps renters compare solar access, storage, monitoring, green score, estimated savings, comfort, and resilience.</p>
           <div class="landing-section-actions">
             <a href="#shared-map" class="btn-primary-green" data-open-finder-top>Browse apartments</a>
           </div>
@@ -5018,16 +5135,9 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
               <div><strong>Storage + resilience</strong><span>Support for peak hours, outages, and shared loads.</span></div>
             </article>
           </div>
-          <div class="landing-pill-row" aria-label="Finder filters">
-            <span class="landing-mini-pill">Green score</span>
-            <span class="landing-mini-pill">Solar access</span>
-            <span class="landing-mini-pill">Battery storage</span>
-            <span class="landing-mini-pill">Energy monitoring</span>
-            <span class="landing-mini-pill">Estimated savings</span>
-          </div>
         </div>
-        <div class="landing-image-card">
-          <img src="Web%20Images/Maps/sf-map-vertical.png" alt="San Francisco apartment finder map preview showing the full city geography">
+        <div class="landing-image-card landing-map-preview">
+          <div id="homeMapEl" class="landing-map-card" role="region" aria-label="Interactive San Francisco apartment map"></div>
         </div>
       </div>
     </section>
@@ -7215,6 +7325,9 @@ Thank you,
     if (route === 'shared-map' && typeof activateSharedMapPage === 'function') {
       activateSharedMapPage();
     }
+    if (route === 'landing' && typeof initHomeMap === 'function') {
+      initHomeMap();
+    }
     if (route === 'landlord-roi' && typeof initROICalculator === 'function') {
       initROICalculator();
     }
@@ -7327,7 +7440,13 @@ Thank you,
 
   function initSolarMap(mapElementId, opts) {
     opts = opts || {};
-    var map = L.map(mapElementId).setView([37.7749, -122.4194], 12);
+    var mapElement = document.getElementById(mapElementId);
+    if (!mapElement || typeof L === 'undefined') return null;
+
+    var map = L.map(mapElementId, {
+      scrollWheelZoom: opts.scrollWheelZoom !== false,
+      tap: true
+    }).setView(opts.center || [37.7749, -122.4194], opts.zoom || 12);
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
@@ -7441,6 +7560,7 @@ Thank you,
   function initRenterMap() {
     if (window._solarMaps.renter) return;
     var result = initSolarMap('renterMapEl');
+    if (!result) return;
     window._solarMaps.renter = result;
     setTimeout(function () { result.map.invalidateSize(); }, 100);
   }
@@ -7448,8 +7568,28 @@ Thank you,
   function initSharedMap() {
     if (window._solarMaps.shared) return;
     var result = initSolarMap('sharedMapEl');
+    if (!result) return;
     window._solarMaps.shared = result;
     setTimeout(function () { result.map.invalidateSize(); }, 100);
+  }
+
+  function initHomeMap() {
+    if (window._solarMaps.home) return;
+    var result = initSolarMap('homeMapEl', { zoom: 12 });
+    if (!result) return;
+    window._solarMaps.home = result;
+    setTimeout(function () {
+      result.map.invalidateSize();
+      var featured = window.solarBuildings.slice(0, 10).map(function (building) {
+        return result.markers[building.id];
+      }).filter(Boolean);
+      if (featured.length) {
+        result.map.fitBounds(L.featureGroup(featured).getBounds(), {
+          padding: [34, 34],
+          maxZoom: 12
+        });
+      }
+    }, 120);
   }
 
   // ---- Card rendering ----
