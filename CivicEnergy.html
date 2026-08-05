@@ -4163,8 +4163,8 @@ html.renter-snap-active {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #E58B5A;
-    border: 1px solid #fff;
+    background: #4285F4;
+    border: 2px solid #fff;
     box-shadow: none;
     display: flex;
     align-items: center;
@@ -4181,20 +4181,23 @@ html.renter-snap-active {
   .map-marker.selected {
     width: 32px;
     height: 32px;
-    background: #E58B5A;
+    background: #1967D2;
   }
-  .map-marker-label {
-    position: absolute;
-    top: -6px;
-    left: 30px;
-    white-space: nowrap;
-    background: var(--color-ink, #1F1F1F);
-    color: #fff;
+  /* Hover pill replaced by always-on Google-style labels below */
+  .map-marker-label { display: none; }
+  .leaflet-tooltip.map-name-label {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    color: #1F1F1F;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
     font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    pointer-events: none;
+    white-space: nowrap;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 1px 2px rgba(255,255,255,0.95);
   }
+  .leaflet-tooltip.map-name-label::before { display: none; }
   .map-marker-wrap:hover .map-marker,
   .map-marker-wrap.selected .map-marker {
     width: 32px;
@@ -8342,7 +8345,7 @@ Thank you,
       tap: true
     }).setView(opts.center || [37.7749, -122.4194], opts.zoom || 12);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
       maxZoom: 19
     }).addTo(map);
@@ -8373,6 +8376,14 @@ Thank you,
         '</div>';
 
       marker.bindPopup(popupHtml);
+
+      marker.bindTooltip(b.name, {
+        permanent: true,
+        direction: 'right',
+        offset: [12, 0],
+        className: 'map-name-label',
+        opacity: 1
+      });
 
       marker.on('mouseover', function () {
         var el = marker.getElement();

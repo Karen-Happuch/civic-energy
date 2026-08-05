@@ -1180,7 +1180,7 @@ html.renter-snap-active {
   width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  padding: 120px clamp(24px, 7vw, 96px) 80px;
+  padding: 92px clamp(24px, 7vw, 96px) 52px;
   color: #fff;
   background-image:
     linear-gradient(90deg, rgba(11,18,13,0.86) 0%, rgba(11,18,13,0.68) 42%, rgba(11,18,13,0.24) 72%),
@@ -1196,8 +1196,8 @@ html.renter-snap-active {
   max-width: 760px;
 }
 .renter-hero-copy h1 {
-  font-size: 72px;
-  line-height: 1.08;
+  font-size: 64px;
+  line-height: 1.03;
   letter-spacing: 0;
   max-width: 780px;
   font-weight: 600;
@@ -1206,11 +1206,43 @@ html.renter-snap-active {
 }
 .renter-hero-copy p {
   color: rgba(255,255,255,0.88);
-  font-size: 22px;
+  font-size: 19px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.45;
   max-width: 700px;
-  margin-top: 22px;
+  margin-top: 16px;
+}
+.renter-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: #FFD7C2;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.renter-hero-promise {
+  max-width: 660px;
+}
+.renter-hero-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 18px;
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.renter-hero-proof span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.renter-hero-proof .material-icons-outlined {
+  color: #FF9A66;
+  font-size: 19px;
 }
 .renter-hero-viewport .btn-secondary {
   color: #fff;
@@ -1224,11 +1256,170 @@ html.renter-snap-active {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  margin-top: 28px;
+  margin-top: 20px;
 }
 .renter-stat-section,
 .renter-feature-section {
   gap: 28px;
+}
+#renter-energy-checkup {
+  grid-template-columns: 1fr;
+  align-content: center;
+  gap: 24px;
+}
+.renter-section-hero {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 26px;
+  background: #DADCE0;
+}
+.renter-section-hero::after {
+  content: "";
+  position: absolute;
+  inset: 48% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(11,18,13,0.76));
+  pointer-events: none;
+}
+.renter-section-hero img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.renter-section-hero figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 22px;
+  bottom: 20px;
+  left: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.4;
+}
+.renter-section-hero figcaption .material-icons-outlined {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.94);
+  color: #B75324;
+  font-size: 20px;
+}
+.renter-checkup-hero {
+  height: 100%;
+  min-height: 360px;
+}
+.renter-checkup-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  align-items: end;
+  gap: clamp(28px, 5vw, 72px);
+}
+.renter-checkup-heading h2 {
+  margin: 0;
+}
+.renter-checkup-heading .section-intro {
+  max-width: 620px;
+  margin: 0;
+}
+.renter-checkup-body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(420px, 1.05fr);
+  align-items: stretch;
+  gap: 18px;
+}
+.renter-checkup-card {
+  height: 100%;
+}
+.renter-path-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+}
+.renter-path-list li {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 18px;
+  background: #fff;
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  line-height: 1.45;
+}
+.renter-path-list strong {
+  color: var(--color-ink);
+}
+.renter-path-number {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #FFF1E8;
+  color: #B75324;
+  font-weight: 700;
+}
+.renter-checkup-card {
+  padding: clamp(24px, 3vw, 36px);
+  border: 1px solid var(--color-border);
+}
+.renter-check-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+.renter-check-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px;
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  background: #fff;
+  color: var(--color-ink);
+  font-size: 14px;
+  line-height: 1.35;
+  cursor: pointer;
+}
+.renter-check-option:has(input:checked) {
+  border-color: #F5854D;
+  background: #FFF8F4;
+}
+.renter-check-option input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  accent-color: #F5854D;
+}
+.renter-check-result {
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 16px;
+  background: #F5F5F7;
+  color: var(--color-text-secondary);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.renter-check-result strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--color-ink);
+  font-size: 17px;
 }
 #renter .renter-feature-section .scroll-row {
   display: grid;
@@ -1240,6 +1431,271 @@ html.renter-snap-active {
 #renter .renter-feature-section .scroll-row .card {
   min-width: 0;
   width: 100%;
+}
+#renter-what-you-get .renter-benefit-card {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 22px;
+}
+#renter-what-you-get .renter-benefit-card img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.renter-benefit-tools {
+  margin-top: auto !important;
+  padding-top: 14px;
+  color: #B75324 !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+}
+.renter-safeguard {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+  margin-top: 22px;
+  padding: 20px 22px;
+  border-radius: 20px;
+  background: #FFF1E8;
+  color: #713515;
+}
+.renter-safeguard .material-icons-outlined {
+  color: #B75324;
+  font-size: 30px;
+}
+.renter-safeguard strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--color-ink);
+  font-size: 17px;
+}
+.renter-safeguard p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.renter-testimonials {
+  gap: 28px;
+}
+.renter-testimonial-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
+  gap: clamp(28px, 5vw, 72px);
+  align-items: end;
+}
+.renter-testimonial-heading .section-intro {
+  max-width: 760px;
+  margin-bottom: 0;
+}
+.renter-testimonial-confidence {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  margin: 0;
+  padding: 18px 20px;
+  border-radius: 20px;
+  background: #FFF1E8;
+  color: #713515;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.renter-testimonial-confidence .material-icons-outlined {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  background: #fff;
+  color: #B75324;
+  font-size: 24px;
+}
+.renter-testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+.renter-testimonial-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: 26px;
+  background: #fff;
+}
+.renter-testimonial-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.renter-testimonial-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 24px;
+}
+.renter-testimonial-body blockquote {
+  margin: 0;
+  color: var(--color-ink);
+  font-size: clamp(17px, 1.3vw, 20px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.renter-testimonial-meta {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: auto;
+  padding-top: 22px;
+  color: #B75324;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+.renter-testimonial-meta .material-icons-outlined {
+  font-size: 19px;
+}
+.renter-testimonial-note {
+  margin: -4px 0 0;
+  color: #80868B;
+  font-size: 12px;
+  line-height: 1.5;
+}
+#renter-landlord-toolkit .section-intro {
+  max-width: 880px;
+  margin-bottom: 28px;
+}
+.renter-toolkit-layout {
+  display: grid;
+  grid-template-columns: minmax(340px, 0.86fr) minmax(0, 1.14fr);
+  gap: 18px;
+  align-items: stretch;
+}
+#renter-landlord-toolkit .renter-section-hero {
+  min-height: 454px;
+}
+#renter-landlord-toolkit .grid-3 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+#renter-landlord-toolkit .argument-card {
+  padding: 20px;
+}
+#renter-hoa-path {
+  grid-template-columns: minmax(0, 1.18fr) minmax(300px, 0.82fr);
+  align-items: center;
+  gap: clamp(30px, 5vw, 72px);
+}
+.renter-hoa-copy .section-intro {
+  max-width: 720px;
+}
+.renter-hoa-steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.renter-hoa-step {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  background: #fff;
+}
+.renter-hoa-step-number {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  background: #FFF1E8;
+  color: #B75324;
+  font-weight: 700;
+}
+.renter-hoa-step h3 {
+  margin: 1px 0 5px;
+  font-size: 17px;
+  font-weight: 650;
+}
+.renter-hoa-step p {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.45;
+}
+.renter-hoa-proposal-card {
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  background: #1F1F1F;
+  color: #fff;
+}
+.renter-hoa-proposal-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.renter-hoa-proposal-content {
+  padding: clamp(24px, 3vw, 34px);
+}
+.renter-hoa-proposal-card .material-icons-outlined {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: rgba(245,133,77,0.18);
+  color: #FF9A66;
+  font-size: 28px;
+}
+.renter-hoa-proposal-card h3 {
+  margin: 18px 0 8px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 600;
+}
+.renter-hoa-proposal-card > p {
+  margin: 0;
+  color: rgba(255,255,255,0.75);
+  font-size: 15px;
+  line-height: 1.55;
+}
+.renter-hoa-checklist {
+  display: grid;
+  gap: 11px;
+  margin: 22px 0 26px;
+  padding: 0;
+  list-style: none;
+}
+.renter-hoa-checklist li {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  color: rgba(255,255,255,0.9);
+  font-size: 14px;
+  line-height: 1.4;
+}
+.renter-hoa-checklist .material-icons-outlined {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
+  color: #FF9A66;
+  font-size: 19px;
+}
+.renter-hoa-proposal-card .btn-secondary {
+  width: 100%;
+  color: #fff;
+  border-color: rgba(255,255,255,0.65);
+  text-align: center;
+}
+.renter-hoa-note {
+  margin-top: 14px !important;
+  font-size: 12px !important;
+  color: rgba(255,255,255,0.56) !important;
 }
 .renter-frame-section {
   position: relative;
@@ -1300,20 +1756,78 @@ html.renter-snap-active {
   line-height: 1.5;
 }
 .brief-list .material-icons-outlined {
-  color: #F0A87B;
+  color: #F7A273;
   font-size: 30px;
 }
-.renter-frame-section .chip-green {
+.renter-frame-section .renter-frame-kicker {
   align-self: flex-start;
-  background: rgba(255,241,232,0.94);
-  color: var(--color-brand-orange-dark);
+  margin-bottom: 0;
 }
 .renter-stat-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
+.renter-stat-section .section-intro {
+  max-width: 820px;
+  margin-bottom: 28px;
+}
+.renter-stat-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(560px, 1.1fr);
+  gap: 18px;
+  align-items: stretch;
+}
+.renter-stat-hero {
+  position: relative;
+  min-height: 440px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #DADCE0;
+}
+.renter-stat-hero::after {
+  content: "";
+  position: absolute;
+  inset: 44% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(11,18,13,0.78));
+  pointer-events: none;
+}
+.renter-stat-hero img {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  object-fit: cover;
+  object-position: center;
+}
+.renter-stat-hero figcaption {
+  position: absolute;
+  z-index: 1;
+  right: 24px;
+  bottom: 22px;
+  left: 24px;
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr);
+  gap: 11px;
+  align-items: center;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.renter-stat-hero figcaption .material-icons-outlined {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 13px;
+  background: rgba(255,255,255,0.94);
+  color: #B75324;
+  font-size: 21px;
+}
 .renter-stat-card {
+  display: flex;
+  flex-direction: column;
   background: #fff;
   border: 1px solid var(--color-border, #DADCE0);
   border-radius: 24px;
@@ -1326,7 +1840,7 @@ html.renter-snap-active {
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: rgba(229,139,90,0.14);
+  background: rgba(245,133,77,0.14);
   color: var(--color-brand-orange);
   font-size: 25px;
   line-height: 1;
@@ -1371,15 +1885,15 @@ html.renter-snap-active {
   font-size: 12px;
 }
 .source-strip a {
-  color: #9D5636;
+  color: #B75324;
   font-weight: 500;
-  border-bottom: 1px solid rgba(136,194,134,0.35);
+  border-bottom: 1px solid rgba(19,115,51,0.35);
 }
 .advocacy-section {
   margin-top: 0;
 }
 .section-kicker {
-  color: #9D5636;
+  color: #B75324;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1418,7 +1932,7 @@ html.renter-snap-active {
 .argument-card .material-icons-outlined,
 .policy-resource-card .material-icons-outlined,
 .incentive-card .material-icons-outlined {
-  color: #E58B5A;
+  color: #F5854D;
   font-size: 32px;
 }
 .policy-resource-card {
@@ -1431,8 +1945,8 @@ html.renter-snap-active {
   margin-top: 18px;
 }
 .policy-meta {
-  color: #9D5636;
-  background: #F7E6DA;
+  color: #B75324;
+  background: #FFF1E8;
   border-radius: 8px;
   padding: 4px 7px;
   font-size: 10px;
@@ -1490,29 +2004,26 @@ html.renter-snap-active {
   border-radius: 16px;
 }
 #renter-policy-packet .policy-resource-card::after {
-  content: "Show details";
-  align-self: flex-start;
-  margin-top: auto;
-  padding-top: 16px;
-  color: #9D5636;
-  font-size: 12px;
-  line-height: 1;
-  font-weight: 700;
+  content: none;
+  display: none;
 }
 #renter-policy-packet .policy-resource-card.open {
-  grid-column: auto;
+  grid-column: 1 / -1;
+  order: -1;
   min-height: 0;
   padding: 18px;
   box-shadow: 0 10px 24px rgba(31,31,31,.08);
 }
 #renter-policy-packet .policy-resource-card.open::after {
-  content: "Back to tiles";
-  margin-top: 12px;
-  padding-top: 0;
+  content: none;
+  display: none;
 }
 #renter-policy-packet .policy-resource-card.open .policy-detail {
   max-height: 440px;
   overflow: visible;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
 }
 #renter-policy-packet .policy-resource-card.open .policy-detail p {
   font-size: 13px;
@@ -1531,7 +2042,7 @@ html.renter-snap-active {
 }
 .accordion-stack .policy-toggle-copy {
   flex: 1;
-  grid-template-columns: 22px minmax(0, 1fr);
+  grid-template-columns: 35px minmax(0, 1fr);
   align-items: center;
   justify-items: start;
   gap: 4px 9px;
@@ -1542,7 +2053,8 @@ html.renter-snap-active {
   justify-self: start;
 }
 .accordion-stack .policy-toggle-copy .material-icons-outlined {
-  font-size: 22px;
+  font-size: 28px;
+  padding-right: 5px;
 }
 .accordion-stack .policy-toggle-copy h3 {
   font-size: 15px;
@@ -1555,8 +2067,8 @@ html.renter-snap-active {
   font-size: 22px;
 }
 .accordion-stack .policy-resource-card .policy-toggle-copy {
-  grid-template-columns: 22px minmax(0, 1fr);
-  gap: 5px 8px;
+  grid-template-columns: 35px minmax(0, 1fr);
+  gap: 13px 8px;
 }
 .accordion-stack .policy-resource-card .policy-toggle-copy .policy-meta {
   grid-column: 1 / -1;
@@ -1569,6 +2081,34 @@ html.renter-snap-active {
 .accordion-stack .policy-resource-card .policy-toggle-copy h3 {
   grid-column: 2;
   grid-row: 2;
+}
+#renter-policy-packet .policy-resource-card .btn-link-pill {
+  align-self: center;
+  margin-top: auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+#renter .renter-end-links .nav-card-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+#renter .renter-end-links .nav-card-link .link-arrow {
+  margin-left: auto;
+  border-bottom: 0;
+  padding-bottom: 0;
+  text-decoration: none;
+}
+#renter .renter-end-links .nav-card-link .chevron {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  line-height: 1;
 }
 .talking-list {
   list-style: none;
@@ -1593,7 +2133,7 @@ html.renter-snap-active {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #E58B5A;
+  background: #F5854D;
 }
 .message-wizard {
   display: grid;
@@ -1626,7 +2166,7 @@ html.renter-snap-active {
 }
 .wizard-input:focus {
   outline: none;
-  border-color: #E58B5A;
+  border-color: #F5854D;
   box-shadow: 0 0 0 3px rgba(26,115,232,0.14);
 }
 .wizard-check-grid {
@@ -1649,7 +2189,7 @@ html.renter-snap-active {
 .wizard-check input {
   width: 18px;
   height: 18px;
-  accent-color: #E58B5A;
+  accent-color: #F5854D;
   margin-top: 1px;
 }
 .wizard-preview {
@@ -1668,7 +2208,7 @@ html.renter-snap-active {
 }
 #landlord-message-wizard.renter-snap-section {
   align-content: center;
-  padding: 100px 0 48px;
+  padding: 82px 0 28px;
 }
 #landlord-message-wizard .section-kicker {
   font-size: 13px;
@@ -1679,47 +2219,110 @@ html.renter-snap-active {
   line-height: 1.08;
 }
 #landlord-message-wizard .section-intro {
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.5;
   max-width: 880px;
-  margin: 14px 0 34px;
+  margin: 10px 0 20px;
 }
 #landlord-message-wizard .message-wizard {
-  grid-template-columns: minmax(0, 0.92fr) minmax(340px, 1.08fr);
-  gap: 28px;
-  padding: 28px;
+  grid-template-columns: minmax(0, 1.2fr) minmax(420px, 0.8fr);
+  gap: 20px;
+  padding: 20px;
   border-radius: var(--radius-card);
+}
+#landlord-message-wizard .wizard-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 14px;
+  align-content: start;
+}
+#landlord-message-wizard .wizard-control {
+  min-width: 0;
 }
 #landlord-message-wizard .wizard-label,
 #landlord-message-wizard .wizard-fieldset legend {
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.35;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
+}
+#landlord-message-wizard .wizard-fieldset legend {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+#landlord-message-wizard .wizard-scroll-hint {
+  color: var(--color-text-secondary);
+  font-weight: 400;
 }
 #landlord-message-wizard .wizard-label[style*="margin-top"] {
-  margin-top: 18px !important;
+  margin-top: 0 !important;
 }
 #landlord-message-wizard .wizard-input {
   border-radius: 16px;
-  padding: 12px 14px;
+  min-height: 48px;
+  padding: 10px 14px;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.35;
+}
+#landlord-message-wizard select.wizard-input {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 54px;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18' fill='none'%3E%3Cpath d='M4 7l5 5 5-5' stroke='%231F1F1F' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 22px center;
+  background-size: 18px 18px;
+  cursor: pointer;
 }
 #landlord-message-wizard .wizard-fieldset {
+  grid-column: 1 / -1;
   margin: 0;
 }
 #landlord-message-wizard .wizard-fieldset[style*="margin-top"] {
-  margin-top: 24px !important;
+  margin-top: 2px !important;
 }
 #landlord-message-wizard .wizard-check-grid {
-  gap: 10px;
+  gap: 8px;
+  max-height: 164px;
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-gutter: stable;
+}
+#landlord-message-wizard .wizard-scroll-more {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 32px;
+  margin: 8px auto 0;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #FFF1E8;
+  color: #B75324;
+  cursor: pointer;
+  transition: transform 180ms ease, background-color 180ms ease;
+}
+#landlord-message-wizard .wizard-scroll-more:hover {
+  transform: translateY(2px);
+  background: #FFE3D2;
+}
+#landlord-message-wizard .wizard-scroll-more .material-icons-outlined {
+  font-size: 24px;
+  transition: transform 180ms ease;
+}
+#landlord-message-wizard .wizard-scroll-more.at-end .material-icons-outlined {
+  transform: rotate(180deg);
 }
 #landlord-message-wizard .wizard-check {
   border-radius: 16px;
-  padding: 12px;
-  gap: 10px;
-  font-size: 14px;
-  line-height: 1.35;
+  min-height: 48px;
+  padding: 10px;
+  gap: 9px;
+  font-size: 16px;
+  line-height: 1.25;
 }
 #landlord-message-wizard .wizard-check input {
   width: 18px;
@@ -1737,7 +2340,7 @@ html.renter-snap-active {
   line-height: 1.2;
 }
 #landlord-message-wizard .msg-template {
-  max-height: 440px;
+  max-height: 404px;
   overflow-y: auto;
   margin-top: 14px;
   border-radius: 16px;
@@ -1750,17 +2353,48 @@ html.renter-snap-active {
   margin-top: 12px;
 }
 #landlord-message-wizard .copy-btn {
-  padding: 8px 18px;
-  font-size: 13px;
+  padding: 9px 18px;
+  font-size: 16px;
 }
 #landlord-message-wizard .src-note {
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.5;
 }
 @media (max-width: 980px) {
   .message-wizard,
   .talking-points {
     grid-template-columns: 1fr;
+  }
+  #renter-energy-checkup {
+    grid-template-columns: 1fr;
+  }
+  .renter-checkup-heading,
+  .renter-checkup-body {
+    grid-template-columns: 1fr;
+  }
+  .renter-checkup-hero {
+    min-height: 320px;
+  }
+  #renter-hoa-path {
+    grid-template-columns: 1fr;
+  }
+  #renter-landlord-toolkit .grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .renter-toolkit-layout {
+    grid-template-columns: 1fr;
+  }
+  #renter-landlord-toolkit .renter-section-hero {
+    min-height: 340px;
+  }
+  .renter-testimonial-heading {
+    grid-template-columns: 1fr;
+  }
+  .renter-testimonial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .renter-testimonial-card:last-child {
+    grid-column: 1 / -1;
   }
   .renter-hero-copy h1 {
     font-size: 58px;
@@ -1773,6 +2407,13 @@ html.renter-snap-active {
   }
   .renter-stat-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+  .renter-stat-layout {
+    grid-template-columns: 1fr;
+  }
+  .renter-stat-hero,
+  .renter-stat-hero img {
+    min-height: 340px;
   }
   #renter .renter-feature-section .scroll-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1839,6 +2480,16 @@ html.renter-snap-active {
     line-height: 1.45;
     margin-top: 18px;
   }
+  .renter-hero-eyebrow {
+    margin-bottom: 14px;
+    font-size: 11px;
+  }
+  .renter-hero-proof {
+    display: grid;
+    gap: 8px;
+    margin-top: 18px;
+    font-size: 13px;
+  }
   .renter-hero-actions {
     gap: 8px;
     margin-top: 20px;
@@ -1850,8 +2501,31 @@ html.renter-snap-active {
     font-size: 12px;
   }
   .renter-stat-grid,
-  .wizard-check-grid {
+  .wizard-check-grid,
+  .renter-check-grid,
+  .renter-hoa-steps,
+  #renter-landlord-toolkit .grid-3 {
     grid-template-columns: 1fr;
+  }
+  #landlord-message-wizard .wizard-form {
+    grid-template-columns: 1fr;
+  }
+  .renter-checkup-hero {
+    min-height: 280px;
+    height: 280px;
+  }
+  .renter-path-list {
+    grid-template-columns: 1fr;
+  }
+  .renter-stat-hero,
+  .renter-stat-hero img {
+    min-height: 300px;
+  }
+  .renter-testimonial-grid {
+    grid-template-columns: 1fr;
+  }
+  .renter-testimonial-card:last-child {
+    grid-column: auto;
   }
   #renter .renter-feature-section .scroll-row {
     grid-template-columns: 1fr;
@@ -1874,7 +2548,7 @@ html.renter-snap-active {
     border-radius: 14px;
   }
   .accordion-stack .policy-resource-card .policy-toggle-copy {
-    grid-template-columns: 22px minmax(0, 1fr);
+    grid-template-columns: 35px minmax(0, 1fr);
     gap: 4px 8px;
   }
   .accordion-stack .policy-resource-card .policy-toggle-copy .policy-meta {
@@ -3489,8 +4163,8 @@ html.renter-snap-active {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background: #E58B5A;
-    border: 1px solid #fff;
+    background: #4285F4;
+    border: 2px solid #fff;
     box-shadow: none;
     display: flex;
     align-items: center;
@@ -3507,20 +4181,23 @@ html.renter-snap-active {
   .map-marker.selected {
     width: 32px;
     height: 32px;
-    background: #E58B5A;
+    background: #1967D2;
   }
-  .map-marker-label {
-    position: absolute;
-    top: -6px;
-    left: 30px;
-    white-space: nowrap;
-    background: var(--color-ink, #1F1F1F);
-    color: #fff;
+  /* Hover pill replaced by always-on Google-style labels below */
+  .map-marker-label { display: none; }
+  .leaflet-tooltip.map-name-label {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    color: #1F1F1F;
+    font-family: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
     font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 100px;
-    pointer-events: none;
+    white-space: nowrap;
+    text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 4px #fff, 0 1px 2px rgba(255,255,255,0.95);
   }
+  .leaflet-tooltip.map-name-label::before { display: none; }
   .map-marker-wrap:hover .map-marker,
   .map-marker-wrap.selected .map-marker {
     width: 32px;
@@ -4257,6 +4934,9 @@ html.renter-snap-active {
 }
 .renter-page-wrap {
   display: none;
+}
+#renter.active .renter-page-wrap {
+  display: block;
 }
 #renter {
   min-height: 100vh;
@@ -5337,10 +6017,17 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <section class="renter-hero-viewport renter-snap-section" aria-labelledby="renter-heading">
         <div class="renter-hero-layout">
           <div class="renter-hero-copy">
-            <h1 id="renter-heading">Lower bills.<br>More leverage.<br>A smarter ask.</h1>
+            <div class="renter-hero-eyebrow"><span class="material-icons-outlined" aria-hidden="true">home</span>Lower the total cost of apartment living</div>
+            <h1 id="renter-heading">Lower bills.<br>More leverage.<br>A better ask.</h1>
+            <p class="renter-hero-promise">Civic Energy helps San Francisco renters spot costly energy problems, explore subsidized improvements, and turn them into a specific request a landlord can act on.</p>
+            <div class="renter-hero-proof" aria-label="Resident benefits">
+              <span><span class="material-icons-outlined" aria-hidden="true">savings</span>Lower monthly costs</span>
+              <span><span class="material-icons-outlined" aria-hidden="true">health_and_safety</span>Healthier, more comfortable homes</span>
+              <span><span class="material-icons-outlined" aria-hidden="true">groups</span>More power to improve your building</span>
+            </div>
             <div class="renter-hero-actions">
-              <a href="#renter" class="btn-primary-green" data-renter-scroll="landlord-message-wizard">Build a landlord message</a>
-              <a href="#renter" class="btn-secondary" data-renter-scroll="renter-policy-packet">Pull policy links</a>
+              <a href="#renter" class="btn-primary-green" data-renter-scroll="renter-energy-checkup">Check what my home could improve</a>
+              <a href="#renter" class="btn-secondary" data-renter-scroll="renter-landlord-toolkit">Prepare a landlord request</a>
             </div>
           </div>
         </div>
@@ -5348,102 +6035,350 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 
       <section class="renter-frame-section renter-snap-section" id="renter-frame" aria-label="Landlord conversation brief">
         <aside class="renter-brief-card">
-          <span class="chip chip-green">How to frame it</span>
-          <h2>This protects the building, not just your comfort.</h2>
+          <div class="section-kicker renter-frame-kicker">First step</div>
+          <h2>Give the building one practical place to start.</h2>
           <ul class="brief-list">
-            <li><span class="material-icons-outlined">apartment</span><span>Energy upgrades can reduce operating costs, make listings more competitive, and protect long-term asset value.</span></li>
-            <li><span class="material-icons-outlined">request_quote</span><span>Public incentives, rebates, and financing can lower the owner's upfront cost.</span></li>
-            <li><span class="material-icons-outlined">verified</span><span>Benchmarking and new building standards are moving energy performance into the public accountability lane.</span></li>
+            <li><span class="material-icons-outlined">fact_check</span><span><strong>Assess the building.</strong> Review energy use, old appliances, drafts, heating, cooling, and other aging equipment.</span></li>
+            <li><span class="material-icons-outlined">request_quote</span><span><strong>Find public support.</strong> Identify rebates, subsidies, and financing before choosing a project.</span></li>
+            <li><span class="material-icons-outlined">handshake</span><span><strong>Choose one improvement.</strong> Request a timeline and explain how residents will benefit without displacement or unreasonable rent increases.</span></li>
           </ul>
         </aside>
+      </section>
+
+      <section class="renter-snap-section" id="renter-energy-checkup" aria-labelledby="renter-energy-checkup-heading">
+        <div class="renter-checkup-heading">
+          <div>
+            <div class="section-kicker">Start with a quick check</div>
+            <h2 id="renter-energy-checkup-heading" style="font-weight:600;">What is making your home costlier or less comfortable?</h2>
+          </div>
+        </div>
+        <div class="renter-checkup-body">
+          <figure class="renter-section-hero renter-checkup-hero">
+            <img src="Web%20Images/renter-energy-checkup-hero-web.jpg" alt="San Francisco renter checking a drafty bay window and older heating equipment while taking notes">
+            <figcaption><span class="material-icons-outlined" aria-hidden="true">search</span><span>Start with what you can observe: bills, drafts, comfort, and aging equipment.</span></figcaption>
+          </figure>
+          <div class="card renter-checkup-card">
+            <h3 style="font-weight:600; margin:0;">What are you experiencing?</h3>
+            <div class="renter-check-grid">
+              <label class="renter-check-option"><input type="checkbox" name="renterConcern" value="high-bills">Energy bills feel unusually high</label>
+              <label class="renter-check-option"><input type="checkbox" name="renterConcern" value="temperature">The unit gets too hot or too cold</label>
+              <label class="renter-check-option"><input type="checkbox" name="renterConcern" value="drafts">Windows or doors feel drafty</label>
+              <label class="renter-check-option"><input type="checkbox" name="renterConcern" value="old-equipment">Heating, water heating, or appliances seem old</label>
+              <label class="renter-check-option"><input type="checkbox" name="renterConcern" value="outages">Outages or heat waves feel unsafe</label>
+              <label class="renter-check-option"><input type="checkbox" name="renterConcern" value="air-quality">Indoor air or gas cooking is a concern</label>
+            </div>
+            <div class="renter-check-result" id="renterCheckResult" aria-live="polite">
+              <strong>Your smallest first step</strong>
+              Choose one or more concerns to see what information to gather and what to discuss with the property team.
+            </div>
+          </div>
+        </div>
+        <ol class="renter-path-list" aria-label="Your renter action path">
+          <li><span class="renter-path-number">1</span><span><strong>Notice the problem</strong> in your unit or building.</span></li>
+          <li><span class="renter-path-number">2</span><span><strong>Gather a few details</strong> about bills, equipment, and who pays.</span></li>
+          <li><span class="renter-path-number">3</span><span><strong>Prepare the conversation</strong> before sending a request.</span></li>
+        </ol>
       </section>
 
       <section class="renter-stat-section renter-snap-section" id="renter-quick-stats" aria-labelledby="renter-quick-stats-heading">
         <div>
           <div class="section-kicker">Quick statistics</div>
-          <h2 id="renter-quick-stats-heading" style="font-weight:600;">Numbers that strengthen the ask</h2>
+          <h2 id="renter-quick-stats-heading" style="font-weight:600;">Numbers that strengthen your case</h2>
           <p class="section-intro">
-            Use these as renter-friendly proof points when you are asking an owner to explore solar, weatherization, electrification, or financing.
+            Use these renter-friendly proof points when inviting an owner to explore solar, weatherization, electrification, or financing.
           </p>
-          <div class="renter-stat-grid" aria-label="Source-backed quick stats">
-            <div class="renter-stat-card">
-              <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">savings</span>
-              <strong>$70/mo</strong>
-              <span>reported monthly bill savings for one resident after a Low-Income Weatherization Program (LIWP) multifamily retrofit.<sup><a href="https://www.csd.ca.gov/Pages/Low-Income-Weatherization-Program.aspx" target="_blank" rel="noopener" aria-label="Source 1: California Department of Community Services and Development Low-Income Weatherization Program">1</a></sup></span>
-            </div>
-            <div class="renter-stat-card">
-              <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">trending_down</span>
-              <strong>40%</strong>
-              <span>average energy-use reduction reported for participating Low-Income Weatherization Program (LIWP) multifamily properties.<sup><a href="https://www.csd.ca.gov/Pages/Low-Income-Weatherization-Program.aspx" target="_blank" rel="noopener" aria-label="Source 1: California Department of Community Services and Development Low-Income Weatherization Program">1</a></sup></span>
-            </div>
-            <div class="renter-stat-card">
-              <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">account_balance</span>
-              <strong>100%</strong>
-              <span>of eligible project costs can be financed through GoGreen Multifamily for qualifying affordable and market-rate properties.<sup><a href="https://www.gogreenfinancing.com/multifamily/" target="_blank" rel="noopener" aria-label="Source 2: GoGreen Multifamily financing">2</a></sup></span>
-            </div>
-            <div class="renter-stat-card">
-              <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">construction</span>
-              <strong>30%</strong>
-              <span>of GoGreen Multifamily financing may support non-energy upgrades when bundled with qualifying energy improvements.<sup><a href="https://www.gogreenfinancing.com/multifamily/" target="_blank" rel="noopener" aria-label="Source 2: GoGreen Multifamily financing">2</a></sup></span>
+          <div class="renter-stat-layout">
+            <figure class="renter-stat-hero">
+              <img src="Web%20Images/renter-quick-statistics-hero-web.jpg" alt="San Francisco renter reviewing energy bills and financing information in an efficient apartment with rooftop solar visible outside">
+              <figcaption><span class="material-icons-outlined" aria-hidden="true">fact_check</span><span>Connect lower bills, lower energy use, and available financing to one documented building conversation.</span></figcaption>
+            </figure>
+            <div class="renter-stat-grid" aria-label="Source-backed quick stats">
+              <div class="renter-stat-card">
+                <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">savings</span>
+                <strong>$70/mo</strong>
+                <span>reported monthly bill savings for one resident after a Low-Income Weatherization Program (LIWP) multifamily retrofit.<sup><a href="https://www.csd.ca.gov/Pages/Low-Income-Weatherization-Program.aspx" target="_blank" rel="noopener" aria-label="Source 1: California Department of Community Services and Development Low-Income Weatherization Program">1</a></sup></span>
+              </div>
+              <div class="renter-stat-card">
+                <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">trending_down</span>
+                <strong>40%</strong>
+                <span>average energy-use reduction reported for participating Low-Income Weatherization Program (LIWP) multifamily properties.<sup><a href="https://www.csd.ca.gov/Pages/Low-Income-Weatherization-Program.aspx" target="_blank" rel="noopener" aria-label="Source 1: California Department of Community Services and Development Low-Income Weatherization Program">1</a></sup></span>
+              </div>
+              <div class="renter-stat-card">
+                <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">account_balance</span>
+                <strong>100%</strong>
+                <span>of eligible project costs can be financed through GoGreen Multifamily for qualifying affordable and market-rate properties.<sup><a href="https://www.gogreenfinancing.com/multifamily/" target="_blank" rel="noopener" aria-label="Source 2: GoGreen Multifamily financing">2</a></sup></span>
+              </div>
+              <div class="renter-stat-card">
+                <span class="material-icons-outlined renter-stat-icon" aria-hidden="true">construction</span>
+                <strong>30%</strong>
+                <span>of GoGreen Multifamily financing may support non-energy upgrades when bundled with qualifying energy improvements.<sup><a href="https://www.gogreenfinancing.com/multifamily/" target="_blank" rel="noopener" aria-label="Source 2: GoGreen Multifamily financing">2</a></sup></span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
 <section class="renter-feature-section renter-snap-section" id="renter-what-you-get" aria-labelledby="renter-what-you-get-heading">
-<h2 id="renter-what-you-get-heading" style="margin-bottom:32px;">Sustainable Benefits</h2>
+<div>
+  <div class="section-kicker">Resident outcomes</div>
+  <h2 id="renter-what-you-get-heading" style="margin-bottom:14px;">What could improve in your home</h2>
+  <p class="section-intro">Start with the outcome you need. The right equipment or building improvement comes next.</p>
+</div>
 <div class="scroll-row">
-  <div class="card">
+  <div class="card renter-benefit-card">
     <img src="Web%20Images/Balcony%20%26%20rooftop%20panels.jpeg" alt="Solar panels installed on an apartment balcony railing">
-    <span class="material-icons-outlined" style="color:#E58B5A;">solar_power</span>
-    <h3 style="font-weight:400; margin:8px 0;">Balcony &amp; rooftop panels</h3>
-    <p style="color:#5F6368; font-size:14px;">"I plugged it in myself in an afternoon. No contractor visit needed."<br>Generates clean power right where you live.</p>
+    <span class="material-icons-outlined" style="color:#F5854D;">savings</span>
+    <h3 style="font-weight:400; margin:8px 0;">Lower monthly bills</h3>
+    <p style="color:#5F6368; font-size:14px;">Reduce wasted energy and explore cleaner power that may lower household or common-area costs.</p>
+    <p class="renter-benefit-tools">Possible tools: energy checkup, solar, weatherization, efficient appliances</p>
   </div>
-  <div class="card">
+  <div class="card renter-benefit-card">
     <img src="Web%20Images/Nest%20smart%20thermostat.jpg" alt="Nest smart thermostat mounted on a living room wall">
-    <span class="material-icons-outlined" style="color:#E58B5A;">thermostat</span>
-    <h3 style="font-weight:400; margin:8px 0;">Nest smart thermostat</h3>
-    <p style="color:#5F6368; font-size:14px;">"It learned my schedule in about a week."<br>Automatically shifts heating and cooling to match solar production.</p>
+    <span class="material-icons-outlined" style="color:#F5854D;">health_and_safety</span>
+    <h3 style="font-weight:400; margin:8px 0;">A healthier, more comfortable home</h3>
+    <p style="color:#5F6368; font-size:14px;">Address drafts, extreme temperatures, indoor air concerns, and inefficient heating or cooling.</p>
+    <p class="renter-benefit-tools">Possible tools: heat pumps, insulation, induction, ventilation</p>
   </div>
-  <div class="card">
+  <div class="card renter-benefit-card">
     <img src="Web%20Images/Home%20battery%20storage.jpeg" alt="Home battery storage unit installed near an apartment entryway">
-    <span class="material-icons-outlined" style="color:#E58B5A;">battery_charging_full</span>
-    <h3 style="font-weight:400; margin:8px 0;">Home battery storage</h3>
-    <p style="color:#5F6368; font-size:14px;">"During the last outage, my fridge and lights stayed on for two days."<br>Stores extra solar energy for nighttime and emergencies.</p>
+    <span class="material-icons-outlined" style="color:#F5854D;">battery_charging_full</span>
+    <h3 style="font-weight:400; margin:8px 0;">Protection during outages and heat</h3>
+    <p style="color:#5F6368; font-size:14px;">Keep essential devices running and make the building safer during extreme weather or grid interruptions.</p>
+    <p class="renter-benefit-tools">Possible tools: battery storage, backup power, cooling, solar charging</p>
   </div>
-  <div class="card">
+  <div class="card renter-benefit-card">
     <img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor display showing real-time household usage">
-    <span class="material-icons-outlined" style="color:#E58B5A;">monitor_heart</span>
-    <h3 style="font-weight:400; margin:8px 0;">Real-time energy monitor</h3>
-    <p style="color:#5F6368; font-size:14px;">"I finally understand where my electricity actually goes."<br>See solar generation, usage, and savings at a glance.</p>
+    <span class="material-icons-outlined" style="color:#F5854D;">groups</span>
+    <h3 style="font-weight:400; margin:8px 0;">More influence in your building</h3>
+    <p style="color:#5F6368; font-size:14px;">Bring neighbors, evidence, policy, and a clear next step into the same landlord conversation.</p>
+    <p class="renter-benefit-tools">Possible tools: shared requests, policy links, response tracking</p>
   </div>
 </div>
+</section>
+
+<section class="renter-testimonials renter-snap-section" id="renter-testimonials" aria-labelledby="renter-testimonials-heading">
+  <div class="renter-testimonial-heading">
+    <div>
+      <div class="section-kicker">Resident perspectives</div>
+      <h2 id="renter-testimonials-heading" style="font-weight:600;">A practical path residents can believe in</h2>
+      <p class="section-intro">Civic Energy turns complicated building decisions into concrete next steps, credible resources, and resident-centered safeguards.</p>
+    </div>
+    <p class="renter-testimonial-confidence">
+      <span class="material-icons-outlined" aria-hidden="true">verified</span>
+      <span><strong>Confidence comes from clarity.</strong><br>Start with the problem, connect it to support, and bring one achievable next step to the decision-maker.</span>
+    </p>
+  </div>
+  <div class="renter-testimonial-grid">
+    <article class="renter-testimonial-card">
+      <img src="Web%20Images/renter-testimonial-family.jpg" alt="Family seated together in their living room">
+      <div class="renter-testimonial-body">
+        <blockquote>“I did not need to become an energy expert. The checkup helped turn high bills and drafty rooms into a short list of facts a property manager could actually evaluate.”</blockquote>
+        <div class="renter-testimonial-meta"><span class="material-icons-outlined" aria-hidden="true">location_on</span>Mission District Renter</div>
+      </div>
+    </article>
+    <article class="renter-testimonial-card">
+      <img src="Web%20Images/renter-testimonial-bay.jpg" alt="Couple overlooking the Golden Gate Bridge from the San Francisco coast">
+      <div class="renter-testimonial-body">
+        <blockquote>“The most useful part was having a first step: review the equipment, check incentives, and set a response date. That made a building upgrade feel possible.”</blockquote>
+        <div class="renter-testimonial-meta"><span class="material-icons-outlined" aria-hidden="true">location_on</span>Outer Sunset Renter</div>
+      </div>
+    </article>
+    <article class="renter-testimonial-card">
+      <img src="Web%20Images/renter-testimonial-senior-laptop.jpg" alt="Confident older resident smiling with a laptop in her sunlit living room">
+      <div class="renter-testimonial-body">
+        <blockquote>“Seeing the rebate and policy sources in one place made the project feel real. We could bring our HOA a documented proposal instead of a vague idea.”</blockquote>
+        <div class="renter-testimonial-meta"><span class="material-icons-outlined" aria-hidden="true">location_on</span>Richmond District Resident</div>
+      </div>
+    </article>
+  </div>
+  <p class="renter-testimonial-note">Illustrative testimonials based on common Bay Area renter goals. Stock photography does not depict actual Civic Energy participants or imply endorsement.</p>
 </section>
 
 <!-- ===== Renter advocacy section ===== -->
 <section class="advocacy-section renter-snap-section" id="renter-landlord-toolkit">
   <div class="section-kicker">Landlord conversation toolkit</div>
-  <h2 style="font-weight:600;">Ask Your Building for Better Energy Options</h2>
+  <h2 style="font-weight:600;">Prepare Your Building Conversation</h2>
   <p class="section-intro">
-    The strongest renter ask is not "please do this for us." It is "this is a responsible property decision, and there are programs that can make it easier to act."
+    Prepare before you send a message: identify the decision-maker, gather the facts you have, bring a few practical questions, and propose one achievable next step.
   </p>
-  <div class="grid-3">
-    <div class="card argument-card">
-      <span class="material-icons-outlined">shield</span>
-      <h3>Protect the asset</h3>
-      <p>Frame solar, insulation, efficient heating, ventilation, and air conditioning (HVAC), and appliance upgrades as ways to make the building more durable, comfortable, and marketable.</p>
-    </div>
-    <div class="card argument-card">
-      <span class="material-icons-outlined">savings</span>
-      <h3>Bring public money to the table</h3>
-      <p>Ask whether the owner has checked High-Efficiency Electric Home Rebate Act (HEEHRA) rebates, the Low-Income Weatherization Program (LIWP), Solar on Multifamily Affordable Housing (SOMAH), GoGreen Multifamily, utility rebates, and local technical assistance.</p>
-    </div>
-    <div class="card argument-card">
-      <span class="material-icons-outlined">groups</span>
-      <h3>Show shared benefits</h3>
-      <p>Solar and energy retrofits can lower common-area costs, improve resilience, reduce tenant complaints, and make the property future-ready.</p>
+  <div class="renter-toolkit-layout">
+    <figure class="renter-section-hero">
+      <img src="Web%20Images/renter-landlord-toolkit-hero-web.jpg" alt="Renters and a property manager reviewing a documented San Francisco building energy proposal together">
+      <figcaption><span class="material-icons-outlined" aria-hidden="true">forum</span><span>Bring the decision-maker, evidence, public support, and resident benefits into the same conversation.</span></figcaption>
+    </figure>
+    <div class="grid-3">
+      <div class="card argument-card">
+        <span class="material-icons-outlined">person_search</span>
+        <h3>Find the decision-maker</h3>
+        <p>Confirm whether the landlord, property manager, homeowners association (HOA), or another party controls the equipment and can approve an assessment or improvement.</p>
+      </div>
+      <div class="card argument-card">
+        <span class="material-icons-outlined">shield</span>
+        <h3>Protect the asset</h3>
+        <p>Frame solar, insulation, efficient heating, ventilation, and air conditioning (HVAC), and appliance upgrades as ways to make the building more durable, comfortable, and marketable.</p>
+      </div>
+      <div class="card argument-card">
+        <span class="material-icons-outlined">savings</span>
+        <h3>Bring public money to the table</h3>
+        <p>Check whether the owner has reviewed High-Efficiency Electric Home Rebate Act (HEEHRA) rebates, the Low-Income Weatherization Program (LIWP), Solar on Multifamily Affordable Housing (SOMAH), GoGreen Multifamily, utility rebates, and local technical assistance.</p>
+      </div>
+      <div class="card argument-card">
+        <span class="material-icons-outlined">groups</span>
+        <h3>Show shared benefits</h3>
+        <p>Solar and energy retrofits can lower common-area costs, improve resilience, reduce tenant complaints, and make the property future-ready.</p>
+      </div>
     </div>
   </div>
+  <div class="renter-safeguard">
+    <span class="material-icons-outlined" aria-hidden="true">verified_user</span>
+    <div>
+      <strong>Keep the resident benefit explicit.</strong>
+      <p>Make measurable tenant benefits a condition of publicly supported improvements, and request that the work be completed without displacement or unreasonable rent increases. If the owner does not respond, document the request, invite neighbors to raise the same concern, and seek tenant-support or professional guidance when appropriate.</p>
+    </div>
+  </div>
+</section>
+
+<section class="advocacy-section renter-snap-section" id="landlord-message-wizard">
+  <div class="section-kicker">Build a specific request</div>
+  <h2 style="font-weight:600;">Turn your concern into a clear next step</h2>
+  <p class="section-intro">
+    Use what you gathered above to request one action, a response timeline, and clear benefits for residents.
+  </p>
+  <div class="card message-wizard">
+    <div class="wizard-form">
+      <div class="wizard-control">
+        <label class="wizard-label" for="wizardRecipient">Recipient</label>
+        <input class="wizard-input" id="wizardRecipient" value="Property Manager/Landlord Name">
+      </div>
+
+      <div class="wizard-control">
+        <label class="wizard-label" for="wizardBuilding">Building or address</label>
+        <input class="wizard-input" id="wizardBuilding" value="our building">
+      </div>
+
+      <div class="wizard-control">
+        <label class="wizard-label" for="wizardSender">Your name</label>
+        <input class="wizard-input" id="wizardSender" value="Your Name">
+      </div>
+
+      <div class="wizard-control">
+        <label class="wizard-label" for="wizardIssue">Main issue</label>
+        <select class="wizard-input" id="wizardIssue">
+          <option value="high or unpredictable energy costs">High or unpredictable energy costs</option>
+          <option value="uncomfortable indoor temperatures">Too hot or too cold</option>
+          <option value="aging or inefficient equipment">Aging or inefficient equipment</option>
+          <option value="indoor air quality and gas appliance concerns">Indoor air quality or gas appliances</option>
+          <option value="limited resilience during outages or extreme weather">Outages or extreme weather</option>
+        </select>
+      </div>
+
+      <div class="wizard-control">
+        <label class="wizard-label" for="wizardNextStep">First action to request</label>
+        <select class="wizard-input" id="wizardNextStep">
+          <option value="complete an energy and appliance assessment">Energy and appliance assessment</option>
+          <option value="meet with residents to review one practical pilot improvement">Meet with residents about one pilot improvement</option>
+          <option value="confirm which rebates, subsidies, and financing the building may qualify for">Check rebates, subsidies, and financing</option>
+          <option value="create a timeline for replacing aging equipment">Create an aging-equipment replacement timeline</option>
+          <option value="prepare a building-wide clean-energy plan">Prepare a building-wide clean-energy plan</option>
+        </select>
+      </div>
+
+      <div class="wizard-control">
+        <label class="wizard-label" for="wizardTimeline">Requested response time</label>
+        <select class="wizard-input" id="wizardTimeline">
+          <option value="within the next 30 days">Within 30 days</option>
+          <option value="within the next 45 days">Within 45 days</option>
+          <option value="within the next 60 days">Within 60 days</option>
+        </select>
+      </div>
+
+      <fieldset class="wizard-fieldset" style="margin-top:24px;">
+        <legend><span>Improvements worth exploring</span><span class="wizard-scroll-hint">Scroll for more</span></legend>
+        <div class="wizard-check-grid">
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="rooftop solar" checked>Rooftop solar</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="balcony or portable solar">Balcony or portable solar</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="battery storage">Battery storage</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="heat pump heating, ventilation, and air conditioning (HVAC)">Heat pump heating, ventilation, and air conditioning (HVAC)</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="heat pump water heating">Heat pump water heating</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="weatherization and insulation" checked>Weatherization and insulation</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="efficient electric appliances">Efficient electric appliances</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="EV charging access">EV charging access</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="real-time energy monitoring">Real-time energy monitoring</label>
+          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="community solar">Community solar</label>
+        </div>
+        <button type="button" class="wizard-scroll-more" id="wizardScrollMore" aria-label="Show more improvements">
+          <span class="material-icons-outlined" aria-hidden="true">expand_more</span>
+        </button>
+      </fieldset>
+    </div>
+
+    <div class="wizard-preview">
+      <h3 style="font-weight:650; margin:0;">Message preview</h3>
+      <div class="msg-template" id="advocacyMsg"></div>
+      <div class="message-toolbar">
+        <button type="button" class="copy-btn" id="copyAdvocacyMsg">Copy message</button>
+        <span class="src-note" style="margin-top:0;">Check program eligibility and bill status before sending.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="advocacy-section renter-snap-section" id="renter-hoa-path" aria-labelledby="renter-hoa-heading">
+  <div class="renter-hoa-copy">
+    <div class="section-kicker">HOA coordination path</div>
+    <h2 id="renter-hoa-heading" style="font-weight:600;">Bring an energy proposal to your HOA</h2>
+    <p class="section-intro">
+      If a homeowners association controls the exterior, electrical work, or shared property, approach the board with a documented proposal and a practical path to approval.
+    </p>
+    <div class="renter-hoa-steps">
+      <article class="renter-hoa-step">
+        <span class="renter-hoa-step-number">1</span>
+        <div>
+          <h3>Understand the rule</h3>
+          <p>Identify the restriction, then review the bylaws, architectural standards, insurance requirements, and approval process.</p>
+        </div>
+      </article>
+      <article class="renter-hoa-step">
+        <span class="renter-hoa-step-number">2</span>
+        <div>
+          <h3>Build the proposal</h3>
+          <p>Prepare safety and installation documents, estimated costs, available incentives, and benefits for residents and the property.</p>
+        </div>
+      </article>
+      <article class="renter-hoa-step">
+        <span class="renter-hoa-step-number">3</span>
+        <div>
+          <h3>Build support</h3>
+          <p>Find supportive neighbors, create a shared statement or petition, and request placement on a board agenda.</p>
+        </div>
+      </article>
+      <article class="renter-hoa-step">
+        <span class="renter-hoa-step-number">4</span>
+        <div>
+          <h3>Track and adapt</h3>
+          <p>Record the board's response, commitments, and deadlines. If the first proposal is rejected, identify what revision or alternative could qualify.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <aside class="card renter-hoa-proposal-card" aria-label="HOA proposal checklist">
+    <img class="renter-hoa-proposal-image" src="Web%20Images/renter-hoa-coordination-hero-web.jpg" alt="San Francisco residents presenting a rooftop solar and building upgrade proposal to an HOA board">
+    <div class="renter-hoa-proposal-content">
+      <span class="material-icons-outlined" aria-hidden="true">fact_check</span>
+      <h3>Bring a board-ready packet</h3>
+      <p>Make it easy for the HOA to evaluate the request rather than treating the board only as an obstacle.</p>
+      <ul class="renter-hoa-checklist">
+        <li><span class="material-icons-outlined" aria-hidden="true">check_circle</span><span>The exact rule or approval requirement</span></li>
+        <li><span class="material-icons-outlined" aria-hidden="true">check_circle</span><span>Safety, electrical, installation, and insurance details</span></li>
+        <li><span class="material-icons-outlined" aria-hidden="true">check_circle</span><span>Estimated costs, incentives, and shared benefits</span></li>
+        <li><span class="material-icons-outlined" aria-hidden="true">check_circle</span><span>Resident support and a specific decision request</span></li>
+        <li><span class="material-icons-outlined" aria-hidden="true">check_circle</span><span>A proposed meeting date and follow-up deadline</span></li>
+      </ul>
+      <a href="#renter" class="btn-secondary" data-renter-scroll="renter-policy-packet">Review Policy Language</a>
+      <p class="renter-hoa-note">Coordination guidance only; requirements vary by building and proposal.</p>
+    </div>
+  </aside>
 </section>
 
 <section class="advocacy-section renter-snap-section policy-language-section" id="renter-policy-packet">
@@ -5452,7 +6387,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
   </div>
   <div class="policy-language-column">
     <div class="section-kicker">Policy language</div>
-    <h2 style="font-weight:600;">Pull legislation and public programs into the ask</h2>
+    <h2 style="font-weight:600;">Bring legislation and public programs into the conversation</h2>
     <p class="section-intro">
       These are the links renters can send so the conversation is grounded in existing rules, official programs, or active policy signals.
     </p>
@@ -5460,7 +6395,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand building energy benchmarking" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
       <div class="policy-toggle-row">
         <div class="policy-toggle-copy">
-          <span class="policy-meta">Existing state requirement</span>
+          <span class="policy-meta">Current requirement</span>
           <span class="material-icons-outlined">monitoring</span>
           <h3>Building energy benchmarking</h3>
         </div>
@@ -5474,7 +6409,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand Civil Code 1947.6" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
       <div class="policy-toggle-row">
         <div class="policy-toggle-copy">
-          <span class="policy-meta">Existing clean-energy access</span>
+          <span class="policy-meta">Current law</span>
           <span class="material-icons-outlined">ev_station</span>
           <h3>Civil Code 1947.6</h3>
         </div>
@@ -5488,7 +6423,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand 2025 Energy Code" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
       <div class="policy-toggle-row">
         <div class="policy-toggle-copy">
-          <span class="policy-meta">Code transition</span>
+          <span class="policy-meta">Current code</span>
           <span class="material-icons-outlined">heat_pump</span>
           <h3>2025 Energy Code</h3>
         </div>
@@ -5502,7 +6437,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand Senate Bill 868 plug-in solar" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
       <div class="policy-toggle-row">
         <div class="policy-toggle-copy">
-          <span class="policy-meta">Policy watch</span>
+          <span class="policy-meta">Proposed legislation</span>
           <span class="material-icons-outlined">solar_power</span>
           <h3>Senate Bill 868 (SB 868) plug-in solar</h3>
         </div>
@@ -5516,7 +6451,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand Senate Bill 222 heat pump permitting" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
       <div class="policy-toggle-row">
         <div class="policy-toggle-copy">
-          <span class="policy-meta">Policy watch</span>
+          <span class="policy-meta">Proposed legislation</span>
           <span class="material-icons-outlined">water_heater</span>
           <h3>Senate Bill 222 (SB 222) heat pump permitting</h3>
         </div>
@@ -5527,17 +6462,59 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
         <a href="https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB222" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Track Senate Bill 222 (SB 222)</a>
       </div>
     </div>
-    <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand non-displacement ask" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
+    <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand PG&E Energy Savings Assistance" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
       <div class="policy-toggle-row">
         <div class="policy-toggle-copy">
-          <span class="policy-meta">Tenant benefit sharing</span>
-          <span class="material-icons-outlined">handshake</span>
-          <h3>Non-displacement ask</h3>
+          <span class="policy-meta">Income-qualified renter program</span>
+          <span class="material-icons-outlined">kitchen</span>
+          <h3>PG&amp;E free home upgrades</h3>
         </div>
         <span class="material-icons-outlined chev">expand_more</span>
       </div>
       <div class="policy-detail">
-        <p>If public incentives are used, renters can ask how tenants will see benefits through lower bills, better cooling, healthier indoor air, EV access, solar credits, or resilience.</p>
+        <p>PG&amp;E's Energy Savings Assistance Program offers qualifying renters and homeowners no-cost efficiency improvements. Depending on the home assessment, support may include refrigerators, lighting, weatherization, furnaces, or heat pump water heaters. The home or apartment must generally be at least five years old, and income rules apply.</p>
+        <a href="https://www.pge.com/en/save-energy-and-money/energy-saving-programs/energy-savings-assistance-program.html" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Check PG&amp;E eligibility</a>
+      </div>
+    </div>
+    <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand BayREN multifamily rebates" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
+      <div class="policy-toggle-row">
+        <div class="policy-toggle-copy">
+          <span class="policy-meta">Landlord or HOA rebate program</span>
+          <span class="material-icons-outlined">apartment</span>
+          <h3>BayREN multifamily rebates</h3>
+        </div>
+        <span class="material-icons-outlined chev">expand_more</span>
+      </div>
+      <div class="policy-detail">
+        <p>BayREN's Bay Area Multifamily Building Enhancements (BAMBE) program provides no-cost technical assistance and rebates for qualifying Bay Area multifamily properties. Rebates start at $500 per unit and may support insulation, windows, heating and cooling, heat pump water heaters, electrification, and other in-unit or common-area upgrades. Funding must be reserved before work begins.</p>
+        <a href="https://www.bayren.org/programs-rebates/bambe-program" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Share BayREN with the property team</a>
+      </div>
+    </div>
+    <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand California HEEHRA appliance rebates" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
+      <div class="policy-toggle-row">
+        <div class="policy-toggle-copy">
+          <span class="policy-meta">Limited funding - verify first</span>
+          <span class="material-icons-outlined">redeem</span>
+          <h3>California HEEHRA appliance rebates</h3>
+        </div>
+        <span class="material-icons-outlined chev">expand_more</span>
+      </div>
+      <div class="policy-detail">
+        <p>California's High-Efficiency Electric Home Rebate Act (HEEHRA) program may provide income-qualified multifamily properties with rebates for heat pumps, heat pump water heaters, electric cooking equipment, heat pump clothes dryers, wiring, and electrical panels. Funding and reservation status vary, so the property team should confirm availability and receive approval before starting work.</p>
+        <a href="https://www.energy.ca.gov/programs-and-topics/programs/inflation-reduction-act-residential-energy-rebate-programs" target="_blank" rel="noopener" class="btn-link-pill solid" onclick="event.stopPropagation()">Review current HEEHRA status</a>
+      </div>
+    </div>
+    <div class="card policy-card policy-resource-card" tabindex="0" role="button" aria-label="Expand non-displacement safeguard" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
+      <div class="policy-toggle-row">
+        <div class="policy-toggle-copy">
+          <span class="policy-meta">Renter safeguard</span>
+          <span class="material-icons-outlined">handshake</span>
+          <h3>Non-displacement safeguard</h3>
+        </div>
+        <span class="material-icons-outlined chev">expand_more</span>
+      </div>
+      <div class="policy-detail">
+        <p>If public incentives are used, renters can request clarity on how tenants will benefit through lower bills, better cooling, healthier indoor air, EV access, solar credits, or resilience.</p>
         <a href="#renter" class="btn-link-pill solid" data-renter-scroll="landlord-message-wizard" onclick="event.stopPropagation()">Add to message</a>
       </div>
     </div>
@@ -5548,7 +6525,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <div class="section-kicker">Incentive language</div>
     <h2 style="font-weight:600;">Talk to landlords about money, risk, and timing</h2>
     <p class="section-intro">
-      Owners usually care about upfront cost, vacancy risk, compliance risk, and long-term value. Renters can speak to all four without losing the tenant-benefit ask.
+      Owners usually care about upfront cost, vacancy risk, compliance risk, and long-term value. Renters can speak to all four while keeping tenant benefits central.
     </p>
     <div class="accordion-stack">
     <div class="card policy-card incentive-card" tabindex="0" role="button" aria-label="Expand HEEHRA rebates" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
@@ -5612,7 +6589,7 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
         <span class="material-icons-outlined chev">expand_more</span>
       </div>
       <div class="policy-detail">
-        <p>Ask owners to plan for old gas water heaters, heating, ventilation, and air conditioning (HVAC), inefficient lighting, and appliances before emergency replacements lock in another fossil-fuel cycle.</p>
+        <p>Encourage owners to plan for old gas water heaters, heating, ventilation, and air conditioning (HVAC), inefficient lighting, and appliances before emergency replacements lock in another fossil-fuel cycle.</p>
       </div>
     </div>
     <div class="card policy-card incentive-card" tabindex="0" role="button" aria-label="Expand market signal" onclick="this.classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open');}">
@@ -5669,26 +6646,26 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
 </section>
 
 <script>
-  function setRenterPolicyLanguageState(shouldOpen) {
-    var cards = document.querySelectorAll('#renter-policy-packet .policy-resource-card');
-    cards.forEach(function(card) {
-      card.classList.toggle('open', shouldOpen);
-      card.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
+  function setActiveRenterPolicyCard(activeCard) {
+    document.querySelectorAll('#renter-policy-packet .policy-resource-card').forEach(function(card) {
+      var isOpen = card === activeCard;
+      card.classList.toggle('open', isOpen);
+      card.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
-  }
-
-  function toggleRenterPolicyLanguageGroup() {
-    var cards = Array.prototype.slice.call(document.querySelectorAll('#renter-policy-packet .policy-resource-card'));
-    var allOpen = cards.length > 0 && cards.every(function(card) { return card.classList.contains('open'); });
-    setRenterPolicyLanguageState(!allOpen);
   }
 
   document.addEventListener('click', function(event) {
     var card = event.target.closest && event.target.closest('#renter-policy-packet .policy-resource-card');
-    if (!card || event.target.closest('a')) return;
-    event.preventDefault();
-    event.stopImmediatePropagation();
-    toggleRenterPolicyLanguageGroup();
+    if (card) {
+      if (event.target.closest('a')) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      setActiveRenterPolicyCard(card.classList.contains('open') ? null : card);
+      return;
+    }
+    if (!event.target.closest || !event.target.closest('#renter-policy-packet')) {
+      setActiveRenterPolicyCard(null);
+    }
   }, true);
 
   document.addEventListener('keydown', function(event) {
@@ -5696,104 +6673,24 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     if (!card || (event.key !== 'Enter' && event.key !== ' ')) return;
     event.preventDefault();
     event.stopImmediatePropagation();
-    toggleRenterPolicyLanguageGroup();
+    setActiveRenterPolicyCard(card.classList.contains('open') ? null : card);
   }, true);
 </script>
 
-<section class="advocacy-section renter-snap-section" id="landlord-message-wizard">
-  <div class="section-kicker">Send a simple message</div>
-  <h2 style="font-weight:600;">Build a customized landlord request</h2>
-  <p class="section-intro">
-    Choose the retrofits or services you care about. The message updates automatically so renters can send a polite, specific, evidence-backed note.
-  </p>
-  <div class="card message-wizard">
-    <div>
-      <label class="wizard-label" for="wizardRecipient">Recipient</label>
-      <input class="wizard-input" id="wizardRecipient" value="Property Manager/Landlord Name">
-
-      <label class="wizard-label" for="wizardBuilding" style="margin-top:18px;">Building or address</label>
-      <input class="wizard-input" id="wizardBuilding" value="our building">
-
-      <label class="wizard-label" for="wizardSender" style="margin-top:18px;">Your name</label>
-      <input class="wizard-input" id="wizardSender" value="Your Name">
-
-      <fieldset class="wizard-fieldset" style="margin-top:24px;">
-        <legend>Sustainable upgrades and services</legend>
-        <div class="wizard-check-grid">
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="rooftop solar" checked>Rooftop solar</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="balcony or portable solar">Balcony or portable solar</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="battery storage">Battery storage</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="heat pump heating, ventilation, and air conditioning (HVAC)">Heat pump heating, ventilation, and air conditioning (HVAC)</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="heat pump water heating">Heat pump water heating</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="weatherization and insulation" checked>Weatherization and insulation</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="efficient electric appliances">Efficient electric appliances</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="EV charging access">EV charging access</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="real-time energy monitoring">Real-time energy monitoring</label>
-          <label class="wizard-check"><input type="checkbox" name="renterUpgrade" value="community solar">Community solar</label>
-        </div>
-      </fieldset>
-    </div>
-
-    <div class="wizard-preview">
-      <h3 style="font-weight:650; margin:0;">Message preview</h3>
-      <div class="msg-template" id="advocacyMsg"></div>
-      <div class="message-toolbar">
-        <button type="button" class="copy-btn" id="copyAdvocacyMsg">Copy message</button>
-        <span class="src-note" style="margin-top:0;">Check program eligibility and bill status before sending.</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="role-store-section renter-snap-section" id="renter-store-experience" aria-labelledby="renter-store-heading">
-  <div class="role-store-head">
-    <div>
-      <div class="section-kicker">Google offsite store</div>
-      <h2 id="renter-store-heading">Try it before you ask.</h2>
-    </div>
-    <p>Renters can visit the offsite store to see how balcony solar, battery storage, Nest controls, and real-time energy feedback work inside an apartment. It turns the landlord conversation from an abstract request into something visible, practical, and easy to explain.</p>
-  </div>
-  <div class="role-store-strip" aria-label="Renter offsite store experiences">
-    <article class="role-store-card">
-      <img src="Web%20Images/Offsite%20Store/google-offsite-guided-demo.jpg" alt="Store guide explaining apartment solar and battery technology to renters">
-      <div class="role-store-caption"><strong>Get a guided demo</strong><span>Learn the system language before talking to a property manager.</span></div>
-    </article>
-    <article class="role-store-card">
-      <img src="Web%20Images/Offsite%20Store/google-offsite-balcony-demo.jpg" alt="Balcony solar demonstration in the Civic Energy store">
-      <div class="role-store-caption"><strong>See apartment-scale solar</strong><span>Compare balcony, portable, and shared building options in context.</span></div>
-    </article>
-    <article class="role-store-card">
-      <img src="Web%20Images/Offsite%20Store/google-offsite-visitor-demo.jpg" alt="Visitors using an energy monitor in the Google offsite store">
-      <div class="role-store-caption"><strong>Test energy feedback</strong><span>Understand what savings, comfort, and usage signals could look like at home.</span></div>
-    </article>
-  </div>
-  <div class="role-store-actions">
-    <a href="#store" class="btn-primary-green">Visit the store</a>
-    <a href="#renter" class="btn-secondary" data-renter-scroll="landlord-message-wizard">Use it in your ask</a>
-  </div>
-</section>
-
-<div class="grid-3 renter-end-links">
+<div class="grid-2 renter-end-links">
   <a href="#how" class="card nav-card-link">
     <div class="nav-card-left">
-      <span class="material-icons-outlined" style="color:#E58B5A;">wb_sunny</span>
-      <h3 style="font-weight:400; margin:0;">How Civic Energy works</h3>
+      <span class="material-icons-outlined" style="color:#F5854D;">wb_sunny</span>
+      <h3 style="font-weight:400; margin:0;">How Civic Energy Works</h3>
     </div>
-    <span class="link-arrow"><span class="chevron">→</span></span>
-  </a>
-  <a href="#shared-map" class="card nav-card-link">
-    <div class="nav-card-left">
-      <span class="material-icons-outlined" style="color:#E58B5A;">map</span>
-      <h3 style="font-weight:400; margin:0;">Find a building</h3>
-    </div>
-    <span class="link-arrow"><span class="chevron">→</span></span>
+    <span class="link-arrow"><span class="material-icons-outlined chevron" aria-hidden="true">arrow_forward</span></span>
   </a>
   <a href="#renter-incentives" class="card nav-card-link">
     <div class="nav-card-left">
-      <span class="material-icons-outlined" style="color:#E58B5A;">savings</span>
-      <h3 style="font-weight:400; margin:0;">Incentives for renters</h3>
+      <span class="material-icons-outlined" style="color:#F5854D;">savings</span>
+      <h3 style="font-weight:400; margin:0;">Incentives for Renters</h3>
     </div>
-    <span class="link-arrow"><span class="chevron">→</span></span>
+    <span class="link-arrow"><span class="material-icons-outlined chevron" aria-hidden="true">arrow_forward</span></span>
   </a>
 </div>
     </div>
@@ -7448,7 +8345,7 @@ Thank you,
       tap: true
     }).setView(opts.center || [37.7749, -122.4194], opts.zoom || 12);
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
       maxZoom: 19
     }).addTo(map);
@@ -7479,6 +8376,14 @@ Thank you,
         '</div>';
 
       marker.bindPopup(popupHtml);
+
+      marker.bindTooltip(b.name, {
+        permanent: true,
+        direction: 'right',
+        offset: [12, 0],
+        className: 'map-name-label',
+        opacity: 1
+      });
 
       marker.on('mouseover', function () {
         var el = marker.getElement();
@@ -7871,6 +8776,9 @@ Thank you,
     var recipient = (document.getElementById('wizardRecipient') || {}).value || 'Property Manager/Landlord Name';
     var building = (document.getElementById('wizardBuilding') || {}).value || 'our building';
     var sender = (document.getElementById('wizardSender') || {}).value || 'Your Name';
+    var issue = (document.getElementById('wizardIssue') || {}).value || 'high or unpredictable energy costs';
+    var nextStep = (document.getElementById('wizardNextStep') || {}).value || 'complete an energy and appliance assessment';
+    var timeline = (document.getElementById('wizardTimeline') || {}).value || 'within the next 30 days';
     var selected = Array.prototype.slice.call(document.querySelectorAll('input[name="renterUpgrade"]:checked')).map(function (input) {
       return input.value;
     });
@@ -7878,23 +8786,73 @@ Thank you,
 
     msg.textContent =
       'Hi ' + recipient + ',\n\n' +
-      'I am writing as a resident of ' + building + ' to ask whether the property team would consider sustainable energy upgrades such as ' + upgrades + '.\n\n' +
-      'I am raising this because these improvements can benefit both residents and ownership. For residents, they can mean lower utility costs, better comfort during heat and outages, healthier indoor air, and clearer energy information. For the building, they can reduce operating costs, improve tenant satisfaction, protect long-term property value, and make the property more competitive.\n\n' +
-      'There may also be public support available. California programs and resources such as the Low-Income Weatherization Program (LIWP), Solar on Multifamily Affordable Housing (SOMAH), High-Efficiency Electric Home Rebate Act (HEEHRA), GoGreen Multifamily, utility rebates, and building energy benchmarking guidance can help owners evaluate rebates, financing, solar options, weatherization, electrification, and tenant benefit sharing.\n\n' +
-      'Could you let residents know whether the building has benchmarked its energy use, reviewed available incentives, or created a replacement plan for older heating, ventilation, and air conditioning (HVAC), water-heating, lighting, appliances, solar, storage, or electric vehicle (EV) charging infrastructure?\n\n' +
-      'I would also appreciate clarity that any public incentives or savings would be shared with tenants through lower bills, better comfort, cooling access, EV charging, solar credits, resilience, or healthier indoor air, without using upgrades as a reason for displacement or excessive rent increases.\n\n' +
+      'I am writing as a resident of ' + building + ' because of ' + issue + '. I am requesting that the property team ' + nextStep + ' ' + timeline + ' and identify one improvement that may qualify for public incentives.\n\n' +
+      'Options worth evaluating include ' + upgrades + '. Before selecting equipment, could the team review current energy use, the age and condition of relevant systems, who pays the affected costs, and which rebates, subsidies, or financing programs may apply?\n\n' +
+      'For residents, a successful project should mean measurable benefits such as lower utility costs, better comfort during heat and outages, healthier indoor air, or clearer energy information. For the building, it may reduce operating costs, avoid emergency replacement pricing, improve tenant satisfaction, and protect long-term value.\n\n' +
+      'Please also explain how residents would receive the benefits of any publicly supported improvement and confirm that the work can be completed without displacement or unreasonable rent increases.\n\n' +
+      'Would you be available for a brief meeting, or provide a written response, ' + timeline + '?\n\n' +
       'Thank you,\n' +
       sender;
+  }
+
+  function updateRenterCheckup() {
+    var result = document.getElementById('renterCheckResult');
+    if (!result) return;
+    var selected = Array.prototype.slice.call(document.querySelectorAll('input[name="renterConcern"]:checked')).map(function(input) {
+      return input.value;
+    });
+    var guidance = [];
+    if (selected.indexOf('high-bills') !== -1) guidance.push('gather two or three recent utility bills and note which costs you pay');
+    if (selected.indexOf('temperature') !== -1 || selected.indexOf('drafts') !== -1) guidance.push('record rooms, dates, drafts, and temperature problems');
+    if (selected.indexOf('old-equipment') !== -1) guidance.push('confirm equipment age and replacement plans with the property team');
+    if (selected.indexOf('outages') !== -1) guidance.push('identify essential power, cooling, or medical needs during outages');
+    if (selected.indexOf('air-quality') !== -1) guidance.push('document ventilation, moisture, gas, or indoor-air concerns');
+
+    if (!guidance.length) {
+      result.innerHTML = '<strong>Your smallest first step</strong>Choose one or more concerns to see what information to gather and what to discuss with the property team.';
+      return;
+    }
+    var guidanceText = guidance.join('; ');
+    guidanceText = guidanceText.charAt(0).toUpperCase() + guidanceText.slice(1);
+    result.innerHTML = '<strong>Your smallest first step</strong>' +
+      guidanceText +
+      '. Then request an energy and appliance assessment before proposing a specific purchase.';
   }
 
   function initAdvocacyWizard() {
     var msg = document.getElementById('advocacyMsg');
     if (!msg) return;
 
-    var inputs = document.querySelectorAll('#landlord-message-wizard input');
+    var inputs = document.querySelectorAll('#landlord-message-wizard input, #landlord-message-wizard select');
     inputs.forEach(function (input) {
       input.addEventListener('input', updateAdvocacyMessage);
       input.addEventListener('change', updateAdvocacyMessage);
+    });
+
+    var wizardUpgradeList = document.querySelector('#landlord-message-wizard .wizard-check-grid');
+    var wizardScrollMore = document.getElementById('wizardScrollMore');
+    if (wizardUpgradeList && wizardScrollMore && !wizardScrollMore.dataset.bound) {
+      wizardScrollMore.dataset.bound = 'true';
+      function syncWizardScrollButton() {
+        var hasOverflow = wizardUpgradeList.scrollHeight > wizardUpgradeList.clientHeight + 4;
+        var atEnd = hasOverflow && wizardUpgradeList.scrollTop + wizardUpgradeList.clientHeight >= wizardUpgradeList.scrollHeight - 4;
+        wizardScrollMore.classList.toggle('at-end', atEnd);
+        wizardScrollMore.setAttribute('aria-label', atEnd ? 'Return to first improvements' : 'Show more improvements');
+      }
+      wizardScrollMore.addEventListener('click', function () {
+        var hasOverflow = wizardUpgradeList.scrollHeight > wizardUpgradeList.clientHeight + 4;
+        var atEnd = hasOverflow && wizardUpgradeList.scrollTop + wizardUpgradeList.clientHeight >= wizardUpgradeList.scrollHeight - 4;
+        wizardUpgradeList.scrollTo({
+          top: atEnd ? 0 : Math.min(wizardUpgradeList.scrollTop + wizardUpgradeList.clientHeight * 0.75, wizardUpgradeList.scrollHeight),
+          behavior: 'smooth'
+        });
+      });
+      wizardUpgradeList.addEventListener('scroll', syncWizardScrollButton, { passive: true });
+      syncWizardScrollButton();
+    }
+
+    document.querySelectorAll('input[name="renterConcern"]').forEach(function(input) {
+      input.addEventListener('change', updateRenterCheckup);
     });
 
     var copyBtn = document.getElementById('copyAdvocacyMsg');
@@ -7911,6 +8869,7 @@ Thank you,
     }
 
     updateAdvocacyMessage();
+    updateRenterCheckup();
   }
 
   if (document.readyState === 'loading') {
@@ -7918,6 +8877,7 @@ Thank you,
   } else {
     initAdvocacyWizard();
   }
+
 </script>
 <script>
 /* ===== ROI CALCULATOR SCRIPT — merge into main script ===== */
@@ -8168,3 +9128,5 @@ function submitBooking() {
 </script>
 </body>
 </html>
+
+
