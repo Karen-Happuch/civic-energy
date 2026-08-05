@@ -1948,10 +1948,11 @@ html.renter-snap-active {
 }
 .policy-meta {
   color: #B75324;
-  background: #FFF1E8;
-  border-radius: 8px;
-  padding: 4px 7px;
+  background: transparent;
+  padding: 0;
   font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   line-height: 1.1;
   font-weight: 700;
 }
@@ -1974,9 +1975,7 @@ html.renter-snap-active {
 }
 .policy-language-media {
   min-width: 0;
-  min-height: 440px;
-  height: min(54svh, 560px);
-  align-self: center;
+  align-self: stretch;   /* image matches the height of the content column */
 }
 .policy-language-media img {
   width: 100%;
@@ -6161,10 +6160,6 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <h2 id="renter-testimonials-heading" style="font-weight:600;">A practical path residents can believe in</h2>
       <p class="section-intro">Civic Energy turns complicated building decisions into concrete next steps, credible resources, and resident-centered safeguards.</p>
     </div>
-    <p class="renter-testimonial-confidence">
-      <span class="material-icons-outlined" aria-hidden="true">verified</span>
-      <span><strong>Confidence comes from clarity.</strong><br>Start with the problem, connect it to support, and bring one achievable next step to the decision-maker.</span>
-    </p>
   </div>
   <div class="renter-testimonial-grid">
     <article class="renter-testimonial-card">
