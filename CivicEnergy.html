@@ -1636,8 +1636,9 @@ html.renter-snap-active {
 }
 .renter-hoa-proposal-image {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  height: clamp(150px, 17vh, 200px);
   object-fit: cover;
+  display: block;
 }
 .renter-hoa-proposal-content {
   padding: clamp(24px, 3vw, 34px);
@@ -1733,7 +1734,7 @@ html.renter-snap-active {
   background: #F5F5F7;
   color: var(--color-ink);
   border-radius: 0;
-  padding: clamp(96px, 14vh, 140px) clamp(28px, 4vw, 58px) clamp(56px, 8vh, 80px);
+  padding: clamp(44px, 6vh, 76px) clamp(28px, 4vw, 58px) clamp(40px, 5vh, 56px);
   max-width: none;
 }
 .renter-brief-card h2 {
@@ -1745,8 +1746,8 @@ html.renter-snap-active {
 }
 .brief-list {
   display: grid;
-  gap: 18px;
-  margin-top: 30px;
+  gap: 14px;
+  margin-top: 22px;
 }
 .brief-list li {
   display: grid;
@@ -6031,11 +6032,11 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
       <section class="renter-frame-section renter-snap-section" id="renter-frame" aria-label="Landlord conversation brief">
         <aside class="renter-brief-card">
           <div class="section-kicker renter-frame-kicker">First step</div>
-          <h2>Give the building one practical place to start.</h2>
+          <h2>Find your neighbors and push for change together.</h2>
           <ul class="brief-list">
-            <li><span class="material-icons-outlined">fact_check</span><span><strong>Assess the building.</strong> Review energy use, old appliances, drafts, heating, cooling, and other aging equipment.</span></li>
-            <li><span class="material-icons-outlined">request_quote</span><span><strong>Find public support.</strong> Identify rebates, subsidies, and financing before choosing a project.</span></li>
-            <li><span class="material-icons-outlined">handshake</span><span><strong>Choose one improvement.</strong> Request a timeline and explain how residents will benefit without displacement or unreasonable rent increases.</span></li>
+            <li><span class="material-icons-outlined">groups</span><span><strong>Find your people.</strong> Connect with neighbors in your building and community who want the same energy improvements.</span></li>
+            <li><span class="material-icons-outlined">campaign</span><span><strong>Move faster together.</strong> A shared request from many residents carries far more weight, and gets a response sooner, than one voice alone.</span></li>
+            <li><span class="material-icons-outlined">gavel</span><span><strong>The law backs you.</strong> State and local policies protect renters raising energy concerns, so you can push for Civic Energy with confidence.</span></li>
           </ul>
         </aside>
       </section>
@@ -6214,13 +6215,6 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
         <h3>Show shared benefits</h3>
         <p>Solar and energy retrofits can lower common-area costs, improve resilience, reduce tenant complaints, and make the property future-ready.</p>
       </div>
-    </div>
-  </div>
-  <div class="renter-safeguard">
-    <span class="material-icons-outlined" aria-hidden="true">verified_user</span>
-    <div>
-      <strong>Keep the resident benefit explicit.</strong>
-      <p>Make measurable tenant benefits a condition of publicly supported improvements, and request that the work be completed without displacement or unreasonable rent increases. If the owner does not respond, document the request, invite neighbors to raise the same concern, and seek tenant-support or professional guidance when appropriate.</p>
     </div>
   </div>
 </section>
