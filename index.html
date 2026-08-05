@@ -1167,7 +1167,7 @@ html.renter-snap-active {
   scroll-snap-stop: normal;
   display: grid;
   align-content: center;
-  padding: 100px 0 64px;
+  padding: clamp(48px, 6vh, 84px) 0 clamp(36px, 5vh, 56px);
 }
 #renter .advocacy-section.renter-snap-section {
   padding: 100px 0 48px;
@@ -1435,7 +1435,9 @@ html.renter-snap-active {
 #renter-what-you-get .renter-benefit-card {
   display: flex;
   flex-direction: column;
-  padding-bottom: 22px;
+  padding-bottom: 24px;
+  border: none;
+  box-shadow: 0 10px 30px rgba(31,31,31,0.07);
 }
 #renter-what-you-get .renter-benefit-card img {
   aspect-ratio: 4 / 3;
@@ -6130,28 +6132,24 @@ html.finder-chrome-hidden #shared-map.active .finder-search-dock { top:20px; }
     <span class="material-icons-outlined" style="color:#F5854D;">savings</span>
     <h3 style="font-weight:400; margin:8px 0;">Lower monthly bills</h3>
     <p style="color:#5F6368; font-size:14px;">Reduce wasted energy and explore cleaner power that may lower household or common-area costs.</p>
-    <p class="renter-benefit-tools">Possible tools: energy checkup, solar, weatherization, efficient appliances</p>
   </div>
   <div class="card renter-benefit-card">
     <img src="Web%20Images/Nest%20smart%20thermostat.jpg" alt="Nest smart thermostat mounted on a living room wall">
     <span class="material-icons-outlined" style="color:#F5854D;">health_and_safety</span>
     <h3 style="font-weight:400; margin:8px 0;">A healthier, more comfortable home</h3>
     <p style="color:#5F6368; font-size:14px;">Address drafts, extreme temperatures, indoor air concerns, and inefficient heating or cooling.</p>
-    <p class="renter-benefit-tools">Possible tools: heat pumps, insulation, induction, ventilation</p>
   </div>
   <div class="card renter-benefit-card">
     <img src="Web%20Images/Home%20battery%20storage.jpeg" alt="Home battery storage unit installed near an apartment entryway">
     <span class="material-icons-outlined" style="color:#F5854D;">battery_charging_full</span>
     <h3 style="font-weight:400; margin:8px 0;">Protection during outages and heat</h3>
     <p style="color:#5F6368; font-size:14px;">Keep essential devices running and make the building safer during extreme weather or grid interruptions.</p>
-    <p class="renter-benefit-tools">Possible tools: battery storage, backup power, cooling, solar charging</p>
   </div>
   <div class="card renter-benefit-card">
     <img src="https://live.staticflickr.com/6100/6325632028_f5a4a1ab40_b.jpg" alt="Energy monitor display showing real-time household usage">
     <span class="material-icons-outlined" style="color:#F5854D;">groups</span>
     <h3 style="font-weight:400; margin:8px 0;">More influence in your building</h3>
     <p style="color:#5F6368; font-size:14px;">Bring neighbors, evidence, policy, and a clear next step into the same landlord conversation.</p>
-    <p class="renter-benefit-tools">Possible tools: shared requests, policy links, response tracking</p>
   </div>
 </div>
 </section>
